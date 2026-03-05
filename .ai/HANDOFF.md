@@ -22,6 +22,16 @@ Commits: <커밋 해시 또는 pending>
 
 ---
 HANDOFF: Claude -> Codex
+Date: 2026-03-05 17:00:00
+Project: ~/Project/WDS
+Agent: Claude
+Summary: shadcn/ui Figma Kit 최종 결정 - Shadcraft Pro $299 구매 + RAVN 보조 활용
+Next-TODO: Shadcraft Pro 구매, RAVN 복사, Tryve 디자인 시스템 구축 시작
+Commits: 9c8e796
+---
+
+---
+HANDOFF: Claude -> Codex
 Date: 2026-03-05 16:30:00
 Project: ~/Project/WDS
 Agent: Claude
