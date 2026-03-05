@@ -21,6 +21,16 @@ Commits: <커밋 해시 또는 pending>
 <!-- 아래에 handoff 기록 추가 -->
 
 ---
+HANDOFF: Claude -> Claude (다음 세션)
+Date: 2026-03-04 16:52:00
+Project: /Users/zen/Project/WDS
+Agent: Claude
+Summary: 집 데스크탑 환경 설정 완료. 폴더명 변경, 빌드, API 키, Figma MCP 추가.
+Next-TODO: Figma MCP 인증 후 프론트엔드 구현 진행 (React+Vite, ~/Project/WDS/demo)
+Commits: 없음 (환경 설정만)
+---
+
+---
 HANDOFF: Claude -> Codex
 Date: 2026-03-05 17:00:00
 Project: ~/Project/WDS

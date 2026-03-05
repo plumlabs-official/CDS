@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-05 | v3.4.0
+> Last updated: 2026-03-05 | v3.5.0
 
 ---
 
@@ -20,6 +20,27 @@
 - Design Director, Engineering Lead, Product Leader 참여
 - 추천: shadcndesign Basic ($119)
 - 미팅 기록: lenny/meetings/2026-03-05_tryve-design-system-recommendation.md
+- Agent: Claude
+
+---
+
+## 이전 세션 (2026-03-04)
+
+### 완료: Button 시맨틱 Figma 동기화 + 코드 리뷰
+- Figma 버튼 컴포넌트 시맨틱을 React/네이밍 스키마에 반영
+- Shape 계층 제거, Ghost를 Intent로 승격
+- Button.tsx: Figma 시맨틱 API로 재작성
+- naming-schema.md v3.0: Intent/Scale/Color 구조
+- AI 프롬프트 업데이트 (naming-single.md, naming-context.md)
+- 코드 리뷰 후 a11y 개선 (type="button", aria-busy)
+- 리뷰 기록: lenny/reviews/2026-03-04_wds-button-review.md
+- Agent: Claude
+
+### 환경 설정 (집 데스크탑)
+- `wds` → `WDS` 폴더명 변경 (macOS 대소문자)
+- npm install + 빌드 완료
+- Agent server 실행 + ANTHROPIC_API_KEY 설정 (~/.zshrc)
+- Figma MCP 추가
 - Agent: Claude
 
 ---

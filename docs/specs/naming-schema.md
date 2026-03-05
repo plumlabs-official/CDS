@@ -2,9 +2,9 @@
 
 > 이 문서는 AI 네이밍 에이전트와 개발자가 **반드시 준수해야 하는** 네이밍 규칙을 정의합니다.
 >
-> Last updated: 2026-01-16 | v2.0.0
+> Last updated: 2026-03-04 | v3.0.0
 >
-> **2026-01-15 개편**: Intent/Shape 분리 구조로 변경
+> **2026-03-04 개편**: Figma 컴포넌트 시맨틱 동기화 (Shape 계층 제거, Intent 단순화)
 
 ---
 
@@ -17,7 +17,7 @@ Type/Context[/State][/Icon]
 
 ### 버튼 (상세 구조)
 ```
-Button/Intent/Shape/[Color]/Size[/State][/Icon]
+Button/Intent/Scale/Color[/State][/Icon]
 ```
 
 ---
@@ -28,60 +28,46 @@ Button/Intent/Shape/[Color]/Size[/State][/Icon]
 
 | 속성 | 필수 | 값 | 설명 |
 |------|------|-----|------|
-| Intent | ✅ | Primary, Secondary, Danger, Warning, Info, Normal | 의미/중요도 |
-| Shape | ✅ | Filled, Outlined, Ghost | 시각적 스타일 |
-| Color | ❌ | White | 컬러/어두운 배경 위 흰색 버튼. Default면 생략 |
-| Size | ✅ | 32, 44, 48, 56 | 높이 (px) |
-| State | ❌ | Disabled, Loading, Focus | 기본(Default)이면 생략 |
-| Icon | ❌ | IconLeft, IconRight, IconOnly | 아이콘 있을 때만 |
+| Intent | ✅ | Primary, Secondary, Ghost | 의미/중요도 |
+| Scale | ✅ | 32, 44, 48, 56 | 높이 (px) |
+| Color | ❌ | Green, White, Transparent | 기본값 Green. Ghost는 Transparent 고정 |
+| State | ❌ | Disabled, Loading | 기본(Normal)이면 생략 |
+| Icon | ❌ | IconLeft, IconRight | 아이콘 있을 때만 |
 
 ### 예시
 ```
-Button/Primary/Filled/48              # 기본 (밝은 배경)
-Button/Primary/Filled/White/56        # 컬러 배경 위 흰색 Filled
-Button/Primary/Outlined/White/56      # 컬러 배경 위 흰색 Outlined
-Button/Secondary/Ghost/White/26       # 컬러 배경 위 보조 텍스트 링크
-Button/Danger/Outlined/44             # 위험 행동, 아웃라인
-Button/Primary/Filled/48/Disabled     # 비활성
-Button/Secondary/Ghost/36/IconLeft    # 고스트, 왼쪽 아이콘
-Button/Danger/Filled/48/Loading       # 로딩 중
-Button/Primary/Filled/56/IconOnly     # 아이콘만
+Button/Primary/56/Green               # 주요 CTA (초록 배경)
+Button/Primary/48/White               # 주요 행동 (흰 배경, 컬러 배경 위)
+Button/Secondary/56/White             # 보조 행동 (테두리)
+Button/Ghost/32/Transparent           # 텍스트 링크
+Button/Primary/56/Green/Disabled      # 비활성
+Button/Primary/48/Green/Loading       # 로딩 중
+Button/Secondary/44/White/IconLeft    # 왼쪽 아이콘
+Button/Primary/56/White/IconRight     # 오른쪽 아이콘
 ```
 
 ### Intent 판단 기준
 
 | Intent | 의미 | 시각적 특징 | 사용 예 |
 |--------|------|------------|--------|
-| Primary | 핵심 전환 행동 | 메인/브랜드 컬러, 강조 | 확인, 저장, 시작하기, 가입 |
-| Secondary | 보조/안내 행동 | 보조 컬러, 덜 강조 | 취소, 뒤로가기, 기존 회원 안내, 로그인 링크 |
-| Danger | 위험/삭제 | 빨간색 계열 | 삭제, 탈퇴 |
-| Warning | 경고 | 노란색/주황색 계열 | 주의 필요 행동 |
-| Info | 정보 | 파란색 계열 | 정보 보기, 도움말 |
-| Normal | 일반 | 회색/무채색 | 일반 행동 |
-
-### Shape 판단 기준
-
-| Shape | 시각적 특징 | 강조 수준 |
-|-------|------------|----------|
-| Filled | 배경색 채워짐 | 높음 (주요 행동) |
-| Outlined | 테두리만 | 중간 (보조 행동) |
-| Ghost | 배경/테두리 없음 | 낮음 (텍스트 버튼) |
+| Primary | 주요 행동 | 배경색 채워짐 (Green/White) | 확인, 저장, 시작하기 |
+| Secondary | 보조 행동 | 테두리만 (Outlined) | 취소, 뒤로, 옵셔널 |
+| Ghost | 텍스트 링크 | 배경/테두리 없음, 밑줄 | 기존 회원 안내, 부가 링크 |
 
 ### Color 판단 기준
 
-| Color | 조건 | 설명 |
+| Color | 시각적 특징 | 사용 조건 |
+|-------|------------|----------|
+| Green | 초록 배경, 흰 텍스트 | 밝은 배경 위 Primary (기본값) |
+| White | 흰 배경, 검정 텍스트 또는 테두리 | 컬러 배경 위 버튼 |
+| Transparent | 배경 없음 | **Ghost 전용 (자동 적용)** |
+
+**규칙:** Ghost Intent 선택 시 Color는 Transparent로 고정됨 (명시 불필요)
+
+### Scale 판단 기준
+
+| Scale | 높이 | 사용 |
 |-------|------|------|
-| White | 부모 배경이 컬러/어두운 색 (brightness < 180) | 텍스트·테두리가 흰색인 버튼 |
-| (생략) | 부모 배경이 밝은 색/흰색 | 기본 색상 버튼 |
-
-- Shape와 Size 사이에 위치
-- 밝은 배경에서는 생략 (Default)
-- 향후 필요 시 Default → Brand 등으로 확장 가능
-
-### Size 판단 기준
-
-| Size | 높이 | 사용 |
-|------|------|------|
 | 32 | 32px | 작은 버튼, 인라인 |
 | 44 | 44px | 일반 버튼 |
 | 48 | 48px | 중요 버튼 |
@@ -205,10 +191,10 @@ Section/Challenge (컨테이너)
 ## 검증 체크리스트
 
 ### 버튼
-- [ ] Intent가 유효한 값인가? (Primary, Secondary, Danger, Warning, Info, Normal)
-- [ ] Shape이 유효한 값인가? (Filled, Outlined, Ghost)
-- [ ] Size가 숫자인가? (32, 44, 48, 56)
-- [ ] State가 UI 상태인가? (Disabled, Loading, Focus)
+- [ ] Intent가 유효한 값인가? (Primary, Secondary, Ghost)
+- [ ] Scale이 유효한 값인가? (32, 44, 48, 56)
+- [ ] Color가 유효한 값인가? (Green, White, Transparent)
+- [ ] State가 UI 상태인가? (Disabled, Loading)
 
 ### 일반 컴포넌트
 - [ ] Type이 허용된 값인가?
@@ -222,10 +208,11 @@ Section/Challenge (컨테이너)
 | 날짜 | 내용 |
 |------|------|
 | 2025-01-15 | 초기 작성 |
-| 2026-01-15 | **구조 개편**: Intent/Shape/Size 분리 |
+| 2026-01-15 | 구조 개편: Intent/Shape/Size 분리 |
 | 2026-01-15 | Purpose/Variant 구조 폐기 |
 | 2026-01-15 | 버튼 전용 상세 규칙 추가 |
 | 2026-01-15 | Focus 상태 추가, Ghost Shape 추가 |
+| 2026-03-04 | **v3.0**: Figma 컴포넌트 동기화 — Shape 계층 제거, Ghost→Intent 승격, Color 필수화 |
 
 ---
 
