@@ -34,25 +34,30 @@ Day 4+: Phase 5 (Components)
 
 ## Phase 체크리스트
 
-### Phase 0: Inventory (30분)
-- [ ] 0.1 기존 자산 목록화
-- [ ] 0.2 참조 파일 확인
-- [ ] 0.3 Publish 상태 확인
+### Phase 0: Inventory (30분) ✅
+- [x] 0.1 기존 자산 목록화
+- [x] 0.2 참조 파일 확인
+- [x] 0.3 Publish 상태 확인
 
-### Phase 1: Archive & Reset (1시간)
-- [ ] 1.1 [Archive] TDS 페이지 생성
-- [ ] 1.2 컴포넌트 Detach
-- [ ] 1.3 Archive로 이동
-- [ ] 1.4 Library Unpublish
-- [ ] 1.5 Local Styles 삭제
-- [ ] 1.6 Variables 삭제
+### Phase 1: Archive & Reset (1시간) ✅
+- [x] 1.1 기존 TDS 파일 정리 시도 (고아 변수 참조 문제)
+- [x] 1.2 **새 TDS 파일 생성** (깨끗한 상태로 시작)
+- [x] 1.3 Variables/Styles/Libraries 없는 clean 상태 확인
 
-### Phase 2: Variables (2-3시간)
-- [ ] 2.1 Shadcraft Pro Variables 분석
-- [ ] 2.2 Tryve 색상 팔레트 정리
-- [ ] 2.3 Primitives Collection 복제
-- [ ] 2.4 Primitives 값 교체
-- [ ] 2.5 Theme/Mode 연결 확인
+### Phase 2: Variables (2-3시간) 🔄 진행 중
+- [x] 2.1 Shadcraft Pro Variables 분석
+  - Primitives (357): 원본값 (colors, spacing, radius)
+  - Theme (252): 테마 변형 (Soft Pop, Vintage Paper) → **불필요, 삭제 예정**
+  - Mode (62): Light/Dark 시맨틱 토큰 → **필수**
+  - Pro (19): 프리미엄 기능
+- [x] 2.2 Export/Import 방법 발견
+  - Collection 우클릭 → Export → .zip → .tokens.json
+  - TDS Variables 패널에 드래그 드롭으로 Import
+- [x] 2.3 Primitives Collection Import 완료 (357개)
+- [x] 2.4 Theme Collection Import 완료 (252개) → 삭제 예정
+- [ ] 2.5 Mode Collection Import
+- [ ] 2.6 Theme 삭제 결정
+- [ ] 2.7 Tryve 색상으로 Primitives 값 교체
 
 ### Phase 3: Typography (1-2시간)
 - [ ] 3.1 Shadcraft Text Styles 분석
@@ -83,3 +88,37 @@ Day 4+: Phase 5 (Components)
 
 - Shadcraft Pro Variable 구조: Primitives (357) → Theme (252) → Mode (62)
 - 미팅 기록: `~/Project/lenny/meetings/2026-03-06_tds-rebuild-master-plan.md`
+
+---
+
+## 현재 상태 (2026-03-06 11:10)
+
+### TDS 파일 상태
+- **파일명:** TDS (새로 생성, 기존 파일 폐기)
+- **Variables:**
+  - Primitives (357) ✅ Import 완료
+  - Theme (252) ✅ Import 완료 → **삭제 예정** (불필요)
+  - Mode → Import 필요
+
+### Variables Import 방법 (발견)
+```
+1. Shadcraft Pro > Variables 패널 > Collection 우클릭 > Export
+2. .zip 파일 저장 → 압축 해제 → .tokens.json 파일
+3. TDS > Variables 패널 열기 > 빈 영역에 .json 드래그 드롭
+4. Collection 이름 변경 (필요시)
+```
+
+### Collection 분석 결과
+| Collection | 개수 | 용도 | TDS에 필요? |
+|------------|------|------|-------------|
+| Primitives | 357 | 색상/간격 원본값 | ✅ 필수 |
+| Theme | 252 | 테마 프리셋 (Soft Pop, Vintage Paper) | ❌ 불필요 |
+| Mode | 62 | Light/Dark 시맨틱 토큰 | ✅ 필수 |
+| Pro | 19 | 프리미엄 기능 | ❓ 선택 |
+
+### 다음 단계
+1. TDS에서 Theme Collection 삭제
+2. Shadcraft Pro에서 Mode Collection Export
+3. TDS에 Mode Import
+4. Tryve 색상 팔레트 정리
+5. Primitives > colors 그룹의 값을 Tryve 색상으로 교체

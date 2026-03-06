@@ -15,18 +15,28 @@
 **마스터 플랜:** `.ai/plans/tds-rebuild-master-plan.md`
 
 **Phase 체크리스트:**
-- [ ] Phase 0: Inventory
-- [ ] Phase 1: Archive & Reset
-- [ ] Phase 2: Variables (Color)
+- [x] Phase 0: Inventory ✅
+- [x] Phase 1: Archive & Reset ✅ (새 TDS 파일 생성)
+- [🔄] Phase 2: Variables - 진행 중
+  - [x] Primitives Import (357개)
+  - [x] Theme Import (252개) → 삭제 예정
+  - [ ] Mode Import (62개)
+  - [ ] Tryve 색상 교체
 - [ ] Phase 3: Typography
 - [ ] Phase 4: Effects
 - [ ] Phase 5: Components
 - [ ] Phase 6: Publish & Test
 
-**원칙:**
-- shadcn 구조/네이밍 유지 (AI 바이브 코딩 호환)
-- 내용물(색상, 폰트)만 Tryve로 교체
-- Primitives 값만 수정, Theme/Mode는 자동 반영
+**발견한 것:**
+- Figma Variables Export: Collection 우클릭 → Export → .zip
+- Import: .tokens.json 파일을 Variables 패널에 드래그 드롭
+- Theme Collection은 테마 프리셋(Soft Pop 등)이라 불필요
+- Mode Collection이 Light/Dark 전환용 시맨틱 토큰
+
+**다음 할 일:**
+1. Theme Collection 삭제
+2. Mode Collection Import
+3. Tryve 색상 팔레트 정리 → Primitives 값 교체
 
 ---
 
