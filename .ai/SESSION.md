@@ -21,31 +21,44 @@
 - [ ] **Phase 5: Components** ← 진행 중
 - [ ] Phase 6: Publish & Test
 
-### Migrate to TDS 플러그인 개발
+### 완료된 작업
 
-**경로:** `figma-plugins/migrate-to-tds/`
+**1. Migrate to TDS 플러그인 개발 ✅**
 
-**기능:**
+경로: `figma-plugins/migrate-to-tds/`
+
 | 대상 | 동작 |
 |------|------|
 | Fill | Mode Collection 변수로 교체 (루트 레벨 우선) |
 | Stroke | Mode Collection 변수로 교체 |
-| Effect Style | 동일 이름 TDS Effect Style로 교체 |
-| Text Style | 동일 이름 TDS Text Style로 교체 |
+| Effect Style | 동일 이름 TDS Effect Style로 교체 (setEffectStyleIdAsync) |
+| Text Style | 동일 이름 TDS Text Style로 교체 (setTextStyleIdAsync) |
 | custom/* | 스킵 |
-| Icon/, Icon | 스킵 |
+| Icon/, Icon | 스킵 (Size=Icon 버튼은 스킵 안 함) |
 
-**해결한 이슈:**
-1. ES5 문법 (optional chaining 미지원)
-2. `setBoundVariableForPaint` API 사용 (paint 직접 수정)
-3. `setEffectStyleIdAsync`, `setTextStyleIdAsync` (dynamic-page 모드)
-4. 루트 레벨 변수 우선 매칭 (primary > sidebar/primary)
+**2. Button 컴포넌트 테스트 통과 ✅**
+- Shadcraft Button Frame → TDS Components 페이지에 복사
+- Migrate to TDS 플러그인 실행 → Fill, Effect, Text Style 교체 확인
 
-**다음 할 일:**
-1. Button 컴포넌트 전체에 플러그인 실행 → TDS 토큰 교체 확인
-2. Icon 라이브러리 TDS로 가져오기
-3. 나머지 컴포넌트 (Input, Card, Badge 등)
-4. Library Publish
+**3. Lucide Icons 추가 ✅**
+- Shadcn-Kit (aqyiOYPHsMCrWKPhkehP0g) 에서 Lucide Icons 복사
+- TDS에 붙여넣기 완료
+- 아이콘 색상 확인/수정 필요할 수 있음
+
+### 다음 할 일
+
+1. **Button 컴포넌트 전체 마이그레이션** — 플러그인으로 전체 버튼에 TDS 토큰 적용
+2. **아이콘 색상 확인** — currentColor 또는 TDS 변수로 바인딩 필요 여부
+3. **나머지 컴포넌트** — Input, Card, Badge 등
+4. **Library Publish** — TDS 라이브러리 배포
+
+### 플러그인 사용법
+
+```
+1. TDS 파일에서 컴포넌트 선택
+2. Plugins > Development > Migrate to TDS 실행
+3. 콘솔에서 교체 결과 확인
+```
 
 ---
 
