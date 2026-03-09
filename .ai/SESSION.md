@@ -31,11 +31,28 @@
 | alpha 채널 구분 | rgba 5% ≠ 100% 정확 구분, custom/ 변수 맵 제외 |
 | lineHeight AUTO 처리 | Auto일 때도 fontSize+weight로 Text Style 근사 매칭 |
 
+| Mobile Header Bar 컴포넌트 TDS 변환 시작 | 2026-03-09 |
+| ├ Shadcn Kit → TDS 복사 완료 | |
+| ├ TDS Migrator 실행 (토큰 바인딩 완료) | |
+| ├ Variant 정리: 6개 → 4개 | |
+| ├ 리네이밍: Nav / Nav+Label / Nav+Label+Actions / Screen+Actions | |
+| ├ 사이즈: 375×60, padding 0 16px | |
+| └ Title 스타일: text-lg/leading-normal/semibold (18/28) | |
+
+| 아이콘 사이즈 전략 결정 | 라이브러리 원본 24×24 유지, Button Size=Icon 원본 수정 (36×36, padding 4, 아이콘 fill) |
+| resize-icons 플러그인 제작 → 불필요로 삭제 | 컴포넌트 레벨 제어가 정답 |
+| Mobile Header Bar 구조 리뷰 (Team Mode) | 아이콘 Lucide 통일, Subtitle 정리, Boolean 프로퍼티 추가 권장 |
+| Button Size=Icon 원본 수정 | padding 8→4, 아이콘 fill, 36×36 |
+| Status/Streaks 독립 컴포넌트 + Boolean 연결 | Screen+Actions variant에 적용 |
+| Modal/Header 컴포넌트 생성 | 3 variant: Nav+Title+Action, Nav+Title (중앙 정렬), Title |
+| └ Nav+Title: Title ignore auto layout + Center constraints | 텍스트 길이 자동 조절 |
+
 ### 다음 할 일
 
-1. **나머지 컴포넌트 마이그레이션** — Input, Card, Badge, Field, Separator, Command 등 (Migrate 플러그인 실행)
-2. **Library Publish** — TDS 라이브러리 배포 + 다른 파일에서 참조 테스트
-3. **비-TEXT 노드 하드코딩 컬러 바인딩** — Phase 3 검토 (FRAME/RECTANGLE fill 토큰화)
+1. **프로필 컴포넌트** — 다음 마이그레이션 대상
+2. **Mobile Header Bar 잔여** — 아이콘 Lucide 통일, Subtitle default=false, Action Boolean 프로퍼티
+3. **나머지 컴포넌트 마이그레이션** — Input, Card, Badge, Field, Separator, Command 등
+4. **Library Publish** — TDS 라이브러리 배포 + 다른 파일에서 참조 테스트
 
 ---
 
