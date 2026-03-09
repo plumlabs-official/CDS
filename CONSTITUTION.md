@@ -1,6 +1,6 @@
 # Project Constitution
 
-> WDS (WellWe Design System) - AI 행동 지침
+> TDS (Tryve Design System) - AI 행동 지침
 >
 > Last updated: 2026-01-17 | v2.1.0
 

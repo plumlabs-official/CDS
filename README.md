@@ -1,4 +1,4 @@
-# WDS (WellWe Design System)
+# TDS (Tryve Design System)
 
 > Figma 디자인 시스템 자동화 플러그인 + AI Agent Server
 

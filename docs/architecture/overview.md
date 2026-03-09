@@ -1,6 +1,6 @@
 # 시스템 아키텍처
 
-> WellWe Design System Automator 전체 구조
+> Tryve Design System 전체 구조
 
 ## 개요
 

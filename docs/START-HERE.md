@@ -1,6 +1,6 @@
 # Start Here
 
-> WellWe Design System Automator - 5분 시작 가이드
+> Tryve Design System - 5분 시작 가이드
 
 ---
 
@@ -9,7 +9,7 @@
 ```bash
 # 1. 설치
 git clone <repository-url>
-cd WDS
+cd TDS
 npm install
 
 # 2. 환경 설정

@@ -16,7 +16,7 @@
 
 ### 2. 플러그인 실행
 
-1. `Plugins` > `Development` > `WellWe Design System Automator`
+1. `Plugins` > `Development` > `Tryve Design System`
 2. **Naming** 버튼 클릭
 
 ### 3. 결과 확인
