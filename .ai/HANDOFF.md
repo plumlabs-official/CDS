@@ -20,9 +20,19 @@ Commits: <커밋 해시 또는 pending>
 <!-- 아래에 handoff 기록 추가 -->
 
 ---
+HANDOFF: Claude -> User
+Date: 2026-03-09
+Project: ~/Project/TDS
+Agent: Claude
+Summary: WDS → TDS 리브랜딩. WellWe→Tryve 전체 참조 업데이트 (CONSTITUTION, README, CONTRIBUTING, docs)
+Next-TODO: 없음
+Commits: 18f86b8
+---
+
+---
 HANDOFF: Claude -> Claude (다음 세션)
 Date: 2026-03-06 16:46:00
-Project: ~/Project/WDS
+Project: ~/Project/TDS
 Agent: Claude
 Summary: TDS Phase 5 진행 - 플러그인 완성 + Button 테스트 통과 + Lucide Icons 추가
 Next-TODO:
