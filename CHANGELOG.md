@@ -14,10 +14,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: Swap Icon Sources 기능 (외부 라이브러리 → Icon Library 정식 소스 교체)
 - TDS Migrator: Bind Icon Colors 기능 (stroke/fill → foreground 변수 바인딩)
 - TDS Migrator: Migrate에 fontFamily(font-sans) + fontWeight 변수 바인딩 통합
+- TDS Migrator Phase 2: 텍스트 Fill 컬러 토큰 바인딩 (하드코딩 색상 → Mode Collection 변수)
+- TDS Migrator Phase 2: Effect Style 근사 매칭 (non-TDS 스타일 → TDS shadow 자동 교체)
+- TDS Migrator Phase 2: Text Style 근사 매칭 (fontSize/weight 기반 최근접 TDS 스타일 유추)
+- TDS Migrator Phase 2: 근사 매칭 요약 로그 ([SUMMARY] color/effect/text 건수 + 평균 거리)
 
 ### Changed
 - 플러그인 이름 변경: Migrate to TDS → TDS Migrator
 - UI 카테고리 재구성: Style Migration / Icon / Cleanup
+
+### Fixed
+- colorToVariable 맵: VARIABLE_ALIAS resolve 추가 (시맨틱 토큰 foreground 등 맵 등록)
+- colorToVariable 맵: alpha 채널 포함 (rgba 5% ≠ 100% 구분, custom/ 변수 제외)
+- Text Style 근사 매칭: lineHeight AUTO 처리 (null이어도 fontSize+weight로 매칭 시도)
+- Text Style 근사 매칭: fontWeight ±100 허용 (SemiBold↔Medium 유연 매칭)
 - replace-font-variable 플러그인 삭제 (TDS Migrator에 통합)
 
 ### Fixed

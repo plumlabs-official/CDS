@@ -274,6 +274,85 @@ async function handleMigrate() {
     }
   }
 
+  // alias 체인 resolve 함수
+  var defaultModeId = modeCollection.modes[0].modeId;
+
+  async function resolveColorValue(varObj) {
+    var val = varObj.valuesByMode[defaultModeId];
+    if (val === undefined) {
+      var modes = Object.keys(varObj.valuesByMode);
+      if (modes.length > 0) val = varObj.valuesByMode[modes[0]];
+    }
+    var depth = 0;
+    while (val && val.type === 'VARIABLE_ALIAS' && depth < 10) {
+      var aliasVar = await figma.variables.getVariableByIdAsync(val.id);
+      if (!aliasVar) return null;
+      var aliasVal = aliasVar.valuesByMode[defaultModeId];
+      if (aliasVal === undefined) {
+        var aliasModes = Object.keys(aliasVar.valuesByMode);
+        aliasVal = aliasVar.valuesByMode[aliasModes[0]];
+      }
+      val = aliasVal;
+      depth++;
+    }
+    if (val && typeof val === 'object' && val.type !== 'VARIABLE_ALIAS' && 'r' in val) {
+      return val;
+    }
+    return null;
+  }
+
+  // COLOR 변수의 resolved value → 변수 역방향 맵 (alias resolve 포함, alpha 포함)
+  var colorToVariable = {};
+  for (var cv = 0; cv < modeVariables.length; cv++) {
+    var mVar = modeVariables[cv];
+    if (mVar.resolvedType !== 'COLOR') continue;
+    // custom/ 변수는 제외 (기존 fill 스왑 로직과 일관)
+    if (mVar.name.indexOf('custom/') === 0) continue;
+    var colorVal = await resolveColorValue(mVar);
+    if (!colorVal) continue;
+    var r = Math.round(colorVal.r * 255);
+    var g = Math.round(colorVal.g * 255);
+    var b = Math.round(colorVal.b * 255);
+    var a = Math.round((colorVal.a !== undefined ? colorVal.a : 1) * 100);
+    var colorKey = r + '_' + g + '_' + b + '_' + a;
+    if (!colorToVariable[colorKey]) {
+      colorToVariable[colorKey] = mVar;
+      console.log('Color map: ' + colorKey + ' → ' + mVar.name);
+    }
+  }
+  console.log('Color map: ' + Object.keys(colorToVariable).length + ' entries');
+
+  // 근사 컬러 매칭: RGB 유클리드 거리 기반 (캐시 포함)
+  var MAX_COLOR_DISTANCE = 30;
+  var nearestColorCache = {};
+
+  function findNearestColor(r, g, b, a) {
+    var cacheKey = r + '_' + g + '_' + b + '_' + a;
+    if (nearestColorCache[cacheKey] !== undefined) return nearestColorCache[cacheKey];
+    var bestVar = null;
+    var bestDist = Infinity;
+    for (var key in colorToVariable) {
+      var parts = key.split('_');
+      var cr = parseInt(parts[0]), cg = parseInt(parts[1]), cb = parseInt(parts[2]);
+      var ca = parseInt(parts[3]);
+      // alpha 차이도 거리에 포함 (가중치: alpha 1% = RGB 2.55)
+      var dist = Math.sqrt(
+        (r - cr) * (r - cr) + (g - cg) * (g - cg) + (b - cb) * (b - cb)
+        + Math.pow((a - ca) * 2.55, 2)
+      );
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestVar = colorToVariable[key];
+      }
+    }
+    var result = null;
+    if (bestVar && bestDist <= MAX_COLOR_DISTANCE) {
+      result = { variable: bestVar, distance: Math.round(bestDist) };
+    }
+    nearestColorCache[cacheKey] = result;
+    return result;
+  }
+
   function findTdsVariable(originalName) {
     var parts = originalName.split('/');
     var shortName = parts[parts.length - 1];
@@ -302,9 +381,158 @@ async function handleMigrate() {
     return null;
   }
 
+  // TDS Effect Style만 필터 (shadows/ prefix)
+  var tdsEffectStyles = [];
+  for (var es = 0; es < effectStyles.length; es++) {
+    if (effectStyles[es].name.indexOf('shadows/') === 0) {
+      tdsEffectStyles.push(effectStyles[es]);
+    }
+  }
+  console.log('TDS Effect Styles: ' + tdsEffectStyles.length);
+
+  // Effect Style 속성 기반 맵 (TDS만)
+  var effectStyleByProps = {};
+
+  function serializeEffects(effects) {
+    if (!effects || effects.length === 0) return null;
+    var parts = [];
+    for (var i = 0; i < effects.length; i++) {
+      var e = effects[i];
+      if (!e.visible) continue;
+      var part = e.type + '_'
+        + Math.round((e.offset ? e.offset.x : 0)) + '_'
+        + Math.round((e.offset ? e.offset.y : 0)) + '_'
+        + Math.round(e.radius || 0) + '_'
+        + Math.round(e.spread || 0);
+      parts.push(part);
+    }
+    parts.sort();
+    return parts.join('|');
+  }
+
+  for (var es = 0; es < tdsEffectStyles.length; es++) {
+    var eStyle = tdsEffectStyles[es];
+    var eKey = serializeEffects(eStyle.effects);
+    if (eKey && !effectStyleByProps[eKey]) {
+      effectStyleByProps[eKey] = eStyle;
+      console.log('Effect map: ' + eKey + ' → ' + eStyle.name);
+    }
+  }
+  console.log('Effect Style props map: ' + Object.keys(effectStyleByProps).length + ' entries');
+
+  // Effect 근사 매칭: 유클리드 거리 기반
+  var MAX_EFFECT_DISTANCE = 50;
+
+  function extractEffectVector(effects) {
+    if (!effects) return null;
+    for (var i = 0; i < effects.length; i++) {
+      var e = effects[i];
+      if (e.visible && e.type === 'DROP_SHADOW') {
+        return {
+          x: e.offset ? e.offset.x : 0,
+          y: e.offset ? e.offset.y : 0,
+          radius: e.radius || 0,
+          spread: e.spread || 0
+        };
+      }
+    }
+    return null;
+  }
+
+  function findNearestTdsEffect(effects) {
+    var srcVec = extractEffectVector(effects);
+    if (!srcVec) return null;
+    var bestStyle = null;
+    var bestDist = Infinity;
+    for (var i = 0; i < tdsEffectStyles.length; i++) {
+      var tgtVec = extractEffectVector(tdsEffectStyles[i].effects);
+      if (!tgtVec) continue;
+      var dist = Math.sqrt(
+        Math.pow(srcVec.x - tgtVec.x, 2) +
+        Math.pow(srcVec.y - tgtVec.y, 2) +
+        Math.pow(srcVec.radius - tgtVec.radius, 2) +
+        Math.pow(srcVec.spread - tgtVec.spread, 2)
+      );
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestStyle = tdsEffectStyles[i];
+      }
+    }
+    if (bestStyle && bestDist <= MAX_EFFECT_DISTANCE) {
+      console.log('Nearest effect: dist=' + Math.round(bestDist) + ' → ' + bestStyle.name);
+      nearestStats.effectCount++;
+      nearestStats.effectTotalDist += bestDist;
+      return bestStyle;
+    }
+    return null;
+  }
+
   var textStyleByName = {};
   for (var t = 0; t < textStyles.length; t++) {
     textStyleByName[textStyles[t].name] = textStyles[t];
+  }
+
+  // fontName.style → weight 매핑 (fontWeight 직접 접근 불가 시 fallback)
+  var styleToWeight = {
+    'Thin': 100, 'ExtraLight': 200, 'Light': 300,
+    'Regular': 400, 'Medium': 500, 'SemiBold': 600,
+    'Bold': 700, 'ExtraBold': 800, 'Black': 900
+  };
+
+  // 속성 기반 역방향 Lookup Map: (fontSize_lineHeight_fontWeight) → TextStyle
+  var textStyleByProps = {};
+  for (var tp = 0; tp < textStyles.length; tp++) {
+    var tStyle = textStyles[tp];
+    var tsFontSize = tStyle.fontSize;
+    var tsLineHeight = null;
+    if (tStyle.lineHeight && tStyle.lineHeight.unit === 'PIXELS') {
+      tsLineHeight = tStyle.lineHeight.value;
+    } else if (tStyle.lineHeight && tStyle.lineHeight.unit === 'PERCENT') {
+      tsLineHeight = Math.round(tsFontSize * tStyle.lineHeight.value / 100);
+    }
+    // AUTO → null (매칭 제외)
+    var tsFontWeight = tStyle.fontWeight;
+    if (!tsFontWeight && tStyle.fontName) {
+      tsFontWeight = styleToWeight[tStyle.fontName.style] || null;
+    }
+    if (tsFontSize && tsLineHeight && tsFontWeight) {
+      var tsKey = tsFontSize + '_' + tsLineHeight + '_' + tsFontWeight;
+      if (!textStyleByProps[tsKey]) {
+        textStyleByProps[tsKey] = tStyle;
+        console.log('Style map: ' + tsKey + ' → ' + tStyle.name);
+      }
+    }
+  }
+  console.log('Text Style props map: ' + Object.keys(textStyleByProps).length + ' entries');
+
+  // Text Style 근사 매칭: fontSize + fontWeight 기반 최근접
+  var MAX_FONTSIZE_DISTANCE = 4; // px 허용 오차
+
+  var MAX_WEIGHT_DISTANCE = 100; // weight ±100 허용 (e.g. 600→500 or 600→700)
+
+  function findNearestTextStyle(fontSize, lineHeight, fontWeight) {
+    var bestStyle = null;
+    var bestDist = Infinity;
+    for (var key in textStyleByProps) {
+      var kParts = key.split('_');
+      var tfs = parseInt(kParts[0]), tlh = parseInt(kParts[1]), tfw = parseInt(kParts[2]);
+      var fsDist = Math.abs(fontSize - tfs);
+      if (fsDist > MAX_FONTSIZE_DISTANCE) continue;
+      var fwDist = Math.abs(fontWeight - tfw);
+      if (fwDist > MAX_WEIGHT_DISTANCE) continue;
+      var lhDist = lineHeight ? Math.abs(lineHeight - tlh) : 0;
+      // 복합 거리: fontSize(가중치 3) + weight(가중치 2, 100단위→1단위) + lineHeight
+      var combinedDist = fsDist * 3 + (fwDist / 100) * 2 + lhDist;
+      if (combinedDist < bestDist) {
+        bestDist = combinedDist;
+        bestStyle = textStyleByProps[key];
+      }
+    }
+    if (bestStyle) {
+      console.log('Nearest text style: dist=' + Math.round(bestDist) + ' → ' + bestStyle.name);
+      nearestStats.textCount = (nearestStats.textCount || 0) + 1;
+    }
+    return bestStyle;
   }
 
   // font-sans 변수 + font-weight 변수 맵 구축
@@ -347,7 +575,8 @@ async function handleMigrate() {
     }
   }
 
-  var stats = { effects: 0, fills: 0, strokes: 0, textStyles: 0, fonts: 0, skipped: 0 };
+  var stats = { effects: 0, fills: 0, strokes: 0, textStyles: 0, inferredStyles: 0, colorTokens: 0, fonts: 0, skipped: 0 };
+  var nearestStats = { colorCount: 0, colorTotalDist: 0, effectCount: 0, effectTotalDist: 0 };
 
   async function processNode(node) {
     if (node.name && (node.name.indexOf('Icon/') === 0 || node.name === 'Icon')) {
@@ -361,6 +590,18 @@ async function handleMigrate() {
         var currentEffectStyle = await figma.getStyleByIdAsync(node.effectStyleId);
         if (currentEffectStyle) {
           var tdsEffectStyle = findTdsEffectStyle(currentEffectStyle.name);
+
+          // 이름 매칭 실패 → 속성 정확 매칭 → 근사 매칭 fallback
+          if (!tdsEffectStyle || tdsEffectStyle.id === node.effectStyleId) {
+            var nodeEffectKey = serializeEffects(currentEffectStyle.effects);
+            if (nodeEffectKey && effectStyleByProps[nodeEffectKey]) {
+              tdsEffectStyle = effectStyleByProps[nodeEffectKey];
+            }
+          }
+          if (!tdsEffectStyle || tdsEffectStyle.id === node.effectStyleId) {
+            tdsEffectStyle = findNearestTdsEffect(currentEffectStyle.effects);
+          }
+
           if (tdsEffectStyle && tdsEffectStyle.id !== node.effectStyleId) {
             await node.setEffectStyleIdAsync(tdsEffectStyle.id);
             stats.effects++;
@@ -454,8 +695,102 @@ async function handleMigrate() {
         }
       }
 
-      // 5. fontFamily + fontWeight 바인딩 (스타일 미적용 텍스트만)
-      if (fontSans && !node.textStyleId) {
+      // 4.5 Text Style 유추 (미스타일 텍스트 → 속성 기반 매칭)
+      if (!node.textStyleId || node.textStyleId === '') {
+        var canInfer = node.fontSize !== figma.mixed
+          && node.lineHeight !== figma.mixed;
+
+        if (canInfer) {
+          var nodeLH = null;
+          if (node.lineHeight && node.lineHeight.unit === 'PIXELS') {
+            nodeLH = node.lineHeight.value;
+          } else if (node.lineHeight && node.lineHeight.unit === 'PERCENT') {
+            nodeLH = Math.round(node.fontSize * node.lineHeight.value / 100);
+          }
+          // AUTO → null (근사 매칭에서 lineHeight 무시하고 fontSize+weight만 비교)
+
+          var nodeWeight = null;
+          if (node.fontWeight && node.fontWeight !== figma.mixed) {
+            nodeWeight = node.fontWeight;
+          } else if (node.fontName && node.fontName !== figma.mixed) {
+            nodeWeight = styleToWeight[node.fontName.style] || null;
+          }
+
+          if (nodeWeight) {
+            var propKey = node.fontSize + '_' + (nodeLH || 'auto') + '_' + nodeWeight;
+            var inferredStyle = nodeLH ? textStyleByProps[node.fontSize + '_' + nodeLH + '_' + nodeWeight] : null;
+
+            // 정확 매칭 실패 시 근사 매칭 fallback
+            if (!inferredStyle) {
+              inferredStyle = findNearestTextStyle(node.fontSize, nodeLH, nodeWeight);
+            }
+
+            if (inferredStyle) {
+              try {
+                if (node.fontName && node.fontName !== figma.mixed) {
+                  await figma.loadFontAsync(node.fontName);
+                }
+                await node.setTextStyleIdAsync(inferredStyle.id);
+                stats.inferredStyles++;
+                console.log('Inferred: ' + inferredStyle.name + ' ← ' + node.name + ' (' + propKey + ')');
+              } catch (err) {
+                console.log('Infer error on ' + node.name + ': ' + err.message);
+              }
+            } else {
+              console.log('No match: ' + node.name + ' (' + propKey + ')');
+            }
+          }
+        }
+      }
+
+      // 4.6: 텍스트 Fill 컬러 → TDS 변수 바인딩 (바인딩 안 된 하드코딩 색상만)
+      if ('fills' in node && node.fills && node.fills !== figma.mixed) {
+        var newTextFills = [];
+        var textFillChanged = false;
+        for (var tfi = 0; tfi < node.fills.length; tfi++) {
+          var textFill = JSON.parse(JSON.stringify(node.fills[tfi]));
+          var alreadyBound = node.boundVariables && node.boundVariables.fills
+            && node.boundVariables.fills[tfi];
+          if (!alreadyBound && textFill.type === 'SOLID') {
+            var tr = Math.round(textFill.color.r * 255);
+            var tg = Math.round(textFill.color.g * 255);
+            var tb = Math.round(textFill.color.b * 255);
+            var ta = Math.round((textFill.opacity !== undefined ? textFill.opacity : 1) * 100);
+            var textColorKey = tr + '_' + tg + '_' + tb + '_' + ta;
+            var matchedVar = colorToVariable[textColorKey];
+            if (matchedVar) {
+              try {
+                textFill = figma.variables.setBoundVariableForPaint(textFill, 'color', matchedVar);
+                textFillChanged = true;
+                stats.colorTokens++;
+                console.log('Text color: ' + textColorKey + ' → ' + matchedVar.name + ' on ' + node.name);
+              } catch (err) {
+                console.log('Text color bind error: ' + err.message);
+              }
+            } else {
+              // 근사 매칭 fallback
+              var nearest = findNearestColor(tr, tg, tb, ta);
+              if (nearest) {
+                try {
+                  textFill = figma.variables.setBoundVariableForPaint(textFill, 'color', nearest.variable);
+                  textFillChanged = true;
+                  stats.colorTokens++;
+                  nearestStats.colorCount++;
+                  nearestStats.colorTotalDist += nearest.distance;
+                  console.log('Text color: ' + textColorKey + ' ~> ' + nearest.variable.name + ' (dist: ' + nearest.distance + ') on ' + node.name);
+                } catch (err) {
+                  console.log('Text color bind error: ' + err.message);
+                }
+              }
+            }
+          }
+          newTextFills.push(textFill);
+        }
+        if (textFillChanged) node.fills = newTextFills;
+      }
+
+      // 5. fontFamily + fontWeight 바인딩 (유추 실패한 미스타일 텍스트만)
+      if (fontSans && (!node.textStyleId || node.textStyleId === '')) {
         try {
           // 현재 폰트 로드 (수정 전 필수)
           if (node.fontName && node.fontName !== figma.mixed) {
@@ -489,10 +824,20 @@ async function handleMigrate() {
     await processNode(targets[n]);
   }
 
-  var total = stats.effects + stats.fills + stats.strokes + stats.textStyles + stats.fonts;
-  var msg = 'Effect ' + stats.effects + ', Fill ' + stats.fills + ', Stroke ' + stats.strokes + ', Text ' + stats.textStyles + ', Font ' + stats.fonts + ' (' + scope + ', skip: ' + stats.skipped + ')';
+  var total = stats.effects + stats.fills + stats.strokes + stats.textStyles + stats.inferredStyles + stats.colorTokens + stats.fonts;
+  var msg = 'Effect ' + stats.effects + ', Fill ' + stats.fills + ', Stroke ' + stats.strokes + ', Text ' + stats.textStyles + ', Inferred ' + stats.inferredStyles + ', Color ' + stats.colorTokens + ', Font ' + stats.fonts + ' (' + scope + ', skip: ' + stats.skipped + ')';
   figma.notify('Done: ' + msg);
   console.log('Stats:', stats);
+  // 근사 매칭 요약
+  if (nearestStats.colorCount > 0) {
+    console.log('[SUMMARY] Nearest color matches: ' + nearestStats.colorCount + ' (avg dist: ' + Math.round(nearestStats.colorTotalDist / nearestStats.colorCount) + ')');
+  }
+  if (nearestStats.effectCount > 0) {
+    console.log('[SUMMARY] Nearest effect matches: ' + nearestStats.effectCount + ' (avg dist: ' + Math.round(nearestStats.effectTotalDist / nearestStats.effectCount) + ')');
+  }
+  if (nearestStats.textCount) {
+    console.log('[SUMMARY] Nearest text style matches: ' + nearestStats.textCount);
+  }
   return msg;
 }
 

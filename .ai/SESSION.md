@@ -24,11 +24,16 @@
 | Migrate to TDS 플러그인 UI 패널 추가 | Migrate / Remove Button Drop Shadow 버튼 분리. IIFE → UI 메시지 핸들러 구조 리팩토링 |
 | Button Drop Shadow 제거 기능 | DROP_SHADOW만 제거, Ghost 타입 제외, 선택 없으면 페이지 전체 대상 |
 
+| TDS Migrator Phase 2 | 컬러 토큰 바인딩 + Effect Style 근사 매칭 + Text Style 근사 매칭 |
+| alias resolve 버그 수정 | VARIABLE_ALIAS 시맨틱 토큰(foreground 등) colorToVariable 맵 등록 |
+| alpha 채널 구분 | rgba 5% ≠ 100% 정확 구분, custom/ 변수 맵 제외 |
+| lineHeight AUTO 처리 | Auto일 때도 fontSize+weight로 Text Style 근사 매칭 |
+
 ### 다음 할 일
 
 1. **나머지 컴포넌트 마이그레이션** — Input, Card, Badge, Field, Separator, Command 등 (Migrate 플러그인 실행)
-2. **아이콘 색상 통일** — 하드코딩(`#09090B`) → TDS foreground 변수 바인딩 (선택)
-3. **Library Publish** — TDS 라이브러리 배포 + 다른 파일에서 참조 테스트
+2. **Library Publish** — TDS 라이브러리 배포 + 다른 파일에서 참조 테스트
+3. **비-TEXT 노드 하드코딩 컬러 바인딩** — Phase 3 검토 (FRAME/RECTANGLE fill 토큰화)
 
 ---
 
