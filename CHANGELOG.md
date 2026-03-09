@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Migrate to TDS 플러그인 UI 패널 (Migrate / Remove Button Drop Shadow 버튼 분리)
+- Button Drop Shadow 제거 기능 (DROP_SHADOW만 제거, Ghost 타입 제외)
+- 선택 없으면 현재 페이지 전체 대상으로 동작
+
 ### Changed
 - 아이콘 출처 확인: Lucide Icons = Shadcn Kit 로컬 컴포넌트 (Huge Icons Detach 불필요)
 - 아이콘 독립화 전략 수정 (Huge Icons Detach → 불필요, 색상 바인딩만 필요)

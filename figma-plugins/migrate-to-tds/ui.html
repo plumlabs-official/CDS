@@ -1,0 +1,102 @@
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Inter, -apple-system, sans-serif;
+    font-size: 12px;
+    color: #333;
+    padding: 16px;
+    background: #fff;
+  }
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .section {
+    margin-bottom: 16px;
+  }
+  .desc {
+    color: #888;
+    font-size: 11px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  button {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  button:hover { opacity: 0.85; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary {
+    background: #171717;
+    color: #fff;
+  }
+  .btn-danger {
+    background: #F33939;
+    color: #fff;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #E4E4E7;
+    margin: 16px 0;
+  }
+  #status {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #666;
+    min-height: 16px;
+  }
+</style>
+
+<h2>Migrate to TDS</h2>
+
+<div class="section">
+  <button id="btn-migrate" class="btn-primary" onclick="onMigrate()">Migrate</button>
+  <div class="desc">Fill / Stroke / Effect / Text Style 교체</div>
+</div>
+
+<hr>
+
+<div class="section">
+  <button id="btn-detach" class="btn-danger" onclick="onDetachEffects()">Remove Button Drop Shadow</button>
+  <div class="desc">Button의 Drop Shadow 제거 (Ghost 제외)</div>
+</div>
+
+<div id="status"></div>
+
+<script>
+  function setStatus(msg) {
+    document.getElementById('status').textContent = msg;
+  }
+
+  function setButtons(disabled) {
+    document.getElementById('btn-migrate').disabled = disabled;
+    document.getElementById('btn-detach').disabled = disabled;
+  }
+
+  function onMigrate() {
+    setStatus('Migrating...');
+    setButtons(true);
+    parent.postMessage({ pluginMessage: { type: 'migrate' } }, '*');
+  }
+
+  function onDetachEffects() {
+    setStatus('Detaching...');
+    setButtons(true);
+    parent.postMessage({ pluginMessage: { type: 'detach-effects' } }, '*');
+  }
+
+  window.onmessage = function(event) {
+    var msg = event.data.pluginMessage;
+    if (msg && msg.type === 'result') {
+      setStatus(msg.text);
+      setButtons(false);
+    }
+  };
+</script>

@@ -18,14 +18,14 @@
 | 아이콘 출처 확인 | Shadcn Kit: Lucide Icons = 로컬 COMPONENT (외부 라이브러리 아님). TDS 복사본도 동일. Huge Icons는 보너스 리소스 |
 | 아이콘 독립화 전략 수정 | ~~Huge Icons Detach~~ 불필요 → 이미 독립된 Lucide 벡터 컴포넌트 |
 | Figma 플러그인 경로 이슈 | Migrate to TDS 플러그인이 이전 경로(`WDS/`)를 참조 → `TDS/figma-plugins/migrate-to-tds/manifest.json`으로 재등록 필요 |
+| Migrate to TDS 플러그인 UI 패널 추가 | Migrate / Remove Button Drop Shadow 버튼 분리. IIFE → UI 메시지 핸들러 구조 리팩토링 |
+| Button Drop Shadow 제거 기능 | DROP_SHADOW만 제거, Ghost 타입 제외, 선택 없으면 페이지 전체 대상 |
 
 ### 다음 할 일
 
-1. **Figma 플러그인 재등록** — `~/Project/TDS/figma-plugins/migrate-to-tds/manifest.json` 경로로 재임포트
-2. **Button 컴포넌트 전체 마이그레이션** — Migrate to TDS 플러그인 실행
-3. **아이콘 색상 통일** — 하드코딩(#09090B) → TDS foreground 변수 바인딩
-4. **나머지 컴포넌트** — Input, Card, Badge 등
-5. **Library Publish**
+1. **나머지 컴포넌트 마이그레이션** — Input, Card, Badge, Field, Separator, Command 등 (Migrate 플러그인 실행)
+2. **아이콘 색상 통일** — 하드코딩(`#09090B`) → TDS foreground 변수 바인딩 (선택)
+3. **Library Publish** — TDS 라이브러리 배포 + 다른 파일에서 참조 테스트
 
 ---
 
