@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- TDS Docs Generator: Effect Showcase 페이지 생성 (effectToCSS 자동 변환, Tailwind 크기순 정렬)
+- TDS Docs Generator: Typography + Color + Effects 3개 페이지 완성
+- TDS Docs Generator: makeLabel 폰트 사전 로드 최적화 (preloadInterFonts 공통화)
+- TDS Docs Generator: 라벨 색상 접근성 개선 (#878789 → #636366, WCAG AA 5.5:1)
 - Migrate to TDS 플러그인 UI 패널 (Migrate / Remove Button Drop Shadow 버튼 분리)
 - Button Drop Shadow 제거 기능 (DROP_SHADOW만 제거, Ghost 타입 제외)
 - 선택 없으면 현재 페이지 전체 대상으로 동작

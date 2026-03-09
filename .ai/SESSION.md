@@ -25,6 +25,7 @@
 | Button Drop Shadow 제거 기능 | DROP_SHADOW만 제거, Ghost 타입 제외, 선택 없으면 페이지 전체 대상 |
 
 | TDS Migrator Phase 2 | 컬러 토큰 바인딩 + Effect Style 근사 매칭 + Text Style 근사 매칭 |
+| TDS Docs Generator: Effect Showcase + Quick Wins | effectToCSS, makeLabel 최적화, 라벨 접근성 개선 |
 | alias resolve 버그 수정 | VARIABLE_ALIAS 시맨틱 토큰(foreground 등) colorToVariable 맵 등록 |
 | alpha 채널 구분 | rgba 5% ≠ 100% 정확 구분, custom/ 변수 맵 제외 |
 | lineHeight AUTO 처리 | Auto일 때도 fontSize+weight로 Text Style 근사 매칭 |

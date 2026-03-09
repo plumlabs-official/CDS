@@ -1,0 +1,13 @@
+{
+  "name": "TDS Docs Generator",
+  "id": "tds-docs-generator",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "networkAccess": { "allowedDomains": ["none"] },
+  "menu": [
+    { "name": "Generate Typography Page", "command": "gen-typography" },
+    { "name": "Generate Color Page", "command": "gen-colors" },
+    { "name": "Generate Effects Page", "command": "gen-effects" }
+  ]
+}
