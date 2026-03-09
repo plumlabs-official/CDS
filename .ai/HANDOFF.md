@@ -21,6 +21,16 @@ Commits: <커밋 해시 또는 pending>
 
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-09 11:10:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Migrate to TDS 플러그인 UI 패널 추가 (Migrate / Remove Button Drop Shadow 분리). DROP_SHADOW만 제거, Ghost 제외, 선택 없으면 페이지 전체 대상.
+Next-TODO: 나머지 컴포넌트 마이그레이션 (Input, Card, Badge 등) + Library Publish
+Commits: e501d5a
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-09 10:51:00
 Project: ~/Project/TDS
 Agent: Claude
