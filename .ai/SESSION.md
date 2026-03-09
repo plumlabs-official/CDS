@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-06 | v3.5.0
+> Last updated: 2026-03-09
 
 ---
 
@@ -10,10 +10,49 @@
 
 ### 완료된 작업
 
-| 작업 | 날짜 |
+| 작업 | 커밋 |
 |------|------|
-| refactor: WDS→TDS 플러그인 리네이밍 + 폴더 이동 (packages/figma-plugin → figma-plugins/tds) | 2026-03-09 |
-| refactor: @wellwe → @tryve npm scope 전체 전환 | 2026-03-09 |
+| refactor: WDS→TDS 플러그인 리네이밍 (manifest, 코드 내 함수/변수/주석) | `a15d1df` |
+| refactor: packages/figma-plugin/ → figma-plugins/tds/ 폴더 이동 | `a15d1df` |
+| refactor: @wellwe → @tryve npm scope 전체 전환 (13개 파일) | `32b17eb` |
+| docs: Skill/커맨드 우선 규칙 → CLAUDE.md에 추가 | - |
+
+### 주요 결정
+
+**아이콘 독립화 전략 (Lenny Team 회의):**
+- Shadcn Kit의 아이콘은 Huge Icons 라이브러리 인스턴스
+- TDS 구조: Icons 페이지(Huge Icons 인스턴스) → 컴포넌트가 Icons 페이지 참조 (2단계 참조)
+- **결정: Icons 페이지에서 Huge Icons Detach → TDS 로컬 컴포넌트로 등록**
+  - 컴포넌트는 Icons 페이지를 참조하므로 자동 전환
+  - 이름은 Lucide 규칙으로 매핑 (프론트엔드 lucide-react와 1:1)
+- 미팅 기록: `~/Project/lenny/meetings/2026-03-09_tds-icon-strategy.md`
+
+### 프로젝트 구조 (현재)
+
+```
+TDS/
+├── packages/
+│   ├── common/          (@tryve/common)
+│   └── agent-server/    (@tryve/agent-server)
+├── figma-plugins/
+│   ├── tds/             (@tryve/figma-plugin, 메인 플러그인)
+│   ├── migrate-to-tds/
+│   └── replace-font-variable/
+└── package.json         (tds, workspaces)
+```
+
+### 다음 할 일
+
+1. **Icons 페이지 독립화** — Huge Icons Detach → TDS 컴포넌트 등록 → Lucide 이름 매핑
+2. **아이콘 색상 통일** — currentColor / TDS foreground 변수
+3. **Button 컴포넌트 마이그레이션 계속** — TDS 토큰 적용
+4. **나머지 컴포넌트** — Input, Card, Badge 등
+5. **Library Publish**
+
+### 남은 레거시
+
+- 파일명 3개: `wellwe-simplification-schedule.*`, WDS PDF — 과거 산출물 (선택 정리)
+- 히스토리 파일 (HANDOFF, SESSION, CHANGELOG) — 의도적 보존
 
 ---
 
