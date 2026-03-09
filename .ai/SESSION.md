@@ -47,12 +47,30 @@
 | Modal/Header 컴포넌트 생성 | 3 variant: Nav+Title+Action, Nav+Title (중앙 정렬), Title |
 | └ Nav+Title: Title ignore auto layout + Center constraints | 텍스트 길이 자동 조절 |
 
+### 컴포넌트 마이그레이션 현황
+
+| 컴포넌트 | 상태 |
+|----------|------|
+| Button | 완료 (Size=Icon 36×36 수정 포함) |
+| Mobile Header Bar | 완료 (4 variant + Status/Streaks 배지) |
+| Modal/Header | 완료 (3 variant: Nav+Title+Action, Nav+Title, Title) |
+
+### 잔여 정리 (완료된 컴포넌트)
+
+| 항목 | 대상 |
+|------|------|
+| 아이콘 Lucide 통일 | Header Bar + Modal Header의 Huge Icons → Lucide 교체 |
+| Subtitle default=false | Header Bar Nav+Label, Nav+Label+Actions |
+| Action Boolean 프로퍼티 | Header Bar Right 영역 Action 1/2/3 토글 |
+
 ### 다음 할 일
 
-1. **프로필 컴포넌트** — 다음 마이그레이션 대상
-2. **Mobile Header Bar 잔여** — 아이콘 Lucide 통일, Subtitle default=false, Action Boolean 프로퍼티
-3. **나머지 컴포넌트 마이그레이션** — Input, Card, Badge, Field, Separator, Command 등
-4. **Library Publish** — TDS 라이브러리 배포 + 다른 파일에서 참조 테스트
+| 순서 | 작업 | 비고 |
+|------|------|------|
+| 1 | **프로필 컴포넌트** | 다음 마이그레이션 대상 |
+| 2 | **나머지 컴포넌트 마이그레이션** | Input, Card, Badge, Field, Separator, Command 등 |
+| 3 | **비-TEXT 노드 컬러 바인딩** | Phase 3 — FRAME/RECTANGLE fill 토큰화 |
+| 4 | **Library Publish** | TDS 라이브러리 배포 + 참조 테스트 |
 
 ---
 
