@@ -21,6 +21,16 @@ Commits: <커밋 해시 또는 pending>
 
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-09 09:51:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: WDS→TDS 플러그인 리네이밍 + packages/figma-plugin/ → figma-plugins/tds/ 폴더 이동. 빌드 검증 완료.
+Next-TODO: Figma에서 플러그인 재등록 (figma-plugins/tds/manifest.json). Phase 2로 @wellwe→@tryve scope 전환 예정.
+Commits: a15d1df
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-09
 Project: ~/Project/TDS
 Agent: Claude
