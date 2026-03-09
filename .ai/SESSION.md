@@ -46,14 +46,37 @@
 | Status/Streaks 독립 컴포넌트 + Boolean 연결 | Screen+Actions variant에 적용 |
 | Modal/Header 컴포넌트 생성 | 3 variant: Nav+Title+Action, Nav+Title (중앙 정렬), Title |
 | └ Nav+Title: Title ignore auto layout + Center constraints | 텍스트 길이 자동 조절 |
+| Button Size=Large 사양 결정 | h56, padding 12/24, borderRadius 28(pill), fontSize 20, fontWeight 600 |
+| └ XL 미추가 결정 | shadcn `lg` 매핑 유지 위해 Large를 CTA 사이즈로 승격 |
 
 ### 컴포넌트 마이그레이션 현황
 
 | 컴포넌트 | 상태 |
 |----------|------|
-| Button | 완료 (Size=Icon 36×36 수정 포함) |
+| Button | 완료 (Size=Icon 36×36 + Size=Large CTA 56px pill 결정) |
 | Mobile Header Bar | 완료 (4 variant + Status/Streaks 배지) |
 | Modal/Header | 완료 (3 variant: Nav+Title+Action, Nav+Title, Title) |
+
+### Button Size 매핑 (현재 → 변경)
+
+| Size | Height | Padding | Radius | Font | shadcn 매핑 |
+|------|--------|---------|--------|------|------------|
+| Small | 32px | 8/12 | 8px | 14/400 | `sm` |
+| Default | 36px | 8/16 | 8px | 14/400 | `default` |
+| **Large** | **56px** | **12/24** | **28px (pill)** | **20/600** | **`lg`** |
+| Icon | 36×36 | 4 | 8px | - | `icon` |
+| Icon Small | 28×28 | - | 8px | - | - |
+| Icon Large | 44×44 | - | 8px | - | - |
+
+> XL variant 미추가 이유: shadcn buttonVariants에 `xl` 없으면 바이브코딩 AI가 매핑 못 함. Large를 CTA용으로 승격하면 `lg` 매핑 유지.
+
+### Figma 인스턴스 운용 규칙
+
+- **인스턴스 레이어명은 원본 유지** — `Button`을 `Button/SendAuth`로 바꾸지 않음
+- **맥락은 부모 프레임 이름으로** — `CTA Section > Button` 구조
+- **의미 단위로 부모 프레임 생성** — Auto Layout + gap으로 간격 제어
+- **불필요한 래퍼 프레임 금지** — 의미 없는 중첩 = 개발 시 불필요한 div
+- **Text Style**: 버튼 등 height 고정 + vertical center인 경우 `leading-none` (line-height: 1) 사용
 
 ### 잔여 정리 (완료된 컴포넌트)
 
@@ -67,6 +90,7 @@
 
 | 순서 | 작업 | 비고 |
 |------|------|------|
+| 0 | **Button Size=Large 36개 variant 수정** | h56, pill, 20/600 — Figma 작업 |
 | 1 | **프로필 컴포넌트** | 다음 마이그레이션 대상 |
 | 2 | **나머지 컴포넌트 마이그레이션** | Input, Card, Badge, Field, Separator, Command 등 |
 | 3 | **비-TEXT 노드 컬러 바인딩** | Phase 3 — FRAME/RECTANGLE fill 토큰화 |
