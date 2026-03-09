@@ -6,7 +6,30 @@
 
 ---
 
-## 현재 세션 (2026-03-09)
+## 현재 세션 (2026-03-09) — 4차
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| Figma MCP 토큰 교체 | 만료 토큰(`figd__p_RV...`) → 새 토큰(`figd_CNga...`)으로 교체. user scope 등록 (전역) |
+| 토큰 영구 저장 | `~/.zshrc`에 `FIGMA_PERSONAL_ACCESS_TOKEN` 환경변수 추가 |
+| Figma MCP 연결 확인 | 정상 작동 확인 (TDS, Shadcn Kit 파일 접근 가능) |
+| 아이콘 출처 확인 | Shadcn Kit: Lucide Icons = 로컬 COMPONENT (외부 라이브러리 아님). TDS 복사본도 동일. Huge Icons는 보너스 리소스 |
+| 아이콘 독립화 전략 수정 | ~~Huge Icons Detach~~ 불필요 → 이미 독립된 Lucide 벡터 컴포넌트 |
+| Figma 플러그인 경로 이슈 | Migrate to TDS 플러그인이 이전 경로(`WDS/`)를 참조 → `TDS/figma-plugins/migrate-to-tds/manifest.json`으로 재등록 필요 |
+
+### 다음 할 일
+
+1. **Figma 플러그인 재등록** — `~/Project/TDS/figma-plugins/migrate-to-tds/manifest.json` 경로로 재임포트
+2. **Button 컴포넌트 전체 마이그레이션** — Migrate to TDS 플러그인 실행
+3. **아이콘 색상 통일** — 하드코딩(#09090B) → TDS foreground 변수 바인딩
+4. **나머지 컴포넌트** — Input, Card, Badge 등
+5. **Library Publish**
+
+---
+
+## 이전 (2026-03-09 — 1차)
 
 ### 완료된 작업
 

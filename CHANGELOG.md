@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- 아이콘 출처 확인: Lucide Icons = Shadcn Kit 로컬 컴포넌트 (Huge Icons Detach 불필요)
+- 아이콘 독립화 전략 수정 (Huge Icons Detach → 불필요, 색상 바인딩만 필요)
 - @wellwe → @tryve npm scope 전체 전환 (package.json, import, 주석)
 - WDS → TDS 플러그인 리네이밍 + 폴더 이동 (`packages/figma-plugin/` → `figma-plugins/tds/`)
 - WDS → TDS 리브랜딩: WellWe → Tryve 전환 (CONSTITUTION, README, CONTRIBUTING, docs)
