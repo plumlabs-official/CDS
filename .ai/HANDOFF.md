@@ -1,4 +1,14 @@
 ---
+HANDOFF: Claude -> User
+Date: 2026-03-10 22:00:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: SF Pro 폰트(iOS 네이티브) 텍스트 스타일/폰트 바인딩 스킵. 에러 로그 상세화. Kbd/Separator 추가 완료, .Input Base Cursor detach 완료.
+Next-TODO: Utility/Logo + Logo Mark TDS 추가 (현재 MISS). Library Publish.
+Commits: 0074222
+---
+
+---
 HANDOFF: Claude -> Codex
 Date: 2026-03-10 21:26:00
 Project: ~/Project/TDS
