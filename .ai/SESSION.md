@@ -12,6 +12,10 @@
 
 | 작업 | 비고 |
 |------|------|
+| 온보딩 UX 컴포넌트 플래닝 | Phase 0~5, 27개 컴포넌트 확정 (Team 리뷰 포함) |
+| TDS Figma 파일 키 기록 | `H36eNEd6o7ZTv4R7VcyLf2` — SESSION.md Figma 파일 섹션 업데이트 |
+| Button Type=Inverted 결정 | 컬러 배경 위 흰 버튼. buttonVariants에 inverted 추가 |
+| Button font size 조정 결정 | TDS Text Style 기준 적용 (e.g. Large 20px→18px) |
 | Figma MCP 토큰 교체 | 만료 토큰(`figd__p_RV...`) → 새 토큰(`figd_CNga...`)으로 교체. user scope 등록 (전역) |
 | 토큰 영구 저장 | `~/.zshrc`에 `FIGMA_PERSONAL_ACCESS_TOKEN` 환경변수 추가 |
 | Figma MCP 연결 확인 | 정상 작동 확인 (TDS, Shadcn Kit 파일 접근 가능) |
@@ -419,9 +423,12 @@ TDS/
 
 | 항목 | 값 |
 |------|-----|
-| URL | https://www.figma.com/design/s4GdImD87fQsWwnRYQVbWV/App?node-id=14451-4060 |
-| fileKey | `s4GdImD87fQsWwnRYQVbWV` |
-| nodeId | `14451:4060` |
+| **TDS (디자인 시스템)** | https://www.figma.com/design/H36eNEd6o7ZTv4R7VcyLf2/TDS |
+| TDS fileKey | `H36eNEd6o7ZTv4R7VcyLf2` |
+| **App (앱 디자인)** | https://www.figma.com/design/s4GdImD87fQsWwnRYQVbWV/App?node-id=14451-4060 |
+| App fileKey | `s4GdImD87fQsWwnRYQVbWV` |
+| **Shadcn Kit (소스)** | `aqyiOYPHsMCrWKPhkehP0g` |
+| **온보딩 디자인** | `rrnCjPKhK4e69ElSkzMpTp` |
 
 ---
 

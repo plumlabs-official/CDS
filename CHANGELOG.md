@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- 온보딩 UX 컴포넌트 플래닝 완료 (Phase 0~5, 27개 컴포넌트)
+- TDS Figma 파일 키 SESSION.md에 기록 (H36eNEd6o7ZTv4R7VcyLf2)
+- Button Type=Inverted variant 추가 결정 (컬러 배경 위 흰 버튼)
+
 ### Fixed
 - TDS Migrator: focus/ Effect Style 보존 (focus/default 등 비-shadow 스타일 교체 방지)
 - TDS Docs Generator: 모든 fill/stroke에 TDS 변수 바인딩 (Migrator 불필요하도록)
