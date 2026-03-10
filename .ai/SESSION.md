@@ -40,9 +40,11 @@
 | 컴포넌트 | 상태 |
 |----------|------|
 | Button | 완료 (7 Type: Default/Secondary/Destructive/Outline/Ghost/Link/Inverted × 6 State × 6 Size = 438 variant) |
-| AppBar (구 Mobile Header Bar) | 완료 (4 variant + StatusComponent). 리네이밍 완료 |
+| AppBar (구 Mobile Header Bar) | 완료 (3 Types + Boolean 토글). /team PASS (95/95). 아이콘 일괄 통일 후속 |
+| Switch | 완료 (Toggle Atom 6v + Switch Molecule 16v). /team PASS (95/95) |
+| Separator | 완료 (Horizontal/Vertical 2v). Alert Dialog 버튼 구분 + 섹션 구분 활용 |
 | Modal/Header | 완료 (3 variant: Nav+Title+Action, Nav+Title, Title) |
-| Tabs | 추가됨 (Tabs + SubTab Addon Inline + TabsTrigger) |
+| Tabs | 완료 (Tabs/Primary 3v + Tabs/Secondary 2v + TabsTrigger 2종 + Addon Inline 3v). /team PASS (95/95) |
 | OS/Native | 추가됨 (Keyboard + iOS StatusBar + HomeIndicator) |
 
 ### 플랜 파일
@@ -54,9 +56,9 @@
 | 컴포넌트 | 상태 | 비고 |
 |----------|------|------|
 | Input / TextField | ✅ 완료 | Input Group + Input OTP + 서브 컴포넌트셋 |
-| Textarea | ✅ SKIP | TDS Input Group의 Type=Textarea로 대체. /team PASS (98/95) |
-| **Checkbox** | 🔄 진행중 | Figma MCP 장애로 중단. 다음 세션에서 이어서 |
-| Inline Link Text | 미진행 | |
+| Textarea | ⏭️ SKIP | TDS Input Group의 Type=Textarea로 대체. /team PASS (98/95) |
+| **Checkbox** | ✅ 완료 | Shadcn→TDS 마이그레이션 + 초대확인 테스트 적용. /team PASS (95/92) |
+| Inline Link Text | ⏭️ SKIP | shadcn 별도 컴포넌트 없음. 약관 링크=`<a>` 스타일링, "자세히"=Button variant=link로 커버 |
 
 ### Ralph Loop 상태 (Checkbox)
 
@@ -77,17 +79,17 @@
 | Phase | 작업 | 비고 |
 |-------|------|------|
 | 1 | ~~Input / TextField~~ | ✅ 완료 |
-| 1 | ~~Textarea~~ | ✅ SKIP |
-| 1 | **Checkbox** | 🔄 Figma MCP 복구 후 이어서 |
-| 1 | **Inline Link Text** | 약관 링크 |
+| 1 | ~~Textarea~~ | ⏭️ SKIP |
+| 1 | ~~Checkbox~~ | ✅ 완료 (/team PASS 95/92) |
+| 1 | ~~Inline Link Text~~ | ⏭️ SKIP (shadcn 컴포넌트 없음, `<a>` + Button link로 커버) |
 | 2 | **Dialog / Alert Dialog** | 알림 허용, 참가 확인 |
 | 2 | **Toast (Sonner)** | 인증 피드백 |
 | 2 | **Progress** | 온보딩 단계 바 |
 | 2 | **Page Indicator** | 슬라이드 dots |
-| 3 | **SubTab / Segment** | 챌린지 서브탭 |
+| 3 | ~~SubTab / Segment~~ | ✅ PASS — Tabs/Secondary로 완료 (95/95) |
 | 3 | **Bottom Sheet** | 각오, 알림시간 설정 |
-| 3 | **Separator** | 섹션 구분 |
-| 3 | **Fixed Button Area** | 하단 고정 CTA |
+| 3 | ~~Separator~~ | ✅ 완료 |
+| 3 | ~~Fixed Button Area~~ | ⏭️ SKIP (Button Size=Large로 커버, 레이아웃 패턴) |
 | 3 | **Status Alert Bar** | 챌린지 상태 알림 |
 | 4 | **Avatar + Stack** | 프로필, 참가자 |
 | 4 | **Challenge Card / Hero** | 커스텀 제작 |
@@ -95,8 +97,8 @@
 | 4 | **Invite Banner** | 초대 배너 |
 | 4 | **Day Calendar Row** | 일차별 표시 |
 | 4 | **Feed Item / Post Card** | 인증 피드 |
-| 4 | **FAB** | 인증 작성 버튼 |
-| 4 | **Success State** | 체크 일러스트 |
+| 4 | ~~FAB~~ | ❌ 삭제 — 온보딩에 표준 FAB 없음 |
+| 4 | ~~Success State~~ | ⏭️ SKIP — 정적 일러스트/에셋 |
 | 5 | **Accordion, Tab Bar, Time Picker, Badge** | 시간 되면 |
 
 ---
