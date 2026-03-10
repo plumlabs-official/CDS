@@ -2,20 +2,70 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-09
+> Last updated: 2026-03-10
 
 ---
 
-## 현재 세션 (2026-03-09) — 4차
+## 현재 세션 (2026-03-10)
 
 ### 완료된 작업
 
 | 작업 | 비고 |
 |------|------|
 | 온보딩 UX 컴포넌트 플래닝 | Phase 0~5, 27개 컴포넌트 확정 (Team 리뷰 포함) |
-| TDS Figma 파일 키 기록 | `H36eNEd6o7ZTv4R7VcyLf2` — SESSION.md Figma 파일 섹션 업데이트 |
-| Button Type=Inverted 결정 | 컬러 배경 위 흰 버튼. buttonVariants에 inverted 추가 |
+| TDS Figma 파일 키 기록 | `H36eNEd6o7ZTv4R7VcyLf2` |
+| Button Type=Inverted 추가 완료 | 6 State × 3 Size = 18 variant. 컬러 배경 위 흰 버튼 |
 | Button font size 조정 결정 | TDS Text Style 기준 적용 (e.g. Large 20px→18px) |
+| Button 기존(20046:203) vs TDS(20012:238) 비교 완료 | 빠진 것 없음 확인. h48 제거, Intent/Color → Inverted로 커버 |
+
+### 컴포넌트 마이그레이션 현황
+
+| 컴포넌트 | 상태 |
+|----------|------|
+| Button | 완료 (7 Type: Default/Secondary/Destructive/Outline/Ghost/Link/Inverted × 6 State × 6 Size = 438 variant) |
+| Mobile Header Bar | 완료 (4 variant + Status/Streaks 배지) |
+| Modal/Header | 완료 (3 variant: Nav+Title+Action, Nav+Title, Title) |
+
+### 플랜 파일
+
+`.claude/plans/iterative-tickling-sundae.md` — 온보딩 컴포넌트 전체 플랜
+
+### 다음 할 일 (온보딩 컴포넌트 Phase 1~5)
+
+| Phase | 작업 | 비고 |
+|-------|------|------|
+| 1 | **Input / TextField** | Shadcn Kit → TDS. Phone variant 포함 |
+| 1 | **Input OTP** | 6자리 인증번호 |
+| 1 | **Textarea** | 한 줄 각오 입력 |
+| 1 | **Checkbox** | 약관 동의 |
+| 1 | **Inline Link Text** | 약관 링크 |
+| 2 | **Dialog / Alert Dialog** | 알림 허용, 참가 확인 |
+| 2 | **Toast (Sonner)** | 인증 피드백 |
+| 2 | **Progress** | 온보딩 단계 바 |
+| 2 | **Page Indicator** | 슬라이드 dots |
+| 3 | **SubTab / Segment** | 챌린지 서브탭 |
+| 3 | **Bottom Sheet** | 각오, 알림시간 설정 |
+| 3 | **Separator** | 섹션 구분 |
+| 3 | **Fixed Button Area** | 하단 고정 CTA |
+| 3 | **Status Alert Bar** | 챌린지 상태 알림 |
+| 4 | **Avatar + Stack** | 프로필, 참가자 |
+| 4 | **Challenge Card / Hero** | 커스텀 제작 |
+| 4 | **인증 카드 (Auth Post)** | 커스텀 제작 |
+| 4 | **Invite Banner** | 초대 배너 |
+| 4 | **Day Calendar Row** | 일차별 표시 |
+| 4 | **Feed Item / Post Card** | 인증 피드 |
+| 4 | **FAB** | 인증 작성 버튼 |
+| 4 | **Success State** | 체크 일러스트 |
+| 5 | **Accordion, Tab Bar, Time Picker, Badge** | 시간 되면 |
+
+---
+
+## 이전 세션 (2026-03-09) — 4차
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
 | Figma MCP 토큰 교체 | 만료 토큰(`figd__p_RV...`) → 새 토큰(`figd_CNga...`)으로 교체. user scope 등록 (전역) |
 | 토큰 영구 저장 | `~/.zshrc`에 `FIGMA_PERSONAL_ACCESS_TOKEN` 환경변수 추가 |
 | Figma MCP 연결 확인 | 정상 작동 확인 (TDS, Shadcn Kit 파일 접근 가능) |
