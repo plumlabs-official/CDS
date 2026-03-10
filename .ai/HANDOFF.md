@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> Codex
+Date: 2026-03-10 21:26:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Swap Icon Sources 삭제, Migrate에 통합. 버튼 3개로 정리
+Next-TODO: Kbd/Separator/.Input Base Cursor 컴포넌트 TDS에 추가 필요 (현재 MISS)
+Commits: 7d6bcae
+---
+
+---
+HANDOFF: Claude -> Codex
 Date: 2026-03-10 21:20:00
 Project: ~/Project/TDS
 Agent: Claude

@@ -711,7 +711,11 @@ async function handleMigrate() {
       }
 
       // 4.5 Text Style 유추 (미스타일 텍스트 → 속성 기반 매칭)
-      if (!node.textStyleId || node.textStyleId === '') {
+      // SF Pro (iOS native) 폰트는 스킵 — 의도적으로 사용하는 시스템 폰트
+      var fontFamily = (node.fontName && node.fontName !== figma.mixed) ? node.fontName.family : '';
+      if (fontFamily.indexOf('SF Pro') === 0) {
+        // SF Pro 텍스트는 스타일/폰트 바인딩 전체 스킵
+      } else if (!node.textStyleId || node.textStyleId === '') {
         var canInfer = node.fontSize !== figma.mixed
           && node.lineHeight !== figma.mixed;
 
@@ -749,7 +753,7 @@ async function handleMigrate() {
                 stats.inferredStyles++;
                 console.log('Inferred: ' + inferredStyle.name + ' ← ' + node.name + ' (' + propKey + ')');
               } catch (err) {
-                console.log('Infer error on ' + node.name + ': ' + err.message);
+                console.log('Infer error on ' + node.name + ': ' + err + ' | styleId=' + (inferredStyle ? inferredStyle.id : 'null'));
               }
             } else {
               console.log('No match: ' + node.name + ' (' + propKey + ')');
@@ -804,8 +808,8 @@ async function handleMigrate() {
         if (textFillChanged) node.fills = newTextFills;
       }
 
-      // 5. fontFamily + fontWeight 바인딩 (유추 실패한 미스타일 텍스트만)
-      if (fontSans && (!node.textStyleId || node.textStyleId === '')) {
+      // 5. fontFamily + fontWeight 바인딩 (유추 실패한 미스타일 텍스트만, SF Pro 제외)
+      if (fontSans && (!node.textStyleId || node.textStyleId === '') && fontFamily.indexOf('SF Pro') !== 0) {
         try {
           // 현재 폰트 로드 (수정 전 필수)
           if (node.fontName && node.fontName !== figma.mixed) {
@@ -823,7 +827,7 @@ async function handleMigrate() {
           }
           stats.fonts++;
         } catch (err) {
-          console.log('Font bind error on ' + node.name + ': ' + err.message);
+          console.log('Font bind error on ' + node.name + ': ' + err + ' | fontName=' + JSON.stringify(node.fontName) + ' | styleId=' + (node.textStyleId || 'none'));
         }
       }
     }

@@ -29,6 +29,7 @@
 | 스크래치 프레임 추가 (사용자 직접) | Frame 1430107481 — Status/Streaks, Badge/Membership, Logo/NavBar, Toggle. 정리 필요 여부 미정 |
 | feat: TDS Migrator 컴포넌트 인스턴스 스왑 | 외부 라이브러리 → TDS 로컬 컴포넌트 교체. Components + Icon Library 페이지 스캔. 멱등성 보장 |
 | refactor: Swap Icon Sources 삭제 | Migrate에 통합 완료. 버튼 3개로 정리 (Migrate / Bind Icon Colors / Remove Drop Shadow) |
+| fix: SF Pro 폰트 스킵 + 에러 로그 개선 | iOS 네이티브(OS/Native) 텍스트 스타일/폰트 바인딩 제외. 에러 상세 출력 추가 |
 
 ### 컴포넌트 마이그레이션 현황
 
