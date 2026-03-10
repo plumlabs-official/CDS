@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-10 23:20:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Textarea SKIP 확정 (TDS Input Group Type=Textarea 대체). "참여 각오" 입력란 발견 (18171:6664). Checkbox 탐색 시작했으나 Figma MCP 재장애로 중단. 세션 재시작 필요.
+Next-TODO: 1) Figma MCP 재인증 확인 2) Checkbox ralph-loop 이어서 (Shadcn Kit checkbox 검색 + 온보딩 사용처 비교) 3) /team 검수 90점 이상
+Commits: 미커밋 (SESSION.md 업데이트만)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-10 22:00:00
 Project: ~/Project/TDS
 Agent: Claude

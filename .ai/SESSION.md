@@ -30,6 +30,10 @@
 | feat: TDS Migrator 컴포넌트 인스턴스 스왑 | 외부 라이브러리 → TDS 로컬 컴포넌트 교체. Components + Icon Library 페이지 스캔. 멱등성 보장 |
 | refactor: Swap Icon Sources 삭제 | Migrate에 통합 완료. 버튼 3개로 정리 (Migrate / Bind Icon Colors / Remove Drop Shadow) |
 | fix: SF Pro 폰트 스킵 + 에러 로그 개선 | iOS 네이티브(OS/Native) 텍스트 스타일/폰트 바인딩 제외. 에러 상세 출력 추가 |
+| Textarea 컴포넌트 검토 → **SKIP 확정** | TDS Input Group에 Type=Textarea 이미 존재 (7 variant). Shadcn Kit Textarea 별도 추가 불필요. /team 검수 효율성 98, 유사도 95 PASS |
+| "참여 각오" 입력란 발견 | 온보딩 `18171:6664` (알림시간설정1). "한 마디" = 단일라인 Input으로 대체 가능 |
+| Checkbox 컴포넌트 탐색 시작 → **Figma MCP 장애로 중단** | 온보딩 캐시에서 발견: `lets-icons:check-ring-round`, `Toggle` 컴포넌트셋, `초대 선택` 화면 |
+| Figma MCP 재발 진단 | `figma-remote-mcp` HTTP 타입 OAuth 토큰 만료 추정. `mcp-needs-auth-cache.json` 이번엔 없음. 세션 재시작 필요 |
 
 ### 컴포넌트 마이그레이션 현황
 
@@ -45,14 +49,36 @@
 
 `.claude/plans/iterative-tickling-sundae.md` — 온보딩 컴포넌트 전체 플랜
 
+### Phase 1 컴포넌트 진행 현황
+
+| 컴포넌트 | 상태 | 비고 |
+|----------|------|------|
+| Input / TextField | ✅ 완료 | Input Group + Input OTP + 서브 컴포넌트셋 |
+| Textarea | ✅ SKIP | TDS Input Group의 Type=Textarea로 대체. /team PASS (98/95) |
+| **Checkbox** | 🔄 진행중 | Figma MCP 장애로 중단. 다음 세션에서 이어서 |
+| Inline Link Text | 미진행 | |
+
+### Ralph Loop 상태 (Checkbox)
+
+- **목표**: Shadcn Kit에서 checkbox/check 검색 → 온보딩 사용처 비교 → 가장 유사한 컴포넌트 확정
+- **완료 조건**: /team 검수 효율성+유사도 90점 이상
+- **최대 반복**: 10회
+- **현재 반복**: 1회 (Figma MCP 장애로 미완료)
+- **온보딩 캐시 발견 노드**:
+  - `lets-icons:check-ring-round` (체크 아이콘) — onboarding1 `18171:3576`, onboarding2 `18626:6678`
+  - `Toggle` 컴포넌트셋 — onboarding1 `18765:4175`
+  - `초대 선택 - 연락처 연동시 - 미선택` — onboarding2 `18171:3770`
+  - `알림 동의` — onboarding2 `14332:1256`
+- **Shadcn Kit Checkbox**: 아직 미탐색 (fileKey: `aqyiOYPHsMCrWKPhkehP0g`)
+- **TDS Input Box Group**: `20052:406` (Type=Text/Textarea/Number 등 이미 존재. Checkbox Type은 미확인)
+
 ### 다음 할 일 (온보딩 컴포넌트 Phase 1~5)
 
 | Phase | 작업 | 비고 |
 |-------|------|------|
-| 1 | **Input / TextField** | Shadcn Kit → TDS. Phone variant 포함 |
-| 1 | **Input OTP** | 6자리 인증번호 |
-| 1 | **Textarea** | 한 줄 각오 입력 |
-| 1 | **Checkbox** | 약관 동의 |
+| 1 | ~~Input / TextField~~ | ✅ 완료 |
+| 1 | ~~Textarea~~ | ✅ SKIP |
+| 1 | **Checkbox** | 🔄 Figma MCP 복구 후 이어서 |
 | 1 | **Inline Link Text** | 약관 링크 |
 | 2 | **Dialog / Alert Dialog** | 알림 허용, 참가 확인 |
 | 2 | **Toast (Sonner)** | 인증 피드백 |
