@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Button Type=Inverted variant 추가 결정 (컬러 배경 위 흰 버튼)
 
 ### Fixed
+- Figma MCP 사일런트 거부 해결 (figma-remote-mcp OAuth 캐시 충돌 → mcp-needs-auth-cache.json 삭제)
 - TDS Migrator: Remove Drop Shadow에서 focus/ Effect Style 보존 (focus ring도 DROP_SHADOW 타입이므로 styleName 체크 추가)
 - TDS Migrator: focus/ Effect Style 보존 (focus/default 등 비-shadow 스타일 교체 방지)
 - TDS Docs Generator: 모든 fill/stroke에 TDS 변수 바인딩 (Migrator 불필요하도록)

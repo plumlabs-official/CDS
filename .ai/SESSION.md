@@ -20,6 +20,8 @@
 | Input 3종 TDS 복사 완료 | Input Group + Input OTP + 서브 컴포넌트셋. Input 단독은 삭제 (Input Group이 상위 호환) |
 | Input Group 구조 설계 (Team 회의) | Variant=Default/Bare 프로퍼티 추가 결정. Phone은 Addon 조합. Validation은 Addon Block |
 | Remove Drop Shadow focus 버그 수정 | focus/ Effect Style 보존 로직 추가 (focus ring도 DROP_SHADOW 타입) |
+| Figma MCP 글로벌 등록 | `~/.mcp.json` 생성. `figma-developer-mcp` + PAT 설정. 세션 재시작 후 활성화 |
+| Figma MCP 사일런트 거부 진단 + 해결 | 원인: `figma-remote-mcp` OAuth 캐시 충돌. `~/.claude/mcp-needs-auth-cache.json` 삭제로 해결 |
 
 ### 컴포넌트 마이그레이션 현황
 
