@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-11
+> Last updated: 2026-03-12
 
 ---
 
@@ -28,7 +28,42 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 ---
 
-## 현재 세션 (2026-03-11)
+## 현재 세션 (2026-03-12)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| Tooltip 컴포넌트 TDS 제작 (혼합) | 5 Style (Default/Primary/Inverted/Warning/Destructive) × 4 Caret (Top/Bottom/Right/Left) = 20v. 토큰 바인딩 완료 |
+| Placeholder Logo 컴포넌트 TDS 추가 (사용자 직접) | Type=White/Black × Size=lg/md/sm = 6v |
+| `primary-dark` (#01A54F) 변수 추가 | Theme → Mode alias 연결. 그래디언트 스탑용 |
+| Gradient Background Color Style 생성 | primary(0%) → primary-dark(100%). 온보딩 배경용 |
+| Docs Generator Figma 검증 PASS | Colors + Effects 재생성 정상 확인 |
+| Library Publish 완료 | Tooltip + Placeholder Logo + primary-dark + Gradient Background |
+
+### 컴포넌트 마이그레이션 현황
+
+| 컴포넌트 | 상태 |
+|----------|------|
+| Tooltip | 완료 (20v: 5 Style × 4 Caret position) |
+| Placeholder Logo | 완료 (6v: Type=White/Black × Size=lg/md/sm) |
+
+### 다음 할 일
+
+| Phase | 작업 | 비고 |
+|-------|------|------|
+| 3 | **Bottom Sheet** | 각오, 알림시간 설정 |
+| 3 | **Status Alert Bar** | 챌린지 상태 알림 |
+| 4 | **Challenge Card / Hero** | 커스텀 제작 |
+| 4 | **인증 카드 (Auth Post)** | 커스텀 제작 |
+| 4 | **Invite Banner** | 초대 배너 |
+| 4 | **Day Calendar Row** | 일차별 표시 |
+| 4 | **Feed Item / Post Card** | 인증 피드 |
+| 5 | Accordion, Tab Bar, Time Picker, Badge | 시간 되면 |
+
+---
+
+## 이전 세션 (2026-03-11)
 
 ### 완료된 작업
 
@@ -101,6 +136,8 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | Avatar | 완료 (22v Circle only: Image/Fallback × 11 sizes, Rounded rectangle 삭제) |
 | Avatar Stack | 완료 (4v: Default/Max Number/Unmasked/Vertical) |
 | Avatar Group | 완료 (5v: 2X Small~Large) |
+| Tooltip | 완료 (20v: 5 Style × 4 Caret position) |
+| Placeholder Logo | 완료 (6v: Type=White/Black × Size=lg/md/sm) |
 
 ### 플랜 파일
 

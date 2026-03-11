@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-12 00:12:00
+Project: ~/Project/TDS
+Agent: 혼합 (사용자 Figma 작업 + Claude 리뷰/가이드)
+Summary: Tooltip 20v (5 Style × 4 Caret) 제작 + 토큰 바인딩. Placeholder Logo 6v 추가. primary-dark 변수 + Gradient Background Style 생성. Library Publish 완료.
+Next-TODO: Phase 3 (Bottom Sheet, Status Alert Bar) 또는 Phase 4 커스텀 컴포넌트 진행
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-11 16:34:00
 Project: ~/Project/TDS
 Agent: 혼합 (사용자 Figma 작업 + Claude 코드수정/리뷰)
