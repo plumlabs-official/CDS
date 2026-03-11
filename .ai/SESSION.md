@@ -6,6 +6,15 @@
 
 ---
 
+## 온보딩 Figma 소스 (프로덕트 디자인)
+
+| 플로우 | 파일 키 | 노드 ID | 설명 |
+|--------|---------|---------|------|
+| 초대링크 온보딩 | `rrnCjPKhK4e69ElSkzMpTp` | `14332-114564` | 초대받은 사람 플로우 |
+| 일반 온보딩 | `rrnCjPKhK4e69ElSkzMpTp` | `18603-3277` | 초대하는 사람 플로우 |
+
+---
+
 ## ⚠️ 크로스 프로젝트 커밋 점검 (2026-03-11)
 
 TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, **lenny에만 커밋/푸시**되고 TDS SESSION.md 변경은 커밋 누락되는 문제 발생.
@@ -56,6 +65,10 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | Alert Dialog TDS 마이그레이션 (사용자 직접) | Shadcn Kit Alert Dialog 기반. width fill + max-width. Breakpoint 2 variant |
 | Field, Select, Textarea, Card TDS 토큰 마이그레이션 (사용자 직접) | Shadcn Kit에서 가져와서 TDS 토큰 바인딩. Hi-Fi 스타일 미적용 |
 | Input Group COMPONENT_SET 이름 원복 | InputGroup→Input Group 등. Migrator SET 매칭 정상화 |
+| /team: Migrator 소스 페이지 탐색 전략 | 전체 스캔 + exclude 방식 결정. 페이지 분리 시 적용 예정 |
+| 온보딩 Figma 소스 경로 기록 | 초대링크(`14332:114564`) + 일반(`18603:3277`) 온보딩 노드 SESSION에 기록 |
+| 온보딩 Toast 사용처 전수조사 | 두 플로우 40+ 화면 시각 확인 → Toast 해당 노드 0건 |
+| /team: Sonner(Toast) 정체성 재검토 | UX 행동(일시적 자동소멸)이 본질, 레이아웃 아님. Phase 2 보류 결정 |
 
 ### 컴포넌트 마이그레이션 현황
 
@@ -96,7 +109,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | 1 | ~~Checkbox~~ | ✅ 완료 (/team PASS 95/92) |
 | 1 | ~~Inline Link Text~~ | ⏭️ SKIP (shadcn 컴포넌트 없음, `<a>` + Button link로 커버) |
 | 2 | ~~Dialog / Alert Dialog~~ | ✅ 완료 (TDS 토큰 바인딩, Hi-Fi 미적용) |
-| 2 | **Toast (Sonner)** | 인증 피드백 |
+| 2 | ~~Toast (Sonner)~~ | ⏸️ 보류 — 온보딩 내 사용처 미디자인. UX 행동(일시적 자동소멸) 해당 노드 0건. /team PASS |
 | 2 | **Progress** | 온보딩 단계 바 |
 | 2 | **Page Indicator** | 슬라이드 dots |
 | 3 | ~~SubTab / Segment~~ | ✅ PASS — Tabs/Secondary로 완료 (95/95) |
