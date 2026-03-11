@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-11 15:30:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: 온보딩 Toast 사용처 전수조사 (40+ 화면) → 해당 노드 0건. /team Sonner 정체성 재검토 — UX 행동(일시적 자동소멸)이 본질, 레이아웃 아님. Phase 2 보류 결정. 온보딩 Figma 소스 경로 SESSION에 기록.
+Next-TODO: 1) Phase 2 나머지: Progress, Page Indicator 2) Hi-Fi 스타일 적용 (Alert Dialog, Field, Select, Textarea, Card) 3) 페이지 분리 시 Migrator 옵션 C 적용
+Commits: dbc1915
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-11 14:00:00
 Project: ~/Project/TDS
 Agent: Claude

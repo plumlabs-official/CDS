@@ -69,6 +69,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | 온보딩 Figma 소스 경로 기록 | 초대링크(`14332:114564`) + 일반(`18603:3277`) 온보딩 노드 SESSION에 기록 |
 | 온보딩 Toast 사용처 전수조사 | 두 플로우 40+ 화면 시각 확인 → Toast 해당 노드 0건 |
 | /team: Sonner(Toast) 정체성 재검토 | UX 행동(일시적 자동소멸)이 본질, 레이아웃 아님. Phase 2 보류 결정 |
+| /team: TDS 퍼블리시 전략 | Progress+Page Indicator+Avatar 추가 후 즉시 퍼블리시. Molecule은 JIT 추가. RICE 270 |
 
 ### 컴포넌트 마이그레이션 현황
 

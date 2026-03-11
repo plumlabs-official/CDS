@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Toast(Sonner) Phase 2 보류 결정 — 온보딩 내 사용처 미디자인, UX 행동(일시적 자동소멸) 해당 노드 0건 (/team PASS)
+- TDS 퍼블리시 전략 확정 — Atom 3개(Progress/Page Indicator/Avatar) 추가 후 조기 퍼블리시, Molecule은 JIT 추가 (/team PASS)
 - TDS Migrator: compMap 빌드 시 variant children 제외 + 충돌 경고 로그 추가
 - TDS Migrator: traverseAndSwap에서 variant 컴포넌트는 1차 bare name 매칭 스킵, SET 매칭 우선
 - Figma: Alert Dialog 컴포넌트 TDS 마이그레이션 (width fill + max-width, Breakpoint 2 variant)
