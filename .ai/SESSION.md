@@ -70,6 +70,15 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | 온보딩 Toast 사용처 전수조사 | 두 플로우 40+ 화면 시각 확인 → Toast 해당 노드 0건 |
 | /team: Sonner(Toast) 정체성 재검토 | UX 행동(일시적 자동소멸)이 본질, 레이아웃 아님. Phase 2 보류 결정 |
 | /team: TDS 퍼블리시 전략 | Progress+Page Indicator+Avatar 추가 후 즉시 퍼블리시. Molecule은 JIT 추가. RICE 270 |
+| Figma: Progress 컴포넌트 TDS 마이그레이션 (사용자 직접) | 12 variant (0%~100%, 10% 단위), width fill, Shadcn Kit 기반 |
+| Figma: Page Indicator 컴포넌트 TDS 제작 (사용자 직접) | Dots COMPONENT_SET (State=Active/Inactive × Background=White/Black/Green = 6v) + Page Indicator molecule (row, gap 4px) |
+| Figma: Avatar 컴포넌트 TDS 마이그레이션 (혼합) | Shadcn Kit→TDS 복사 + Migrate + Rounded rectangle 삭제. 22v Circle only (Image/Fallback × 11 sizes) |
+| Figma: Avatar Stack TDS 포함 (사용자 직접) | 4v (Default/Max Number/Unmasked/Vertical). Avatar Upload 패스 |
+| Figma: Avatar Group TDS 포함 (사용자 직접) | 5v (2X Small~Large). 겹침 레이아웃 |
+| Tabs Tailwind label mapping 체크 | foreground `#1A1A1A` vs TDS 토큰 `#09090B` 불일치 발견 → TDS 토큰이 Tryve 커스텀값으로 변경됨 확인 |
+| TDS Color Docs 전체 점검 | 13개 토큰 중 11개 라벨 불일치 — Shadcn 기본값 텍스트, 실제 변수는 Tryve 값 |
+| TDS Effect Docs 점검 | Preview 바인딩 엇갈림 + CSS 라벨 불일치 + EFFECT_ORDER 정렬 고장 |
+| fix: Docs Generator 버그 5건 수정 (/director) | 1) 페이지 prefix 매칭 2) 원래 이름 보존 3) Light 모드 우선 탐색 4) Effect 정렬 baseName 기준 5) cross-collection alias resolve. Figma 검증 PASS |
 
 ### 컴포넌트 마이그레이션 현황
 
@@ -87,6 +96,11 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | Select | TDS 토큰 바인딩 완료 (Hi-Fi 미적용) |
 | Textarea | TDS 토큰 바인딩 완료 (Hi-Fi 미적용) |
 | Card | TDS 토큰 바인딩 완료 (Hi-Fi 미적용) |
+| Progress | 완료 (12v, 0%~100%, width fill, Shadcn Kit 기반) |
+| Page Indicator | 완료 (Dots 6v + Page Indicator molecule) |
+| Avatar | 완료 (22v Circle only: Image/Fallback × 11 sizes, Rounded rectangle 삭제) |
+| Avatar Stack | 완료 (4v: Default/Max Number/Unmasked/Vertical) |
+| Avatar Group | 완료 (5v: 2X Small~Large) |
 
 ### 플랜 파일
 
@@ -111,14 +125,14 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | 1 | ~~Inline Link Text~~ | ⏭️ SKIP (shadcn 컴포넌트 없음, `<a>` + Button link로 커버) |
 | 2 | ~~Dialog / Alert Dialog~~ | ✅ 완료 (TDS 토큰 바인딩, Hi-Fi 미적용) |
 | 2 | ~~Toast (Sonner)~~ | ⏸️ 보류 — 온보딩 내 사용처 미디자인. UX 행동(일시적 자동소멸) 해당 노드 0건. /team PASS |
-| 2 | **Progress** | 온보딩 단계 바 |
-| 2 | **Page Indicator** | 슬라이드 dots |
+| 2 | ~~Progress~~ | ✅ 완료 (12v, Shadcn Kit 기반) |
+| 2 | ~~Page Indicator~~ | ✅ 완료 (Dots 6v + molecule) |
 | 3 | ~~SubTab / Segment~~ | ✅ PASS — Tabs/Secondary로 완료 (95/95) |
 | 3 | **Bottom Sheet** | 각오, 알림시간 설정 |
 | 3 | ~~Separator~~ | ✅ 완료 |
 | 3 | ~~Fixed Button Area~~ | ⏭️ SKIP (Button Size=Large로 커버, 레이아웃 패턴) |
 | 3 | **Status Alert Bar** | 챌린지 상태 알림 |
-| 4 | **Avatar + Stack** | 프로필, 참가자 |
+| 4 | ~~Avatar + Stack~~ | ✅ 완료 (Avatar 22v + Stack 4v + Group 5v). Upload 패스 |
 | 4 | **Challenge Card / Hero** | 커스텀 제작 |
 | 4 | **인증 카드 (Auth Post)** | 커스텀 제작 |
 | 4 | **Invite Banner** | 초대 배너 |

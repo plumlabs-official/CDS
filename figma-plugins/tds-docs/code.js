@@ -46,15 +46,26 @@ function bindPaint(color, varName) {
   return paint;
 }
 
+// [FIX] 페이지 매칭: prefix 포함 이름도 매칭, 기존 페이지 비우고 재사용
 function getOrCreateDocPage(name) {
   for (var i = 0; i < figma.root.children.length; i++) {
-    if (figma.root.children[i].name === name) {
-      figma.root.children[i].remove();
-      break;
+    var pageName = figma.root.children[i].name;
+    var trimmed = pageName.trim();
+    if (trimmed === name || trimmed.endsWith(' ' + name) || trimmed.endsWith('↳ ' + name)) {
+      var existingPage = figma.root.children[i];
+      // 기존 페이지의 자식 모두 제거 (페이지 자체는 유지)
+      var children = existingPage.children.slice();
+      for (var c = 0; c < children.length; c++) {
+        children[c].remove();
+      }
+      console.log('Reusing existing page: ' + pageName);
+      return existingPage;
     }
   }
+  // 기존 페이지 없으면 새로 생성
   var page = figma.createPage();
   page.name = name;
+  console.log('Created new page: ' + name);
   return page;
 }
 
@@ -115,6 +126,48 @@ function rgbToHex(r, g, b) {
   return '#' + toHex(Math.round(r * 255)) + toHex(Math.round(g * 255)) + toHex(Math.round(b * 255));
 }
 
+// [FIX] Light 모드 우선 탐색 — "Light" 이름 모드 먼저, 없으면 modes[0]
+function findLightModeId(modeCollection) {
+  for (var i = 0; i < modeCollection.modes.length; i++) {
+    var modeName = modeCollection.modes[i].name.toLowerCase();
+    if (modeName === 'light' || modeName === 'default' || modeName.indexOf('light') !== -1) {
+      console.log('Using mode: ' + modeCollection.modes[i].name + ' (' + modeCollection.modes[i].modeId + ')');
+      return modeCollection.modes[i].modeId;
+    }
+  }
+  // fallback to first mode
+  console.log('No Light mode found, falling back to: ' + modeCollection.modes[0].name);
+  return modeCollection.modes[0].modeId;
+}
+
+// [FIX] 컬렉션별 Light modeId 캐시 — alias 체인에서 다른 컬렉션 접근 시 사용
+var collectionModeCache = {};
+
+async function getLightModeIdForCollection(collectionId) {
+  if (collectionModeCache[collectionId] !== undefined) {
+    return collectionModeCache[collectionId];
+  }
+  var collections = await figma.variables.getLocalVariableCollectionsAsync();
+  for (var i = 0; i < collections.length; i++) {
+    if (collections[i].id === collectionId) {
+      var modes = collections[i].modes;
+      // Light 모드 탐색 (findLightModeId와 동일 로직, 로그 없음)
+      for (var m = 0; m < modes.length; m++) {
+        var name = modes[m].name.toLowerCase();
+        if (name === 'light' || name === 'default' || name.indexOf('light') !== -1) {
+          collectionModeCache[collectionId] = modes[m].modeId;
+          return modes[m].modeId;
+        }
+      }
+      // Light 모드 없으면 첫 번째 모드
+      collectionModeCache[collectionId] = modes[0].modeId;
+      return modes[0].modeId;
+    }
+  }
+  collectionModeCache[collectionId] = null;
+  return null;
+}
+
 async function resolveColorValue(varObj, defaultModeId) {
   var val = varObj.valuesByMode[defaultModeId];
   if (val === undefined) {
@@ -125,10 +178,12 @@ async function resolveColorValue(varObj, defaultModeId) {
   while (val && val.type === 'VARIABLE_ALIAS' && depth < 10) {
     var aliasVar = await figma.variables.getVariableByIdAsync(val.id);
     if (!aliasVar) return null;
-    var aliasVal = aliasVar.valuesByMode[defaultModeId];
+    // [FIX] alias 변수의 컬렉션에 맞는 modeId 사용 (cross-collection alias 버그 수정)
+    var aliasModeId = await getLightModeIdForCollection(aliasVar.variableCollectionId);
+    var aliasVal = aliasModeId ? aliasVar.valuesByMode[aliasModeId] : undefined;
     if (aliasVal === undefined) {
       var aliasModes = Object.keys(aliasVar.valuesByMode);
-      aliasVal = aliasVar.valuesByMode[aliasModes[0]];
+      if (aliasModes.length > 0) aliasVal = aliasVar.valuesByMode[aliasModes[0]];
     }
     val = aliasVal;
     depth++;
@@ -410,7 +465,9 @@ async function handleGenColors() {
     return;
   }
 
-  var defaultModeId = modeCollection.modes[0].modeId;
+  // [FIX] Light 모드 명시적 탐색
+  var defaultModeId = findLightModeId(modeCollection);
+  console.log('Mode collection modes:', modeCollection.modes.map(function(m) { return m.name + '(' + m.modeId + ')'; }).join(', '));
 
   var allVars = await figma.variables.getLocalVariablesAsync();
   var modeVars = [];
@@ -434,6 +491,17 @@ async function handleGenColors() {
     var resolved = await resolveColorValue(modeVars[rv], defaultModeId);
     if (resolved) {
       resolvedMap[modeVars[rv].id] = resolved;
+    }
+  }
+
+  // [DEBUG] foreground 값 확인 로그
+  for (var dv = 0; dv < modeVars.length; dv++) {
+    if (modeVars[dv].name === 'foreground') {
+      var fgRgb = resolvedMap[modeVars[dv].id];
+      if (fgRgb) {
+        console.log('foreground resolved to: ' + rgbToHex(fgRgb.r, fgRgb.g, fgRgb.b));
+      }
+      break;
     }
   }
 
@@ -534,12 +602,15 @@ async function handleGenColors() {
 
 // ─── Effects ─────────────────────────────────────────────
 
-var EFFECT_ORDER = ['shadow-sm', 'shadow', 'shadow-md', 'shadow-lg', 'shadow-xl', 'shadow-2xl', 'shadow-inner', 'shadow-none'];
+// [FIX] Tailwind shadow 사이즈 순서 — baseName 기준 (shadows/ prefix 제거 후)
+var EFFECT_ORDER = ['2xs', 'xs', 'sm', 'shadow', 'md', 'lg', 'xl', '2xl'];
 
-function getEffectOrder(name) {
+function getEffectOrder(baseName) {
   for (var i = 0; i < EFFECT_ORDER.length; i++) {
-    if (name === EFFECT_ORDER[i]) return i;
+    if (baseName === EFFECT_ORDER[i]) return i;
   }
+  // focus/ 등은 shadow 뒤에 배치
+  if (baseName.indexOf('focus') === 0) return 100 + baseName.length;
   return 99;
 }
 
@@ -587,6 +658,9 @@ async function handleGenEffects() {
   shadowStyles.sort(function(a, b) {
     return getEffectOrder(a.baseName) - getEffectOrder(b.baseName);
   });
+
+  // [DEBUG] 정렬 결과 확인
+  console.log('Effect sort order: ' + shadowStyles.map(function(s) { return s.baseName; }).join(', '));
 
   var page = getOrCreateDocPage('Effects');
   figma.currentPage = page;

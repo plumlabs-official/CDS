@@ -1,5 +1,35 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-11 16:34:00
+Project: ~/Project/TDS
+Agent: 혼합 (사용자 Figma 작업 + Claude 코드수정/리뷰)
+Summary: Avatar TDS 완료 (22v + Stack 4v + Group 5v). Color/Effect Docs 전체 점검 — 11/13 토큰 라벨 불일치 + Effect 정렬 고장 발견. Docs Generator 버그 4건 수정 (페이지 매칭/이름 보존/Light 모드/Effect 정렬). Figma 검증 대기.
+Next-TODO: 1) Figma에서 Docs Generator 리로드 → Generate Colors + Generate Effects 재실행 2) 콘솔 로그로 Light 모드 확인 3) 정상이면 /record fix 커밋 4) Library Publish
+Commits: 없음 (Figma 검증 대기)
+---
+
+---
+HANDOFF: Claude -> User
+Date: 2026-03-11 15:22:00
+Project: ~/Project/TDS
+Agent: 혼합 (사용자 Figma 작업 + Claude 리뷰/가이드)
+Summary: Progress 마이그레이션 완료 (12v, width fill). Page Indicator 커스텀 제작 완료 (Dots 6v State×Background + molecule). Dots_Active/Inactive를 단일 COMPONENT_SET으로 통합. Shadcn 매핑 조사 (Progress=공식, Page Indicator=커스텀). "Whtie" 오타 수정 필요.
+Next-TODO: 1) Dots "Whtie" → "White" 오타 수정 2) Avatar 컴포넌트 제작 3) Hi-Fi 미적용 컴포넌트 WIP 표기 4) Figma Library Publish
+Commits: 없음 (세션 기록)
+---
+
+---
+HANDOFF: Claude -> User
+Date: 2026-03-11 16:00:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: TDS 퍼블리시 전략 확정 (/team). Atom 3개(Progress/Page Indicator/Avatar) 추가 후 즉시 퍼블리시. Molecule은 산출물 작업 중 JIT 추가. Hi-Fi 미적용 컴포넌트는 WIP 표기.
+Next-TODO: 1) Progress + Page Indicator + Avatar TDS 제작 2) Hi-Fi 미적용 컴포넌트 WIP 표기 3) Figma Library Publish
+Commits: e8c7c68
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-11 15:30:00
 Project: ~/Project/TDS
 Agent: Claude
