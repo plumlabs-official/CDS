@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-12 11:24:00
+Project: ~/Project/TDS
+Agent: 혼합 (사용자 Figma 작업 + Claude 리서치/리뷰)
+Summary: /record 커맨드 개선 + 온보딩 화면 네이밍 리뷰(78→90점) + Figma 리서치 3건(네이밍깊이/rename/Group-Frame) + 인스턴스 오버라이드 리서치(underline비권장/color안전) + /research 커맨드 설계
+Next-TODO: 1) /research 커맨드 작성 2) 온보딩 산출물 계속 3) Phase 3-4 컴포넌트
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-12 00:12:00
 Project: ~/Project/TDS
 Agent: 혼합 (사용자 Figma 작업 + Claude 리뷰/가이드)

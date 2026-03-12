@@ -34,6 +34,11 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| /record 커맨드 개선 (/team) | 세션 기록 모드에서도 커밋+푸시 자동 실행. "커밋 없음" 설계 결함 수정 |
+| 온보딩 화면 네이밍 리뷰 (/team) | 78→90점. Container/ 일관성 우수, 브랜드명/Text prefix 수정, 래퍼 구조 적용 |
+| Figma 리서치 3건 (/team) | 네이밍 깊이(인스턴스 내부 안 함), 인스턴스 rename(안전), Group vs Frame(Frame 기본) |
+| Figma 인스턴스 오버라이드 리서치 | underline=텍스트 스타일 포함(✓)→바인딩 깨짐. color=미포함(✕)→안전 |
+| /research 커맨드 설계 (/coach) | 커맨드 방식 추천. Explore+WebFetch 검증 루프, 95% 신뢰도 Gate |
 | Tooltip 컴포넌트 TDS 제작 (혼합) | 5 Style (Default/Primary/Inverted/Warning/Destructive) × 4 Caret (Top/Bottom/Right/Left) = 20v. 토큰 바인딩 완료 |
 | Placeholder Logo 컴포넌트 TDS 추가 (사용자 직접) | Type=White/Black × Size=lg/md/sm = 6v |
 | `primary-dark` (#01A54F) 변수 추가 | Theme → Mode alias 연결. 그래디언트 스탑용 |
