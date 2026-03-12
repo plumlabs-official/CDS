@@ -43,6 +43,7 @@
 | Naming 작업 | `docs/specs/naming-schema.md` | 전체 |
 | AI Agent/서버 수정 | `docs/architecture/lessons-learned.md` | "AI Agent 버그 패턴" 섹션 |
 | **Figma 속성 추출** | `docs/architecture/lessons-learned.md` | "Figma 속성 추출 버그 패턴" 섹션 |
+| **TDS 컴포넌트 논의/리뷰** | TDS Figma 라이브러리 (fileKey: `H36eNEd6o7ZTv4R7VcyLf2`) | 해당 컴포넌트 노드 직접 확인 |
 | 빌드/디버깅 | `.ai/RECIPES.md` | "빌드", "디버깅" 섹션 |
 | 문서 구조 변경 | `CONSTITUTION.md` | "문서 관리 원칙" 섹션 |
 | 새 기능 설계 | `docs/architecture/ADRs/` | 관련 ADR |
@@ -64,6 +65,17 @@
 ### 불확실할 때
 - 추측하지 말고 **질문 먼저**
 - "이해가 맞나요?" 확인
+
+### TDS 컴포넌트 논의/리뷰 시 (필수)
+> 프로덕트 디자인에서 TDS 컴포넌트를 언급하거나, 컴포넌트 구조를 설명할 때
+
+- [ ] **TDS 라이브러리 원본 먼저 확인** — 프로덕트 파일만 보고 컴포넌트 구조 추측 금지
+  - TDS fileKey: `H36eNEd6o7ZTv4R7VcyLf2`
+  - `get_figma_data`로 해당 컴포넌트 노드 직접 읽기
+- [ ] **프로퍼티/Slot 구분** — Boolean 프로퍼티, Variant, Slot 각각 무엇인지 원본에서 확인
+- [ ] **확인 안 했으면 "확인 안 했습니다" 먼저 말하기** — 추측으로 답변하지 않음
+
+> 근거: 2026-03-12 초대 바텀시트 사건 — Sheet의 footer 프로퍼티를 slot이라 잘못 답변 (3회 연속 오답)
 
 ### 슬래시 커맨드 생성 시 (필수)
 > `/coach`, `/record` 같은 커맨드 만들 때
