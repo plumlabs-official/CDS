@@ -45,6 +45,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | Gradient Background Color Style 생성 | primary(0%) → primary-dark(100%). 온보딩 배경용 |
 | Docs Generator Figma 검증 PASS | Colors + Effects 재생성 정상 확인 |
 | Library Publish 완료 | Tooltip + Placeholder Logo + primary-dark + Gradient Background |
+| docs: 초대 바텀시트 컴포넌트화 결정 (/team) | 1회 사용 No-go. Bottom Sheet Container만 Phase 3에서 범용 컴포넌트로 |
 
 ### 컴포넌트 마이그레이션 현황
 

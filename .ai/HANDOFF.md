@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-12 18:30:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: 초대 바텀시트 컴포넌트화 결정 (/team) — 1회 사용이라 No-go. Bottom Sheet Container만 Phase 3에서 범용 컴포넌트로 제작
+Next-TODO: Phase 3 Bottom Sheet Container 설계 + Phase 4 커스텀 컴포넌트
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-12 11:24:00
 Project: ~/Project/TDS
 Agent: 혼합 (사용자 Figma 작업 + Claude 리서치/리뷰)

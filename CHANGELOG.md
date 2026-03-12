@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: compMap variant name 충돌 버그 수정 (Select→X버튼 오스왑 방지, 이중 방어)
 
 ### Changed
+- 초대 바텀시트 컴포넌트화 결정 — 1회 사용이라 No-go, Bottom Sheet Container만 Phase 3에서 범용 컴포넌트로 (/team)
 - Toast(Sonner) Phase 2 보류 결정 — 온보딩 내 사용처 미디자인, UX 행동(일시적 자동소멸) 해당 노드 0건 (/team PASS)
 - TDS 퍼블리시 전략 확정 — Atom 3개(Progress/Page Indicator/Avatar) 추가 후 조기 퍼블리시, Molecule은 JIT 추가 (/team PASS)
 - TDS Migrator: compMap 빌드 시 variant children 제외 + 충돌 경고 로그 추가
