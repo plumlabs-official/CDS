@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-12
+> Last updated: 2026-03-13
 
 ---
 
@@ -15,37 +15,65 @@
 
 ---
 
-## ⚠️ 크로스 프로젝트 커밋 점검 (2026-03-11)
+## ⚠️ 크로스 동기화 점검 (필수)
 
-TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, **lenny에만 커밋/푸시**되고 TDS SESSION.md 변경은 커밋 누락되는 문제 발생.
+### 문제 1: 크로스 프로젝트 커밋 누락 (2026-03-11)
 
-**점검 필요:**
-- 이전 세션에서 TDS SESSION.md를 수정했지만 TDS 프로젝트에서 커밋하지 않은 경우가 있었는지 확인
-- `git log`와 SESSION.md 내용 비교하여 누락 여부 판단
+TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, **lenny에만 커밋/푸시**되고 TDS SESSION.md 변경은 커밋 누락.
 
-**재발 방지:**
-- `/record` 실행 후, 다른 프로젝트 SESSION.md도 수정했으면 해당 프로젝트에서도 반드시 커밋/푸시할 것
+### 문제 2: 크로스 로컬 동기화 누락 (2026-03-13)
+
+다른 로컬 머신에서 TDS Figma 작업 + claude-center에만 기록 → TDS SESSION.md 미반영 상태로 커밋/푸시. 이 로컬에서 `/tds` 재개 시 3-13 작업분 누락 발견.
+
+### 세션 시작 시 점검 절차
+
+1. `git pull` 후 **`claude-center/.ai/SESSION.md`도 확인** — TDS 관련 기록이 있으면 이쪽에 반영
+2. `git log`와 SESSION.md `Last updated` 날짜 비교 — 날짜 갭이 있으면 다른 로컬 작업분 누락 의심
+3. Figma 작업은 git에 안 남으므로, claude-center SESSION.md가 유일한 출처일 수 있음
+
+### 세션 종료 시 필수
+
+- TDS 작업을 했으면 **TDS SESSION.md 업데이트 + 커밋/푸시** (어떤 프로젝트에서 실행했든)
+- claude-center에만 기록하고 끝내지 말 것
 
 ---
 
-## 현재 세션 (2026-03-12)
+## 현재 세션 (2026-03-13)
 
 ### 완료된 작업
 
 | 작업 | 비고 |
 |------|------|
-| /record 커맨드 개선 (/team) | 세션 기록 모드에서도 커밋+푸시 자동 실행. "커밋 없음" 설계 결함 수정 |
-| 온보딩 화면 네이밍 리뷰 (/team) | 78→90점. Container/ 일관성 우수, 브랜드명/Text prefix 수정, 래퍼 구조 적용 |
-| Figma 리서치 3건 (/team) | 네이밍 깊이(인스턴스 내부 안 함), 인스턴스 rename(안전), Group vs Frame(Frame 기본) |
-| Figma 인스턴스 오버라이드 리서치 | underline=텍스트 스타일 포함(✓)→바인딩 깨짐. color=미포함(✕)→안전 |
-| /research 커맨드 설계 (/coach) | 커맨드 방식 추천. Explore+WebFetch 검증 루프, 95% 신뢰도 Gate |
-| Tooltip 컴포넌트 TDS 제작 (혼합) | 5 Style (Default/Primary/Inverted/Warning/Destructive) × 4 Caret (Top/Bottom/Right/Left) = 20v. 토큰 바인딩 완료 |
-| Placeholder Logo 컴포넌트 TDS 추가 (사용자 직접) | Type=White/Black × Size=lg/md/sm = 6v |
-| `primary-dark` (#01A54F) 변수 추가 | Theme → Mode alias 연결. 그래디언트 스탑용 |
-| Gradient Background Color Style 생성 | primary(0%) → primary-dark(100%). 온보딩 배경용 |
-| Docs Generator Figma 검증 PASS | Colors + Effects 재생성 정상 확인 |
-| Library Publish 완료 | Tooltip + Placeholder Logo + primary-dark + Gradient Background |
-| docs: 초대 바텀시트 컴포넌트화 결정 (/team) | 1회 사용 No-go. Bottom Sheet Container만 Phase 3에서 범용 컴포넌트로 |
+| 바이브코딩 매핑 이슈 파악 (/team) | Figma→코드 3계층 매핑 문제 분석, 매니페스트 필요성 합의 |
+| TDS Menubar 바이브코딩 적합성 리뷰 (/team) | rename→Tabs 매핑 가능, Menubar 베이스 부적합 판정 |
+| Evidence-First 프로토콜 v2 (/director) | CLAUDE.md GATE 교체 + Memory 업데이트 |
+| TabsList Tag 컴포넌트 TDS 편입 (사용자 직접) | Type=Fixed/Hug + TabsTrigger Tag + Tabs Addon Inline Icon |
+| Alert 컴포넌트 생성 (사용자 직접) | 3 variant, 3-section, Description Boolean |
+| Tabs 네이밍 정리 (사용자 직접) | Primary→Section, Secondary→Toggle, 신규 Tag 추가 |
+| Button Group 삭제 (사용자 직접) | 사용처 없음 |
+| Figma Slots 리서치 (/research) | 5th property type, single Slot=children 매핑 OK, multiple Slots=Code Connect 필요 |
+| shadcn blocks 리서치 (/research) | blocks=페이지 수준 섹션 템플릿(27개, 4카테고리). AppBar/Modal Header는 Composed |
+| TDS 컴포넌트 분류/네이밍 전수 점검 (/team) | shadcn 바이브코딩 매핑 관점 리뷰. 10개 리네이밍 + Card/Sheet 분리 |
+| 섹션 리네이밍: Composes → Composed | shadcn 계층 용어 통일 |
+| AppBar → Navbar 리네이밍 | shadcn/Tailwind 핏 (MUI 용어 탈피) |
+| Modal Header → Header 프레임 통합 | Dialog Header + Content Header 2종 통합 |
+| Card/Sheet 분리 | Card COMPONENT_SET 독립 + Sheet COMPONENT_SET 분리. Header→Content Header로 이동 |
+| Card And Sheet Header/Footer → Header/Footer 중립화 | 바이브코딩 매핑 개선 |
+| Status Component → Status 리네이밍 | "Component" 접미사 제거 |
+| Field legend → Field Legend 케이싱 수정 | 대문자 통일 |
+| Alert Type=Type4 → Detailed 네이밍 | 하단 Slot_Center 포함 변형 |
+| Alert Detailed 적용 검증 | ConfirmJoin Sheet에서 Alert+Status 통합 확인 |
+| Icon Scale 유틸리티 컴포넌트 (사용자 직접) | Figma-native 아이콘 사이즈+스트로크 프리셋 |
+| Typography 유틸리티 컴포넌트 (사용자 직접) | Figma-native 텍스트 스타일 프리셋 (Disclaimer 패턴) |
+| Status 컴포넌트 생성 (사용자 직접) | Coin/Streaks × Inline/Floating × Button/Info = 6v |
+| Avatar Stack → Composed 이동 (사용자 직접) | 다중 Avatar 조합 = Composed |
+| shadcn video player 리서치 | 공식 컴포넌트 없음. Challenge Hero = TDS 커스텀 확정 |
+| Challenge Card 아키텍처 플래닝 (/team) | Video Container(Primitive) + Challenge Card(Composed, 3v) 구조 합의 → Boolean 컨트롤로 전환 |
+| Composer 플러그인 모듈 신규 개발 | `modules/composer.ts` + code.ts 연결 + UI 버튼 3개. 코드리뷰/디자인리뷰 PASS (/director) |
+| Challenge Card 사용자 직접 제작 (Figma) | TDS Button+Badge+Content Header 조합. 바이브코딩 핏 A급 (/team 리뷰) |
+| Content Header에 Slot 추가 (사용자 직접) | Description Slot 확장 |
+
+> 출처(상위 7건): claude-center SESSION.md (다른 로컬에서 작업, TDS SESSION 반영 누락)
 
 ### 컴포넌트 마이그레이션 현황
 
@@ -53,6 +81,10 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 |----------|------|
 | Tooltip | 완료 (20v: 5 Style × 4 Caret position) |
 | Placeholder Logo | 완료 (6v: Type=White/Black × Size=lg/md/sm) |
+| Alert | 완료 (3 variant, 3-section, Description Boolean) |
+| TabsList Tag | 완료 (Type=Fixed/Hug + TabsTrigger Tag + Addon Inline Icon) |
+| Tabs | 네이밍 정리 완료 (Primary→Section, Secondary→Toggle, Tag 추가) |
+| Button Group | 삭제 (사용처 없음) |
 
 ### 다음 할 일
 
@@ -60,7 +92,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 |-------|------|------|
 | 3 | **Bottom Sheet** | 각오, 알림시간 설정 |
 | 3 | **Status Alert Bar** | 챌린지 상태 알림 |
-| 4 | **Challenge Card / Hero** | 커스텀 제작 |
+| 4 | **Challenge Card / Hero** | TDS 프리미티브 조합 제작 중. Boolean 컨트롤 적용 예정 |
 | 4 | **인증 카드 (Auth Post)** | 커스텀 제작 |
 | 4 | **Invite Banner** | 초대 배너 |
 | 4 | **Day Calendar Row** | 일차별 표시 |

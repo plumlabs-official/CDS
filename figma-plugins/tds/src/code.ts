@@ -32,6 +32,12 @@ import {
 } from './modules/componentize';
 
 import {
+  composeVideoContainer,
+  composeChallengeCard,
+  composeAll,
+} from './modules/composer';
+
+import {
   handleNamingAgent,
   handleNamingResult,
   handleNamingBatchResult,
@@ -186,6 +192,22 @@ async function handleUIMessage(msg: UIMessage) {
     const { parentIds } = msg as { type: string; parentIds: string[] };
     console.log('[handleUIMessage] execute-merge received:', parentIds);
     handleExecuteMerge(parentIds);
+    return;
+  }
+
+  // Compose 명령어 (async — font loading 필요)
+  if (msg.type.startsWith('compose-')) {
+    switch (msg.type) {
+      case 'compose-video-container':
+        await handleComposeVideoContainer();
+        break;
+      case 'compose-challenge-card':
+        await handleComposeChallengeCard();
+        break;
+      case 'compose-all':
+        await handleComposeAll();
+        break;
+    }
     return;
   }
 
@@ -919,6 +941,41 @@ function handleComponentizeConvert() {
   }
 
   // UI 유지 (closePlugin 제거)
+}
+
+// === Composer Handlers ===
+
+async function handleComposeVideoContainer() {
+  figma.ui.postMessage({ type: 'task-start', taskName: 'Video Container 생성 중...' });
+  try {
+    const result = await composeVideoContainer();
+    figma.notify(result.message, { timeout: 3000, error: !result.success });
+  } catch (e) {
+    figma.notify(`오류: ${e}`, { error: true });
+  }
+  figma.ui.postMessage({ type: 'task-complete' });
+}
+
+async function handleComposeChallengeCard() {
+  figma.ui.postMessage({ type: 'task-start', taskName: 'Challenge Card 생성 중...' });
+  try {
+    const result = await composeChallengeCard();
+    figma.notify(result.message, { timeout: 3000, error: !result.success });
+  } catch (e) {
+    figma.notify(`오류: ${e}`, { error: true });
+  }
+  figma.ui.postMessage({ type: 'task-complete' });
+}
+
+async function handleComposeAll() {
+  figma.ui.postMessage({ type: 'task-start', taskName: 'Video Container + Challenge Card 생성 중...' });
+  try {
+    const result = await composeAll();
+    figma.notify(result.message, { timeout: 3000, error: !result.success });
+  } catch (e) {
+    figma.notify(`오류: ${e}`, { error: true });
+  }
+  figma.ui.postMessage({ type: 'task-complete' });
 }
 
 /**
