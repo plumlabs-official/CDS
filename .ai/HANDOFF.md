@@ -1,5 +1,25 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-15 20:23:00
+Project: ~/Project/TDS
+Agent: 혼합 (Claude 설계/안내/문서 + 사용자 Figma 제작)
+Summary: Bottom Tab Bar 제작 진행 — 5 variant(Active=Home/Feed/Make/Task/Profile) + 아이콘 에셋 10개 COMPONENT 등록. Participant Card Scale 복제(15v) + Left/Right Slot 완료. 정합성 미확인 패턴 발견 → lessons-learned + CLAUDE.md 규칙 추가.
+Next-TODO: 1) Tab Bar Badge 추가 (Notification Badge stroke 방향 결정) 2) Tab Bar 네이밍 정리 3) Migrator 실행
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
+Date: 2026-03-15 18:53:00
+Project: ~/Project/TDS
+Agent: 혼합 (Claude 설계/리뷰/QA + 사용자 Figma 제작)
+Summary: Participant Card 1:1 빌드 완료 — State(Not Authed/Authed/Empty) × Self(Self/Other) 5 variant. Determined→Boolean 전환, Pending→Empty 통합 (Avatar 스왑), Avatar Type 5종 확장 (Invite Enabled/Disabled/Anonymous 추가). /director QA PASS. 프로덕트 디자인 적용 테스트 완료.
+Next-TODO: 1) borderRadius 12px 통일 2) Scale 4:5 + 9:16 복제 3) Library Publish
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-15 14:16:00
 Project: ~/Project/TDS
 Agent: 혼합 (Claude 리뷰 + 사용자 Figma 수정)

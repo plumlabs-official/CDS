@@ -109,6 +109,14 @@
 - [ ] Layout, Content 타입 금지
 - [ ] 비즈니스 상태 추론 금지 (Authenticated, Empty 등)
 
+### TDS 컴포넌트 수정 제안 시 (필수)
+> 근거: [lessons-learned.md#tds-컴포넌트-정합성-미확인-패턴](docs/architecture/lessons-learned.md#tds-컴포넌트-정합성-미확인-패턴)
+
+- [ ] **사용처 확인** — 해당 컴포넌트가 공용인지, 어디서 참조되는지 확인
+- [ ] **원본 vs 인스턴스 구분** — 원본 수정은 전파 영향, 인스턴스 오버라이드는 깨짐 리스크 명시
+- [ ] **기존 존재 여부 확인** — `get_figma_data` 결과를 먼저 읽고, 이미 있는 것을 재확인
+- [ ] **"좋습니다" 금지** — 영향도 확인 없이 동의하지 말 것
+
 ### Figma 노드 속성 추출 시 (handler.ts 수정)
 > 근거: [lessons-learned.md#figma-속성-추출-버그-패턴](docs/architecture/lessons-learned.md#figma-속성-추출-버그-패턴)
 

@@ -49,19 +49,67 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | Challenge State Card 내 Content Header 사용 적절성 확인 | 수평 구조 일치, 패딩 24→12 오버라이드는 토큰 범위 내. 적절 |
 | Lucide 아이콘 통일 보류 | 마지막에 일괄 처리 결정 |
 | Composed 완전분해 /director QA — PASS | Tabs 인스턴스 리네임(Primary→Section, Secondary→Toggle), Content Header 통일, Card wrapper명, Sheet 슬래시명 수정 확인 |
+| **Participant Card 설계 + 1:1 빌드** | 아래 상세 |
+| ├ Tooltip Left Slot 확장 (혼합) | Kbd→Slot 교체, 20 variant 전체. Label Boolean 추가 |
+| ├ Shadcn Product Card + Profile Card → TDS 복사+Migrate | 베이스 구조 확보 |
+| ├ State variant 구조 결정 | State(Not Authed/Authed/Empty) × Self(Self/Other) × Scale(1:1/4:5/9:16) |
+| ├ Determined variant 제거 → Determination Boolean | Tooltip 인스턴스 내부에서 상태 제어 |
+| ├ Pending State 제거 → Empty로 통합 | Avatar Type 스왑으로 처리 (Invite Enabled/Disabled/Fallback/Anonymous) |
+| ├ Avatar Type 확장 (사용자) | +Invite Enabled, Invite Disabled, Anonymous = 55v (5 Type × 11 Size) |
+| ├ Profile Card에 Icon Slot Boolean 추가 (사용자) | 호스트 뱃지 표시 제어 |
+| ├ 1:1 variant 5개 완성 (사용자) | Not Authed Self/Other, Authed Self/Other, Empty Other |
+| ├ /director QA — CONDITIONAL PASS → PASS | borderRadius 8→12 수정 진행 중 |
+| └ 프로덕트 디자인에 적용 테스트 | 4개 인스턴스 정상 작동 확인 |
+| **Participant Card Scale 복제 완료 (사용자)** | 1:1 → 4:5 + 9:16. 15 variant 전부 존재 |
+| **Participant Card Left/Right Slot 제작 (사용자)** | 2컬럼 masonry 배치 패턴. Left: 9:16→1:1→4:5, Right: 1:1→9:16→4:5 |
+| **Participant Card 프로덕트 디자인 최종 체크** | 너비 불일치(168 vs 167.5) 발견 → 사용자 패스 |
+| **Bottom Tab Bar 제작 진행 중 (혼합)** | 아래 상세 |
+| ├ 프로덕트 디자인에서 복사 → TDS Container Navbar에 배치 | |
+| ├ 아이콘 5탭 네이밍 정리 | 홈, 피드&라운지, 챌린지만들기, 할 일, 마이페이지 |
+| ├ 아이콘 에셋 10개 COMPONENT 등록 (사용자) | On(Filled)/Off(Stroke) × 5탭. Component Tabbar Icon COMPONENT_SET |
+| ├ Tab Bar COMPONENT_SET 5 variant 완성 (사용자) | Active=Home/Feed/Make/Task/Profile |
+| ├ Badge 작업 중 → Notification Badge 정합성 이슈 발견 | 공용 컴포넌트에 stroke 추가 시 영향도 미확인 |
+| └ 정합성 미확인 패턴 lessons-learned + CLAUDE.md 규칙 추가 | /team 논의 후 재발방지 기록 |
+
+### Bottom Tab Bar 현재 구조
+
+```
+Bottom Tabbar 6 (COMPONENT_SET) — Container Navbar 내
+├── Active=Home
+├── Active=Feed
+├── Active=Make
+├── Active=Task
+└── Active=Profile
+
+Component Tabbar Icon (COMPONENT_SET) — 에셋
+├── On: Home, Feed, Make, Task, Profile (Filled)
+└── Off: Home, Feed, Make, Task, Profile (Stroke)
+```
+
+### Participant Card 현재 구조
+
+```
+Participant Card (COMPONENT_SET)
+├── Variants: Scale × State × Self
+│   Scale: 1:1 (4:5, 9:16 복제 예정)
+│   State: Not Authed | Authed | Empty
+│   Self: Self | Other
+├── Booleans: Host, Nudge, Determination, Description
+└── 5 variants (1:1): Not Authed×Self, Not Authed×Other, Authed×Self, Authed×Other, Empty×Other
+```
 
 ### 다음 할 일
 
 | 순서 | 작업 | 비고 |
 |------|------|------|
-| 1 | **하단 탭바** 컴포넌트 제작 | |
-| 2 | **9:16 카드** 컴포넌트 제작 | |
-| 3 | **챌린지 리스트 + 상세페이지** 컴포넌트 제작 | |
-| 4 | **아코디언 + 리스트** 컴포넌트 제작 | |
-| 5 | **챌린지 인증 카드** 컴포넌트 제작 | |
+| 1 | **Tab Bar Badge 추가** | Notification Badge stroke 방향 결정 후 진행 |
+| 2 | **Tab Bar 네이밍 정리** | `Bottom Tabbar 6` → `Tab Bar` |
+| 3 | **Tab Bar Migrator 실행** | 토큰 바인딩 |
+| 4 | **챌린지 리스트 + 상세페이지** 컴포넌트 제작 | |
+| 5 | **아코디언 + 리스트** 컴포넌트 제작 | |
 | 6 | **캘린더** 컴포넌트 제작 | |
 | 7 | **버튼과 뱃지 아이콘 크기 최적화** | |
-| 마지막 | Lucide 아이콘 일괄 통일 | |
+| 마지막 | Lucide 아이콘 일괄 통일 (Avatar의 Huge Icons 포함) | |
 
 ---
 
