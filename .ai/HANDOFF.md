@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-16 01:48:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: QA Fix Plan v3.1 완성 (/team 4R PASS 97/96/96). 76건 변경, Phase 0~3 실행 순서, 이중 Gate, 롤백 전략 확정.
+Next-TODO: Phase 0 실행 (Determination/Nudge 매핑 + AddonType 확인 + Figma 스냅샷) → Phase 1~3 순차 수정 → /director 재QA
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-16 01:30:00
 Project: ~/Project/TDS
 Agent: 혼합 (Claude 가이드/리뷰 + 사용자 Figma 제작)
