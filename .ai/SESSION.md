@@ -73,6 +73,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **Bottom Tab Bar 구조 리뷰 (/team)** | 네이밍 3건 + Badge 통합 방향 확정 |
 | **Tab Bar 완성 (사용자)** | 네이밍 수정 (TabBar/TabBar Icon/variant값 단축) + Reddot Stroke Boolean + Badge Boolean + Migrator 완료 |
 | **버튼과 뱃지 아이콘 크기 최적화 (사용자)** | 완료 |
+| **챌린지 리스트 카드 구조 결정 (/team)** | 별개 컴포넌트 분리 + Challenge 패밀리 네이밍. Challenge List Card(Composed) + Challenge Mini Card(Primitive). Grid는 레이아웃 패턴 |
 
 ### Bottom Tab Bar 완성 구조
 

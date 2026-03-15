@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: compMap variant name 충돌 버그 수정 (Select→X버튼 오스왑 방지, 이중 방어)
 
 ### Changed
+- docs: 챌린지 리스트 카드 구조 결정 — 별개 컴포넌트 분리 + Challenge 패밀리 네이밍 (/team)
 - Bottom Tab Bar 구조 리뷰 (/team) — 네이밍 3건 수정 권고 (Tabbar→Tab Bar, variant값 단축, Component prefix 제거) + Badge 통합 방향 확정
 - Challenge State Card + Content Header 구조 평가 — Content Header 정당성 확인, 아이콘 Lucide 통일 필요 (/team)
 - 초대 바텀시트 컴포넌트화 결정 — 1회 사용이라 No-go, Bottom Sheet Container만 Phase 3에서 범용 컴포넌트로 (/team)

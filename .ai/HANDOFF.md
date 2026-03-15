@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-15 22:30:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: 챌린지 리스트 카드 구조 결정 (/team) — 별개 컴포넌트 분리 + Challenge 패밀리 네이밍. Challenge List Card(Composed) + Challenge Mini Card(Primitive). Grid는 레이아웃 패턴(컴포넌트X).
+Next-TODO: 1) Challenge Mini Card Primitive 제작 2) Challenge List Card Composed 제작 3) 프로덕트 디자인 인스턴스 테스트
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-15 21:30:00
 Project: ~/Project/TDS
 Agent: Claude
