@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-15
+> Last updated: 2026-03-16
 
 ---
 
@@ -75,6 +75,10 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **버튼과 뱃지 아이콘 크기 최적화 (사용자)** | 완료 |
 | **챌린지 리스트 카드 구조 결정 (/team)** | 별개 컴포넌트 분리 + Challenge 패밀리 네이밍. Challenge List Card(Composed) + Challenge Mini Card(Primitive). Grid는 레이아웃 패턴 |
 | **챌린지 리스트 카드 제작 플랜 리뷰 (/team × 3R)** | R1(82)→R2(92)→R3(96) PASS. Product Category 베이스(Mini) + 신규제작(List). 토큰 2개 신규(Theme), WCAG 4.77:1 AA, Boolean 3/16 유효조합 |
+| **Challenge Mini Card 제작 (혼합)** | Product Category Type=Text 베이스 → 164×218, r:8, padding:8, text-sm semibold, shadows/sm. Primitives→Composed로 이동 |
+| **Challenge List Card 제작 (혼합)** | Team Card Default detach → Card Body로 활용. Creator Row(Avatar+Name) + Card Body(image fill, gradient, justify-end) + Content(Title+Stats Row+Price Tag). Boolean 6개(Creator Row, Attendee, Rating, Price Tag, Video Duration, Video Button) + Text 5개 |
+| **Challenge List Card responsiveness 수정** | 최상위 H:hug, Card Body W/H:fill로 변경. Creator Row off 시 높이 늘어남 버그 수정 |
+| **바이브코딩 적합성 QA (/director × 5R)** | 3개 카드 전체 검증. Challenge List Card 39.6, ChallengeCard 27.4, Participant Card 56.4. Critical 8건 + Warnings 10건. FAIL — 네이밍 남용(Text/Description), Blur:mask-group 콜론, prop 설계 결함 |
 
 ### Bottom Tab Bar 완성 구조
 
@@ -89,14 +93,27 @@ TabBar Icon (COMPONENT_SET) — 에셋
 └── Reddot Boolean → Notification Badge (Reddot Stroke Boolean) 인스턴스
 ```
 
+### /director QA 결과 (바이브코딩 적합성)
+
+| 컴포넌트 | R1 네이밍 | R2 레이아웃 | R3 프로퍼티 | R4 합성 | R5 종합 | 평균 |
+|----------|:-:|:-:|:-:|:-:|:-:|:-:|
+| Challenge List Card | 42 | 45 | 35 | 38 | 38 | 39.6 |
+| ChallengeCard (Mission) | 35 | 32 | 20 | 28 | 22 | 27.4 |
+| Participant Card | 52 | 65 | 48 | 62 | 55 | 56.4 |
+
+**Critical 8건**: Text 이름 남용, Description 3중 충돌, Blur:mask-group 콜론, 서브컴포넌트 prop 미명시, Video Duration/Button 분리, ID 이름 충돌, Avatar 사이즈 혼재, ChallengeCard 과복잡
+
 ### 다음 할 일
 
 | 순서 | 작업 | 비고 |
 |------|------|------|
-| 1 | **챌린지 리스트 카드** 컴포넌트 제작 | |
-| 2 | **챌린지 상세페이지** 컴포넌트 제작 | |
-| 3 | **아코디언 + 리스트** 컴포넌트 제작 | |
-| 4 | **캘린더** 컴포넌트 제작 | |
+| 0 | **Critical 8건 수정** | 3개 카드 네이밍/프로퍼티/구조 정비 → 재QA |
+| 1 | **Migrator 실행** | Challenge List Card + Mini Card 토큰 바인딩 |
+| 2 | **신규 Variable 2개** | color.surface.challenge, color.surface.overlay (Theme) |
+| 3 | **프로덕트 디자인 인스턴스 테스트** | 성공기준 4개 (피드/그리드/Boolean/토큰) |
+| 4 | **챌린지 상세페이지** 컴포넌트 제작 | |
+| 5 | **아코디언 + 리스트** 컴포넌트 제작 | |
+| 6 | **캘린더** 컴포넌트 제작 | |
 | 마지막 | Lucide 아이콘 일괄 통일 (Avatar의 Huge Icons 포함) | |
 
 ---
