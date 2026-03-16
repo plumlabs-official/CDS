@@ -81,6 +81,8 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **바이브코딩 적합성 QA (/director × 5R)** | 3개 카드 전체 검증. Challenge List Card 39.6, ChallengeCard 27.4, Participant Card 56.4. Critical 8건 + Warnings 10건. FAIL — 네이밍 남용(Text/Description), Blur:mask-group 콜론, prop 설계 결함 |
 | **QA Fix Plan v3.1 (/team × 4R)** | DD:97/EL:96/PL:96 PASS. 76건 변경(Rename 43+Remove 2+Structural 10+Property 15+Variant 3+Avatar 3). Phase 0~3 실행 순서 + 이중 Gate(director 85+, team 95+) + 롤백 전략 확정 |
 | **챌린지 카드 4종 바이브코딩 분석 (/team)** | 프로덕트 디자인 4개 카드 Figma 직접 조회. 수정 33건 확정: Phase 0 네이밍 13 + Phase 1 Description 5 + Phase 2 프로퍼티 7 + Phase 3 아이콘 8. 아이콘 5종 혼용(Lucide+Huge+Phosphor+Remix+Tabler) 발견 |
+| **디자인 시스템 4계층 구조 평가 (/team)** | Foundation→Components→Blocks→Patterns 구조 리뷰. 현재 Primitives/Composed 유지, Blocks는 향후 점진 도입 결정 |
+| **GPT 컨설팅: TDS 분류 체계 리뷰** | GPT에 tds-overview.md 전달. Composed가 Block화 위험 지적, Navbar/TabBar=Layout 분리 필요, "독립성" 기준 느슨함 피드백. 4단계 제안: Primitives / Composed / Domain Blocks / Layout |
 
 ### Bottom Tab Bar 완성 구조
 
