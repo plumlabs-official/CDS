@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-16 22:30:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: 세션 기록 — ChallengeProgress 리뷰(B+/B-) + borderRadius P0 철회 + 챌린지 상세페이지 Shadcn Kit 매핑(Accordion 1순위) + 일감 정리(Migrator/Variable/테스트 완료)
+Next-TODO: Accordion TDS 추가 → 기간/비용 행 패턴(TDS 20199-6244) → 활동 일정 그리드(20145-10532, 20159-2721 활용)
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-16 18:30:00
 Project: ~/Project/TDS
 Agent: Claude
