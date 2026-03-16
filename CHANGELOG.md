@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: compMap variant name 충돌 버그 수정 (Select→X버튼 오스왑 방지, 이중 방어)
 
 ### Changed
+- docs: TDS Breadcrumb + Profile Card Challenge variant 매핑 결정 (/team)
 - docs: TDS Accordion Slot 패턴 설계 — Slot 1개 vertical AL 채택, Slot2 삭제, hug height (/team)
 - docs: 챌린지 진행 화면 TDS 종합 리뷰 (/director) — 디자인 시스템 B, 바이브코딩 B-. P0 3건 (borderRadius 혼용, 터치영역, 색상 대비)
 - docs: 챌린지 카드 4종 바이브코딩 적합성 분석 (/team) — 수정 33건 확정 (네이밍 13 + Description 충돌 5 + 프로퍼티 7 + 아이콘 8)

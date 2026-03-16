@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-16 23:45:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Breadcrumb + Profile Card 매핑 결정 (/team) — Category→Breadcrumb 사용, User Container→Profile Card Type=Challenge variant 추가
+Next-TODO: Figma에서 Breadcrumb 적용 + Profile Card Type=Challenge variant 추가 + 프로덕트 User Container 교체
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-16 23:15:00
 Project: ~/Project/TDS
 Agent: Claude
