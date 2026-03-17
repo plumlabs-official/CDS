@@ -15,7 +15,7 @@ export const TDS_FILE_KEY = 'H36eNEd6o7ZTv4R7VcyLf2';
 // 금지 어휘
 // ============================================
 
-export const BANNED_SUFFIXES = ['Container', 'Wrapper', 'Box', 'View', 'Div'];
+export const BANNED_SUFFIXES = ['Container', 'Wrapper', 'Content', 'Box', 'View', 'Div'];
 
 export const AUTO_GENERATED_PATTERNS = [
   /^Text$/i,
@@ -87,7 +87,7 @@ export const DOMAIN_KEYWORDS = [
 export const STRUCTURAL_LAYER_NAMES: Record<string, string> = {
   'header': 'Header', 'hdr': 'Header',
   'footer': 'Footer', 'ftr': 'Footer',
-  'body': 'Content', 'content': 'Content',
+  'body': 'Body', 'content': 'Body',
   'list': 'List', 'grid': 'Grid',
   'nav': 'Navbar', 'navigation': 'Navbar',
   'sidebar': 'Sidebar',

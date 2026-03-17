@@ -44,6 +44,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| **rules.ts v2.0 정합성 수정** | `BANNED_SUFFIXES`에 `Content` 추가 + `STRUCTURAL_LAYER_NAMES`에서 body/content→`Body` 변경. 빌드 25.2kb |
 | **Step 7 과잉 수정** | `Actions`→`Actions Area` 버그 — Step 7(역할 접미사 추가)이 사용자 의도적 이름에도 발동. `bannedRemoved` 플래그 추가로 금지어 제거 후에만 Step 7 실행하도록 수정 |
 | **naming-policy v2.0 클린 재작성** | 4회 개정 누적 모순 7건 해소. Content 완전 제거(Main Content→Body). CTA 금지. 복수형 제거. 역할명/Area/Group 3개만. ALLOWED_ROLES Content→Body |
 | **naming-policy v1.2.1** (/director) | 피드백 5건: 복수형 제거 + 사용처 규칙 + 접미사 중복 금지 + §2/§3/§9 예시 정합성 + Sheet→Drawer + INSTANCE skip + isTDSInstance 방어 + toTitleCase |
@@ -67,7 +68,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 ### 잔여 + 다음 세션 TODO
 
 **즉시:**
-- Figma 리로드 → Renamer `bannedRemoved` 수정 테스트 (Actions에 Area 안 붙는지 확인)
+- Figma 리로드 → Renamer 테스트 (bannedRemoved + Content 금지 + body→Body 확인)
 - `Header Area Area` 등 레거시 이름 수동 수정 (Renamer가 이미 역할로 끝나는 이름은 변경 안 함)
 
 **Renamer 한계 — 에이전트 네이밍 검토:**
