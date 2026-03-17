@@ -1,8 +1,8 @@
 /**
  * TDS Renamer — naming-policy v1.1 기반 자동 리네이밍
  *
- * Mode 1: renameProductDesign — 프로덕트 디자인 화면 리네이밍
- * Mode 2: renameTDSLibrary — TDS 라이브러리 컴포넌트 리네이밍 + 프로퍼티 점검
+ * Mode 1: analyzeProductDesign — 프로덕트 디자인 화면 리네이밍
+ * Mode 2: analyzeTDSLibrary — TDS 라이브러리 컴포넌트 리네이밍 + 프로퍼티 점검
  */
 
 import {
@@ -62,6 +62,30 @@ export interface RenamerResult {
 }
 
 // ============================================
+// 역할 판정 (공용)
+// ============================================
+
+/** 모든 역할 키워드 (ALLOWED_ROLES + TEXT_ROLES + IMAGE_TYPES) */
+var ALL_ROLE_NAMES = ALLOWED_ROLES.concat(TEXT_ROLES).concat(IMAGE_TYPES);
+
+/** 이름의 마지막 단어가 역할 키워드인지 */
+function endsWithRole(name: string): boolean {
+  var words = name.split(/\s+/);
+  var last = words[words.length - 1] || '';
+  for (var i = 0; i < ALL_ROLE_NAMES.length; i++) {
+    if (ALL_ROLE_NAMES[i].toLowerCase() === last.toLowerCase()) return true;
+  }
+  return false;
+}
+
+/** 노드 구조 분석 → 시맨틱 역할 접미사 */
+function determineRole(node: SceneNode): string {
+  if ('children' in node && allChildrenSameType(node)) return 'Group';
+  if (hasOnlyLayoutProps(node)) return 'Area';
+  return 'Content';
+}
+
+// ============================================
 // Mode 1: 프로덕트 디자인 리네이밍
 // ============================================
 
@@ -75,17 +99,8 @@ export function analyzeProductDesign(): RenamerResult {
   for (var node of walkTree(targets)) {
     total++;
 
-    // TDS 인스턴스 내부는 skip
-    if (isTDSInstance(node)) {
-      skipped++;
-      continue;
-    }
-
-    // 인스턴스의 자식도 skip (부모가 인스턴스면)
-    if (isInsideTDSInstance(node)) {
-      skipped++;
-      continue;
-    }
+    if (isTDSInstance(node)) { skipped++; continue; }
+    if (isInsideTDSInstance(node)) { skipped++; continue; }
 
     var newName = computeProductName(node);
     if (newName && newName !== node.name) {
@@ -97,7 +112,6 @@ export function analyzeProductDesign(): RenamerResult {
       });
     }
 
-    // 1:1 래퍼 감지
     if (isSingleChildWrapper(node)) {
       var child = (node as FrameNode).children[0];
       wrapperWarnings.push({
@@ -109,15 +123,18 @@ export function analyzeProductDesign(): RenamerResult {
     }
   }
 
-  return { mode: 'product', entries, propertyIssues: [], wrapperWarnings: wrapperWarnings, skipped: skipped, total: total };
+  return {
+    mode: 'product', entries: entries, propertyIssues: [],
+    wrapperWarnings: wrapperWarnings, skipped: skipped, total: total,
+  };
 }
 
 export async function applyProductRenames(entries: RenameEntry[]): Promise<number> {
-  let applied = 0;
-  for (const entry of entries) {
-    const node = await figma.getNodeByIdAsync(entry.nodeId);
+  var applied = 0;
+  for (var i = 0; i < entries.length; i++) {
+    var node = await figma.getNodeByIdAsync(entries[i].nodeId);
     if (node && 'name' in node) {
-      (node as SceneNode).name = entry.after;
+      (node as SceneNode).name = entries[i].after;
       applied++;
     }
   }
@@ -129,12 +146,13 @@ export async function applyProductRenames(entries: RenameEntry[]): Promise<numbe
 // ============================================
 
 export function analyzeTDSLibrary(): RenamerResult {
-  const selection = figma.currentPage.selection;
-  const entries: RenameEntry[] = [];
-  const propertyIssues: PropertyIssue[] = [];
-  let total = 0;
+  var selection = figma.currentPage.selection;
+  var entries: RenameEntry[] = [];
+  var propertyIssues: PropertyIssue[] = [];
+  var total = 0;
 
-  for (const node of selection) {
+  for (var i = 0; i < selection.length; i++) {
+    var node = selection[i];
     if (node.type !== 'COMPONENT' && node.type !== 'COMPONENT_SET') {
       figma.notify('COMPONENT 또는 COMPONENT_SET을 선택하세요.', { error: true });
       continue;
@@ -142,34 +160,27 @@ export function analyzeTDSLibrary(): RenamerResult {
 
     total++;
 
-    // 1. Display Name 매칭
-    const shadcnMatch = findShadcnMatch(node.name);
+    var shadcnMatch = findShadcnMatch(node.name);
     if (shadcnMatch && shadcnMatch !== node.name) {
       entries.push({
-        nodeId: node.id,
-        before: node.name,
-        after: shadcnMatch,
-        reason: `shadcn 공식명 매칭: ${shadcnMatch}`,
+        nodeId: node.id, before: node.name,
+        after: shadcnMatch, reason: 'shadcn 공식명 매칭: ' + shadcnMatch,
       });
     }
 
-    // 2. 프로퍼티 점검
-    propertyIssues.push(...checkComponentProperties(node));
+    var propIssues = checkComponentProperties(node);
+    for (var p = 0; p < propIssues.length; p++) propertyIssues.push(propIssues[p]);
 
-    // 3. 내부 파트명 순서 점검
-    propertyIssues.push(...checkPartNameOrder(node));
+    var partIssues = checkPartNameOrder(node);
+    for (var q = 0; q < partIssues.length; q++) propertyIssues.push(partIssues[q]);
 
-    // 4. 내부 레이어 리네이밍 (COMPONENT_SET의 children)
     if ('children' in node) {
-      for (const child of walkTree(node.children as SceneNode[])) {
+      for (var child of walkTree(node.children as SceneNode[])) {
         total++;
-        // 특수문자 제거
         if (SPECIAL_CHARS_IN_NAMES.test(child.name)) {
-          const cleaned = child.name.replace(SPECIAL_CHARS_IN_NAMES, '').trim();
           entries.push({
-            nodeId: child.id,
-            before: child.name,
-            after: cleaned,
+            nodeId: child.id, before: child.name,
+            after: child.name.replace(SPECIAL_CHARS_IN_NAMES, '').trim(),
             reason: '특수문자 제거',
           });
         }
@@ -177,19 +188,22 @@ export function analyzeTDSLibrary(): RenamerResult {
     }
   }
 
-  return { mode: 'library', entries, propertyIssues, wrapperWarnings: [], skipped: 0, total };
+  return {
+    mode: 'library', entries: entries, propertyIssues: propertyIssues,
+    wrapperWarnings: [], skipped: 0, total: total,
+  };
 }
 
-/**
- * 1:1 래퍼 프레임 언래핑 — 자식을 부모로 이동 후 빈 래퍼 삭제
- */
+// ============================================
+// 언래핑
+// ============================================
+
 export async function unwrapSingleChildWrappers(nodeIds: string[]): Promise<number> {
   var unwrapped = 0;
-  // 역순 처리 — 인덱스 꼬임 방지
   var reversed = nodeIds.slice().reverse();
+
   for (var i = 0; i < reversed.length; i++) {
-    var id = reversed[i];
-    var node = await figma.getNodeByIdAsync(id);
+    var node = await figma.getNodeByIdAsync(reversed[i]);
     if (!node || node.type !== 'FRAME') continue;
     var frame = node as FrameNode;
     if (frame.children.length !== 1) continue;
@@ -198,6 +212,8 @@ export async function unwrapSingleChildWrappers(nodeIds: string[]): Promise<numb
     if (!parent || !('children' in parent)) continue;
 
     var child = frame.children[0];
+
+    // 래퍼 인덱스 찾기
     var parentChildren = (parent as FrameNode).children;
     var wrapperIndex = -1;
     for (var j = 0; j < parentChildren.length; j++) {
@@ -205,17 +221,14 @@ export async function unwrapSingleChildWrappers(nodeIds: string[]): Promise<numb
     }
     if (wrapperIndex === -1) continue;
 
-    // 자식 위치를 래퍼 기준으로 보정 (non-AL 부모에서만)
+    // non-AL 부모에서만 좌표 보정
     var parentIsAL = 'layoutMode' in parent && (parent as FrameNode).layoutMode !== 'NONE';
     if (!parentIsAL) {
       child.x = child.x + frame.x;
       child.y = child.y + frame.y;
     }
 
-    // 자식을 부모로 이동 (래퍼 자리에)
     (parent as FrameNode).insertChild(wrapperIndex, child);
-
-    // 빈 래퍼 삭제
     frame.remove();
     unwrapped++;
   }
@@ -226,117 +239,110 @@ export async function unwrapSingleChildWrappers(nodeIds: string[]): Promise<numb
 // 내부 로직
 // ============================================
 
-/** 노드의 구조를 분석하여 시맨틱 역할 접미사 반환 */
-function determineRole(node: SceneNode): string {
-  if ('children' in node && allChildrenSameType(node)) return 'Group';
-  if (hasOnlyLayoutProps(node)) return 'Area';
-  return 'Content';
-}
-
-/** 시맨틱 역할 접미사가 필요한지 판정 */
-function needsRoleSuffix(name: string, node: SceneNode): boolean {
-  // FRAME 타입만 (TEXT, INSTANCE는 역할 접미사 불필요)
-  if (node.type !== 'FRAME') return false;
-
-  // 단어 1개뿐인 경우만
-  if (name.split(/\s+/).length !== 1) return false;
-
-  // 이미 유효한 역할명이면 skip
-  var lowerName = name.toLowerCase();
-  var allRoles = ALLOWED_ROLES.concat(TEXT_ROLES).concat(IMAGE_TYPES);
-  for (var i = 0; i < allRoles.length; i++) {
-    if (allRoles[i].toLowerCase() === lowerName) return false;
-  }
-
-  return true;
-}
-
+/**
+ * 프로덕트 디자인 이름 변환 (파이프라인 — 모든 변환 누적 적용)
+ */
 function computeProductName(node: SceneNode): string | null {
-  var name = node.name;
+  var original = node.name;
+  var name = original;
 
   // Step 1: 한글 → 영문
   var koreanMatch = KOREAN_LABEL_MAP[name.trim()];
-  if (koreanMatch) return koreanMatch;
+  if (koreanMatch) name = koreanMatch;
 
-  // Step 2: 자동 생성명 추론
+  // Step 2: 자동 생성명 → 완전 새 이름 (early return)
   if (isAutoGenerated(name)) {
     return inferName(node);
   }
 
-  // Step 2.5: 시맨틱 역할 부족 — 단어 1개 + 역할 아님 → 역할 접미사 추가
-  if (needsRoleSuffix(name, node)) {
-    var role = determineRole(node);
-    return pascalToTitleCase(name) + ' ' + role;
-  }
-
   // Step 3: 금지 접미사 대체
   var bannedResult = replaceBannedSuffix(node, name);
-  if (bannedResult) return bannedResult;
+  if (bannedResult) name = bannedResult;
 
   // Step 4: 슬래시 → 공백
-  if (name.includes('/') && node.type !== 'INSTANCE') {
-    return name.replace(/\//g, ' ').replace(/\s+/g, ' ').trim();
+  if (name.indexOf('/') !== -1 && node.type !== 'INSTANCE') {
+    name = name.replace(/\//g, ' ').replace(/\s+/g, ' ').trim();
   }
 
   // Step 5: PascalCase → Title Case
-  var titleCased = pascalToTitleCase(name);
-  if (titleCased !== name) return titleCased;
+  name = pascalToTitleCase(name);
 
   // Step 6: 특수문자 제거
   if (SPECIAL_CHARS_IN_NAMES.test(name)) {
-    return name.replace(SPECIAL_CHARS_IN_NAMES, '').trim();
+    name = name.replace(SPECIAL_CHARS_IN_NAMES, '').trim();
   }
 
-  return null; // 변경 불필요
+  // Step 7: 시맨틱 역할 접미사 (단어 1개 FRAME + 역할 아님)
+  if (node.type === 'FRAME'
+    && name.split(/\s+/).length === 1
+    && !endsWithRole(name)) {
+    name = name + ' ' + determineRole(node);
+  }
+
+  return name !== original ? name : null;
 }
 
 function isAutoGenerated(name: string): boolean {
-  return AUTO_GENERATED_PATTERNS.some((p) => p.test(name));
+  for (var i = 0; i < AUTO_GENERATED_PATTERNS.length; i++) {
+    if (AUTO_GENERATED_PATTERNS[i].test(name)) return true;
+  }
+  return false;
 }
 
 function inferName(node: SceneNode): string {
-  const context = inferContext(node);
-  const prefix = context || 'Unnamed';
+  var context = inferContext(node);
+  var prefix = context || 'Unnamed';
 
-  // 자식 기반 추론
   if ('children' in node) {
-    const children = (node as FrameNode).children;
+    var children = (node as FrameNode).children;
 
-    // 자식 1개 → 자식 기반
     if (children.length === 1) {
-      const childName = children[0].name.split(/[\s/]/)[0];
-      const role = STRUCTURAL_LAYER_NAMES[childName.toLowerCase()];
-      if (role) return `${prefix} ${role}`;
-      return `${childName} Area`;
+      var childName = children[0].name.split(/[\s/]/)[0];
+      var role = STRUCTURAL_LAYER_NAMES[childName.toLowerCase()];
+      if (role) return prefix + ' ' + role;
+      return childName + ' Area';
     }
 
-    // 자식 n개 → 부모 컨텍스트 + 역할
     if (children.length > 1) {
       return prefix + ' ' + determineRole(node);
     }
   }
 
-  // 루트 레벨
   if (node.parent === figma.currentPage) {
-    return `${prefix} Screen`;
+    return prefix + ' Screen';
   }
 
-  // 폴백
-  return `${prefix} Section`;
+  return prefix + ' Section';
 }
 
+/**
+ * 금지 접미사(Container 등) 제거 + 역할 할당
+ *
+ * 역할 추가 조건:
+ * - remaining이 1단어 AND 마지막 단어가 역할이 아닌 경우만
+ * - 2단어 이상이면 이미 충분히 설명적 → 역할 안 붙임
+ * - 이미 역할로 끝나면 → 역할 안 붙임
+ */
 function replaceBannedSuffix(node: SceneNode, name: string): string | null {
-  const words = name.split(/\s+/);
+  var words = name.split(/\s+/);
 
-  for (const banned of BANNED_SUFFIXES) {
-    const idx = words.findIndex((w) => w.toLowerCase() === banned.toLowerCase());
+  for (var b = 0; b < BANNED_SUFFIXES.length; b++) {
+    var idx = -1;
+    for (var w = 0; w < words.length; w++) {
+      if (words[w].toLowerCase() === BANNED_SUFFIXES[b].toLowerCase()) { idx = w; break; }
+    }
     if (idx === -1) continue;
 
-    // "Container X" → 컨텍스트 추출
-    const remaining = words.filter((_, i) => i !== idx).join(' ').trim();
-    const context = remaining || inferContext(node) || 'Main';
+    // 금지어 제거
+    var parts: string[] = [];
+    for (var k = 0; k < words.length; k++) {
+      if (k !== idx) parts.push(words[k]);
+    }
+    var context = parts.join(' ').trim() || inferContext(node) || 'Main';
 
-    // 대체 어휘 선택
+    // 역할 추가 판정
+    if (endsWithRole(context)) return context;
+    if (context.split(/\s+/).length >= 2) return context;
     return context + ' ' + determineRole(node);
   }
 
@@ -344,15 +350,17 @@ function replaceBannedSuffix(node: SceneNode, name: string): string | null {
 }
 
 function findShadcnMatch(name: string): string | null {
-  const normalized = name.split('/')[0].trim();
-  return SHADCN_COMPONENTS.find(
-    (sc) => sc.toLowerCase() === normalized.toLowerCase()
-      || sc.replace(/\s/g, '').toLowerCase() === normalized.replace(/\s/g, '').toLowerCase()
-  ) || null;
+  var normalized = name.split('/')[0].trim();
+  for (var i = 0; i < SHADCN_COMPONENTS.length; i++) {
+    var sc = SHADCN_COMPONENTS[i];
+    if (sc.toLowerCase() === normalized.toLowerCase()) return sc;
+    if (sc.replace(/\s/g, '').toLowerCase() === normalized.replace(/\s/g, '').toLowerCase()) return sc;
+  }
+  return null;
 }
 
 function isInsideTDSInstance(node: SceneNode): boolean {
-  let current = node.parent;
+  var current = node.parent;
   while (current && current.type !== 'PAGE') {
     if (current.type === 'INSTANCE') {
       return isTDSInstance(current as InstanceNode);
@@ -363,13 +371,24 @@ function isInsideTDSInstance(node: SceneNode): boolean {
 }
 
 function getRenameReason(before: string, after: string): string {
-  if (isAutoGenerated(before)) return '자동 생성명 → 시맨틱 추론';
-  for (const banned of BANNED_SUFFIXES) {
-    if (before.toLowerCase().includes(banned.toLowerCase())) return `금지어 ${banned} → 대체`;
+  var reasons: string[] = [];
+
+  if (KOREAN_LABEL_MAP[before.trim()]) reasons.push('한글 → 영문');
+
+  for (var i = 0; i < BANNED_SUFFIXES.length; i++) {
+    if (before.toLowerCase().indexOf(BANNED_SUFFIXES[i].toLowerCase()) !== -1) {
+      reasons.push(BANNED_SUFFIXES[i] + ' 제거');
+      break;
+    }
   }
-  if (before.includes('/')) return '슬래시 → 공백 변환';
-  if (before !== pascalToTitleCase(before)) return 'PascalCase → Title Case';
-  if (SPECIAL_CHARS_IN_NAMES.test(before)) return '특수문자 제거';
-  if (KOREAN_LABEL_MAP[before.trim()]) return '한글 → 영문';
-  return '네이밍 정책 적용';
+
+  if (before.indexOf('/') !== -1 && after.indexOf('/') === -1) reasons.push('슬래시 → 공백');
+  if (before !== pascalToTitleCase(before) && after === pascalToTitleCase(after)) reasons.push('Title Case 변환');
+  if (SPECIAL_CHARS_IN_NAMES.test(before) && !SPECIAL_CHARS_IN_NAMES.test(after)) reasons.push('특수문자 제거');
+
+  var afterWords = after.split(/\s+/);
+  var lastWord = afterWords[afterWords.length - 1];
+  if (endsWithRole(after) && !endsWithRole(before)) reasons.push(lastWord + ' 역할 추가');
+
+  return reasons.length > 0 ? reasons.join(' + ') : '네이밍 정책 적용';
 }
