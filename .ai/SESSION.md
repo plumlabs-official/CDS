@@ -44,6 +44,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| **Figma 구조 리뷰 (혼합)** | 챌린지 상세: Screen scroll→Body scroll 전환 + Top Bar 고정 + Navbar를 Body Content 안으로 이동. 컴포넌트화 기준 논의 — Title+Subtitle 반복 패턴은 Content Header 인스턴스 사용 권장 |
 | **Dissolve 기능 시도 → 롤백** | Container 다중 자식 해체(Dissolve) 구현 → 테스트 중 AL 부모에서 StatusBar 고정 해제 문제 발견 → v1.2 전체 롤백. 최상위 scroll vs Body scroll 논의. toTitleCase(body→Body) 보류 |
 | **Renamer 리팩토링** (/director) | 파이프라인 누적 변환 + 역할 중복 방지(Area Area 버그) + ES6 var 통일 + require→import + 레거시 제거. Gate 5/5 PASS |
 | **Renamer v1.1** | 1:1 래퍼 감지+Unwrap UI + 시맨틱 역할(Area/Group/Content) 자동 할당 + PascalCase→Title Case Step 2.5 수정. Screen Onboarding QA 78.5→91.5 PASS |

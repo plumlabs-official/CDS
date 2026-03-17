@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-17 15:24:00
+Project: ~/Project/TDS
+Agent: 혼합
+Summary: 챌린지 상세 Figma 구조 리뷰 — Screen scroll→Body scroll 전환, Top Bar 고정(h:fill+clip), Navbar Body Content 안으로 이동. 컴포넌트화 기준: Title+Subtitle 반복→Content Header 인스턴스, 단발 Icon+Text→프레임+토큰.
+Next-TODO: 나머지 화면 동일 패턴(Screen scroll 제거) 적용 + Renamer toTitleCase 적용 여부 판단
+Commits: (세션 기록)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-17 14:53:00
 Project: ~/Project/TDS
 Agent: Claude
