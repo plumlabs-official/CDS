@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>TDS</title>
+  <title>TDS Tools</title>
   <style>
     * {
       margin: 0;
@@ -73,1432 +73,206 @@
       background: #e6e6e6;
     }
 
-    .btn-agent {
-      background: #6366f1;
-      color: white;
-    }
-
-    .btn-agent:hover:not(:disabled) {
-      background: #4f46e5;
-    }
-
-    .info {
-      font-size: 11px;
-      color: #797979;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid #eee;
-    }
-
     .status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 11px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .status-connected {
-      background: #ecfdf5;
-      color: #065f46;
-    }
-
-    .status-connected .status-dot {
-      background: #10b981;
-    }
-
-    .status-disconnected {
-      background: #fef2f2;
-      color: #991b1b;
-    }
-
-    .status-disconnected .status-dot {
-      background: #ef4444;
-    }
-
-    .status-loading {
-      background: #fffbeb;
-      color: #92400e;
-    }
-
-    .status-loading .status-dot {
-      background: #f59e0b;
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .progress {
-      margin-top: 12px;
       font-size: 11px;
       color: #666;
-    }
-
-    /* 진행 상태 패널 */
-    .progress-panel {
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 12px;
-    }
-
-    .progress-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 8px;
-    }
-
-    .progress-steps {
-      margin: 8px 0 12px 0;
-    }
-
-    .progress-step {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 0;
-      font-size: 11px;
-    }
-
-    .progress-step.completed { color: #10b981; }
-    .progress-step.active { color: #6366f1; font-weight: 500; }
-    .progress-step.pending { color: #9ca3af; }
-
-    .progress-bar-container {
-      height: 4px;
-      background: #e5e7eb;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 4px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background: #6366f1;
-      transition: width 0.3s ease;
-    }
-
-    .progress-percent {
-      font-size: 10px;
-      color: #6b7280;
-      text-align: right;
-    }
-
-    .progress-meta {
-      display: none;
-      margin-bottom: 8px;
-    }
-
-    .progress-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      font-size: 10px;
-      font-weight: 600;
-      color: #92400e;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 999px;
-    }
-
-    .server-status-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .server-status-wrapper .status {
-      flex: 1;
-      margin-bottom: 0;
-    }
-
-    .btn-reconnect {
-      width: auto;
-      padding: 8px 12px;
-      margin-bottom: 0;
-      background: #f3f3f3;
-      color: #666;
-      font-size: 11px;
-    }
-
-    .btn-reconnect:hover:not(:disabled) {
-      background: #e6e6e6;
-    }
-
-    .btn-danger {
-      background: #ef4444;
-      color: white;
-    }
-
-    .btn-danger:hover:not(:disabled) {
-      background: #dc2626;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .modal {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      width: 260px;
-      max-height: 400px;
-      overflow: hidden;
-    }
-
-    .modal-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .modal-content {
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 16px;
-    }
-
-    .modal-select-all {
-      margin-bottom: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .modal-select-all label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .modal-layers-list {
-      max-height: 200px;
-      overflow-y: auto;
-      background: #f5f5f5;
-      border-radius: 8px;
+      text-align: center;
       padding: 8px;
     }
 
-    .layer-item {
+    /* Rename Preview */
+    .preview-container {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .preview-container.active {
+      display: block;
+    }
+
+    .preview-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      padding: 6px 4px;
-      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 8px;
+    }
+
+    .preview-header span {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .preview-list {
+      max-height: 240px;
+      overflow-y: auto;
+      border: 1px solid #eee;
+      border-radius: 6px;
+    }
+
+    .preview-item {
+      padding: 6px 8px;
+      border-bottom: 1px solid #f5f5f5;
       font-size: 11px;
     }
 
-    .layer-item:last-child {
+    .preview-item:last-child {
       border-bottom: none;
     }
 
-    .layer-item label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      flex: 1;
+    .preview-before {
+      color: #999;
+      text-decoration: line-through;
     }
 
-    .layer-item input[type="checkbox"] {
-      cursor: pointer;
+    .preview-after {
+      color: #00cc61;
+      font-weight: 500;
     }
 
-    .modal-buttons {
-      display: flex;
-      gap: 8px;
+    .preview-reason {
+      color: #888;
+      font-size: 10px;
+      margin-top: 2px;
     }
 
-    .modal-buttons button {
-      flex: 1;
+    .issue-item {
+      padding: 6px 8px;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 11px;
     }
+
+    .issue-severity {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+
+    .severity-major { background: #fee2e2; color: #dc2626; }
+    .severity-minor { background: #fef9c3; color: #ca8a04; }
+    .severity-warning { background: #f3f4f6; color: #6b7280; }
   </style>
 </head>
 <body>
-  <h1>TDS</h1>
-
-  <!-- Agent Server Status -->
-  <div class="server-status-wrapper">
-    <div id="server-status" class="status status-loading">
-      <div class="status-dot"></div>
-      <span>Agent Server 연결 확인 중...</span>
-    </div>
-    <button id="btn-reconnect" class="btn-reconnect" onclick="checkServerConnection()">
-      재연결
-    </button>
-  </div>
+  <h1>TDS Tools</h1>
 
   <div class="section">
-    <div class="section-title">1. 전처리</div>
-    <button id="btn-detach-components" class="btn-secondary" onclick="runCommandWithProgress('detach-components', this)">
-      컴포넌트 브레이크
+    <div class="section-title">Renamer</div>
+    <button class="btn-primary" id="btn-rename-product">
+      Rename (Product Design)
     </button>
-    <button id="btn-delete-hidden-layers" class="btn-secondary" onclick="runCommand('delete-hidden-layers')">
-      꺼진 레이어 삭제
-    </button>
-    <button id="btn-convert-groups" class="btn-secondary" onclick="runCommandWithProgress('convert-groups-to-frames', this)">
-      프레이밍
-    </button>
-    <button id="btn-cleanup-wrappers" class="btn-secondary" onclick="runCommandWithProgress('cleanup-wrappers-ai', this)">
-      래퍼 제거
-    </button>
-    <button id="btn-flatten-same-name" class="btn-secondary" onclick="runCommandWithProgress('collect-merge-candidates', this)">
-      중첩 레이어 병합
-    </button>
-    <button id="btn-standardize-spacing" class="btn-secondary" onclick="runCommandWithProgress('standardize-spacing', this)">
-      간격 표준화
+    <button class="btn-secondary" id="btn-rename-tds">
+      Rename (TDS Library)
     </button>
   </div>
 
-  <!-- 병합 후보 모달 -->
-  <div id="merge-modal-overlay" class="modal-overlay" style="display: none;">
-    <div class="modal" style="width: 300px; max-height: 500px;">
-      <div class="modal-title" style="display: flex; justify-content: space-between; align-items: center;">
-        <span>중첩 병합 후보</span>
-        <span id="merge-candidates-count" style="font-size: 10px; color: #666; font-weight: normal;"></span>
-      </div>
-      <div class="modal-content" style="margin-bottom: 12px;">
-        <div class="modal-select-all" style="display: flex; gap: 8px; margin-bottom: 8px;">
-          <button class="btn-secondary" onclick="selectAllMergeCandidates(true)" style="flex: 1; font-size: 11px;">전체 선택</button>
-          <button class="btn-secondary" onclick="selectAllMergeCandidates(false)" style="flex: 1; font-size: 11px;">전체 해제</button>
-        </div>
-        <div id="merge-candidates-list" class="modal-layers-list" style="max-height: 280px; font-size: 11px;"></div>
-      </div>
-      <div class="modal-buttons" style="flex-direction: column; gap: 6px;">
-        <button id="btn-execute-merge" class="btn-primary" onclick="executeMerge()">선택 항목 병합 실행</button>
-        <button class="btn-secondary" onclick="hideMergeCandidates()">취소</button>
-      </div>
+  <div class="preview-container" id="preview-container">
+    <div class="preview-header">
+      <span id="preview-title">Preview</span>
+      <button class="btn-primary" id="btn-apply-renames" style="width: auto; padding: 6px 12px; margin: 0;">
+        Apply
+      </button>
     </div>
+    <div class="preview-list" id="preview-list"></div>
   </div>
 
-  <div class="section">
-    <div class="section-title">2. AI 네이밍</div>
-    <button id="btn-naming-agent" class="btn-agent" onclick="runCommandWithProgress('auto-naming-agent', this)" disabled>
-      AI 네이밍 실행
-    </button>
-    <button id="btn-reset-patterns" class="btn-secondary" onclick="resetPatternDB()" style="margin-top: 6px; font-size: 10px;">
-      패턴 DB 초기화
-    </button>
-  </div>
-
-  <div class="section">
-    <div class="section-title">3. 컴포넌트</div>
-    <div style="font-size: 10px; color: #999; margin-bottom: 6px;">전처리</div>
-    <button id="btn-autolayout-agent" class="btn-agent" onclick="runCommandWithProgress('apply-autolayout-agent', this)" disabled>
-      AI Auto Layout
-    </button>
-    <div style="font-size: 10px; color: #999; margin: 8px 0 6px 0;">변환</div>
-    <button id="btn-componentize" class="btn-secondary" onclick="runCommand('componentize')">
-      컴포넌트 후보 탐지
-    </button>
-    <button id="btn-componentize-convert" class="btn-primary" onclick="runCommand('componentize-convert')">
-      컴포넌트로 변환
-    </button>
-  </div>
-
-  <div class="section">
-    <button id="btn-run-all-agent" class="btn-agent" onclick="runCommandWithProgress('run-all-agent', this)" disabled>
-      전체 실행 (with AI Agent)
-    </button>
-  </div>
-
-  <div class="section">
-    <div class="section-title">4. Compose</div>
-    <button id="btn-compose-video" class="btn-secondary" onclick="runCommandWithProgress('compose-video-container', this)">
-      Video Container
-    </button>
-    <button id="btn-compose-challenge" class="btn-secondary" onclick="runCommandWithProgress('compose-challenge-card', this)">
-      Challenge Card (3 variants)
-    </button>
-    <button id="btn-compose-all" class="btn-primary" onclick="runCommandWithProgress('compose-all', this)">
-      Video + Challenge 전체 생성
-    </button>
-  </div>
-
-  <div class="info">
-    <p>프레임을 선택한 후 버튼을 클릭하세요.</p>
-    <p style="margin-top: 4px;">토큰 기반: spacing (0, 4, 8, 12, 16, 24, 32, 64)</p>
-  </div>
-
-  <div id="progress" class="progress" style="display: none;"></div>
-
-  <!-- 진행 상태 패널 -->
-  <div id="progress-panel" class="progress-panel" style="display: none;">
-    <div class="progress-title">진행 상태</div>
-    <div id="progress-meta" class="progress-meta">
-      <span id="progress-badge" class="progress-badge"></span>
-    </div>
-    <div id="progress-steps" class="progress-steps"></div>
-    <div class="progress-bar-container">
-      <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
-    </div>
-    <div id="progress-percent" class="progress-percent">0%</div>
-  </div>
-
-  <!-- 확인 모달 (꺼진 레이어) -->
-  <div id="modal-overlay" class="modal-overlay" style="display: none;">
-    <div class="modal">
-      <div class="modal-title">꺼진 레이어 삭제</div>
-      <div class="modal-content">
-        <p id="modal-message"></p>
-        <div class="modal-select-all">
-          <label>
-            <input type="checkbox" id="select-all-layers" onchange="toggleSelectAll()">
-            <span>전체 선택</span>
-          </label>
-        </div>
-        <div id="modal-layers" class="modal-layers-list"></div>
-      </div>
-      <div class="modal-buttons">
-        <button class="btn-secondary" onclick="cancelDeleteHidden()">취소</button>
-        <button class="btn-danger" onclick="confirmDeleteHidden()">선택 삭제</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- HITL 패턴 확인 모달 -->
-  <div id="pattern-confirm-modal" class="modal-overlay" style="display: none;">
-    <div class="modal">
-      <div class="modal-title">유사 패턴 발견</div>
-      <div class="modal-content">
-        <p style="margin-bottom: 8px;">현재 노드: <strong id="pattern-node-name"></strong></p>
-        <p style="margin-bottom: 8px;">제안 이름: <strong id="pattern-suggested-name" style="color: #6366f1;"></strong></p>
-        <p>유사도: <strong id="pattern-score"></strong>%</p>
-      </div>
-      <div class="modal-buttons" style="flex-direction: column; gap: 6px;">
-        <button class="btn-primary" onclick="confirmPatternApply()">적용</button>
-        <button class="btn-secondary" onclick="skipToAINaming()">AI로 분석</button>
-        <button class="btn-agent" onclick="enableAutoApplyAll()">모두 자동 적용</button>
-      </div>
-    </div>
-  </div>
+  <div class="status" id="status"></div>
 
   <script>
-    const AGENT_SERVER_URL = 'http://localhost:3001';
-    let serverConnected = false;
+    // Button handlers
+    document.getElementById('btn-rename-product').addEventListener('click', function() {
+      parent.postMessage({ pluginMessage: { type: 'rename-product' } }, '*');
+    });
 
-    // ============================================
-    // 진행 상태 관리
-    // ============================================
-    let currentPipeline = null;
-    let namingDeferredCount = 0;
-    let namingCollisionHoldCount = 0;
-    let appliedNodeIds = []; // 패턴 저장 가드용
-    let pendingPatternsToSave = []; // 패턴 저장 대기 (적용 성공 후 저장)
+    document.getElementById('btn-rename-tds').addEventListener('click', function() {
+      parent.postMessage({ pluginMessage: { type: 'rename-tds' } }, '*');
+    });
 
-    function updateProgressMetaBadge() {
-      const metaEl = document.getElementById('progress-meta');
-      const badgeEl = document.getElementById('progress-badge');
-      if (!metaEl || !badgeEl) return;
-
-      const parts = [];
-      if (namingDeferredCount > 0) {
-        parts.push(`AI 이관 ${namingDeferredCount}개`);
+    document.getElementById('btn-apply-renames').addEventListener('click', function() {
+      if (window._pendingEntries) {
+        parent.postMessage({ pluginMessage: { type: 'apply-renames', entries: window._pendingEntries } }, '*');
+        document.getElementById('preview-container').classList.remove('active');
+        window._pendingEntries = null;
       }
-      if (namingCollisionHoldCount > 0) {
-        parts.push(`충돌 보류 ${namingCollisionHoldCount}개`);
-      }
+    });
 
-      if (parts.length > 0) {
-        badgeEl.textContent = parts.join(' / ');
-        metaEl.style.display = 'block';
-      } else {
-        badgeEl.textContent = '';
-        metaEl.style.display = 'none';
-      }
-    }
-
-    function showPipelineProgress(steps) {
-      currentPipeline = {
-        steps: steps,
-        currentStep: 0,
-        completed: []
-      };
-      namingDeferredCount = 0;
-      namingCollisionHoldCount = 0;
-      pendingPatternsToSave = [];
-      updateProgressMetaBadge();
-      insertProgressPanelAfterButton();
-      renderProgress();
-      document.getElementById('progress-panel').style.display = 'block';
-    }
-
-    function updatePipelineStep(stepIndex, status) {
-      if (!currentPipeline) return;
-
-      if (status === 'completed') {
-        if (!currentPipeline.completed.includes(stepIndex)) {
-          currentPipeline.completed.push(stepIndex);
-        }
-      }
-      currentPipeline.currentStep = stepIndex;
-      renderProgress();
-    }
-
-    function renderProgress() {
-      if (!currentPipeline) return;
-
-      const stepsEl = document.getElementById('progress-steps');
-      const barEl = document.getElementById('progress-bar');
-      const percentEl = document.getElementById('progress-percent');
-
-      const { steps, currentStep, completed } = currentPipeline;
-
-      stepsEl.innerHTML = steps.map((step, i) => {
-        let icon = '○';
-        let className = 'pending';
-
-        if (completed.includes(i)) {
-          icon = '✓';
-          className = 'completed';
-        } else if (i === currentStep) {
-          icon = '→';
-          className = 'active';
-        }
-
-        return '<div class="progress-step ' + className + '">' + icon + ' ' + (i + 1) + '. ' + step + '</div>';
-      }).join('');
-
-      const percent = Math.round((completed.length / steps.length) * 100);
-      barEl.style.width = percent + '%';
-      percentEl.textContent = percent + '%';
-    }
-
-    function hidePipelineProgress() {
-      document.getElementById('progress-panel').style.display = 'none';
-      currentPipeline = null;
-      namingDeferredCount = 0;
-      namingCollisionHoldCount = 0;
-      pendingPatternsToSave = [];
-      updateProgressMetaBadge();
-      activeButton = null;
-    }
-
-    // 진행 상태 패널을 버튼 아래에 삽입
-    function insertProgressPanelAfterButton() {
-      const panel = document.getElementById('progress-panel');
-      if (activeButton && activeButton.parentNode) {
-        // 버튼 바로 다음에 삽입
-        activeButton.parentNode.insertBefore(panel, activeButton.nextSibling);
-      }
-    }
-
-    // 단일 작업 진행 상태 표시
-    function showSingleTaskProgress(taskName) {
-      currentPipeline = {
-        steps: [taskName],
-        currentStep: 0,
-        completed: []
-      };
-      namingDeferredCount = 0;
-      namingCollisionHoldCount = 0;
-      pendingPatternsToSave = [];
-      updateProgressMetaBadge();
-      insertProgressPanelAfterButton();
-      renderProgress();
-      document.getElementById('progress-panel').style.display = 'block';
-    }
-
-    function completeSingleTaskProgress() {
-      if (currentPipeline && currentPipeline.steps.length === 1) {
-        currentPipeline.completed.push(0);
-        renderProgress();
-        // 1초 후 숨김
-        setTimeout(() => {
-          hidePipelineProgress();
-          activeButton = null;
-        }, 1000);
-      }
-    }
-
-    // 병합 프로그레스 업데이트
-    function updateMergeProgress(current, total, name) {
-      if (currentPipeline && currentPipeline.steps.length === 1) {
-        const percent = Math.round((current / total) * 100);
-        currentPipeline.steps[0] = `병합 중 (${current}/${total}): ${name}`;
-        renderProgress();
-      }
-    }
-
-    // Check server connection on load
-    checkServerConnection();
-
-    async function checkServerConnection() {
-      console.log('[DEBUG] checkServerConnection called');
-      const reconnectBtn = document.getElementById('btn-reconnect');
-      const statusEl = document.getElementById('server-status');
-
-      // 로딩 상태 표시
-      reconnectBtn.disabled = true;
-      reconnectBtn.textContent = '연결 중...';
-      statusEl.className = 'status status-loading';
-      statusEl.innerHTML = '<div class="status-dot"></div><span>연결 시도 중...</span>';
-
-      const urls = [
-        'http://localhost:3001/health',
-        'http://127.0.0.1:3001/health'
-      ];
-
-      for (const url of urls) {
-        try {
-          console.log('[DEBUG] Trying:', url);
-          const response = await fetch(url, { method: 'GET' });
-          console.log('[DEBUG] Response:', response.status);
-
-          if (response.ok) {
-            serverConnected = true;
-            updateServerStatus(true);
-            enableAgentButtons(true);
-            reconnectBtn.disabled = false;
-            reconnectBtn.textContent = '재연결';
-            return;
-          }
-        } catch (error) {
-          console.log('[DEBUG] Error for', url, ':', error.message);
-        }
-      }
-
-      // 모두 실패
-      serverConnected = false;
-      updateServerStatus(false, 'localhost 접근 불가');
-      enableAgentButtons(false);
-      reconnectBtn.disabled = false;
-      reconnectBtn.textContent = '재연결';
-    }
-
-    function updateServerStatus(connected, errorMsg) {
-      const statusEl = document.getElementById('server-status');
-      if (connected) {
-        statusEl.className = 'status status-connected';
-        statusEl.innerHTML = '<div class="status-dot"></div><span>Agent Server 연결됨 (localhost:3001)</span>';
-      } else {
-        statusEl.className = 'status status-disconnected';
-        const msg = errorMsg ? 'Error: ' + errorMsg : 'Agent Server 연결 안됨';
-        statusEl.innerHTML = '<div class="status-dot"></div><span>' + msg + '</span>';
-      }
-    }
-
-    function enableAgentButtons(enabled) {
-      document.getElementById('btn-autolayout-agent').disabled = !enabled;
-      document.getElementById('btn-naming-agent').disabled = !enabled;
-      document.getElementById('btn-run-all-agent').disabled = !enabled;
-    }
-
-    function showProgress(message) {
-      const progressEl = document.getElementById('progress');
-      progressEl.style.display = 'block';
-      progressEl.textContent = message;
-    }
-
-    function hideProgress() {
-      document.getElementById('progress').style.display = 'none';
-    }
-
-    function runCommand(command) {
-      parent.postMessage({ pluginMessage: { type: command } }, '*');
-    }
-
-    // 클릭한 버튼 참조 저장
-    let activeButton = null;
-
-    function runCommandWithProgress(command, buttonElement) {
-      activeButton = buttonElement;
-      parent.postMessage({ pluginMessage: { type: command } }, '*');
-    }
-
-    // Listen for messages from main code
-    window.onmessage = async (event) => {
-      const msg = event.data.pluginMessage;
+    // Message handler from plugin
+    window.onmessage = function(event) {
+      var msg = event.data.pluginMessage;
       if (!msg) return;
 
-      switch (msg.type) {
-        case 'agent-naming':
-          await handleNamingAgent(msg.data);
-          break;
-
-        case 'agent-naming-batch':
-          await handleNamingBatch(msg.data);
-          break;
-
-        case 'agent-naming-context':
-          await handleNamingContext(msg.data);
-          break;
-
-        case 'agent-autolayout':
-          await handleAutoLayoutAgent(msg.data);
-          break;
-
-        case 'check-connection':
-          await checkServerConnection();
-          parent.postMessage({
-            pluginMessage: {
-              type: 'connection-result',
-              connected: serverConnected
-            }
-          }, '*');
-          break;
-
-        case 'confirm-hidden-layers':
-          showHiddenLayersModal(msg.data);
-          break;
-
-        // 파이프라인 진행 상태
-        case 'pipeline-start':
-          showPipelineProgress(msg.steps);
-          break;
-
-        case 'pipeline-step':
-          updatePipelineStep(msg.stepIndex, msg.status);
-          break;
-
-        case 'pipeline-complete':
-          hidePipelineProgress();
-          break;
-
-        case 'merge-candidates':
-          showMergeCandidates(msg.candidates);
-          break;
-
-        case 'merge-result':
-          hideMergeCandidates();
-          break;
-
-        case 'merge-progress':
-          updateMergeProgress(msg.current, msg.total, msg.name);
-          break;
-
-        // 단일 작업 진행 상태
-        case 'task-start':
-          showSingleTaskProgress(msg.taskName);
-          break;
-
-        case 'task-complete':
-          completeSingleTaskProgress();
-          break;
-
-        case 'naming-deferred-info':
-          namingDeferredCount = Math.max(0, Number(msg.count) || 0);
-          updateProgressMetaBadge();
-          break;
-
-        case 'naming-collision-hold':
-          // 충돌로 적용 보류된 노드 처리
-          namingCollisionHoldCount = msg.nodes?.length || 0;
-          updateProgressMetaBadge();
-          // 콘솔에 상세 정보 출력
-          if (msg.nodes && msg.nodes.length > 0) {
-            console.log(`[Naming] 충돌 보류: ${msg.nodes.length}개`);
-            for (const n of msg.nodes) {
-              console.log(`  - "${n.currentName}" → "${n.suggestedName}" (형제 충돌)`);
-            }
-          }
-          break;
-
-        case 'naming-applied-nodes':
-          // 패턴 저장 가드: 적용 성공 노드만 저장
-          appliedNodeIds = msg.nodeIds || [];
-          console.log(`[Naming] 적용 성공 노드: ${appliedNodeIds.length}개`);
-
-          // 대기 중인 패턴 중 적용 성공한 것만 저장
-          if (pendingPatternsToSave.length > 0 && appliedNodeIds.length > 0) {
-            const filteredPatterns = pendingPatternsToSave.filter(p =>
-              appliedNodeIds.includes(p.sourceNodeId)
-            );
-            const excludedCount = pendingPatternsToSave.length - filteredPatterns.length;
-            console.log(`[Pattern Save] 저장: ${filteredPatterns.length}개 (충돌 제외: ${excludedCount}개)`);
-            if (filteredPatterns.length > 0) {
-              savePatternsBatch(filteredPatterns);
-            }
-          }
-          pendingPatternsToSave = []; // 초기화
-          break;
-
-        case 'save-patterns-batch':
-          savePatternsBatch(msg.patterns);
-          break;
+      if (msg.type === 'rename-preview') {
+        showPreview(msg);
       }
     };
 
-    // ===== 패턴 배치 저장 =====
-    async function savePatternsBatch(patterns) {
-      if (!patterns || patterns.length === 0) return;
+    function showPreview(msg) {
+      var container = document.getElementById('preview-container');
+      var list = document.getElementById('preview-list');
+      var title = document.getElementById('preview-title');
+      var applyBtn = document.getElementById('btn-apply-renames');
 
-      let savedCount = 0;
-      for (const p of patterns) {
-        try {
-          await fetch(AGENT_SERVER_URL + '/patterns', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(p),
-          });
-          savedCount++;
-        } catch (err) {
-          console.warn('[Pattern Save Error]', p.name, err);
+      list.innerHTML = '';
+
+      if (msg.mode === 'product') {
+        title.textContent = msg.entries.length + ' changes (' + msg.skipped + ' TDS skipped)';
+        window._pendingEntries = msg.entries;
+        applyBtn.style.display = 'inline-block';
+
+        for (var i = 0; i < msg.entries.length; i++) {
+          var entry = msg.entries[i];
+          var item = document.createElement('div');
+          item.className = 'preview-item';
+          item.innerHTML =
+            '<div class="preview-before">' + escapeHtml(entry.before) + '</div>' +
+            '<div class="preview-after">' + escapeHtml(entry.after) + '</div>' +
+            '<div class="preview-reason">' + escapeHtml(entry.reason) + '</div>';
+          list.appendChild(item);
         }
-      }
-      console.log(`[Pattern Save] 룰베이스 ${savedCount}/${patterns.length}개 저장 완료`);
-    }
+      } else if (msg.mode === 'library') {
+        var total = msg.entries.length + (msg.propertyIssues ? msg.propertyIssues.length : 0);
+        title.textContent = total + ' issues found';
+        applyBtn.style.display = 'none';
 
-    // ===== 패턴 DB 초기화 =====
-    async function resetPatternDB() {
-      if (!confirm('패턴 DB를 초기화하시겠습니까?\n저장된 모든 패턴이 삭제됩니다.')) {
-        return;
-      }
-
-      try {
-        const response = await fetch(AGENT_SERVER_URL + '/patterns/reset', {
-          method: 'POST',
-        });
-
-        if (response.ok) {
-          alert('패턴 DB가 초기화되었습니다.');
-          console.log('[Pattern DB] 초기화 완료');
-        } else {
-          alert('패턴 DB 초기화 실패');
-        }
-      } catch (err) {
-        console.error('[Pattern DB Reset Error]', err);
-        alert('서버 연결 실패');
-      }
-    }
-
-    // ===== 병합 후보 관련 함수 =====
-    let mergeCandidatesData = [];
-
-    function showMergeCandidates(candidates) {
-      mergeCandidatesData = candidates || [];
-      const overlay = document.getElementById('merge-modal-overlay');
-      const list = document.getElementById('merge-candidates-list');
-      const countEl = document.getElementById('merge-candidates-count');
-
-      if (candidates.length === 0) {
-        overlay.style.display = 'none';
-        return;
-      }
-
-      countEl.textContent = `${candidates.length}개`;
-
-      // 리스트 렌더링 (새 포맷: hierarchy, depth, childrenPreview)
-      let html = '';
-      candidates.forEach((c, i) => {
-        const depthBadge = `<span style="background: #e0e0e0; color: #333; font-size: 9px; padding: 1px 4px; border-radius: 3px;">${c.depth}중</span>`;
-
-        // 계층 구조 (접기/펼치기)
-        // depth번째까지는 체인(제거됨), 그 이후는 최종 자식(유지됨)
-        const chainEndIdx = c.depth;
-        const hierarchyHtml = c.hierarchy.map((h, idx) => {
-          const indent = '&nbsp;'.repeat(idx * 2);
-          const isChain = idx < chainEndIdx;
-          const isLastChain = idx === chainEndIdx - 1;
-
-          if (idx === 0) {
-            return `<div style="font-weight: 500; color: #c00; text-decoration: line-through;">${h}</div>`;
-          } else if (isChain && !isLastChain) {
-            // 중간 노드 (제거됨)
-            return `<div style="color: #c00; font-size: 10px; text-decoration: line-through;">${indent}└ ${h}</div>`;
-          } else if (isLastChain) {
-            // 최하위 노드 (제거됨, 자식만 유지)
-            return `<div style="color: #c00; font-size: 10px; text-decoration: line-through;">${indent}└ ${h} <span style="color: #888; text-decoration: none;">(자식만 유지)</span></div>`;
-          } else {
-            // 최종 자식 (유지됨)
-            return `<div style="color: #080; font-size: 10px;">${indent}└ ${h}</div>`;
-          }
-        }).join('');
-
-        html += `
-          <div style="border-bottom: 1px solid #eee; padding: 6px 0;">
-            <label style="display: flex; align-items: flex-start; gap: 6px; cursor: pointer;">
-              <input type="checkbox" data-index="${i}" data-nodeid="${c.id}" checked style="margin-top: 3px;" onchange="onCandidateCheckChange(this)">
-              <div style="flex: 1; min-width: 0;">
-                <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 2px;">
-                  ${depthBadge}
-                  <span style="font-weight: 500; overflow: hidden; text-overflow: ellipsis;">${c.name}</span>
-                  <span style="color: #999; font-size: 9px;">${c.size.width}x${c.size.height}</span>
-                </div>
-                <details style="font-size: 10px;" open>
-                  <summary style="cursor: pointer; color: #666;">계층 구조 <span style="color: #c00;">빨강=제거</span> <span style="color: #080;">초록=유지</span></summary>
-                  <div style="padding: 4px 0 0 8px; color: #555;">
-                    ${hierarchyHtml}
-                  </div>
-                </details>
-              </div>
-            </label>
-          </div>
-        `;
-      });
-
-      list.innerHTML = html;
-      overlay.style.display = 'flex';
-
-      // 초기 선택은 code.ts의 handleCollectMergeCandidates에서 이미 설정됨
-    }
-
-    function hideMergeCandidates() {
-      document.getElementById('merge-modal-overlay').style.display = 'none';
-      mergeCandidatesData = [];
-    }
-
-    function selectAllMergeCandidates(selectAll) {
-      const checkboxes = document.querySelectorAll('#merge-candidates-list input[type="checkbox"]');
-      checkboxes.forEach(cb => {
-        cb.checked = selectAll;
-      });
-      // 전체 선택 상태를 한 번에 업데이트
-      updateMergeSelection();
-    }
-
-    function onCandidateCheckChange(checkbox) {
-      console.log('[UI] onCandidateCheckChange:', checkbox.dataset.nodeid, checkbox.checked);
-      // 전체 선택 상태를 한 번에 업데이트 (꺼진 레이어 삭제와 동일)
-      updateMergeSelection();
-    }
-
-    // 체크된 모든 후보의 ID를 수집해서 Figma에 전송 (꺼진 레이어 삭제와 동일 방식)
-    function updateMergeSelection() {
-      const checkboxes = document.querySelectorAll('#merge-candidates-list input[type="checkbox"]:checked');
-      const selectedIds = Array.from(checkboxes).map(cb => cb.dataset.nodeid);
-
-      console.log('[UI] updateMergeSelection:', selectedIds);
-      parent.postMessage({
-        pluginMessage: {
-          type: 'update-merge-selection',
-          selectedIds: selectedIds
-        }
-      }, '*');
-    }
-
-    function executeMerge() {
-      console.log('[UI] executeMerge called');
-      console.log('[UI] mergeCandidatesData:', mergeCandidatesData);
-
-      const checkboxes = document.querySelectorAll('#merge-candidates-list input[type="checkbox"]:checked');
-      const selectedIds = [];
-
-      checkboxes.forEach(cb => {
-        const index = parseInt(cb.dataset.index);
-        console.log('[UI] checkbox index:', index, 'data:', mergeCandidatesData[index]);
-        if (mergeCandidatesData[index]) {
-          selectedIds.push(mergeCandidatesData[index].id);
-        }
-      });
-
-      console.log('[UI] selectedIds:', selectedIds);
-
-      if (selectedIds.length === 0) {
-        alert('선택된 항목이 없습니다.');
-        return;
-      }
-
-      // 후보 목록 숨기기
-      hideMergeCandidates();
-
-      const message = {
-        pluginMessage: {
-          type: 'execute-merge',
-          parentIds: selectedIds
-        }
-      };
-      console.log('[UI] Sending message:', message);
-      parent.postMessage(message, '*');
-    }
-
-    // 꺼진 레이어 모달 표시
-    let hiddenLayersData = [];
-
-    function showHiddenLayersModal(data) {
-      hiddenLayersData = data.layers || [];
-
-      document.getElementById('modal-message').textContent =
-        `${data.count}개의 꺼진 레이어가 발견되었습니다. 삭제할 레이어를 선택하세요.`;
-
-      // 체크박스 목록 생성
-      const layersContainer = document.getElementById('modal-layers');
-      layersContainer.innerHTML = hiddenLayersData.map((layer, index) => `
-        <div class="layer-item">
-          <label>
-            <input type="checkbox" class="layer-checkbox" data-index="${index}" data-id="${layer.id}" checked onchange="updateLayerSelection()">
-            <span>${layer.name}</span>
-          </label>
-        </div>
-      `).join('');
-
-      // 전체 선택 체크박스 초기화
-      document.getElementById('select-all-layers').checked = true;
-
-      document.getElementById('modal-overlay').style.display = 'flex';
-    }
-
-    function toggleSelectAll() {
-      const selectAll = document.getElementById('select-all-layers').checked;
-      const checkboxes = document.querySelectorAll('.layer-checkbox');
-      checkboxes.forEach(cb => cb.checked = selectAll);
-      updateLayerSelection();
-    }
-
-    function updateLayerSelection() {
-      // 선택된 레이어 ID 수집
-      const checkboxes = document.querySelectorAll('.layer-checkbox:checked');
-      const selectedIds = Array.from(checkboxes).map(cb => cb.dataset.id);
-
-      // Figma에 선택 상태 업데이트 요청
-      parent.postMessage({
-        pluginMessage: {
-          type: 'update-hidden-selection',
-          selectedIds: selectedIds
-        }
-      }, '*');
-    }
-
-    function confirmDeleteHidden() {
-      // 선택된 레이어 ID 수집
-      const checkboxes = document.querySelectorAll('.layer-checkbox:checked');
-      const selectedIds = Array.from(checkboxes).map(cb => cb.dataset.id);
-
-      document.getElementById('modal-overlay').style.display = 'none';
-
-      if (selectedIds.length === 0) {
-        runCommand('cancel-delete-hidden');
-        return;
-      }
-
-      // 선택된 ID 전송
-      parent.postMessage({
-        pluginMessage: {
-          type: 'confirm-delete-hidden',
-          selectedIds: selectedIds
-        }
-      }, '*');
-    }
-
-    function cancelDeleteHidden() {
-      document.getElementById('modal-overlay').style.display = 'none';
-      runCommand('cancel-delete-hidden');
-    }
-
-    // Naming Agent API call
-    async function handleNamingAgent(data) {
-      if (!serverConnected) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'agent-result',
-            success: false,
-            error: 'Agent server not connected'
-          }
-        }, '*');
-        return;
-      }
-
-      showProgress('AI 네이밍 분석 중...');
-
-      try {
-        const response = await fetch(AGENT_SERVER_URL + '/agents/naming', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-
-        parent.postMessage({
-          pluginMessage: {
-            type: 'naming-result',
-            ...result
-          }
-        }, '*');
-      } catch (error) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'naming-result',
-            success: false,
-            error: error.message
-          }
-        }, '*');
-      } finally {
-        hideProgress();
-      }
-    }
-
-    // Batch Naming Agent API call
-    async function handleNamingBatch(data) {
-      if (!serverConnected) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'naming-batch-result',
-            success: false,
-            error: 'Agent server not connected'
-          }
-        }, '*');
-        return;
-      }
-
-      showProgress('AI 네이밍 분석 중... (0/' + data.nodes.length + ')');
-
-      try {
-        const results = [];
-
-        for (let i = 0; i < data.nodes.length; i++) {
-          showProgress('AI 네이밍 분석 중... (' + (i + 1) + '/' + data.nodes.length + ')');
-
-          const response = await fetch(AGENT_SERVER_URL + '/agents/naming', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data.nodes[i]),
-          });
-
-          const result = await response.json();
-          results.push(result);
+        // Rename entries
+        for (var i = 0; i < msg.entries.length; i++) {
+          var entry = msg.entries[i];
+          var item = document.createElement('div');
+          item.className = 'preview-item';
+          item.innerHTML =
+            '<div class="preview-before">' + escapeHtml(entry.before) + '</div>' +
+            '<div class="preview-after">' + escapeHtml(entry.after) + '</div>' +
+            '<div class="preview-reason">' + escapeHtml(entry.reason) + '</div>';
+          list.appendChild(item);
         }
 
-        parent.postMessage({
-          pluginMessage: {
-            type: 'naming-batch-result',
-            success: true,
-            results
-          }
-        }, '*');
-      } catch (error) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'naming-batch-result',
-            success: false,
-            error: error.message
-          }
-        }, '*');
-      } finally {
-        hideProgress();
-      }
-    }
-
-    // ===== 패턴 매칭 + AI 네이밍 통합 =====
-    let autoApplyPatterns = false; // 세션 내 "모두 자동 적용" 플래그
-    let pendingPatternDecision = null; // HITL 모달 대기 중인 노드 정보
-    let patternDecisionResolver = null; // Promise resolver
-
-    // Context-aware Naming Agent API call (패턴 매칭 통합)
-    async function handleNamingContext(data) {
-      console.log('[DEBUG] handleNamingContext 시작, 총 노드:', data.nodes.length);
-
-      if (!serverConnected) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'naming-context-result',
-            success: false,
-            error: 'Agent server not connected'
-          }
-        }, '*');
-        return;
-      }
-
-      // 세션 시작 시 플래그 리셋
-      autoApplyPatterns = false;
-
-      const results = [];
-      const nodesForAI = [];
-      let patternAppliedCount = 0;
-
-      // 패턴 저장은 네이밍 완료 후 일괄 처리 (같은 실행 내 HITL 방지)
-      const patternsToSave = [];
-
-      // 룰베이스 패턴 수집 (저장은 나중에)
-      if (data.ruleBasedPatterns && data.ruleBasedPatterns.length > 0) {
-        patternsToSave.push(...data.ruleBasedPatterns);
-        console.log('[Pattern] 룰베이스 패턴 수집:', data.ruleBasedPatterns.length, '개');
-      }
-
-      // 진행 패널 업데이트
-      if (currentPipeline && currentPipeline.steps.length === 1) {
-        currentPipeline.steps[0] = '패턴 매칭 + AI 네이밍 분석 중... (' + data.nodes.length + '개 노드)';
-        renderProgress();
-      }
-
-      // 1. 각 노드마다 패턴 매칭 시도
-      for (let i = 0; i < data.nodes.length; i++) {
-        const node = data.nodes[i];
-
-        // 진행 상태 업데이트
-        if (currentPipeline && currentPipeline.steps.length === 1) {
-          currentPipeline.steps[0] = `패턴 매칭 중... (${i + 1}/${data.nodes.length})`;
-          renderProgress();
-        }
-
-        // 구조 정보가 있으면 패턴 매칭 시도
-        if (node.structure) {
-          try {
-            const matchResponse = await fetch(AGENT_SERVER_URL + '/patterns/match', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                structure: node.structure,
-                limit: 1,
-                minScore: 0.8
-              }),
-            });
-
-            const matchResult = await matchResponse.json();
-
-            if (matchResult.success && matchResult.data?.candidates?.length > 0) {
-              const topMatch = matchResult.data.candidates[0];
-
-              if (topMatch.score >= 0.8) {
-                // 유사도 높음 - HITL 또는 자동 적용
-                if (autoApplyPatterns) {
-                  // 자동 적용 모드
-                  results.push({
-                    nodeId: node.nodeId,
-                    suggestedName: topMatch.pattern.name,
-                    source: 'pattern-auto',
-                    confidence: topMatch.score
-                  });
-                  patternAppliedCount++;
-
-                  // 사용 횟수 증가
-                  await fetch(AGENT_SERVER_URL + '/patterns/' + topMatch.pattern.id + '/use', {
-                    method: 'POST'
-                  });
-
-                  console.log('[Pattern Auto]', node.currentName, '→', topMatch.pattern.name, '(' + (topMatch.score * 100).toFixed(0) + '%)');
-                } else {
-                  // HITL 모달 표시
-                  const userChoice = await showPatternConfirmModalAsync(node, topMatch);
-
-                  if (userChoice === 'apply') {
-                    results.push({
-                      nodeId: node.nodeId,
-                      suggestedName: topMatch.pattern.name,
-                      source: 'pattern-hitl',
-                      confidence: topMatch.score
-                    });
-                    patternAppliedCount++;
-
-                    // 사용 횟수 증가
-                    await fetch(AGENT_SERVER_URL + '/patterns/' + topMatch.pattern.id + '/use', {
-                      method: 'POST'
-                    });
-
-                    console.log('[Pattern HITL]', node.currentName, '→', topMatch.pattern.name);
-                  } else if (userChoice === 'auto-all') {
-                    autoApplyPatterns = true;
-                    results.push({
-                      nodeId: node.nodeId,
-                      suggestedName: topMatch.pattern.name,
-                      source: 'pattern-auto',
-                      confidence: topMatch.score
-                    });
-                    patternAppliedCount++;
-
-                    await fetch(AGENT_SERVER_URL + '/patterns/' + topMatch.pattern.id + '/use', {
-                      method: 'POST'
-                    });
-
-                    console.log('[Pattern Auto-All]', node.currentName, '→', topMatch.pattern.name);
-                  } else {
-                    // AI로 분석
-                    nodesForAI.push(node);
-                  }
-                }
-                continue;
-              }
-            }
-          } catch (err) {
-            console.warn('[Pattern Match Error]', err);
+        // Property issues
+        if (msg.propertyIssues) {
+          for (var i = 0; i < msg.propertyIssues.length; i++) {
+            var issue = msg.propertyIssues[i];
+            var item = document.createElement('div');
+            item.className = 'issue-item';
+            var severityClass = 'severity-' + issue.severity;
+            item.innerHTML =
+              '<span class="issue-severity ' + severityClass + '">' + issue.severity + '</span>' +
+              '<strong>' + escapeHtml(issue.nodeName) + '</strong>: ' +
+              escapeHtml(issue.property) + '<br>' +
+              '<span style="color:#999">' + escapeHtml(issue.current) + '</span> → ' +
+              '<span style="color:#00cc61">' + escapeHtml(issue.suggested) + '</span>';
+            list.appendChild(item);
           }
         }
-
-        // 패턴 매칭 실패 또는 유사도 낮음 - AI 분석 대상
-        nodesForAI.push(node);
       }
 
-      // 2. AI 네이밍 대상이 있으면 AI API 호출
-      console.log('[DEBUG] AI 호출 전 - nodesForAI:', nodesForAI.length);
-      if (nodesForAI.length > 0) {
-        console.log('[DEBUG] AI 블록 진입');
-        if (currentPipeline && currentPipeline.steps.length === 1) {
-          currentPipeline.steps[0] = `AI 네이밍 분석 중... (${nodesForAI.length}개 노드)`;
-          renderProgress();
-        }
-
-        try {
-          const aiData = {
-            screenScreenshot: data.screenScreenshot,
-            screenWidth: data.screenWidth,
-            screenHeight: data.screenHeight,
-            nodes: nodesForAI,
-            model: 'two-stage'
-          };
-
-          console.log('[DEBUG] AI 요청 시작 - 노드:', nodesForAI.length, '개, 스크린샷 크기:', data.screenScreenshot?.length || 0);
-
-          const aiResponse = await fetch(AGENT_SERVER_URL + '/agents/naming/context', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(aiData),
-          });
-
-          console.log('[DEBUG] AI 응답 상태:', aiResponse.status, aiResponse.statusText);
-
-          const aiResult = await aiResponse.json();
-          console.log('[DEBUG] AI 결과:', aiResult.success, '결과 수:', aiResult.data?.results?.length || 0);
-
-          if (aiResult.success && aiResult.data?.results) {
-            // AI 결과 추가 + 패턴 수집 (저장은 나중에)
-            for (const r of aiResult.data.results) {
-              results.push({
-                nodeId: r.nodeId,
-                suggestedName: r.suggestedName,
-                componentType: r.componentType,
-                confidence: r.confidence,
-                reasoning: r.reasoning,
-                source: 'ai'
-              });
-
-              // 패턴 수집 (저장은 네이밍 완료 후)
-              const nodeData = nodesForAI.find(n => n.nodeId === r.nodeId);
-              if (nodeData?.structure) {
-                patternsToSave.push({
-                  name: r.suggestedName,
-                  structure: nodeData.structure,
-                  sourceNodeId: r.nodeId
-                });
-              }
-            }
-            console.log('[Pattern] AI 패턴 수집:', aiResult.data.results.length, '개');
-          }
-        } catch (aiErr) {
-          console.error('[AI Naming Error]', aiErr);
-          console.error('[AI Naming Error] Stack:', aiErr.stack);
-        }
-      }
-
-      // 3. 최종 결과 전달
-      console.log('[DEBUG] 최종 결과 - 패턴 적용:', patternAppliedCount, ', AI 분석:', nodesForAI.length, ', 총 results:', results.length);
-      console.log('[DEBUG] results 상세:', results.map(r => ({ nodeId: r.nodeId, name: r.suggestedName, source: r.source })));
-
-      parent.postMessage({
-        pluginMessage: {
-          type: 'naming-context-result',
-          success: true,
-          data: { results }
-        }
-      }, '*');
-
-      // 4. 패턴 저장 대기 (naming-applied-nodes 메시지 후 필터링하여 저장)
-      if (patternsToSave.length > 0) {
-        console.log('[Pattern] 패턴 저장 대기:', patternsToSave.length, '개 (적용 성공 후 저장)');
-        pendingPatternsToSave = patternsToSave;
-      }
+      container.classList.add('active');
     }
 
-    // HITL 모달 표시 (Promise 기반)
-    function showPatternConfirmModalAsync(node, match) {
-      return new Promise((resolve) => {
-        patternDecisionResolver = resolve;
-        pendingPatternDecision = { node, match };
-
-        document.getElementById('pattern-node-name').textContent = node.currentName;
-        document.getElementById('pattern-suggested-name').textContent = match.pattern.name;
-        document.getElementById('pattern-score').textContent = (match.score * 100).toFixed(0);
-
-        document.getElementById('pattern-confirm-modal').style.display = 'flex';
-      });
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
-
-    // HITL 모달 버튼 핸들러
-    function confirmPatternApply() {
-      document.getElementById('pattern-confirm-modal').style.display = 'none';
-      if (patternDecisionResolver) {
-        patternDecisionResolver('apply');
-        patternDecisionResolver = null;
-      }
-    }
-
-    function skipToAINaming() {
-      document.getElementById('pattern-confirm-modal').style.display = 'none';
-      if (patternDecisionResolver) {
-        patternDecisionResolver('ai');
-        patternDecisionResolver = null;
-      }
-    }
-
-    function enableAutoApplyAll() {
-      document.getElementById('pattern-confirm-modal').style.display = 'none';
-      if (patternDecisionResolver) {
-        patternDecisionResolver('auto-all');
-        patternDecisionResolver = null;
-      }
-    }
-
-    // AutoLayout Agent API call
-    async function handleAutoLayoutAgent(data) {
-      if (!serverConnected) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'autolayout-result',
-            success: false,
-            error: 'Agent server not connected'
-          }
-        }, '*');
-        return;
-      }
-
-      // Two-Stage 기본 사용 (AutoLayout은 단일 모델 - haiku 사용)
-      const selectedModel = 'haiku';
-
-      // 진행 패널에 상세 정보 업데이트 (task-start로 패널이 이미 표시됨)
-      if (currentPipeline && currentPipeline.steps.length === 1) {
-        currentPipeline.steps[0] = 'AI Auto Layout 분석 중...';
-        renderProgress();
-      }
-
-      try {
-        const response = await fetch(AGENT_SERVER_URL + '/agents/autolayout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...data, model: selectedModel }),
-        });
-
-        const result = await response.json();
-
-        parent.postMessage({
-          pluginMessage: {
-            type: 'autolayout-result',
-            ...result
-          }
-        }, '*');
-      } catch (error) {
-        parent.postMessage({
-          pluginMessage: {
-            type: 'autolayout-result',
-            success: false,
-            error: error.message
-          }
-        }, '*');
-      }
-    }
-
   </script>
 </body>
 </html>

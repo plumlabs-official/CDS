@@ -1,5 +1,5 @@
 {
-  "name": "TDS",
+  "name": "TDS Tools",
   "id": "tds",
   "api": "1.0.0",
   "main": "dist/code.js",
@@ -7,9 +7,5 @@
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": ["figma"],
-  "documentAccess": "dynamic-page",
-  "networkAccess": {
-    "allowedDomains": ["http://localhost:3001"],
-    "reasoning": "Local agent server for AI-powered design automation"
-  }
+  "documentAccess": "dynamic-page"
 }

@@ -1,27 +1,18 @@
 {
   "name": "tds",
-  "version": "2.0.0",
-  "description": "TDS - Figma 디자인 시스템 자동화 플러그인",
+  "version": "3.0.0",
+  "description": "TDS - Figma 디자인 시스템 도구 모음",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "figma-plugins/tds"
-  ],
   "scripts": {
-    "build": "npm run build --workspace=@tryve/common && npm run build --workspace=@tryve/figma-plugin",
-    "build:all": "npm run build && npm run build --workspace=@tryve/agent-server",
-    "build:plugin": "npm run build --workspace=@tryve/figma-plugin",
-    "build:server": "npm run build --workspace=@tryve/agent-server",
-    "build:common": "npm run build --workspace=@tryve/common",
-    "watch": "npm run watch --workspace=@tryve/figma-plugin",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "server": "npm run start --workspace=@tryve/agent-server"
+    "build": "cd figma-plugins/tds && npm run build",
+    "watch": "cd figma-plugins/tds && npm run watch",
+    "typecheck": "cd figma-plugins/tds && npx tsc --noEmit"
   },
   "keywords": [
     "figma",
     "plugin",
     "design-system",
-    "auto-layout"
+    "vibe-coding"
   ],
   "author": "",
   "license": "MIT",

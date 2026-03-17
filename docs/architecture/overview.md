@@ -1,72 +1,60 @@
 # 시스템 아키텍처
 
 > Tryve Design System 전체 구조
+>
+> Last updated: 2026-03-17 | v3.0.0
 
 ## 개요
 
 ```
-┌─────────────────┐     ┌─────────────────┐
-│  Figma Plugin   │────▶│  Agent Server   │
-│  (TypeScript)   │◀────│  (Express)      │
-└─────────────────┘     └────────┬────────┘
-                                 │
-                                 ▼
-                        ┌─────────────────┐
-                        │   Claude API    │
-                        │   (Anthropic)   │
-                        └─────────────────┘
+┌─────────────────────────────────────┐
+│         Figma Plugins               │
+│                                     │
+│  ┌───────────┐  ┌───────────────┐   │
+│  │ TDS Tools │  │ TDS Docs      │   │
+│  │ (Renamer) │  │ (Doc Gen)     │   │
+│  └───────────┘  └───────────────┘   │
+│                                     │
+│  ┌───────────────────────────────┐  │
+│  │ Migrate to TDS                │  │
+│  └───────────────────────────────┘  │
+└─────────────────────────────────────┘
 ```
 
 ## 컴포넌트
 
-### Figma Plugin (`figma-plugins/tds/`)
+### TDS Tools (`figma-plugins/tds/`)
 
 - **역할**: Figma UI와 상호작용, 노드 조작
-- **기술**: TypeScript, Figma Plugin API
+- **기술**: TypeScript, Figma Plugin API, esbuild
 - **주요 모듈**:
-  - `handlers/`: UI 메시지 처리
-  - `naming/`: 네이밍 파이프라인
-  - `extractors/`: 노드 컨텍스트 추출
-  - `validators/`: 검증 로직
+  - `modules/renamer/` — 네이밍 정책 기반 자동 리네이밍 (2모드)
 
-### Agent Server (`packages/agent-server/`)
+### TDS Docs (`figma-plugins/tds-docs/`)
 
-- **역할**: Claude API 연동, AI 분석 수행
-- **기술**: Express, TypeScript
-- **포트**: localhost:3001
-- **주요 모듈**:
-  - `agents/naming/`: 네이밍 에이전트
-  - `agents/autolayout/`: 오토레이아웃 에이전트
+- **역할**: TDS 라이브러리 문서 자동 생성
 
-### Common (`packages/common/`)
+### Migrate to TDS (`figma-plugins/migrate-to-tds/`)
 
-- **역할**: 공유 타입, 스키마, 유틸리티
-- **주요 파일**:
-  - `types.ts`: 공통 타입 정의
-  - `naming-schema.ts`: zod 스키마
-  - `validators.ts`: 공통 검증 함수
+- **역할**: 기존 디자인 → TDS 컴포넌트 마이그레이션
 
 ## 데이터 흐름
 
-### 네이밍 파이프라인
+### Renamer 파이프라인
 
 ```
-1. [선택된 노드]
+1. [선택된 노드 / 페이지 전체]
       ↓
-2. [Direct Naming 시도]
-      ├── 성공 → 적용
-      └── 실패/Blacklist → AI로 위임
+2. [walkTree 순회]
+      ├── TDS 인스턴스 → skip
+      └── 비-TDS 노드 → 분석
             ↓
-3. [컨텍스트 추출]
-   (텍스트, 아이콘, 구조)
+3. [규칙 기반 이름 추론]
+   (컨텍스트 + 시맨틱 역할)
             ↓
-4. [Agent Server 요청]
+4. [before → after 목록 표시]
             ↓
-5. [Claude API 분석]
-            ↓
-6. [응답 검증 (zod)]
-            ↓
-7. [후처리 + 적용]
+5. [사용자 확인 → 일괄 적용]
 ```
 
 ## 의사결정 기록
@@ -75,5 +63,6 @@
 
 ## 관련 문서
 
-- [네이밍 스키마 상세](../specs/naming-schema.md)
-- [API Contract](../specs/api-contract.md)
+- [네이밍 정책](../../.claude/rules/naming-policy.md)
+- [QA 루브릭](../../.claude/rules/qa-rubric.md)
+- [기술 사양](../specs/technical-spec.md)

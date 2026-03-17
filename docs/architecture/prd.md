@@ -1,13 +1,13 @@
 # Project Overview
 
-> Tryve Design System Automator
+> Tryve Design System
 >
-> Last updated: 2026-01-17 | v2.1.1
+> Last updated: 2026-03-17 | v3.0.0
 
 ---
 
 > **Note**: 이 문서는 **SSOT가 아닙니다** (배경/맥락 설명용).
-> 현재 범위/제약/정의/규칙은 [`docs/specs/`](../specs/)를 참조하세요.
+> 현재 범위/제약/규칙은 [`docs/specs/`](../specs/)를 참조하세요.
 
 ---
 
@@ -17,40 +17,33 @@
 
 ## Summary
 
-Figma 디자인 파일을 자동으로 정리하고 디자인 시스템 규격에 맞게 변환하는 플러그인 + Agent Server.
+Figma 디자인 파일을 바이브코딩(Tailwind+React+shadcn)에 최적화하는 디자인 시스템 도구 모음.
 
 ### Target User
-- 디자이너: Figma 파일 정리
-- 개발자: 디자인 시스템 코드 생성
+- 디자이너: Figma 파일 정리, 네이밍 표준화
+- 개발자: 바이브코딩 시 1:1 매핑 가능한 디자인 시스템
 
 ### Mission
-> 5분의 스펙 작성이 수 시간의 리팩토링을 줄여준다.
+> TDS 적용 + QA 검증된 Figma 화면 → AI가 즉시 코드로 변환 가능
 
 ---
 
 ## Core Features
 
-### 1. AI Naming
-컴포넌트 레이어에 시맨틱 이름 자동 부여
+### 1. Renamer (TDS Tools 플러그인)
+네이밍 정책 v1.1 기반 자동 리네이밍
 
-```
-Frame 123 → Button/CTA/Primary/LG
-```
+- **Mode 1 — Product Design**: 사용처 화면의 프레임/레이어 리네이밍
+- **Mode 2 — TDS Library**: 컴포넌트 Display Name + 프로퍼티 점검
 
-### 2. AI Auto Layout
-적절한 Auto Layout 자동 적용
+### 2. Docs Generator (TDS Docs 플러그인)
+TDS 라이브러리 문서 자동 생성
 
-```
-Free layout → Vertical, gap=16, padding=16
-```
+### 3. Migrator (Migrate to TDS 플러그인)
+기존 디자인 → TDS 컴포넌트 마이그레이션
 
-### 3. Cleanup (전처리)
-- 의미 없는 래퍼 제거
-- 동일 이름 중첩 병합
-- 꺼진 레이어 삭제
-
-### 4. Componentize
-레이어를 재사용 가능한 컴포넌트로 변환
+### 4. QA Agent (`/qa` 커맨드)
+8축 루브릭 기반 바이브코딩 적합성 자동 점검
 
 ---
 
@@ -58,51 +51,17 @@ Free layout → Vertical, gap=16, padding=16
 
 | 영역 | 기술 |
 |------|------|
-| Figma Plugin | TypeScript, esbuild |
-| Agent Server | Express, Claude API |
-| Communication | postMessage, fetch |
-
----
-
-## Architecture
-
-```
-┌─────────────────────┐
-│   Figma Plugin      │
-│   (code.ts)         │
-└─────────┬───────────┘
-          │ postMessage
-┌─────────▼───────────┐
-│   UI (ui.html)      │
-│   (iframe)          │
-└─────────┬───────────┘
-          │ fetch
-┌─────────▼───────────┐
-│   Agent Server      │
-│   (localhost:3001)  │
-└─────────┬───────────┘
-          │ API call
-┌─────────▼───────────┐
-│   Claude API        │
-└─────────────────────┘
-```
-
----
-
-## Success Metrics
-
-- [ ] 네이밍 정확도 90% 이상
-- [ ] Auto Layout 적용 후 시각적 변화 없음
-- [ ] 처리 시간 10초 이내 (단일 화면)
+| Figma Plugins | TypeScript, esbuild |
+| QA | Claude Code `/qa` 커맨드 + Figma MCP |
 
 ---
 
 ## Constraints
 
 ### 네이밍 규칙
-- `.ai/design-system/naming-rules.md` 참조
-- Layout, Content 타입 금지
-- Purpose 필수
+- `.claude/rules/naming-policy.md` 참조
+- Container/Wrapper/Box/View/Div 금지
+- Title Case 공백 필수
 
 ### 기술 제약
 - Figma 플러그인은 외부 API 직접 호출 불가
@@ -110,26 +69,10 @@ Free layout → Vertical, gap=16, padding=16
 
 ---
 
-## Roadmap
-
-### Phase 1 (현재)
-- 기본 AI 네이밍
-- AI Auto Layout
-- 전처리 도구
-
-### Phase 2 (예정)
-- 디자인 토큰 추출
-- 컴포넌트 코드 생성
-- 디자인 시스템 자동 구축
-
----
-
----
-
 ## 관련 문서
 
 | 문서 | 역할 |
 |------|------|
-| [SPEC.md](SPEC.md) | 기술 사양 및 API 명세 |
-| [MEMORY.md](MEMORY.md) | 의사결정 기록 |
-| [design-system/naming-rules.md](design-system/naming-rules.md) | 네이밍 규칙 |
+| [../specs/technical-spec.md](../specs/technical-spec.md) | 기술 사양 |
+| [../../.claude/rules/naming-policy.md](../../.claude/rules/naming-policy.md) | 네이밍 정책 |
+| [../../.claude/rules/qa-rubric.md](../../.claude/rules/qa-rubric.md) | QA 루브릭 |

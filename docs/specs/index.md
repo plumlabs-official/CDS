@@ -1,14 +1,14 @@
 # Specs Index (SSOT)
 
-> Single Source of Truth - 모든 규칙/사양/계약의 정답 위치
+> Single Source of Truth - 모든 규칙/사양의 정답 위치
 >
-> Last updated: 2026-01-17
+> Last updated: 2026-03-17
 
 ---
 
 ## SSOT 원칙
 
-- **규칙/사양/계약이 바뀌면 이 폴더만 수정**
+- **규칙/사양이 바뀌면 이 폴더만 수정**
 - `.ai/`, `prompts/`에는 본문 복사 금지 (링크/요약만)
 - 중요 변경은 [ADR](../architecture/ADRs/)로 기록
 
@@ -16,22 +16,21 @@
 
 ## 문서 목록
 
-### Naming
+### Naming & QA
 | 문서 | 설명 |
 |------|------|
-| [naming-schema.md](naming-schema.md) | 네이밍 규칙 (타입, 계층, 금지사항) |
+| [naming-policy.md](../../.claude/rules/naming-policy.md) | 네이밍 정책 v1.1 (SSOT) |
+| [qa-rubric.md](../../.claude/rules/qa-rubric.md) | 바이브코딩 QA 루브릭 v1.0 |
 
-### Layout
+### Design Tokens
 | 문서 | 설명 |
 |------|------|
-| [autolayout-rules.md](autolayout-rules.md) | 오토레이아웃 적용 규칙 |
 | [token-structure.md](token-structure.md) | 디자인 토큰 구조 |
 
-### API
+### Technical
 | 문서 | 설명 |
 |------|------|
-| [api-contract.md](api-contract.md) | Agent Server API 계약 |
-| [technical-spec.md](technical-spec.md) | 기술 사양 전체 |
+| [technical-spec.md](technical-spec.md) | 기술 사양 (플러그인 아키텍처) |
 
 ### Figma/MCP
 | 문서 | 설명 |
@@ -45,10 +44,10 @@
 
 ```bash
 # SSOT 위치
-docs/specs/
+docs/specs/          # 기술 사양
+.claude/rules/       # 네이밍 정책, QA 루브릭
 
 # 규칙 변경 시
-1. docs/specs/*.md 수정
+1. 해당 SSOT 파일 수정
 2. (필요시) ADR 작성: docs/architecture/ADRs/ADR-xxxx-*.md
-3. prompts/는 링크만 업데이트
 ```

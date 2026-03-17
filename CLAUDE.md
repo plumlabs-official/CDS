@@ -2,19 +2,20 @@
 
 > 이 파일은 Claude Code 세션 시작 시 자동으로 로드됩니다.
 >
-> Last updated: 2026-01-17 | v2.5.0
+> Last updated: 2026-03-17 | v3.0.0
 
 ## Quick Reference
 
 | 용도 | 파일 |
 |------|------|
 | 프로젝트 헌법 | `CONSTITUTION.md` |
-| 기술 사양/API | `docs/specs/technical-spec.md` |
+| 기술 사양 | `docs/specs/technical-spec.md` |
 | SSOT 인덱스 | `docs/specs/index.md` |
 | 버그 패턴 (WHAT) | `docs/architecture/lessons-learned.md` |
 | 반복 작업 패턴 | `.ai/RECIPES.md` |
 | 현재 상태 | `.ai/SESSION.md` |
-| 네이밍 규칙 | `docs/specs/naming-schema.md` |
+| 네이밍 정책 | `.claude/rules/naming-policy.md` |
+| QA 루브릭 | `.claude/rules/qa-rubric.md` |
 | **완료 기록** | `.claude/commands/record.md` |
 
 ## 문서 역할 경계 (SSOT)
@@ -39,10 +40,8 @@
 
 | 요청 유형 | 문서 | 읽을 범위 |
 |----------|------|----------|
-| Cleanup/병합 작업 | `docs/architecture/lessons-learned.md` | "Cleanup 버그 패턴" 섹션 |
-| Naming 작업 | `docs/specs/naming-schema.md` | 전체 |
-| AI Agent/서버 수정 | `docs/architecture/lessons-learned.md` | "AI Agent 버그 패턴" 섹션 |
-| **Figma 속성 추출** | `docs/architecture/lessons-learned.md` | "Figma 속성 추출 버그 패턴" 섹션 |
+| Naming/Renamer 작업 | `.claude/rules/naming-policy.md` | 전체 |
+| QA 점검 | `.claude/rules/qa-rubric.md` | 전체 |
 | **TDS 컴포넌트 논의/리뷰** | TDS Figma 라이브러리 (fileKey: `H36eNEd6o7ZTv4R7VcyLf2`) | 해당 컴포넌트 노드 직접 확인 |
 | 빌드/디버깅 | `.ai/RECIPES.md` | "빌드", "디버깅" 섹션 |
 | 문서 구조 변경 | `CONSTITUTION.md` | "문서 관리 원칙" 섹션 |
@@ -96,18 +95,12 @@
 
 > 근거: [lessons-learned.md#claude-code-커맨드-버그-패턴](docs/architecture/lessons-learned.md#claude-code-커맨드-버그-패턴)
 
-### Cleanup 작업 시 (cleanup.ts 수정 전)
-- [ ] `getNodeByIdAsync` 사용 (getNodeById 금지, dynamic-page 모드)
-- [ ] 캐시 clear는 진입점 함수에서만 (반복 함수 내부 금지)
-- [ ] 노드 삭제 전 필요한 속성(.name 등) 미리 저장
-- [ ] children 배열 복사 후 순회
-- [ ] 좌표 계산에서 절대/상대 구분
+### Naming/Renamer 작업 시
+> 상세: `.claude/rules/naming-policy.md`
 
-### Naming 작업 시
-> 상세: `docs/specs/naming-schema.md`
-
-- [ ] Layout, Content 타입 금지
-- [ ] 비즈니스 상태 추론 금지 (Authenticated, Empty 등)
+- [ ] Title Case 공백 필수 (`Chat Content` O, `chatContent` X)
+- [ ] 금지 접미사 (Container/Wrapper/Box/View/Div) 사용 금지
+- [ ] 대체 어휘: Content > Area > Group 순서
 
 ### TDS 컴포넌트 수정 제안 시 (필수)
 > 근거: [lessons-learned.md#tds-컴포넌트-정합성-미확인-패턴](docs/architecture/lessons-learned.md#tds-컴포넌트-정합성-미확인-패턴)
@@ -117,24 +110,10 @@
 - [ ] **기존 존재 여부 확인** — `get_figma_data` 결과를 먼저 읽고, 이미 있는 것을 재확인
 - [ ] **"좋습니다" 금지** — 영향도 확인 없이 동의하지 말 것
 
-### Figma 노드 속성 추출 시 (handler.ts 수정)
-> 근거: [lessons-learned.md#figma-속성-추출-버그-패턴](docs/architecture/lessons-learned.md#figma-속성-추출-버그-패턴)
-
-- [ ] **디버그 로그 먼저** - 추출 결과 확인용 로그 추가 후 시작
-- [ ] **실제 구조 확인** - 버튼 = FRAME > RECT 가정 금지, 재귀 탐색 필요
-- [ ] **2레벨 이상 탐색** - fills/strokes가 손자 노드에 있을 수 있음
-- [ ] **작은 단위 테스트** - 빌드 → Figma 테스트 → 수정 반복
-
-### AI Agent 작업 시 (agent-server 수정)
-> 상세: `docs/architecture/lessons-learned.md` → "AI Agent 버그 패턴"
-
-- [ ] max_tokens: 32768 (100+ 노드)
-- [ ] 스트리밍 필수
-
 ### 빌드 후 테스트 전
 > 상세: `.ai/RECIPES.md` → "빌드"
 
-- [ ] `npm run build:all` (통합 빌드)
+- [ ] `npm run build` (플러그인 빌드)
 - [ ] **플러그인 리로드 확인** (Figma에서 Reload)
 
 ### 디버깅 시
@@ -192,6 +171,3 @@
 - 진행 중인 작업
 - 다음 단계 (compact 후 이어서 진행할 내용)
 
-## Agent Server
-
-> 상세: `.ai/RECIPES.md` → "빌드", `docs/specs/api-contract.md`

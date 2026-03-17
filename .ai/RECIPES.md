@@ -2,22 +2,18 @@
 
 > AI용 워크플로우 - 링크 중심, SSOT 복사 금지
 >
-> Last updated: 2026-01-17
+> Last updated: 2026-03-17
 
 ---
 
 ## 빌드 명령어
 
 ```bash
-# 통합 빌드
-npm run build:all
+# 플러그인 빌드
+npm run build
 
-# 개별 빌드
-npm run build:plugin   # Figma 플러그인
-npm run build:server   # Agent Server
-
-# 서버 실행
-npm run server         # localhost:3001
+# 플러그인 watch 모드
+npm run watch
 ```
 
 ---
@@ -25,9 +21,6 @@ npm run server         # localhost:3001
 ## 디버깅
 
 ```bash
-# API 헬스체크
-curl localhost:3001/health
-
 # 플러그인 콘솔
 Figma > Plugins > Development > Open Console
 ```
@@ -38,9 +31,9 @@ Figma > Plugins > Development > Open Console
 
 | 용도 | 문서 |
 |------|------|
-| 네이밍 규칙 | [docs/specs/naming-schema.md](../docs/specs/naming-schema.md) |
-| 오토레이아웃 규칙 | [docs/specs/autolayout-rules.md](../docs/specs/autolayout-rules.md) |
-| API 계약 | [docs/specs/api-contract.md](../docs/specs/api-contract.md) |
+| 네이밍 정책 | [.claude/rules/naming-policy.md](../.claude/rules/naming-policy.md) |
+| QA 루브릭 | [.claude/rules/qa-rubric.md](../.claude/rules/qa-rubric.md) |
+| 토큰 구조 | [docs/specs/token-structure.md](../docs/specs/token-structure.md) |
 | 버그 패턴 | [docs/architecture/lessons-learned.md](../docs/architecture/lessons-learned.md) |
 
 ---
@@ -52,7 +45,7 @@ Figma > Plugins > Development > Open Console
 
 - 상세 내용
 
-Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 ```
 
 ---
@@ -60,7 +53,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 ## 체크리스트
 
 ### PR 전
-- [ ] `npm run build:all` 성공
+- [ ] `npm run build` 성공
 - [ ] Figma 플러그인 테스트 완료
 
 ### 버그 수정 후

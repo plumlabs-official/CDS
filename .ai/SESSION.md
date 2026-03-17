@@ -44,6 +44,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| **Phase 2-4 완료: 문서 수정 + 레거시 삭제 + 빌드 검증** | 11문서 수정 + 16항목 삭제 + code.ts 1980→120줄 + 빌드 22.6kb (90%↓). 깨진 참조 0건 |
 | **Renamer Phase 1 구현 완료** (/director) | renamer/ 4파일 + code.ts 핸들러. 빌드 성공 219.2kb. Phase 2~3 다음 세션 |
 | **전체 정리 플랜 v4.0 확정** (/team Ralph 2R Amb 0) | 삭제 16건 + 수정 11건 + 신규 4건. 문서 의존성 체인 전수 추적. Phase 1~4 실행 순서 |
 | **레거시 재판정: 유지 5→2개** (/team Ralph 2R) | Detach/DeleteHidden/Groups→Frames 삭제. Docs Generator+Migrator만 유지 |
@@ -57,11 +58,11 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 ### 잔여
 
-- **Renamer 플러그인 구현** — `figma-plugins/tds/src/modules/renamer/` 4파일 생성
 - 리서치 Phase A (RS1/RS2/RS3) 미실행
 - 리서치 Phase B (RS4/RS5/RS6) 미실행
 - `/qa` 검증 3건 (채팅/챌린지진행/카드4종) + 감점 캘리브레이션
 - 기존 화면 Container→Content/Area 마이그레이션
+- Figma에서 TDS Tools 플러그인 리로드 + Renamer UI 테스트
 
 ---
 
@@ -515,13 +516,12 @@ TabBar Icon (COMPONENT_SET) — 에셋
 
 ```
 TDS/
-├── packages/
-│   ├── common/          (@tryve/common)
-│   └── agent-server/    (@tryve/agent-server)
 ├── figma-plugins/
-│   ├── tds/             (@tryve/figma-plugin, 메인 플러그인)
-│   └── migrate-to-tds/
-└── package.json         (tds, workspaces)
+│   ├── tds/               TDS Tools (Renamer)
+│   ├── tds-docs/          문서 생성기
+│   └── migrate-to-tds/    TDS 마이그레이션
+├── .claude/rules/         네이밍 정책 + QA 루브릭
+└── package.json           (v3.0.0)
 ```
 
 ### 다음 할 일
@@ -937,8 +937,8 @@ TDS/
 ### 빌드 명령어
 
 ```bash
-npm run build:all    # 통합 빌드
-npm run server       # Agent Server (localhost:3001)
+npm run build    # Figma 플러그인 빌드
+npm run watch    # watch 모드
 ```
 
 ### 플랜 파일
