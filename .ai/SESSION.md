@@ -44,6 +44,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| **naming-policy v2.0 클린 재작성** | 4회 개정 누적 모순 7건 해소. Content 완전 제거(Main Content→Body). CTA 금지. 복수형 제거. 역할명/Area/Group 3개만. ALLOWED_ROLES Content→Body |
 | **naming-policy v1.2.1** (/director) | 피드백 5건: 복수형 제거 + 사용처 규칙 + 접미사 중복 금지 + §2/§3/§9 예시 정합성 + Sheet→Drawer + INSTANCE skip + isTDSInstance 방어 + toTitleCase |
 | **naming-policy v1.2** (/director) | Content 래퍼 접미사 폐기→Area 통일. 래퍼 우선순위: 역할명>Area. toTitleCase 추가. determineRole Content 폴백 제거 |
 | **Figma 구조 리뷰 (혼합)** | 챌린지 상세: Screen scroll→Body scroll 전환 + Top Bar 고정 + Navbar를 Body Content 안으로 이동. 컴포넌트화 기준 논의 — Title+Subtitle 반복 패턴은 Content Header 인스턴스 사용 권장 |

@@ -36,7 +36,7 @@ export const SPECIAL_CHARS_IN_NAMES = /[:\u2199\u2198\u2197\u2196↳↗↘↙]/;
 // ============================================
 
 export const ALLOWED_ROLES = [
-  'Screen', 'Content', 'Header', 'Footer', 'Section', 'Area',
+  'Screen', 'Body', 'Header', 'Footer', 'Section', 'Area',
   'Sidebar', 'Scroll Area', 'List', 'Grid', 'Navbar', 'Tab Bar',
   'Input', 'Form', 'Card', 'Group',
 ];

@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-17 16:40:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: naming-policy v2.0 클린 재작성 — 4회 개정 누적 모순 7건 해소. Content 완전 제거(Main Content→Body). CTA 금지. ALLOWED_ROLES Content→Body. 빌드 성공.
+Next-TODO: Figma 리로드 → Renamer 테스트 → Container Progress 등 레거시 수정
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-17 16:10:00
 Project: ~/Project/TDS
 Agent: Claude
