@@ -44,6 +44,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| **Renamer v1.1** | 1:1 래퍼 감지+Unwrap UI + 시맨틱 역할(Area/Group/Content) 자동 할당 + PascalCase→Title Case Step 2.5 수정. Screen Onboarding QA 78.5→91.5 PASS |
 | **Phase 2-4 완료: 문서 수정 + 레거시 삭제 + 빌드 검증** | 11문서 수정 + 16항목 삭제 + code.ts 1980→120줄 + 빌드 22.6kb (90%↓). 깨진 참조 0건 |
 | **Renamer Phase 1 구현 완료** (/director) | renamer/ 4파일 + code.ts 핸들러. 빌드 성공 219.2kb. Phase 2~3 다음 세션 |
 | **전체 정리 플랜 v4.0 확정** (/team Ralph 2R Amb 0) | 삭제 16건 + 수정 11건 + 신규 4건. 문서 의존성 체인 전수 추적. Phase 1~4 실행 순서 |

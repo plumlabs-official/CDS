@@ -10,6 +10,8 @@ import {
   AUTO_GENERATED_PATTERNS,
   SPECIAL_CHARS_IN_NAMES,
   ALLOWED_ROLES,
+  TEXT_ROLES,
+  IMAGE_TYPES,
   STRUCTURAL_LAYER_NAMES,
   KOREAN_LABEL_MAP,
   SHADCN_COMPONENTS,
@@ -23,6 +25,7 @@ import {
   pascalToTitleCase,
   allChildrenSameType,
   hasOnlyLayoutProps,
+  isSingleChildWrapper,
 } from './utils';
 
 import {
@@ -42,10 +45,18 @@ export interface RenameEntry {
   reason: string;
 }
 
+export interface WrapperWarning {
+  nodeId: string;
+  nodeName: string;
+  childName: string;
+  reason: string;
+}
+
 export interface RenamerResult {
   mode: 'product' | 'library';
   entries: RenameEntry[];
   propertyIssues: PropertyIssue[];
+  wrapperWarnings: WrapperWarning[];
   skipped: number;
   total: number;
 }
@@ -55,12 +66,13 @@ export interface RenamerResult {
 // ============================================
 
 export function analyzeProductDesign(): RenamerResult {
-  const targets = getTargetNodes();
-  const entries: RenameEntry[] = [];
-  let skipped = 0;
-  let total = 0;
+  var targets = getTargetNodes();
+  var entries: RenameEntry[] = [];
+  var wrapperWarnings: WrapperWarning[] = [];
+  var skipped = 0;
+  var total = 0;
 
-  for (const node of walkTree(targets)) {
+  for (var node of walkTree(targets)) {
     total++;
 
     // TDS 인스턴스 내부는 skip
@@ -75,7 +87,7 @@ export function analyzeProductDesign(): RenamerResult {
       continue;
     }
 
-    const newName = computeProductName(node);
+    var newName = computeProductName(node);
     if (newName && newName !== node.name) {
       entries.push({
         nodeId: node.id,
@@ -84,15 +96,26 @@ export function analyzeProductDesign(): RenamerResult {
         reason: getRenameReason(node.name, newName),
       });
     }
+
+    // 1:1 래퍼 감지
+    if (isSingleChildWrapper(node)) {
+      var child = (node as FrameNode).children[0];
+      wrapperWarnings.push({
+        nodeId: node.id,
+        nodeName: node.name,
+        childName: child.name,
+        reason: '1:1 래퍼 — ' + child.name + '을 직접 배치 가능',
+      });
+    }
   }
 
-  return { mode: 'product', entries, propertyIssues: [], skipped, total };
+  return { mode: 'product', entries, propertyIssues: [], wrapperWarnings: wrapperWarnings, skipped: skipped, total: total };
 }
 
-export function applyProductRenames(entries: RenameEntry[]): number {
+export async function applyProductRenames(entries: RenameEntry[]): Promise<number> {
   let applied = 0;
   for (const entry of entries) {
-    const node = figma.getNodeById(entry.nodeId);
+    const node = await figma.getNodeByIdAsync(entry.nodeId);
     if (node && 'name' in node) {
       (node as SceneNode).name = entry.after;
       applied++;
@@ -154,18 +177,85 @@ export function analyzeTDSLibrary(): RenamerResult {
     }
   }
 
-  return { mode: 'library', entries, propertyIssues, skipped: 0, total };
+  return { mode: 'library', entries, propertyIssues, wrapperWarnings: [], skipped: 0, total };
+}
+
+/**
+ * 1:1 래퍼 프레임 언래핑 — 자식을 부모로 이동 후 빈 래퍼 삭제
+ */
+export async function unwrapSingleChildWrappers(nodeIds: string[]): Promise<number> {
+  var unwrapped = 0;
+  // 역순 처리 — 인덱스 꼬임 방지
+  var reversed = nodeIds.slice().reverse();
+  for (var i = 0; i < reversed.length; i++) {
+    var id = reversed[i];
+    var node = await figma.getNodeByIdAsync(id);
+    if (!node || node.type !== 'FRAME') continue;
+    var frame = node as FrameNode;
+    if (frame.children.length !== 1) continue;
+
+    var parent = frame.parent;
+    if (!parent || !('children' in parent)) continue;
+
+    var child = frame.children[0];
+    var parentChildren = (parent as FrameNode).children;
+    var wrapperIndex = -1;
+    for (var j = 0; j < parentChildren.length; j++) {
+      if (parentChildren[j].id === frame.id) { wrapperIndex = j; break; }
+    }
+    if (wrapperIndex === -1) continue;
+
+    // 자식 위치를 래퍼 기준으로 보정 (non-AL 부모에서만)
+    var parentIsAL = 'layoutMode' in parent && (parent as FrameNode).layoutMode !== 'NONE';
+    if (!parentIsAL) {
+      child.x = child.x + frame.x;
+      child.y = child.y + frame.y;
+    }
+
+    // 자식을 부모로 이동 (래퍼 자리에)
+    (parent as FrameNode).insertChild(wrapperIndex, child);
+
+    // 빈 래퍼 삭제
+    frame.remove();
+    unwrapped++;
+  }
+  return unwrapped;
 }
 
 // ============================================
 // 내부 로직
 // ============================================
 
+/** 노드의 구조를 분석하여 시맨틱 역할 접미사 반환 */
+function determineRole(node: SceneNode): string {
+  if ('children' in node && allChildrenSameType(node)) return 'Group';
+  if (hasOnlyLayoutProps(node)) return 'Area';
+  return 'Content';
+}
+
+/** 시맨틱 역할 접미사가 필요한지 판정 */
+function needsRoleSuffix(name: string, node: SceneNode): boolean {
+  // FRAME 타입만 (TEXT, INSTANCE는 역할 접미사 불필요)
+  if (node.type !== 'FRAME') return false;
+
+  // 단어 1개뿐인 경우만
+  if (name.split(/\s+/).length !== 1) return false;
+
+  // 이미 유효한 역할명이면 skip
+  var lowerName = name.toLowerCase();
+  var allRoles = ALLOWED_ROLES.concat(TEXT_ROLES).concat(IMAGE_TYPES);
+  for (var i = 0; i < allRoles.length; i++) {
+    if (allRoles[i].toLowerCase() === lowerName) return false;
+  }
+
+  return true;
+}
+
 function computeProductName(node: SceneNode): string | null {
-  const name = node.name;
+  var name = node.name;
 
   // Step 1: 한글 → 영문
-  const koreanMatch = KOREAN_LABEL_MAP[name.trim()];
+  var koreanMatch = KOREAN_LABEL_MAP[name.trim()];
   if (koreanMatch) return koreanMatch;
 
   // Step 2: 자동 생성명 추론
@@ -173,8 +263,14 @@ function computeProductName(node: SceneNode): string | null {
     return inferName(node);
   }
 
+  // Step 2.5: 시맨틱 역할 부족 — 단어 1개 + 역할 아님 → 역할 접미사 추가
+  if (needsRoleSuffix(name, node)) {
+    var role = determineRole(node);
+    return pascalToTitleCase(name) + ' ' + role;
+  }
+
   // Step 3: 금지 접미사 대체
-  const bannedResult = replaceBannedSuffix(node, name);
+  var bannedResult = replaceBannedSuffix(node, name);
   if (bannedResult) return bannedResult;
 
   // Step 4: 슬래시 → 공백
@@ -183,7 +279,7 @@ function computeProductName(node: SceneNode): string | null {
   }
 
   // Step 5: PascalCase → Title Case
-  const titleCased = pascalToTitleCase(name);
+  var titleCased = pascalToTitleCase(name);
   if (titleCased !== name) return titleCased;
 
   // Step 6: 특수문자 제거
@@ -216,8 +312,7 @@ function inferName(node: SceneNode): string {
 
     // 자식 n개 → 부모 컨텍스트 + 역할
     if (children.length > 1) {
-      if (allChildrenSameType(node)) return `${prefix} Group`;
-      return `${prefix} Content`;
+      return prefix + ' ' + determineRole(node);
     }
   }
 
@@ -242,13 +337,7 @@ function replaceBannedSuffix(node: SceneNode, name: string): string | null {
     const context = remaining || inferContext(node) || 'Main';
 
     // 대체 어휘 선택
-    if ('children' in node && allChildrenSameType(node)) {
-      return `${context} Group`;
-    }
-    if (hasOnlyLayoutProps(node)) {
-      return `${context} Area`;
-    }
-    return `${context} Content`;
+    return context + ' ' + determineRole(node);
   }
 
   return null;

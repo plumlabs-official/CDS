@@ -10,6 +10,7 @@ import {
   analyzeProductDesign,
   applyProductRenames,
   analyzeTDSLibrary,
+  unwrapSingleChildWrappers,
   RenamerResult,
 } from './modules/renamer/renamer';
 
@@ -63,8 +64,17 @@ function handleUIMessage(msg: { type: string; [key: string]: any }) {
 
     case 'apply-renames':
       if (msg.entries) {
-        const count = applyProductRenames(msg.entries);
-        figma.notify(`✅ ${count}건 리네이밍 완료`);
+        applyProductRenames(msg.entries).then(function(count) {
+          figma.notify('✅ ' + count + '건 리네이밍 완료');
+        });
+      }
+      break;
+
+    case 'unwrap-wrappers':
+      if (msg.nodeIds) {
+        unwrapSingleChildWrappers(msg.nodeIds).then(function(count) {
+          figma.notify('✅ ' + count + '건 래퍼 언래핑 완료');
+        });
       }
       break;
 
@@ -88,10 +98,14 @@ function handleRenameProduct() {
     type: 'rename-preview',
     mode: 'product',
     entries: result.entries,
+    wrapperWarnings: result.wrapperWarnings,
     skipped: result.skipped,
     total: result.total,
   });
-  figma.notify(`${result.entries.length}건 변경 제안 (${result.skipped}건 TDS skip)`, { timeout: 3000 });
+  var warnCount = result.wrapperWarnings.length;
+  var msg = result.entries.length + '건 변경 제안 (' + result.skipped + '건 TDS skip)';
+  if (warnCount > 0) msg += ' + ' + warnCount + '건 래퍼 경고';
+  figma.notify(msg, { timeout: 3000 });
 }
 
 function handleRenameTDS() {

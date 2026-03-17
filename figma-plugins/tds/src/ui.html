@@ -153,6 +153,50 @@
     .severity-major { background: #fee2e2; color: #dc2626; }
     .severity-minor { background: #fef9c3; color: #ca8a04; }
     .severity-warning { background: #f3f4f6; color: #6b7280; }
+
+    .wrapper-section {
+      margin-top: 8px;
+      border-top: 1px solid #eee;
+      padding-top: 8px;
+    }
+
+    .wrapper-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #ca8a04;
+      margin-bottom: 4px;
+    }
+
+    .wrapper-item {
+      padding: 4px 8px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wrapper-item input[type="checkbox"] {
+      margin: 0;
+    }
+
+    .wrapper-item .wrapper-label {
+      color: #666;
+    }
+
+    .wrapper-item .wrapper-child {
+      color: #ca8a04;
+      font-weight: 500;
+    }
+
+    .btn-warning {
+      background: #fef9c3;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .btn-warning:hover:not(:disabled) {
+      background: #fde68a;
+    }
   </style>
 </head>
 <body>
@@ -176,6 +220,13 @@
       </button>
     </div>
     <div class="preview-list" id="preview-list"></div>
+    <div class="wrapper-section" id="wrapper-section" style="display:none;">
+      <div class="wrapper-section-title">Wrapper Warnings</div>
+      <div id="wrapper-list"></div>
+      <button class="btn-warning" id="btn-unwrap" style="width: auto; padding: 6px 12px; margin-top: 6px;">
+        Unwrap Selected
+      </button>
+    </div>
   </div>
 
   <div class="status" id="status"></div>
@@ -194,7 +245,20 @@
       if (window._pendingEntries) {
         parent.postMessage({ pluginMessage: { type: 'apply-renames', entries: window._pendingEntries } }, '*');
         document.getElementById('preview-container').classList.remove('active');
+        document.getElementById('wrapper-section').style.display = 'none';
         window._pendingEntries = null;
+      }
+    });
+
+    document.getElementById('btn-unwrap').addEventListener('click', function() {
+      var checkboxes = document.querySelectorAll('#wrapper-list input[type="checkbox"]:checked');
+      var nodeIds = [];
+      for (var i = 0; i < checkboxes.length; i++) {
+        nodeIds.push(checkboxes[i].getAttribute('data-node-id'));
+      }
+      if (nodeIds.length > 0) {
+        parent.postMessage({ pluginMessage: { type: 'unwrap-wrappers', nodeIds: nodeIds } }, '*');
+        document.getElementById('wrapper-section').style.display = 'none';
       }
     });
 
@@ -217,6 +281,7 @@
       list.innerHTML = '';
 
       if (msg.mode === 'product') {
+        var warnCount = (msg.wrapperWarnings && msg.wrapperWarnings.length) || 0;
         title.textContent = msg.entries.length + ' changes (' + msg.skipped + ' TDS skipped)';
         window._pendingEntries = msg.entries;
         applyBtn.style.display = 'inline-block';
@@ -230,6 +295,26 @@
             '<div class="preview-after">' + escapeHtml(entry.after) + '</div>' +
             '<div class="preview-reason">' + escapeHtml(entry.reason) + '</div>';
           list.appendChild(item);
+        }
+
+        // Wrapper warnings
+        var wrapperSection = document.getElementById('wrapper-section');
+        var wrapperList = document.getElementById('wrapper-list');
+        wrapperList.innerHTML = '';
+        if (warnCount > 0) {
+          for (var j = 0; j < msg.wrapperWarnings.length; j++) {
+            var warn = msg.wrapperWarnings[j];
+            var wItem = document.createElement('div');
+            wItem.className = 'wrapper-item';
+            wItem.innerHTML =
+              '<input type="checkbox" checked data-node-id="' + escapeHtml(warn.nodeId) + '">' +
+              '<span class="wrapper-label">' + escapeHtml(warn.nodeName) + ' → </span>' +
+              '<span class="wrapper-child">' + escapeHtml(warn.childName) + ' 직접 배치</span>';
+            wrapperList.appendChild(wItem);
+          }
+          wrapperSection.style.display = 'block';
+        } else {
+          wrapperSection.style.display = 'none';
         }
       } else if (msg.mode === 'library') {
         var total = msg.entries.length + (msg.propertyIssues ? msg.propertyIssues.length : 0);

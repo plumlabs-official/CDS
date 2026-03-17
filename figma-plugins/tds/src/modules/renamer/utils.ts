@@ -134,3 +134,47 @@ export function hasOnlyLayoutProps(node: SceneNode): boolean {
   const hasChildren = frame.children.length > 0;
   return noFills && noEffects && hasChildren;
 }
+
+/**
+ * 1:1 래퍼 감지: 자식 1개, 패딩/배경/오프셋 없는 프레임
+ * 삭제 가능한 불필요 래퍼인지 판정
+ */
+export function isSingleChildWrapper(node: SceneNode): boolean {
+  if (node.type !== 'FRAME') return false;
+  var frame = node as FrameNode;
+
+  // 자식 1개 필수
+  if (frame.children.length !== 1) return false;
+
+  // 배경 없음
+  var fills = frame.fills;
+  var hasFills = fills !== figma.mixed
+    && (fills as Paint[]).length > 0
+    && (fills as Paint[]).some(function(f: Paint) { return f.visible !== false; });
+  if (hasFills) return false;
+
+  // 이펙트 없음
+  if (frame.effects.length > 0) return false;
+
+  // 스트로크 없음
+  if (frame.strokes.length > 0) return false;
+
+  // 패딩 없음 (Auto Layout인 경우)
+  if (frame.layoutMode !== 'NONE') {
+    if (frame.paddingTop > 0 || frame.paddingRight > 0
+      || frame.paddingBottom > 0 || frame.paddingLeft > 0) {
+      return false;
+    }
+  }
+
+  // 자식 위치 오프셋 없음
+  var child = frame.children[0];
+  if (child.x > 2 || child.y > 2) return false;
+
+  // 자식이 부모와 동일 사이즈 (±2px 허용)
+  var sameWidth = Math.abs(frame.width - child.width) <= 2;
+  var sameHeight = Math.abs(frame.height - child.height) <= 2;
+  if (!sameWidth || !sameHeight) return false;
+
+  return true;
+}

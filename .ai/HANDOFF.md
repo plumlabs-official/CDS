@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-17 14:07:00
+Project: ~/Project/TDS
+Agent: 혼합
+Summary: Renamer v1.1 — isSingleChildWrapper()+unwrap UI, determineRole() 공용 함수, needsRoleSuffix() Step 2.5, PascalCase 변환 수정. Screen Onboarding QA 78.5→91.5 PASS (사용자 Figma 적용).
+Next-TODO: 나머지 온보딩 화면 Renamer 일괄 적용 + /qa 검증
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-17 13:01:00
 Project: ~/Project/TDS
 Agent: Claude
