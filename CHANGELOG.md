@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- naming-policy v1.2 — Content 래퍼 접미사 폐기 + Area 통일 + 래퍼 우선순위(역할명>복수형>Area) + toTitleCase 추가
+- naming-policy v1.2.1 — 피드백 5건 반영: 복수형 제거 + 사용처 [목적]+[타입] 규칙 + 접미사 중복 금지 + 예시 정합성 + Sheet→Drawer + isTDSInstance 에러 방어
+- naming-policy v1.2 — Content 래퍼 접미사 폐기 + Area 통일 + 래퍼 우선순위(역할명>Area) + toTitleCase 추가
 - Renamer 리팩토링 — 파이프라인 누적 변환 + 역할 중복 방지(Area Area) + ES6 var 통일 + require→import + 레거시 제거
 
 ### Added

@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-17 16:10:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: naming-policy v1.2.1 — 피드백 5건 반영 + Sheet→Drawer LEGACY_NAME_MAP + INSTANCE skip + isTDSInstance componentProperties 에러 방어 + toTitleCase. Gate 7/7 PASS.
+Next-TODO: Figma 리로드 → Renamer 테스트 → 나머지 화면 적용
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-17 15:40:00
 Project: ~/Project/TDS
 Agent: Claude

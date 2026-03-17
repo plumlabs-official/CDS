@@ -61,7 +61,7 @@ export const SHADCN_COMPONENTS = [
   'Dropdown Menu', 'Form', 'Hover Card', 'Input', 'Input OTP',
   'Label', 'Menubar', 'Navigation Menu', 'Pagination', 'Popover',
   'Progress', 'Radio Group', 'Resizable', 'Scroll Area', 'Select',
-  'Separator', 'Sheet', 'Sidebar', 'Skeleton', 'Slider', 'Sonner',
+  'Separator', 'Drawer', 'Sidebar', 'Skeleton', 'Slider', 'Sonner',
   'Switch', 'Table', 'Tabs', 'Textarea', 'Toast', 'Toggle',
   'Toggle Group', 'Tooltip',
 ];
@@ -114,6 +114,14 @@ export const STRUCTURAL_LAYER_NAMES: Record<string, string> = {
 // ============================================
 // 한글 레이블 → 영문 (constants.ts에서 이전)
 // ============================================
+
+// ============================================
+// 레거시 컴포넌트명 → 현재 공식명 매핑
+// ============================================
+
+export const LEGACY_NAME_MAP: Record<string, string> = {
+  'Sheet': 'Drawer',
+};
 
 export const KOREAN_LABEL_MAP: Record<string, string> = {
   '홈': 'Home', '라운지': 'Lounge', '마이페이지': 'My Page',

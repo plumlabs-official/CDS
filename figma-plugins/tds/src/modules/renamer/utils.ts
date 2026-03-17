@@ -15,11 +15,16 @@ export function isTDSInstance(node: SceneNode): boolean {
   try {
     if (instance.mainComponent) return true;
   } catch (e) {
-    // 외부 라이브러리 접근 실패
+    // 외부 라이브러리 접근 실패 또는 컴포넌트 에러
   }
 
-  return instance.componentProperties !== undefined
-    && Object.keys(instance.componentProperties).length > 0;
+  try {
+    return instance.componentProperties !== undefined
+      && Object.keys(instance.componentProperties).length > 0;
+  } catch (e) {
+    // componentProperties 접근 실패 (컴포넌트 에러 있는 노드)
+    return true; // 안전하게 TDS로 간주 (skip)
+  }
 }
 
 /**
