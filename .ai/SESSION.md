@@ -66,12 +66,19 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **바이브코딩 QA 루브릭 v1.0 생성** (/director) | 8축 루브릭 + Figma Make 10건 피드백 + 네이밍 정책 반영 |
 | **`/qa` 커맨드 생성** (/director) | Figma MCP 2단계 조회 + 8축 점수 + PASS/CONDITIONAL/FAIL |
 | **QA 구현 플랜 최종 정리** (/director) | Phase 0 리서치 → Phase 1 루브릭 → Phase 2 검증 → Phase 3 실전 |
+| **빌드 수행** | git pull 후 dist/code.js 없음 → `npm run build` 실행 (25.4kb) |
+| **`/qa` Screen Onboarding Input Name — 97.5/100 PASS** | R1(100) R2(100) R3(80) R4(100) R5(100) R6(90) R7(100) R8(100). Major 3건: Screen/Body `mode:none`(absolute), Screen fill 토큰 미바인딩 |
 
 ### 잔여 + 다음 세션 TODO
 
 **즉시:**
 - Figma 리로드 → Renamer 테스트 (bannedRemoved + Content 금지 + body→Body 확인)
 - `Header Area Area` 등 레거시 이름 수동 수정 (Renamer가 이미 역할로 끝나는 이름은 변경 안 함)
+
+**QA 수정 (Screen Onboarding Input Name):**
+- Screen → column AL 전환 (Top Bar + Navbar + Body + Actions 순서)
+- Body → column AL 전환 (Progress Area + Input Area 순서)
+- Screen fill `#FFFFFF` → `background` 변수 바인딩
 
 **Renamer 한계 — 에이전트 네이밍 검토:**
 - 사용자가 "에이전트가 스크린샷+구조 기반으로 네이밍 보정하면 좋겠다" 의견 제시
@@ -80,7 +87,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 - 타이밍: naming-policy v2.0 안정화 후
 
 **QA/검증:**
-- `/qa` 검증 3건 (채팅/챌린지진행/카드4종) + 감점 캘리브레이션
+- `/qa` 검증 2건 남음 (채팅/챌린지진행) + 감점 캘리브레이션
 - ~~qa-rubric.md 업데이트~~ ✅ v1.1 반영 완료
 - 기존 화면 Container→Area 마이그레이션 (Renamer 일괄 실행)
 

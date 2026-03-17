@@ -1,4 +1,14 @@
 ---
+HANDOFF: Claude -> User
+Date: 2026-03-17 22:37:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: /qa Screen Onboarding Input Name — 97.5/100 PASS. Major 3건(Screen/Body absolute layout, Screen fill 토큰 미바인딩). 빌드 수행(25.4kb).
+Next-TODO: Figma에서 Screen/Body column AL 전환 + Screen fill background 변수 바인딩. Renamer 테스트.
+Commits: (이번 커밋)
+---
+
+---
 HANDOFF: Claude -> Next Session
 Date: 2026-03-17 17:20:00
 Project: ~/Project/TDS
