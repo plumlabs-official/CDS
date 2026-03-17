@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-16
+> Last updated: 2026-03-17
 
 ---
 
@@ -38,7 +38,28 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 ---
 
-## 현재 세션 (2026-03-16)
+## 현재 세션 (2026-03-17)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **Figma 레이어 네이밍 리서치** (/research 5건 병렬) | Figma 공식, Container vs Wrapper, Title Case, shadcn 패턴, Figma-to-code 영향 |
+| **네이밍 정책 v1.1 확정** (/team 2회) | Container 금지 + Content/Area/Group 대체 어휘. Title Case 공백. Property camelCase |
+| **바이브코딩 QA 루브릭 v1.0 생성** (/director) | 8축 루브릭 + Figma Make 10건 피드백 + 네이밍 정책 반영 |
+| **`/qa` 커맨드 생성** (/director) | Figma MCP 2단계 조회 + 8축 점수 + PASS/CONDITIONAL/FAIL |
+| **QA 구현 플랜 최종 정리** (/director) | Phase 0 리서치 → Phase 1 루브릭 → Phase 2 검증 → Phase 3 실전 |
+
+### 잔여
+
+- 리서치 Phase A (RS1/RS2/RS3) 미실행
+- 리서치 Phase B (RS4/RS5/RS6) 미실행
+- `/qa` 검증 3건 (채팅/챌린지진행/카드4종) + 감점 캘리브레이션
+- 기존 화면 Container→Content/Area 마이그레이션
+
+---
+
+## 이전 세션 (2026-03-16)
 
 ### 완료된 작업
 

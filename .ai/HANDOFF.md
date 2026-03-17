@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-17 10:30:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: TDS 바이브코딩 QA 시스템 최종 정리 — 네이밍 정책 v1.1(Container 금지+대체 어휘) + 루브릭 v1.0(8축) + /qa 커맨드. /team 2회(QA 플래닝 4R + Container 재토론) + /director 최종 정리.
+Next-TODO: 리서치 Phase A(RS1/RS2/RS3) 실행 → 루브릭 정밀화 → /qa 검증 3건
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-16 23:33:00
 Project: ~/Project/TDS
 Agent: 혼합 (사용자 Figma 작업 + Claude 리뷰/기록)
