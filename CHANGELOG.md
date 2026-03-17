@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: compMap variant name 충돌 버그 수정 (Select→X버튼 오스왑 방지, 이중 방어)
 
 ### Changed
+- docs: TDS 자동 리네이밍 플러그인 설계 — naming-policy v1.1 기반 2모드(Product+Library) + renamer 모듈 구조 확정
 - docs: TDS 바이브코딩 QA 시스템 — 네이밍 정책 v1.1 + 루브릭 v1.0 + `/qa` 커맨드 생성
 - docs: TDS 채팅 화면 컴포넌트화 플래닝 — shadcn Kit Message 편입 + Phase 0-5 작업 순서 확정 (/team)
 - docs: TDS Breadcrumb + Profile Card Challenge variant 매핑 결정 (/team)

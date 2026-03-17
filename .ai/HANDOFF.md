@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-17 11:15:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: 자동 리네이밍 플러그인 설계 완료 (/team). renamer 모듈 4파일 구조 + Mode 1(Product) + Mode 2(TDS Library). /qa 첫 테스트 Sheet Invite 96.8점 PASS.
+Next-TODO: renamer 모듈 구현 (renamer.ts + rules.ts + property-checker.ts + utils.ts) + code.ts/ui.html 버튼 추가
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-17 10:30:00
 Project: ~/Project/TDS
 Agent: Claude

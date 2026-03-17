@@ -44,6 +44,8 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 | 작업 | 비고 |
 |------|------|
+| **자동 리네이밍 플러그인 설계** (/team) | renamer 모듈 구조. Mode 1 Product + Mode 2 TDS Library. 규칙 기반(AI 불필요) |
+| **`/qa` 첫 테스트: Sheet Invite** | 96.8/100 PASS. R2 순서역전 1건 + R4 Boolean 접두어 4건 |
 | **Figma 레이어 네이밍 리서치** (/research 5건 병렬) | Figma 공식, Container vs Wrapper, Title Case, shadcn 패턴, Figma-to-code 영향 |
 | **네이밍 정책 v1.1 확정** (/team 2회) | Container 금지 + Content/Area/Group 대체 어휘. Title Case 공백. Property camelCase |
 | **바이브코딩 QA 루브릭 v1.0 생성** (/director) | 8축 루브릭 + Figma Make 10건 피드백 + 네이밍 정책 반영 |
@@ -52,6 +54,7 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 ### 잔여
 
+- **Renamer 플러그인 구현** — `figma-plugins/tds/src/modules/renamer/` 4파일 생성
 - 리서치 Phase A (RS1/RS2/RS3) 미실행
 - 리서치 Phase B (RS4/RS5/RS6) 미실행
 - `/qa` 검증 3건 (채팅/챌린지진행/카드4종) + 감점 캘리브레이션
