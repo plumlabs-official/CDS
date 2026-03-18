@@ -50,6 +50,8 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **인스턴스 fill 커스텀 확인** | 토큰 바인딩된 오버라이드(컬러/스타일)는 안전. 원본 블록 내 중첩 인스턴스는 expose 필요 |
 | **Challenge Mission Card fill 3종 유지 결정** | Linear+Image+#000 풀어두기 — Style로 묶으면 Image 교체 시 detach 필요 |
 | **Determination Drawer QA — 100/100 PASS** | TDS Drawer(White) + Slot Holder + Footer + HomeIndicator. 이슈 없음 |
+| **서비스명 브레인스토밍** | Tryve 사용 불가 → 후보 20+개 제안 (Wellby, Nudgy, Habby, Volta, Pingd, Motti 등) |
+| **"Volta" 상표권 /research** | 5개 에이전트 병렬 조사 (KIPRIS/USPTO/EUIPO/실사용/분쟁). 결론: **사용 비권장** — 동일 분야 웰니스 앱 존재(indeHealth), USPTO Class 9 live 등록 다수, 한국 "볼타코퍼레이션" 존재, NVIDIA도 상표 확보 실패 선례. 리포트: `report/2026-03-18_volta-trademark-research.md` |
 
 ### 잔여 + 다음 세션 TODO
 

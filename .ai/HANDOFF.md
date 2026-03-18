@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-18 20:17:00
+Project: ~/Project/TDS
+Agent: 혼합 (Claude 브랜딩 제안/리서치 + 사용자 네이밍 후보 제시)
+Summary: 서비스명 브레인스토밍 20+개 + "Volta" 상표권 딥리서치(5에이전트 병렬, 35소스). Volta 사용 비권장 결론 — 동일 분야 웰니스 앱 존재 + 상표 포화.
+Next-TODO: 서비스명 최종 결정 (Volta 제외) + 나머지 후보 상표 검색
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-18 17:03:00
 Project: ~/Project/TDS
 Agent: 혼합 (Claude QA/버그수정 + 사용자 Figma TDS 편입)
