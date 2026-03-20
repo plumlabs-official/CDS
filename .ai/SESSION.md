@@ -50,6 +50,8 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **슬롯 vs variant 기준 정립** | 교체될 수 있는 자리 = 슬롯, 같은 것의 시각 변형 = variant |
 | **1곳 전용 컴포넌트 불필요 원칙 확인** | Slogan Area, Ticket Item, Select Trigger, ToggleSwitch 등 — 재사용 없으면 로컬 프레임 유지 |
 | **TDS 라이브러리 오타 발견** | `Ticek Item Illust` → `Ticket Item Illust` (원본 수정 필요) |
+| **Onboarding_invite 섹션 배치 QA — 13/13 PASS** | 전체 PASS (97~100점). 공통 이슈: Actions absolute 5건 (Screen AL 마이그레이션 대상), 네이밍 Minor 7건. 리포트: `reviews/2026-03-20_qa-onboarding-invite-section.md` |
+| **네이밍 Minor 수정 (사용자)** | CTA Group, Text InputName ×2, Friend List Gruop, 트레일링 스페이스 등 수정 완료. `TabsList Primary/ChallengeState` 위치 안내 (21555:20030, Chatting Screen) |
 
 ### 다음 세션 TODO (3/21)
 
@@ -59,10 +61,10 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 3. 재분류 기준에 맞춰 분리/통합 적용
 
 **잔여:**
-- `/qa` 섹션 전체 검증 (Onboarding_link 26개 프레임)
+- 5개 스크롤 화면 Screen AL 마이그레이션 (Actions absolute → Body fill scroll-y + Actions hug)
 - Renamer 리로드 → 테스트 (setBusy 수정 확인)
-- 나머지 화면에 모바일 Screen AL 패턴 적용
 - `Ticek Item Illust` TDS 원본 오타 수정
+- Onboarding Screen Slogan Area → AL hug 전환
 
 **미션 (3/17 기록, 진행 중):**
 1. 챌린지 현황 그룹 진행도 TDS 컴포넌트 제작

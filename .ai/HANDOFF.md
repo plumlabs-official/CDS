@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> User
+Date: 2026-03-20 22:50:00
+Project: ~/Project/TDS
+Agent: 혼합 (Claude QA/분석 + 사용자 Figma 슬롯 전환/네이밍 수정)
+Summary: Content Header 슬롯 전환(6 variant), Drawer Select 삭제, Challenge Invite QA 92 PASS, Onboarding_invite 섹션 배치 QA 13/13 PASS. 슬롯 vs variant 기준 정립.
+Next-TODO: TDS 슬롯 점검 + Primitives/Components/Blocks 섹션 재분류 + Screen AL 마이그레이션 5건
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> User
 Date: 2026-03-18 20:17:00
 Project: ~/Project/TDS
 Agent: 혼합 (Claude 브랜딩 제안/리서치 + 사용자 네이밍 후보 제시)
