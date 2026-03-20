@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-03-18
+> Last updated: 2026-03-20
 
 ---
 
@@ -38,27 +38,31 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 ---
 
-## 현재 세션 (2026-03-18)
+## 현재 세션 (2026-03-20)
 
 ### 완료된 작업
 
 | 작업 | 비고 |
 |------|------|
-| **Dropdown Menu QA — 91.5/100 PASS** | TDS Primitive 편입 완료. shadcn DropdownMenu 1:1 매핑. `.Dropdown Menu Item` COMPONENT_SET + Section 그루핑 |
-| **Renamer setBusy 버그 수정** | Product Design 클릭 → 변경 0건 시 UI 잠김 — `postMessage` 누락. 0건일 때도 result 메시지 전송하도록 수정 |
-| **Figma 구조 논의 (혼합)** | Actions absolute fill 비활성화 → Screen AL 패턴(Body scroll + Actions fill/hug) 권장. Title+Badge fill vs hug Figma 한계 확인 (CSS flex-shrink 대응 없음) |
-| **인스턴스 fill 커스텀 확인** | 토큰 바인딩된 오버라이드(컬러/스타일)는 안전. 원본 블록 내 중첩 인스턴스는 expose 필요 |
-| **Challenge Mission Card fill 3종 유지 결정** | Linear+Image+#000 풀어두기 — Style로 묶으면 Image 교체 시 detach 필요 |
-| **Determination Drawer QA — 100/100 PASS** | TDS Drawer(White) + Slot Holder + Footer + HomeIndicator. 이슈 없음 |
-| **서비스명 브레인스토밍** | Tryve 사용 불가 → 후보 20+개 제안 (Wellby, Nudgy, Habby, Volta, Pingd, Motti 등) |
-| **"Volta" 상표권 /research** | 5개 에이전트 병렬 조사 (KIPRIS/USPTO/EUIPO/실사용/분쟁). 결론: **사용 비권장** — 동일 분야 웰니스 앱 존재(indeHealth), USPTO Class 9 live 등록 다수, 한국 "볼타코퍼레이션" 존재, NVIDIA도 상표 확보 실패 선례. 리포트: `report/2026-03-18_volta-trademark-research.md` |
+| **Content Header 슬롯 전환** | 6개 variant 모두 Right Slot(SLOT) 적용 — Left 3개 + Center 3개. 교체 가능한 우측 요소는 variant 아닌 슬롯이 정석 |
+| **Drawer Type=Select 삭제** | 사용처 0 (Screen 전환으로 불필요). Drawer는 White/Black 2개만 유지 — 껍데기(Handle+Status+Header+Slot+Footer) Boolean on/off 패턴 |
+| **Challenge Invite Screen QA — 92/100 PASS** | 1차 80.4 CONDITIONAL → 수정 후 92 PASS. 불필요 래퍼 제거, 자동생성명 수정, 토큰 바인딩, 색상 통일 |
+| **슬롯 vs variant 기준 정립** | 교체될 수 있는 자리 = 슬롯, 같은 것의 시각 변형 = variant |
+| **1곳 전용 컴포넌트 불필요 원칙 확인** | Slogan Area, Ticket Item, Select Trigger, ToggleSwitch 등 — 재사용 없으면 로컬 프레임 유지 |
+| **TDS 라이브러리 오타 발견** | `Ticek Item Illust` → `Ticket Item Illust` (원본 수정 필요) |
 
-### 잔여 + 다음 세션 TODO
+### 다음 세션 TODO (3/21)
 
-**즉시:**
+**우선:**
+1. TDS 컴포넌트 슬롯 점검 — 슬롯 처리 가능성 높은 곳 체크 + 반영
+2. TDS 라이브러리 섹션 재분류: Primitives < Components < Blocks
+3. 재분류 기준에 맞춰 분리/통합 적용
+
+**잔여:**
 - `/qa` 섹션 전체 검증 (Onboarding_link 26개 프레임)
 - Renamer 리로드 → 테스트 (setBusy 수정 확인)
 - 나머지 화면에 모바일 Screen AL 패턴 적용
+- `Ticek Item Illust` TDS 원본 오타 수정
 
 **미션 (3/17 기록, 진행 중):**
 1. 챌린지 현황 그룹 진행도 TDS 컴포넌트 제작
