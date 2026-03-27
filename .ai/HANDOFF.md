@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> 정재
+Date: 2026-03-27 16:25:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Org Plan Shared Font 리서치(19소스, 94%) — MCP 커스텀 폰트 공식 미지원 확인. /team 2차 — Inter 전면전환 No-go(한글 없음), Pretendard 유지 + Noto Sans KR 중간체 결정. Desktop MCP는 use_figma 미제공(읽기 전용) 확인.
+Next-TODO: Spike — Noto Sans KR MCP 생성 + Pretendard'em All 전환 테스트 (10분) → Phase 3 S1 재시도
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> 정재
 Date: 2026-03-27 15:51:00
 Project: ~/Project/TDS
 Agent: Claude

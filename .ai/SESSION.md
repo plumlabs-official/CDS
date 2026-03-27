@@ -50,27 +50,29 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 | **Phase 1 완료 — OAuth + 도구 검증** | OAuth 인증 성공 (zen@plumlabs.im). 도구 T0~T5 6/6 PASS. CLAUDE.md 도구명 업데이트 (`get_figma_data` → `get_design_context`). MCP 글로벌 설정 (`~/.claude/.mcp.json`) |
 | **Phase 2 완료 — Skills 작성** | 공식 5개 복사 + 커뮤니티 1개 Fork + TDS 커스텀 3개 = 8 Skills, 11 파일. `figma-generate-design`에 TDS 오버레이 추가. `.claude/skills/` 디렉토리 |
 | **Phase 3 S1 테스트 — generate-design** | Draft 파일(`AhnTqeIcvzcQAI9Pe90dh8`)에서 Login Screen 생성 시도. Wrapper 프레임 + 변수 바인딩 PASS. TDS 인스턴스 import/생성 PASS (페이지 레벨). **appendChild FAIL** — 원격 MCP 클라우드에 Pretendard 폰트 없음 |
-| **폰트 블로커 리서치** | 근본 원인: 원격 MCP(`mcp.figma.com`)는 클라우드 샌드박스, Google Fonts만 지원. Pretendard 미등록. **해결책: Desktop MCP 서버(`127.0.0.1:3845`)** — 데스크톱 앱 경유로 로컬 폰트 접근 가능. `figma-desktop` MCP 추가 완료. |
+| **폰트 블로커 리서치** | 근본 원인: 원격 MCP(`mcp.figma.com`)는 클라우드 샌드박스, Google Fonts만 지원. Pretendard 미등록. ~~해결책: Desktop MCP 서버~~ → Desktop MCP는 `use_figma` 미제공 (읽기 전용) |
+| **Org Plan Shared Font 리서치** | /research — 19소스, 94% 신뢰도. **결론: Org Plan 업그레이드 + Shared Font로도 MCP 폰트 문제 해결 불가.** 공식 문서에 "Custom fonts aren't supported yet" 명시. 리포트: `report/2026-03-27_figma-org-plan-shared-fonts-mcp-pretendard.md` |
+| **/team 폰트 전략 결정 (2차)** | Engineering Lead + Design Director + Product Leader. 사용자 제안(Inter 전면 전환) 검토 → **Inter 단독은 No-go** (한글 글리프 없음, fallback 발생). **결론: Pretendard TDS 표준 유지 + MCP 생성 시 Noto Sans KR 중간체 → Pretendard 일괄 전환**. 미팅 기록: `meetings/2026-03-27_mcp-pretendard-font-workaround.md` |
+| **Desktop MCP 검증** | `figma-desktop` MCP 연결 성공 (읽기 전용). `use_figma` 미제공 확인 → 이전 세션 해결책(Desktop MCP 쓰기) 무효화 |
+| **MCP 폰트 실측** | `listAvailableFontsAsync` = 7,658개. Inter ✅, Noto Sans KR ✅, Pretendard ❌. `loadFontAsync("Pretendard")` = FAIL |
 
 ### 다음 세션 TODO
 
-**즉시 (폰트 블로커 해결):**
-1. 세션 재시작 → `figma-desktop` MCP 로드 확인
-2. Desktop MCP에서 `listAvailableFontsAsync` → Pretendard 존재 확인
-3. Desktop MCP `use_figma`로 TDS 인스턴스 appendChild 재시도
-4. 성공 시 Login Screen 완성 → S1 PASS
+**즉시 (Spike — 10분):**
+1. `use_figma`로 Noto Sans KR 텍스트 노드 생성 → 한글 렌더링 확인
+2. Pretendard'em All 플러그인 설치 → Noto Sans KR → Pretendard 전환 테스트
+3. 전환 후 레이아웃 깨짐 여부 + Text Style 바인딩 유지 확인
+
+**Spike 결과 기반:**
+4. 성공 시: Phase 3 S1 재시도 — `use_figma`(Noto Sans KR) → Pretendard 전환 → `get_screenshot`
+5. 실패 시: TDS Tools에 Font Replace 모듈 추가 (~2시간)
 
 **Phase 3 잔여:**
-5. S2 naming-enforcer 테스트 (프로덕트 디자인 파일 읽기 전용)
-6. S3~S5 나머지 Skills 테스트
-7. S6 통합 테스트
+6. S2 naming-enforcer 테스트
+7. S3~S6 나머지 Skills 테스트
 
-**Phase 2 잔여 (선택):**
-8. figma-implement-design 추가 (Figma→코드 변환용)
-9. MCP 서버 이중화 전략 결정 — 원격(읽기) + Desktop(쓰기) 병행 여부
-
-**Phase 3 (검증):**
-9. Draft 파일에서 통합 테스트 S1~S6
+**병행:**
+8. Figma MCP changelog 분기별 모니터링 (커스텀 폰트 지원 출시 시 워크어라운드 폐기)
 
 ---
 
