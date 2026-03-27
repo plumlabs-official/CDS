@@ -74,12 +74,12 @@
    - `node.type` (INSTANCE / FRAME / GROUP / COMPONENT)
    - `componentId` 존재 여부 + 값
    - TDS 라이브러리(`H36eNEd6o7ZTv4R7VcyLf2`) 소속 여부
-   - 프로퍼티/Slot/Variant 구분 (원본 `get_figma_data` 결과 인용)
+   - 프로퍼티/Slot/Variant 구분 (원본 `get_design_context` 결과 인용)
 
 2. **THEN CONCLUDE** — 증거 기반으로만 결론
 
 3. **CORRECTION CHECK** — 사용자가 정정해도:
-   - "확인해보겠습니다" → `get_figma_data` 재호출
+   - "확인해보겠습니다" → `get_design_context` 재호출
    - "네, 알겠습니다"로 검증 없이 수용 **금지**
 
 > 근거: 2026-03-12 사건 2건
@@ -107,7 +107,7 @@
 
 - [ ] **사용처 확인** — 해당 컴포넌트가 공용인지, 어디서 참조되는지 확인
 - [ ] **원본 vs 인스턴스 구분** — 원본 수정은 전파 영향, 인스턴스 오버라이드는 깨짐 리스크 명시
-- [ ] **기존 존재 여부 확인** — `get_figma_data` 결과를 먼저 읽고, 이미 있는 것을 재확인
+- [ ] **기존 존재 여부 확인** — `get_design_context` 결과를 먼저 읽고, 이미 있는 것을 재확인
 - [ ] **"좋습니다" 금지** — 영향도 확인 없이 동의하지 말 것
 
 ### 빌드 후 테스트 전
