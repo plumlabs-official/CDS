@@ -1,4 +1,14 @@
 ---
+HANDOFF: Claude -> 정재
+Date: 2026-03-27 17:30:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Figma MCP Write 리서치(18소스, 91%) + Skills 플랜(공식 래퍼+커스텀 3개) + /team 리뷰(충돌 10건) + MCP 서버 교체(figma-developer-mcp → mcp.figma.com). OAuth 인증 대기.
+Next-TODO: 세션 재시작 → OAuth 인증 → T1~T6 도구 검증 → CLAUDE.md 업데이트 → Phase 2 Skills 작성
+Commits: (이번 커밋)
+---
+
+---
 HANDOFF: Claude -> User
 Date: 2026-03-20 22:50:00
 Project: ~/Project/TDS
