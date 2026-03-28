@@ -14,6 +14,12 @@ fi
 
 cd "$REPO_ROOT"
 
+# CHANGELOG가 이번 커밋에 이미 포함되어 있으면 스킵 (/record가 이미 업데이트)
+if git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | grep -q "^CHANGELOG.md$"; then
+  echo "ℹ️  CHANGELOG.md가 이미 이번 커밋에 포함됨 — 스킵"
+  exit 0
+fi
+
 # 최근 커밋 메시지 가져오기
 COMMIT_MSG=$(git log -1 --pretty=%s)
 COMMIT_HASH=$(git log -1 --pretty=%h)
@@ -79,7 +85,7 @@ BEGIN {
   next
 }
 found_unreleased && /^### / {
-  if ($0 == "### " section) {
+  if (!added && $0 == "### " section) {
     found_section = 1
     print
     print "- " message
