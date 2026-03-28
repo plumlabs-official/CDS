@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+### Fixed
+- auto-changelog 중복 엔트리 버그 2건 수정
+### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 ### Added
 - Figma MCP 도구 선택 가이드 (`.claude/rules/figma-mcp-tool-guide.md`) — Decision Tree, 20KB 제한 대응 패턴, rate limit 정리
 - figma-use Rule 16: use_figma output 20KB 제한 명시 + Pre-flight 체크 추가
@@ -17,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 폰트 마이그레이션 최종 플랜 미팅 기록 (Ralph Loop 3 iterations, 전원 96+)
 - Figma MCP Skills — 공식 5개 + 커뮤니티 1개 + TDS 커스텀 3개
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - MCP Pretendard 폰트 리서치 (19소스, 94%) + /team 전략 결정: Inter 전면전환 No-go, Pretendard 유지 + Noto Sans KR 중간체
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
@@ -36,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: compMap variant name 충돌 버그 수정 (Select→X버튼 오스왑 방지, 이중 방어)
 
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
 - update Figma MCP tool name get_figma_data → get_design_context
@@ -73,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator: Swap Icon Sources 버튼 삭제 (Migrate에 통합, 중복 제거)
 
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
 - update Figma MCP tool name get_figma_data → get_design_context
@@ -106,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TDS Migrator Phase 2: 근사 매칭 요약 로그 ([SUMMARY] color/effect/text 건수 + 평균 거리)
 
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
 - update Figma MCP tool name get_figma_data → get_design_context
@@ -144,6 +154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 워크샵 필요 여부 구분 (정책 결정 vs 실무 완성도)
 
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
 - update Figma MCP tool name get_figma_data → get_design_context
@@ -159,6 +170,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 비고 보강: 라운지 입장 조건에 유료 챌린지 전용 명시
 
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
 - update Figma MCP tool name get_figma_data → get_design_context
@@ -184,6 +196,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Top-level 강제 STRETCH**: AI가 INHERIT 반환해도 80% 이상 요소는 강제 STRETCH
 
 ### Changed
+- CHANGELOG 중복 엔트리 정리 (hook 누적분)
 - session record — Org Plan 폰트 리서치 + /team Inter전면전환 No-go 결정
 - session record — Phase 3 S1 테스트 + Pretendard 폰트 블로커 + Desktop MCP 추가
 - update Figma MCP tool name get_figma_data → get_design_context
