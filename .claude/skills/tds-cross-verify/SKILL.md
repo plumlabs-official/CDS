@@ -28,6 +28,13 @@ TDS 라이브러리와 프로덕트 파일을 교차 검증합니다.
 - `page.findAll`로 범위 제한 금지
 - 증거 없는 "통합 필요" 판단 금지
 
+## 도구 선택 + 20KB 대응
+
+> 상세: `.claude/rules/figma-mcp-tool-guide.md`
+
+- **읽기 우선**: 구조 파악은 `get_metadata`, 상세는 `get_design_context`. `use_figma`는 `componentProperties`/`boundVariables` 등 read 도구로 불가능한 조회에만 사용.
+- **use_figma 사용 시 분할 필수**: TDS 90개+ 컴포넌트를 한번에 return하면 20KB 초과. **페이지별 분할** 또는 **카운트 → 상세 분리** 패턴 적용.
+
 ## Workflow
 
 ### Phase 1: TDS 라이브러리 인벤토리

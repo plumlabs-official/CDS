@@ -62,6 +62,8 @@ Before touching Figma, understand what you're building:
 
 ### Step 2: Discover Design System — Components, Variables, and Styles
 
+> **도구 선택**: 읽기는 read 도구 우선, `use_figma`는 쓰기/특수 읽기에만. 상세: `.claude/rules/figma-mcp-tool-guide.md`
+
 You need three things from the design system: **components** (buttons, cards, etc.), **variables** (colors, spacing, radii), and **styles** (text styles, effect styles like shadows). Don't hardcode hex colors or pixel values when design system tokens exist.
 
 #### 2a: Discover components

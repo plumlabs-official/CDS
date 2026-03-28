@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> 정재
+Date: 2026-03-28 14:43:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Figma MCP 도구 선택 가이드 체계화 — `.claude/rules/figma-mcp-tool-guide.md` 신규 생성 (Decision Tree + 20KB 대응 패턴 + rate limit). figma-use/tds-cross-verify/figma-generate-design 3개 Skill 참조 링크 추가. CLAUDE.md Auto Reference 반영. MAX_MCP_OUTPUT_TOKENS 100K 설정.
+Next-TODO: 가이드 실전 테스트 (교차 검증 + 화면 생성 시 도구 선택 검증) + designer.md 작성 (TDS 컴포넌트 조립 지침)
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> 정재
 Date: 2026-03-27 23:36:00
 Project: ~/Project/TDS
 Agent: Claude

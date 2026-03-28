@@ -16,6 +16,7 @@
 | 현재 상태 | `.ai/SESSION.md` |
 | 네이밍 정책 | `.claude/rules/naming-policy.md` |
 | QA 루브릭 | `.claude/rules/qa-rubric.md` |
+| MCP 도구 가이드 | `.claude/rules/figma-mcp-tool-guide.md` |
 | **완료 기록** | `.claude/commands/record.md` |
 
 ## 문서 역할 경계 (SSOT)
@@ -42,6 +43,7 @@
 |----------|------|----------|
 | Naming/Renamer 작업 | `.claude/rules/naming-policy.md` | 전체 |
 | QA 점검 | `.claude/rules/qa-rubric.md` | 전체 |
+| **Figma MCP 작업** | `.claude/rules/figma-mcp-tool-guide.md` | 전체 |
 | **TDS 컴포넌트 논의/리뷰** | TDS Figma 라이브러리 (fileKey: `H36eNEd6o7ZTv4R7VcyLf2`) | 해당 컴포넌트 노드 직접 확인 |
 | 빌드/디버깅 | `.ai/RECIPES.md` | "빌드", "디버깅" 섹션 |
 | 문서 구조 변경 | `CONSTITUTION.md` | "문서 관리 원칙" 섹션 |

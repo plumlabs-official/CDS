@@ -38,7 +38,19 @@ TDS 컴포넌트 리뷰를 lenny 프로젝트에서 `/team`으로 실행하면, 
 
 ---
 
-## 현재 세션 (2026-03-27)
+## 현재 세션 (2026-03-28)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **Figma MCP 도구 선택 가이드** | /team Decision Meeting (Engineering Lead + AI Ops Expert). `.claude/rules/figma-mcp-tool-guide.md` 신규 생성 (~65줄). Decision Tree + 20KB 대응 패턴 + rate limit 정리. CLAUDE.md + 3개 Skill 참조 링크 추가. 미팅 기록: `meetings/2026-03-28_mcp-tool-selection-guide.md` |
+| **MCP output 토큰 증량** | `~/.claude/settings.json` `MAX_MCP_OUTPUT_TOKENS` = 100,000 (기본 25,000에서 4배). 대형 캔버스 get_design_context 응답 잘림 방지 |
+| **Figma MCP 서버 제한 리서치** | /research — use_figma output 20KB 제한 (공식 확인), read 도구 rate limit (200/day Org), write 도구 면제, 클라이언트 토큰 25K 기본값 |
+
+---
+
+## 이전 세션 (2026-03-27)
 
 ### 완료된 작업
 
