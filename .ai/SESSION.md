@@ -22,6 +22,7 @@
 | 작업 | 비고 |
 |------|------|
 | **프로젝트 비효율 진단 + 정리** | HANDOFF.md 754→9줄, SESSION.md 1,090→40줄, meetings/ 46파일 삭제, screenshots/ 58파일 삭제, review-images/ 2파일 삭제, CONSTITUTION.md/RECIPES.md 중복 참조 테이블 제거 |
+| **라운지 리뷰 회의 결정사항 Figma 반영 플랜** | 2/26 회의록 9건 결정 → 기존 화면 수정 4건 + 신규 화면 4건 매핑 완료. 프로덕트 파일 `DxrzwmdzqAi4m4F0pp83gd` Review Version 섹션(`22206:21655`) 대상. Content Header(`20233:11574`) 활용처 확인. 패딩은 부모 A/L 책임 원칙 확인 |
 
 ---
 
