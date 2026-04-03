@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Added
+- Updates Card TDS 컴포넌트 — 4 variant(State×Expanded) + Thumbnail/Content 슬롯
 - /review Phase 3-B Instance Replace + 크로스 스크린 패턴 참고
 - /review + /make-component TDS 스킬 생성 — 화면 리뷰 통합 + 컴포넌트 자동 생성
 ### Changed

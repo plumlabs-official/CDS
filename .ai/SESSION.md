@@ -32,6 +32,8 @@
 | **스킬 Director QA** | 7건 수정 적용 (skillNames, idempotency, 파일 타겟, Plugin API gotcha 등) |
 | **`/review` Phase 3-B 추가** | Instance Replace 워크플로우 (복제→분석→승인→교체→검증) + 크로스 스크린 패턴 참고 문구 |
 | **`/review` 실전 테스트** | Lounge Screen 스캔 — PASS (92점, TDS 27건, 위반 0건) |
+| **Updates Card 크로스 스크린 패턴 분석** | Lounge Screen + Updates Screen에서 동일 구조 4회+ 반복 감지 → 컴포넌트화 결정 |
+| **Updates Card TDS 컴포넌트 생성** | 4 variant (State=default/locked × Expanded=true/false). Thumbnail Slot + Content Slot 적용. 프로퍼티 8개 (4 TEXT + 2 BOOLEAN + 2 VARIANT). 혼합 작업 (Claude 구조 생성 + 사용자 슬롯 전환) |
 
 ---
 
@@ -42,7 +44,8 @@
 2. Lounge Card 컴포넌트 TDS화 검토
 3. 기존 TDS 컴포넌트 Boolean property `Show Xxx` 포맷 통일
 4. Challenge Talk Card Publish
-5. Announcement Header 컴포넌트화 검토 (3화면 공통)
+5. Updates Card Publish
+6. Announcement Header 컴포넌트화 검토 (3화면 공통)
 
 **스크린 리뷰 (Creator Case 잔여):**
 6. Creator Lounge Updates Screen 리뷰
