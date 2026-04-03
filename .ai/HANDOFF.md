@@ -1,9 +1,9 @@
 ---
 HANDOFF: Claude -> 정재
-Date: 2026-04-03 16:45:00
+Date: 2026-04-03 17:11:09
 Project: ~/Project/TDS
 Agent: Claude
-Summary: Lounge Cards 그룹 통합 + Lounge Screen QA PASS(98점) + Write Updates Screen 리뷰 CONDITIONAL(84점) + 인풋 포맷 계열 점검(Select/Input Group Label 부재) + Form Field 범용 래퍼 컴포넌트 생성 (Input Group 그룹 내 배치).
-Next-TODO: 신규 컴포넌트 Publish (Challenge Talk Card, Updates Card, Pro Creator Card, Form Field) → Creator Case 잔여 화면 리뷰 → Select Label 일관성 검토
+Summary: 인풋 포맷 계열 위계 정돈. Date Picker/Combobox Label 기본값 false 변경 + Description 업데이트. Form Field 중복 생성→기존 Field(20083:18344) 발견하여 삭제. 모든 인풋은 Field 래퍼 사용 통일 방침 결정.
+Next-TODO: 신규 컴포넌트 Publish (Challenge Talk Card, Updates Card, Pro Creator Card) → Field 토큰 바인딩 확인 → Creator Case 잔여 화면 리뷰
 Commits: (이번 커밋)
 ---
