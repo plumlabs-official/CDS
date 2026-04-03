@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Added
+- /review Phase 3-B Instance Replace + 크로스 스크린 패턴 참고
 - /review + /make-component TDS 스킬 생성 — 화면 리뷰 통합 + 컴포넌트 자동 생성
 ### Changed
 - session record — 라운지 리뷰 회의 결정 Figma 반영 플랜
