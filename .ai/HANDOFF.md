@@ -1,9 +1,9 @@
 ---
 HANDOFF: Claude -> 정재
-Date: 2026-04-03 17:11:09
+Date: 2026-04-04 17:05:00
 Project: ~/Project/TDS
 Agent: Claude
-Summary: 인풋 포맷 계열 위계 정돈. Date Picker/Combobox Label 기본값 false 변경 + Description 업데이트. Form Field 중복 생성→기존 Field(20083:18344) 발견하여 삭제. 모든 인풋은 Field 래퍼 사용 통일 방침 결정.
-Next-TODO: 신규 컴포넌트 Publish (Challenge Talk Card, Updates Card, Pro Creator Card) → Field 토큰 바인딩 확인 → Creator Case 잔여 화면 리뷰
+Summary: TDS 컴포넌트 정리 — shadcn Kit 잔여물 9종 삭제 + Slot Holder 단순화(6→1 variant) + Footer 불필요 3종 삭제. 프로토타입 연결은 사용자가 직접 복구 완료.
+Next-TODO: Content Header+Content Section Header 통합, Challenge Mission Card/Participant Card 하위 파트 내부화(. 접두어), TDS Publish
 Commits: (이번 커밋)
 ---

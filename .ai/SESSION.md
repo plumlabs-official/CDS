@@ -15,7 +15,7 @@
 
 ---
 
-## 현재 세션 (2026-04-03)
+## 현재 세션 (2026-04-04)
 
 ### 완료된 작업
 
@@ -43,6 +43,10 @@
 | **Form Field 컴포넌트 생성 → 기존 Field 발견으로 삭제** | Label + Field Slot + Help text 래퍼 생성했으나, TDS에 이미 shadcn Field 컴포넌트(20083:18344) 존재 확인. 중복 삭제, 기존 Field 사용 결정 |
 | **Date Picker/Combobox Label 기본값 변경** | Label Boolean default true→false. Description 업데이트 ("Form Field 래퍼와 함께 사용 권장") |
 | **인풋 포맷 위계 정돈** | Team 논의: 모든 인풋은 Field 래퍼 사용 통일. Select/Input Group은 Field로 감싸기, Date Picker/Combobox는 자체 Label 비활성화 |
+| **TDS 컴포넌트 분류 및 정리** | shadcn 공식 vs Kit 전용 vs 커스텀 분류. Section Heading, Rich Text Heading(2개), Rich Text Paragraph, Typography 6종(header-medium/small/xsmall, Description-Medium/small, Disclaimer) 삭제 |
+| **Slot Holder 단순화** | Slot2~6 variant 삭제, Slot1 gap 16px/padding 16px/hug height로 수정. 사용자가 Component Set 해체하여 단일 AL 프레임으로 전환 |
+| **Footer 정리** | Button cloud, Event slots, Pagination variant 3종 삭제. 버튼 6종 + Calendar/Alarm 3종 = 9개 variant 유지 |
+| **프로토타입 연결 복구** | Drawer/Card Slot Holder 변경으로 깨진 프로토타입 연결을 사용자가 직접 복구 |
 
 ---
 
@@ -55,6 +59,12 @@
 4. Challenge Talk Card Publish
 5. Updates Card Publish
 6. Announcement Header 컴포넌트화 검토 (3화면 공통)
+
+**컴포넌트 정리 (잔여):**
+7. Content Header + Content Section Header 통합 검토
+8. Challenge Mission Card 하위 4종 + Participant Card 하위 3종 `.` 접두어 내부화
+9. Purchase Button → Button variant 통합 검토
+10. Footer Kbd 요소 제거 여부 검토
 
 **스크린 리뷰 (Creator Case 잔여):**
 6. Creator Lounge Updates Screen 리뷰
