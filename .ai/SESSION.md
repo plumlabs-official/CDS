@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-04-03
+> Last updated: 2026-04-07
 
 ---
 
@@ -15,7 +15,7 @@
 
 ---
 
-## 현재 세션 (2026-04-04)
+## 현재 세션 (2026-04-07)
 
 ### 완료된 작업
 
@@ -47,24 +47,17 @@
 | **Slot Holder 단순화** | Slot2~6 variant 삭제, Slot1 gap 16px/padding 16px/hug height로 수정. 사용자가 Component Set 해체하여 단일 AL 프레임으로 전환 |
 | **Footer 정리** | Button cloud, Event slots, Pagination variant 3종 삭제. 버튼 6종 + Calendar/Alarm 3종 = 9개 variant 유지 |
 | **프로토타입 연결 복구** | Drawer/Card Slot Holder 변경으로 깨진 프로토타입 연결을 사용자가 직접 복구 |
+| **Content Header + Content Section Header 통합** | Content Section Header 삭제, Content Header로 통합. 프로덕트 파일 인스턴스 2건 사용자 직접 교체 |
+| **Challenge Mission Card/Participant Card 하위 파트 내부화** | 6건 `.` 접두어 적용 (Host Info, Header, Addon Footer, Left Slot, Right Slot). Thumbnail은 독립 사용으로 유지 |
+| **Purchase Button 통합 검토 → 분리 유지** | Price Area(코인+가격) 도메인 특화로 Button 통합 불필요 판정 |
+| **Footer Kbd 유지** | 앱웹 베이스 가능성으로 Kbd 요소 유지 결정 |
+| **Boolean property `Show Xxx` 포맷 통일** | 전체 50개 컴포넌트 스캔, 30건 네이밍 수정 (Show/Is/Has 접두어). ↳ 접두어 6건 적용 (Combobox, Date Picker, Profile Card, Invite Profile Card) |
+| **Announcement Header 통합 확인** | Lounge Card 슬롯 개선으로 이미 흡수 완료 확인 |
+| **Thumbnail/Challenge Talk Card/Updates Card Publish 확인** | 사용자 직접 Publish 완료 확인 |
 
 ---
 
 ## 다음 TODO
-
-**TDS 컴포넌트:**
-1. Thumbnail 컴포넌트 Publish + 프로덕트 파일에서 라운지 카드에 적용
-2. Lounge Card 컴포넌트 TDS화 검토
-3. 기존 TDS 컴포넌트 Boolean property `Show Xxx` 포맷 통일
-4. Challenge Talk Card Publish
-5. Updates Card Publish
-6. Announcement Header 컴포넌트화 검토 (3화면 공통)
-
-**컴포넌트 정리 (잔여):**
-7. Content Header + Content Section Header 통합 검토
-8. Challenge Mission Card 하위 4종 + Participant Card 하위 3종 `.` 접두어 내부화
-9. Purchase Button → Button variant 통합 검토
-10. Footer Kbd 요소 제거 여부 검토
 
 **스크린 리뷰 (Creator Case 잔여):**
 6. Creator Lounge Updates Screen 리뷰
