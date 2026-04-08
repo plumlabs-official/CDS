@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> 정재
+Date: 2026-04-08 19:47:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: Slot→Instance Swap 전환 분석 (~25건 후보) + Icon Scaler 사용처 조사 (20개 컴포넌트 ~150건) 문서화 완료.
+Next-TODO: P0 1번(초대 플로우 삭제), P0 2번(소식 잠금 표기), P0 3번(Slot→Instance Swap 전환 ~25건 실행). 참조: `research/2026-04-08_slot-instance-swap-analysis.md`
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> 정재
 Date: 2026-04-08 17:30:00
 Project: ~/Project/TDS
 Agent: 혼합
