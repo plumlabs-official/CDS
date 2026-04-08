@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-04-07
+> Last updated: 2026-04-08
 
 ---
 
@@ -15,7 +15,7 @@
 
 ---
 
-## 현재 세션 (2026-04-07)
+## 현재 세션 (2026-04-08)
 
 ### 완료된 작업
 
@@ -55,6 +55,13 @@
 | **Announcement Header 통합 확인** | Lounge Card 슬롯 개선으로 이미 흡수 완료 확인 |
 | **Thumbnail/Challenge Talk Card/Updates Card Publish 확인** | 사용자 직접 Publish 완료 확인 |
 | **Write Updates Screen 리뷰** | 91점 PASS (R1=82, R2=100). TDS 9건, 로컬 0건, 네이밍 위반 0건 |
+| **Write Updates Screen 재리뷰** | 97점 PASS (R1=100, R2=96). Field 래퍼 적용으로 TDS 15건, Lounge Item 네이밍 Warning 2건 |
+| **Calendar Drawer 리뷰** | 100점 PASS. Drawer + Calendar Block 슬롯 조합, 커스텀 0건 |
+| **Lounge Setting Dropdown 리뷰 + 컴포넌트 교체** | 99점 PASS. Dropdown Menu → Select Menu 교체. 시맨틱 오류 해소 (action menu → selection listbox) |
+| **Select Menu Item `State=Selected` 추가** | TDS 원본에 Selected variant 추가 — `--sidebar/primary` 배경 + 흰 텍스트 + 체크. 전체 variant 폰트 14→16px |
+| **Select 트리거 높이 통일** | 36px → 48px (Date Picker Field와 동일) |
+| **Select 컴포넌트 구조 개편** | flat → nested (root VERTICAL → Label → Field → Help text). Date Picker와 동일 아키텍처. 프로퍼티 9개 (Show Label/Help Text/Icon Left/Icon Right, Label, Help Text, Placeholder, ↳ Icon Left). min-width 160, max-width 512. description 업데이트 |
+| **프로덕트 파일 반영 확인** | TDS 퍼블리시 + 프로덕트 인스턴스 업데이트 사용자 완료 확인 |
 
 ---
 
@@ -64,8 +71,7 @@
 6. Creator Lounge Updates Screen 리뷰
 7. Creator Lounge Chatting List/Screen 리뷰
 8. Feed Screen 리뷰
-9. 소식 작성 플로우 리뷰
-10. 나머지 화면 네이밍 수정 (Updates Content, lets-icons 교체)
+9. 나머지 화면 네이밍 수정 (Updates Content, lets-icons 교체)
 
 **스킬 테스트:**
 11. `/review` 스킬 실전 테스트
