@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> 정재
+Date: 2026-04-09 10:55:00
+Project: ~/Project/TDS
+Agent: Claude
+Summary: product-designer 스킬 생성 (/design 커맨드). Director QA 3역할 병렬 검증 후 14건 피드백 반영. 6-Phase 워크플로우 (요구사항+UCD → Design Director Checklist → 승인 → Figma 생성 → QA → 보고). claude-center에 글로벌 커맨드도 생성.
+Next-TODO: /design --dry-run으로 04-07 미팅 기록 테스트. TDS P0 일감 (초대 플로우 삭제, 소식 잠금, Slot→Instance Swap, Participant Card 분리) 오후/주말 진행.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> 정재
 Date: 2026-04-08 20:39:00
 Project: ~/Project/TDS
 Agent: 혼합
