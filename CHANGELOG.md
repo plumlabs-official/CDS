@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- 구독 티어 유저 화면 목록 도출 — Team 모드 (Product Leader + Design Director), 7플로우 19화면
 - TDS 컴포넌트 정리 — shadcn Kit 잔여물 삭제(Section Heading, Rich Text Heading/Paragraph, Typography 6종) + Slot Holder 단순화(Slot2~6 삭제, Slot1 gap/padding 수정) + Footer 불필요 variant 3종 삭제(Button cloud, Event slots, Pagination)
 
 

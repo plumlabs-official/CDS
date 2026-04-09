@@ -67,6 +67,7 @@
 | **Participant Card 구조 리뷰** | Authed 이미 분리 확인. 네이밍 5건 수정 (Container×2, Frame 3/4, 오타 Show Determinded, Authed 공백 트림). Participant Card 분리를 P0 TODO에 추가 |
 | **Participant Left/Right Column Slot 검토** | masonry 레이아웃에서 복수 카드 자유 배치 용도 — Slot 유지 결정. Pinterest형 UX에서 비율은 서버 기반 랜덤이 표준, TDS의 Scale bucketing(1:1/4:5/9:16)은 실용적 접근 |
 | **`product-designer` 스킬 생성** | `/design` 커맨드. 미팅 기록 → Figma 화면 디자인 워크플로우. Director QA (3역할 병렬: Design Director G3 62, AI Ops G1 58/G2 45, Product Leader G4 75) → 14건 피드백 반영. 6-Phase 구조 (요구사항 추출 + UCD Empathize → Design Director Checklist → 승인 → figma-generate-design 위임 → QA Decision Tree → 보고). DesignRequirements/ScreenPlan 중간 스키마, 잠금 패턴 4종 명시, 해석 분기점 [AMBIGUOUS] 감지, --dry-run 모드 |
+| **구독 티어 유저 화면 목록 도출** | Team 모드 (Product Leader + Design Director). 04-07 미팅 D1-D7 분석 → 어드민 제외, 7플로우 19화면 + 보류 4건. P0: 크리에이터 페이월(5) + 슈퍼호스트 페이월(3) + 라운지 소식 잠금(3) + 공통 트리거 컴포넌트(1). D3 소식 잠금 A/B 양안 시안 권장 |
 
 ---
 
