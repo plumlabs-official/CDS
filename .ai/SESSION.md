@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-04-09
+> Last updated: 2026-04-11
 
 ---
 
@@ -15,7 +15,7 @@
 
 ---
 
-## 현재 세션 (2026-04-09)
+## 현재 세션 (2026-04-11)
 
 ### 완료된 작업
 
@@ -68,6 +68,11 @@
 | **Participant Left/Right Column Slot 검토** | masonry 레이아웃에서 복수 카드 자유 배치 용도 — Slot 유지 결정. Pinterest형 UX에서 비율은 서버 기반 랜덤이 표준, TDS의 Scale bucketing(1:1/4:5/9:16)은 실용적 접근 |
 | **`product-designer` 스킬 생성** | `/design` 커맨드. 미팅 기록 → Figma 화면 디자인 워크플로우. Director QA (3역할 병렬: Design Director G3 62, AI Ops G1 58/G2 45, Product Leader G4 75) → 14건 피드백 반영. 6-Phase 구조 (요구사항 추출 + UCD Empathize → Design Director Checklist → 승인 → figma-generate-design 위임 → QA Decision Tree → 보고). DesignRequirements/ScreenPlan 중간 스키마, 잠금 패턴 4종 명시, 해석 분기점 [AMBIGUOUS] 감지, --dry-run 모드 |
 | **구독 티어 유저 화면 목록 도출** | Team 모드 (Product Leader + Design Director). 04-07 미팅 D1-D7 분석 → 어드민 제외, 7플로우 19화면 + 보류 4건. P0: 크리에이터 페이월(5) + 슈퍼호스트 페이월(3) + 라운지 소식 잠금(3) + 공통 트리거 컴포넌트(1). D3 소식 잠금 A/B 양안 시안 권장 |
+| **크리에이터 페이월 디자인 (Lite/Pro)** | Director 모드. dry-run 후 Lite/Pro 2개 화면 제작 → 베리에이션 → 라이트/프로 확정 → 사용자 직접 디자인. 미팅 결정 D1-D7 크로스체크 후 D2(쿠폰=프로 전용), D3(소식=프로 통합) 변경 확인 |
+| **use_figma 디자인 퀄리티 리서치** | /research 5 에이전트 병렬. clone→modify 전략, 비주얼 폴리시 패턴(그라디언트, 섀도우, cornerSmoothing), 토큰 바인딩, 컴포넌트 오버라이드, AI+Figma MCP best practices. 리포트: report/2026-04-09_use-figma-design-quality.md |
+| **Stitch 결과 → TDS 토큰 바인딩** | Super Creator Tier 카드를 Stitch에서 가져와 TDS 변수(sidebar/primary, primary-foreground, radius/rounded-xl 등)와 텍스트 스타일 바인딩. 그라디언트 fill은 Plugin API 제약으로 수동 유지 |
+| **슈퍼호스트 페이월 (Host) v1** | Director 모드. 처음에 탭 구조 (호스트30/99) → 사용자 피드백 "탭 부적합, Freepik 패턴 차용" → 단일 화면 3카드 스택 구조로 재설계. 페르소나: 크로스핏 관장 (회원비 외 추가 결제 X). HOST 30 BEST VALUE 강조. UX 이슈: 토글 가격 중복 표기 → 다음 세션에서 A/B/C안 제작 예정 |
+| **204 가격 확정값 확인** | 호스트 15 $7.99/$76.99(20% 할인), 호스트 30 $14.99/$143.99, 호스트 99 $24.99/$239.99. ₩ 환산: 10,500/19,500/32,500. 연간 할인 33% 아닌 **20%** (현재 디자인 수정 필요) |
 
 ---
 

@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> 정재
+Date: 2026-04-11 (세션 종료)
+Project: ~/Project/TDS
+Agent: Claude
+Summary: 슈퍼호스트 페이월 v1 (3카드 스택 구조). 토글 가격 중복 UX 이슈 → 다음 세션에서 A/B/C안 제작 예정. 가격 ₩ 환산값 + 연간 할인 20% 반영 필요.
+Next-TODO: (1) 토글 가격 중복 해소 A/B/C안 제작, (2) 가격 환산값 수정 (₩10,500/19,500/32,500), (3) 연간 할인 33%→20% 수정. Paywall Host 노드: 24773:1250
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Claude -> 정재
 Date: 2026-04-09 11:15:00
 Project: ~/Project/TDS
 Agent: Claude
