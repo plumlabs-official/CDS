@@ -73,6 +73,9 @@
 | **Stitch 결과 → TDS 토큰 바인딩** | Super Creator Tier 카드를 Stitch에서 가져와 TDS 변수(sidebar/primary, primary-foreground, radius/rounded-xl 등)와 텍스트 스타일 바인딩. 그라디언트 fill은 Plugin API 제약으로 수동 유지 |
 | **슈퍼호스트 페이월 (Host) v1** | Director 모드. 처음에 탭 구조 (호스트30/99) → 사용자 피드백 "탭 부적합, Freepik 패턴 차용" → 단일 화면 3카드 스택 구조로 재설계. 페르소나: 크로스핏 관장 (회원비 외 추가 결제 X). HOST 30 BEST VALUE 강조. UX 이슈: 토글 가격 중복 표기 → 다음 세션에서 A/B/C안 제작 예정 |
 | **204 가격 확정값 확인** | 호스트 15 $7.99/$76.99(20% 할인), 호스트 30 $14.99/$143.99, 호스트 99 $24.99/$239.99. ₩ 환산: 10,500/19,500/32,500. 연간 할인 33% 아닌 **20%** (현재 디자인 수정 필요) |
+| **Paywall Host — 안 A/B/C 토글 중복 해소** | A안(토글 가격 제거) + B안(2개월 무료 뱃지) + C안("부터" 가격) 3안 제작. 24773:1250 / 24794:1250 / 24794:1354 |
+| **Paywall Host — 안 D 최종 (Team + Director)** | Team 1차 "tier-first vs billing-first" → D안(Tier-First Hybrid) 권고 → 사용자 수정본 리뷰 Team 2차 → Director 실행 → Plan Card 반복 수정(Mini chip→2개 차별점→1개→제거) → Hero subtitle로 차별점 통합. 최종 구조: Hero + Subtitle + TabsList Toggle + Tier Cards (₩/1인 표기 추가) + FAQ + CTA. 노드 24806:1250 |
+| **정합성 이슈 발견 (204 단체 완주 인증서)** | 204 단독 주장 확인 (200/400/420/ADR/meetings/decisions 0건). 사용자 "기획 리뷰 전이라 Host Pro에서 빼는게 좋음" 결정. Plan Card 제거로 회피. 204 본문은 다음 세션에서 정리 예정 |
 
 ---
 
