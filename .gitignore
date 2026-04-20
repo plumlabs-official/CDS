@@ -34,3 +34,6 @@ packages/agent-server/data/naming-patterns.json
 
 # Figma local exports
 *.fig
+
+# Temporary export assets (Claude Design / Pencil references, migration artifacts)
+exports/

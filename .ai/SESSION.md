@@ -98,6 +98,9 @@
 | **크리에이터 큐레이션 홈 디자인 PRD v0.3** | 2026-04-15 미팅 §9 기반 초안. 핵심 제약 2개(별도 랜딩 페이지 없음 + 챌린지 정보 카드 노출 금지). v0.1→v0.2(에디터 제거 과해석)→v0.3(별도 랜딩 페이지 없음으로 재정의) 리비전. CDS 신규 컴포넌트 후보 3종(Creator Hero Card, Creator Discover Card, Creator Tier Badge). 리포트: `report/2026-04-20_creator-curation-home-prd.md` |
 | **Figma 레퍼런스 export 워크플로우** | REST API + Python 배치 스크립트(/tmp/figma_export.py). 40장 전체 → 10장 핵심 → 페이월 3장 + 할 일 1장 추가 = 최종 14장(라운지/피드/탐색 10, 페이월 3, 할 일 1). Claude Design 업로드 후 exports/ 정리 |
 | **P0 1~2 완료 처리** | 방장 일정 미정 초대 플로우 삭제 + 챌린지별 라운지 소식 잠금 표기 (사용자 완료) |
+| **Stitch/Pencil 대안 리서치** | Claude Design Max 20x 한도 소진 대응. Stitch는 .fig 업로드 불가(DESIGN.md만), Pencil은 복붙 1계층만 + CDS 인스턴스 바인딩 소실. 둘 다 "프롬프트→UI" 수준으로 CDS 대체 부적합. 리포트: `report/2026-04-20_stitch-pencil-alternatives.md` |
+| **Pencil + CDS 이식 PoC 플랜 수립** | /team plan 모드. 실험 A(Figma 원본 복제) + B(PRD만으로 생성) 2종 설계. 7-Phase 자동 실행 플랜 + RESUME 재개 규약. 플랜 파일: `~/.claude/plans/wobbly-churning-kurzweil.md`. 산출물 폴더: `exports/2026-04-20_cds-migration/` (gitignore) |
+| **Pencil PoC 사전 체크리스트 진행** | Figma MCP/CDS 라이브러리/폴더 생성 PASS. **Pencil 데스크톱 앱 WebSocket 연결 실패로 블로킹** (`get_editor_state` 3회 재시도 실패). 다음 세션에서 앱 MCP 세션 활성화 후 재개 |
 
 ---
 
