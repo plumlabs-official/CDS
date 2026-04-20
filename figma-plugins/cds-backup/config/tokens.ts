@@ -1,5 +1,5 @@
 /**
- * Tryve Design System Tokens
+ * Challify Design System Tokens
  *
  * 피그마 [All] 페이지 분석 기반으로 추출한 디자인 토큰
  * 생성일: 2026-01-12
