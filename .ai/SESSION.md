@@ -76,6 +76,19 @@
 | **Paywall Host — 안 A/B/C 토글 중복 해소** | A안(토글 가격 제거) + B안(2개월 무료 뱃지) + C안("부터" 가격) 3안 제작. 24773:1250 / 24794:1250 / 24794:1354 |
 | **Paywall Host — 안 D 최종 (Team + Director)** | Team 1차 "tier-first vs billing-first" → D안(Tier-First Hybrid) 권고 → 사용자 수정본 리뷰 Team 2차 → Director 실행 → Plan Card 반복 수정(Mini chip→2개 차별점→1개→제거) → Hero subtitle로 차별점 통합. 최종 구조: Hero + Subtitle + TabsList Toggle + Tier Cards (₩/1인 표기 추가) + FAQ + CTA. 노드 24806:1250 |
 | **정합성 이슈 발견 (204 단체 완주 인증서)** | 204 단독 주장 확인 (200/400/420/ADR/meetings/decisions 0건). 사용자 "기획 리뷰 전이라 Host Pro에서 빼는게 좋음" 결정. Plan Card 제거로 회피. 204 본문은 다음 세션에서 정리 예정 |
+| **TDS → CDS 전면 리네이밍** | 프로젝트 디렉토리(~/Project/TDS→CDS), 플러그인 코드(85 files, 상수/함수명/UI), 스킬 6개+플러그인 4개 디렉토리, npm scope(@tryve→@challify), 외부 프로젝트 4개(claude-center/plumlabs/lenny/글로벌 메모리), GitHub 리포 리네임. Figma fileKey 보존. 과거 기록 보존. Team 모드로 범위/리스크 논의 후 실행. Director QA 5-Gate 전체 PASS |
+| **Claude Design 출시 리서치** | /research 5에이전트 병렬. 2026-04-17 Research Preview 출시 분석. 핵심: 프롬프트→인터랙티브 HTML, 디자인 시스템 자동 추출, Claude Code 핸드오프 번들. Figma MCP와 보완적 풀루프. 리포트: report/2026-04-20_claude-design-launch-research.md |
+
+---
+
+## 현재 세션 (2026-04-20)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **TDS → CDS 전면 리네이밍** | Team 모드 논의 → Plan 승인 → 6 Phase 실행. 85 files, 440+440 대칭 변경. Director QA 5-Gate PASS. GitHub 리포 리네임 완료 |
+| **Claude Design 출시 리서치** | /research 5에이전트 병렬, 14소스, 96% 신뢰도. 리포트: `report/2026-04-20_claude-design-launch-research.md` |
 
 ---
 
@@ -105,3 +118,4 @@
 
 **모니터링:**
 - Figma MCP 커스텀 폰트 지원 출시 시 → Pretendard 복원 검토
+- Claude Design Research Preview → GA 전환 시 CDS 연동 PoC 검토

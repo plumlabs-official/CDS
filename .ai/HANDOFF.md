@@ -1,5 +1,15 @@
 ---
 HANDOFF: Claude -> 정재
+Date: 2026-04-20
+Project: ~/Project/CDS
+Agent: Claude
+Summary: TDS→CDS 전면 리네이밍 완료 (85 files, 4개 외부 프로젝트, GitHub 리포). Claude Design 출시 리서치 (14소스, 96% 신뢰도). Figma 라이브러리 퍼블리싱은 사용자 직접 완료.
+Next-TODO: (1) Figma 플러그인 리로드 확인. (2) Claude Design PoC — CDS 디자인 시스템 자동 인식 테스트 (선택). (3) P0 일감 재개 (초대 플로우 삭제, 소식 잠금 표기).
+Commits: 471f636, 7ea1558
+---
+
+---
+HANDOFF: Claude -> 정재
 Date: 2026-04-11 (세션 종료 v2)
 Project: ~/Project/CDS
 Agent: Claude
