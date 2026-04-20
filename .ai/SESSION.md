@@ -106,6 +106,8 @@
 | **Claude Design × Pencil 대조군 리포트** | Claude Design이 토큰 정확 (`#00CC61` 등 + Brand/Semantic/Neutrals/Chart 그룹화) 확인. 둘 다 variant flatten 공통, Pencil은 .pen 네이티브 편집성 우위. 세 도구 역할 분리안 합의 |
 | **[Director] CDS → Pencil 네이티브 이관 실행** | Hybrid 전략 (Theme + Structural reusables). 3 QA 사이클 PASS (87→92→94.6). 51 variables + 27 reusables (Buttons 5, Containers 4 w/ Dialog+Drawer, Controls 5 w/ Select+Dropdown, Domain 2: Challenge Mission Card + Participant Card) + 11 PNG export + Home Feed 390×844 합성. 산출: `exports/2026-04-20_cds-migration/`(.pen + MIGRATION-PLAN.md + QA-INBOX.md + screenshots/) + reviews/2026-04-20_cds-pencil-migration.md |
 | **Rev. 4 — Visual Auto-Improve Loop** | 사용자 지적("피그마와 달라") 후 Figma↔Pencil 스크린샷 대조 → diff 식별 → `batch_design` 수정 + `G()` AI 이미지 주입 → 재검증. CMC 시각 일치 ~50→~90%, Badge 3→6, Alert 1→3, CDS Card 시맨틱 교체(Sheet Header Card 신규), Button 라벨 매칭. 총 27→**31 reusables**. 산출: `VISUAL-DIFF-REPORT.md` |
+| **Rev. 5 — Padding Precision Fix** | 사용자 지적("버튼/뱃지 padding 너무 얇아") 후 Figma Plugin API로 원본 padding/height spec 직접 추출 → Pencil 교정. Button pad `[0,16]`→`[8,16]` gap `8`→`6`, Badge radius `pill(9999)`→`8` pad `[6,10]`→`[2,8]`. 교훈: Pencil `[a,b]` padding = `[V,H]`, `U()` 시 height/width 명시 필수 |
+| **Rev. 6 — 전수 비교 점검** | 사용자 요청("토큰/컴포넌트 하나하나 비교")으로 Figma Plugin API 전수 스펙 추출 → 토큰 **51→73 variables** (+22: popover/success/warning/info/chart/sidebar/custom-focus, `--muted-foreground` 값 교정), 컴포넌트 10+ 속성 수정 (Input/Field/Select white bg+stroke, CMC 344w, Participant Card 168w, Card radius 16 등). Input의 fill/stroke 역할 혼동 근본 수정 |
 
 ---
 
