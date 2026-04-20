@@ -90,6 +90,9 @@
 | **TDS → CDS 전면 리네이밍** | Team 모드 논의 → Plan 승인 → 6 Phase 실행. 85 files, 440+440 대칭 변경. Director QA 5-Gate PASS. GitHub 리포 리네임 완료 |
 | **Claude Design 출시 리서치** | /research 5에이전트 병렬, 14소스, 96% 신뢰도. 리포트: `report/2026-04-20_claude-design-launch-research.md` |
 | **프로젝트 구조 정리** | Team 2회 + Coach + Director QA 5-Gate PASS. research/, demo/, CONTRIBUTING, START-HERE, prd, shadcn-kit-comparison 삭제 (60 files, -7337줄). slot-analysis → report/로 이동. CONSTITUTION 트리 현실화 + 전체 데드 링크 정리. report/reviews/meetings는 audit trail 자산으로 유지 결정 |
+| **Figma 라이브러리 CDS 리네이밍** | 사용자(재현) 직접 완료 |
+| **Claude Design × CDS 활용 전략 논의** | 3단계 비전 (하이파이 프로토타입 → 컴포넌트 이관 → Figma 의존도 0). 현재 1단계만 가능, 2-3은 Claude Design 진화 필요. 핸드오프 메커니즘 리서치 (URL → CLI 번들 생성). slot은 바이브코딩에 문제 없음 확인 |
+| **Claude Design 온보딩 시작** | CDS .fig 파일 업로드 + IBM Plex Sans KR 폰트 추가. 디자인 시스템 제너레이팅 진행 중 (결과 확인 대기) |
 
 ---
 
@@ -116,6 +119,10 @@
 **폰트 전환 잔여:**
 13. 프로덕트 파일 인스턴스 오버라이드 잔여분 정리
 14. Mixed font 텍스트 수동 정리
+
+**Claude Design PoC:**
+15. Claude Design 디자인 시스템 생성 결과 확인 — CDS 컴포넌트 인식 수준 평가
+16. 인식 결과 기반 CDS 활용 전략 구체화
 
 **모니터링:**
 - Figma MCP 커스텀 폰트 지원 출시 시 → Pretendard 복원 검토
