@@ -1,5 +1,25 @@
 ---
-HANDOFF: Claude -> 재현 (다음 세션 재개용 — Phase B 이어서)
+HANDOFF: Claude -> 재현 (다음 세션)
+Date: 2026-04-21 (Rev.20 후속 — Figma 사본 CDS 교체 + Web Standalone)
+Project: ~/Project/CDS
+Agent: Claude
+Summary: Phase B 이미지 업로드 — `createImage(base64Decode)` 경로로 1건 성공하나 `use_figma` code 파라미터 5KB+ base64 transport truncation 제약 확인 → 1 hash를 9 placeholder에 배포(plumbing 검증). 사용자가 `14332:285690/25548:18524`로 사본 이동 후 CDS 교체 요청 → §0.1 Segment Toggle→TabsList Toggle Value=2, §4.8 Mini Preview×2→Challenge Mini Card 인스턴스. 인스턴스 26→29(19.8→25.2%). 이미지 다양성 원본 해상도 유지가 MCP 경로 불가능(50KB code 한계) 확정 → 방향 전환: Pencil `3F9KM` 시안 그대로 standalone HTML 생성. CSS custom properties로 CDS 토큰 매핑 + 9 원본 PNG 로컬 복사. `exports/2026-04-20_cds-migration/web-standalone/index.html` (gitignore).
+Next-TODO:
+  (1) (선택) 수동 Figma UI 드래그로 9 placeholder 이미지 다양화 — PNG 경로 리뷰 문서 매핑표 참고
+  (2) Creator Card Compact (Pencil iXk8R) CDS 정식 편입 검토 — Rev.19 매핑 논의
+  (3) MCP `use_figma` base64 transport 5KB+ truncation 이슈 Figma 측 보고 검토
+  (4) 프로덕트 작업 재개: P0-3 Slot→Instance Swap (~25건), P0-4 Participant Card 분리
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (Screen `3F9KM`, 158 reusables)
+  - Figma 원본: `t0SK7XaNqw8qIY3PpZw4s7` page `25511:337` screen `25511:379`
+  - Figma 사본(사용자 이동): `t0SK7XaNqw8qIY3PpZw4s7` page `14332:285690` node `25548:18524`
+  - Web Standalone: `exports/2026-04-20_cds-migration/web-standalone/index.html` + `./images/*.png`
+  - 리뷰: `reviews/2026-04-21_pencil-figma-roundtrip-test.md` (Phase B 완료 + Post-B CDS 교체 섹션 추가)
+Commits: (이번 세션 기록 commit)
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Phase B 70% 중간)
 Date: 2026-04-21 (Rev.20 — Pencil↔Figma Roundtrip, Phase B 70%)
 Project: ~/Project/CDS
 Agent: Claude (Director Mode)
