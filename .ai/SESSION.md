@@ -108,6 +108,10 @@
 | **Rev. 4 — Visual Auto-Improve Loop** | 사용자 지적("피그마와 달라") 후 Figma↔Pencil 스크린샷 대조 → diff 식별 → `batch_design` 수정 + `G()` AI 이미지 주입 → 재검증. CMC 시각 일치 ~50→~90%, Badge 3→6, Alert 1→3, CDS Card 시맨틱 교체(Sheet Header Card 신규), Button 라벨 매칭. 총 27→**31 reusables**. 산출: `VISUAL-DIFF-REPORT.md` |
 | **Rev. 5 — Padding Precision Fix** | 사용자 지적("버튼/뱃지 padding 너무 얇아") 후 Figma Plugin API로 원본 padding/height spec 직접 추출 → Pencil 교정. Button pad `[0,16]`→`[8,16]` gap `8`→`6`, Badge radius `pill(9999)`→`8` pad `[6,10]`→`[2,8]`. 교훈: Pencil `[a,b]` padding = `[V,H]`, `U()` 시 height/width 명시 필수 |
 | **Rev. 6 — 전수 비교 점검** | 사용자 요청("토큰/컴포넌트 하나하나 비교")으로 Figma Plugin API 전수 스펙 추출 → 토큰 **51→73 variables** (+22: popover/success/warning/info/chart/sidebar/custom-focus, `--muted-foreground` 값 교정), 컴포넌트 10+ 속성 수정 (Input/Field/Select white bg+stroke, CMC 344w, Participant Card 168w, Card radius 16 등). Input의 fill/stroke 역할 혼동 근본 수정 |
+| **Rev. 7-9 — 자동 루프 + 인스턴스 활용 + 누락 컴포넌트 추가** | Ralph MCP validator 우회 → 세션 내 직접 Figma↔Pencil diff 루프 실행. 31 iter 전수. Alert colored variants/Card Host Info/Meta Row 내부 reusable 승격. Challenge Thumbnail/Avatar Group/Featured Icon/Navbar/Dialog Header/Dots/Nudge/Notification Badge/Message R&S/Lounge Card 15종 추가. **27→51 reusables** |
+| **Rev. 10 — NEW PLAN v2 Phase 0+1** | Team 재플래닝 후: Figma 102 컴포넌트 enumeration + Challify 240 usage 집계 → P0 18종 커버리지 감사 (55.6%→100%). P0 누락 9종 추가 (Icon Scaler/Kbd/TabsTrigger Tag/Section/Input Group Addon Inline/Coin/Messaging Reaction/iOS StatusBar+HomeIndicator). **51→60 reusables**. 산출: discovery.json, usage.json, COVERAGE-REPORT.md |
+| **Rev. 11 — A/B/C 연쇄 Director** | Step A Phase 2 3-Layer Diff (91/100) 5 tickets (Kbd arrows, TabsTrigger Tag/Section, Messaging Reaction, Coin accepted) → Step B P1 15종 추가 (Status, Select Menu Item, TabBar Icon, Dropdown Menu Trigger, Select Menu Label, Navbar Addon Inline, Creator Badge, Fire, Lounge Card Addon Block, Challenge Day Progress, Circle Progress, Segmented Progress, Accordion Item, Fieldset, Page Indicator) → Step C Icon Pipeline (99 icons inventoried, 48 mappings). **60→76 reusables** |
+| **Rev. 12 — P2 17종 추가 (현재 세션)** | Textarea, Tooltip, Breadcrumb + Breadcrumb Item, Combobox + Combobox Menu, Date Picker, Radio Group, Checkbox Group, Switch Toggle, TabsTrigger Toggle, Purchase Button, Content Header, Form Message, Profile Card, Invite Profile Card, TabBar (container w/ 5 tabs). **76→92 CDS reusables + 1 ancillary (Creator Card Compact) = 93 total**. CDS 커버리지 **90.2%** |
 
 ---
 
@@ -138,6 +142,14 @@
 **Claude Design PoC:**
 15. Claude Design 디자인 시스템 생성 결과 확인 — CDS 컴포넌트 인식 수준 평가
 16. 인식 결과 기반 CDS 활용 전략 구체화
+
+**Pencil 이관 다음 세션 재개 지점 (Rev.12 이후):**
+17. **P2 잔여 10여종 추가** — Accordion(standalone), Bell Image, Calendar Block, Challenge List/Mini Card, Challenge Thumbnail Group, Field Legend, Footer, Input Group + Addons + Button + OTP, Item, Kbd Group + Keyboard, Participant Card Authed, Participant Left/Right Column, Pro Creator Card, Select Menu(container), TabsList Section/Tag/Toggle
+18. **Illustrations (P3)** — Character/Contact/Gift/Lounge Badge/Ticket Item Illust, Placeholder Creator/Host/Logo
+19. **Pencil PNG export 버그 재현** — 앱 재시작 후 새 reusable export 재검증
+20. **Layer 3 자동화** — rendered PNG diff 이미지 비교 에이전트 구축
+21. **Drift Monitoring** — discovery.json 스냅샷 diff 알림 메커니즘
+22. **재개 키 파일**: `exports/2026-04-20_cds-migration/pen/cds.pen` (활성 편집 파일), `COVERAGE-REPORT.md`, `qa-tickets.md`, `diff-protocol.md`
 
 **모니터링:**
 - Figma MCP 커스텀 폰트 지원 출시 시 → Pretendard 복원 검토

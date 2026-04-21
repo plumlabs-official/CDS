@@ -1,5 +1,26 @@
 ---
 HANDOFF: Claude -> 재현 (다음 세션 재개용)
+Date: 2026-04-21 14:50:00
+Project: ~/Project/CDS
+Agent: Claude
+Summary: CDS → Pencil 이관 Rev.7-12 대규모 진행. NEW PLAN v2 Phase 0-2 완료 + Step A/B/C 연쇄 Director + Rev.12 P2 17종 추가. **Pencil reusable 27→92 (+1 ancillary)**, CDS 커버리지 90.2%. 73 variables. 자동 Figma↔Pencil diff 루프로 사용자 개입 없이 gap catch하는 파이프라인 확립.
+Next-TODO:
+  (1) **P2 잔여 10여종 추가** (재개 우선):
+      - Structural: Accordion(standalone), Bell Image, Calendar Block, Challenge List/Mini Card, Challenge Thumbnail Group, Field Legend, Footer, Input Group + Addon Block + Button + OTP + OTP Field, Item, Kbd Group + Keyboard, Participant Card Authed, Participant Left/Right Column, Pro Creator Card, Select Menu(container), TabsList Section/Tag/Toggle
+      - Illustrations P3: Character/Contact/Gift/Lounge Badge/Ticket Item Illust, Placeholder Creator/Host/Logo
+  (2) **Pencil PNG export 버그 재현** — 앱 재시작 후 Rev.10 추가 9종 + Rev.11 15종 + Rev.12 17종 (총 41종) PNG 재검증. 현재 get_screenshot은 일부 blank 반환되지만 export_nodes + scale 3x면 대체로 정상.
+  (3) **Layer 3 자동화** — rendered PNG diff 이미지 비교 에이전트. Figma get_screenshot ↔ Pencil export_nodes 동시 호출 → 시각 agent(subagent)로 대조 판정.
+  (4) **Drift Monitoring** — `discovery.json` 스냅샷 diff 감지 메커니즘. CDS Figma 업데이트 시 알림.
+  (5) **Pencil MCP 재시도 이슈** — Ralph subprocess에 MCP 허용 방법 탐색 (현재는 세션 내 직접 루프로 우회 중)
+Commits: cd8fe62 (Rev.11), a7ff82c (Rev.10), 80096bd (재플래닝 meeting), 938b7f2 (Rev.9), be44f22 (Rev.8) + 이번 Rev.12 커밋
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (활성 편집, 93 reusables)
+  - Docs: `exports/2026-04-20_cds-migration/` 폴더 — diff-protocol.md, discovery.json, usage.json, COVERAGE-REPORT.md, qa-tickets.md, icons/inventory.json, icons/mapping.json, icons/audit.md, MIGRATION-PLAN.md, VISUAL-DIFF-REPORT.md
+  - Review: `reviews/2026-04-20_cds-pencil-migration.md` (Rev.1-11 모두 기록)
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — 2026-04-20)
 Date: 2026-04-20 16:40:01
 Project: ~/Project/CDS
 Agent: Claude
