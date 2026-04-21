@@ -1,4 +1,23 @@
 ---
+HANDOFF: Claude -> 재현 (Stitch 라운지 홈 → CDS 교체 완료, 사용자 리뷰 대기)
+Date: 2026-04-22
+Project: /Users/zen/Project/CDS
+Agent: Claude
+Summary: Stitch 생성 라운지 콜드 스타트 홈(`t0SK7XaNqw8qIY3PpZw4s7 / 25577:29746` 390×2664)을 복제 → 새 스크린 `25679:337` "4 — CDS 교체본"에 CDS 인스턴스 39종 교체 + 토큰 바인딩. Navbar FULL + TabsList Toggle Value=2(피드/라운지) + menu·search 아이콘 / Hero Badge NEW START / Creator Spotlight Avatar XL + Creator Badge Pro + Button×2 / Explore TabsTrigger Tag×4(전체 Selected) + Button Small×2 / Trending Avatar XL×4 + Creator Badge×4 / Popular Avatar Medium×2 + Badge BTS×2 + Button arrow×2 + Link / Challenge Mini Card×2 + Button Secondary → arrow-right / TabBar Active=Home. 토큰 4종(card/foreground/muted-foreground/border). 네이밍 39 rename. QA G1/G3/G5 PASS, G2 8/10 PASS(Profile Card/Lounge Card NA), G4 PARTIAL. 리뷰: `reviews/2026-04-22_stitch-lounge-cds-migration.md`. 원본 `25577:29746` 보존.
+Next-TODO:
+  (1) 사용자 리뷰 + 승인 → `25679:337` 라운지 탭 최종 채택 여부
+  (2) CDS 신규 컴포넌트 검토(Team 모드 권고) — Creator Tier Card(Explore용 hero 중심), Lounge Hero Card(Popular horizontal scroll용)
+  (3) Challenge Mini Card 기본 썸네일 override
+  (4) 3단계+ 깊이 Container 잔존 네이밍 정돈(사용자 판단)
+  (5) 이전 세션 Next-TODO 계승: CDS-max `25582:337` / HTML-literal `25655:337` 이미지 원본 매칭 방안
+Key-Files:
+  - 작업 스크린: page `14332:285690` node `25679:337` (4 — CDS 교체본, 390×2664)
+  - 원본 Stitch: `25577:29746` (보존)
+  - 리뷰: `reviews/2026-04-22_stitch-lounge-cds-migration.md`
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Claude -> 재현 (CDS-max 구현 완료 + HTML 핸드오프 재구현 / 이미지 한계)
 Date: 2026-04-21 23:50:00
 Project: /Users/zen/Project/CDS
