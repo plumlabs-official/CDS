@@ -1,5 +1,25 @@
 ---
 HANDOFF: Claude -> 재현 (다음 세션 재개용)
+Date: 2026-04-21 (Rev.19 — Phase 1-4 partial)
+Project: ~/Project/CDS
+Agent: Claude
+Summary: Team Plan Phase 1-5 실행. **Phase 1**: L1+L2 inspect 인프라(cds-components.json 120 + mapping.full.json 155 + inspect-protocol.md). **Phase 2**: 11-batch 전수 inspection 100%. PASS ~80, MINOR ~40, MAJOR 12, CRITICAL 3, ACCEPTED ~10. **Phase 3**: triage-report.md (Atomic/Molecule/Organism × structural/dim/label). **Phase 4 partial**: C3 Label mapping fix(form primitive) + M1 CT Thumbnail 신규 3종(X Small 24/Medium 40/Large 48) + 기존 라벨 변경 2(64→2X Large, 128→5X Large) + M2 CT Group 5종 재구성(Avatar Group Rev.18 패턴: 6 children, CDS spec gap -16/-20/-26/-30). **155→158 reusables**. 주요 발견: Pencil size scale 라벨 패턴(F6A53 Avatar / CT Thumbnail Medium/Large) — CDS와 한 두 step offset.
+Next-TODO:
+  (1) **Phase 4 잔여 fix**: C1 Dialog Header layout 검증(Figma children trace), C2 Content Header variant 재확인, M3 Tooltip caret 추가, M4 Switch row+label mapping 정정(RmT6o → CDS .Switch Toggle Core), M5 Drawer ACCEPT 결정 명문화.
+  (2) **Phase 5 잔여**: drift monitor — `discovery.json` snapshot diff 메커니즘. CDS 업데이트 시 자동 재검증.
+  (3) **Layer 3 자동 subagent 연결**: 현재 Phase 2는 Claude 세션 manual orchestrator. subagent로 자동 실행.
+  (4) **Tooltip K3-1/K3-2 ticket resolve**: 라벨 convention + Primary default style.
+  (5) **프로덕트 작업**: P0-3 Slot→Instance Swap (~25건), P0-4 Participant Card 분리.
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (158 reusables)
+  - Layer3: `exports/2026-04-20_cds-migration/layer3/` — cds-components.json, mapping.full.json, inspect-protocol.md, diffs/batch{1..11}-*.json (11 files), triage-report.md
+  - Docs: `qa-tickets.md` Step L
+  - 백업: `cds.pen.bak-rev19` (Phase 4 fix 전), `cds.pen.bak-rev19-after` (fix 후)
+Commits: CDS 0601d83 (Rev.18) + 158de53 (record) + 이번 Rev.19 record
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.18 + Team Plan)
 Date: 2026-04-21 (Rev.18 + Team Plan)
 Project: ~/Project/CDS
 Agent: Claude
