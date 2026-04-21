@@ -1,4 +1,22 @@
 ---
+HANDOFF: Claude -> 재현 (CDS-max 구현 완료 + HTML 핸드오프 재구현 / 이미지 한계)
+Date: 2026-04-21 23:50:00
+Project: /Users/zen/Project/CDS
+Agent: Claude
+Summary: (1) CDS-max 스크린 `25582:337` §4.1–§4.8 전체 구현 완료 — Navbar CDS 교체, News empty state, Trending Avatar 40 통일 + user-plus 아이콘, back arrow/red dot 제거 등 사용자 피드백 5건 반영. (2) Claude Design 두 번째 URL `7mt5j9x3k8ek0bNb_MuoNw` curl -i로 tar.gz 17MB 수신 → chat transcript로 Option β my_lounge 의도 재확인. (3) HTML-literal raw Screen `25655:337` 신규 — Phone 390×2020에 CDS 인스턴스 0, IBMPlexSansKR 폰트 + 모든 섹션/StatusBar/Navbar/TabBar/HomeIndicator raw frame으로 구현. Hug sizing 회귀 117개 일괄 정규화. **한계: `figma.createImageAsync` + `fetch()` 모두 use_figma 샌드박스 미지원** 확인 → 원본 Unsplash 이미지 적용 불가, 파일 내 기존 imageHash 재활용(creator 얼굴 불일치 남음). git pull로 a5bf921/92ad55d 수신 — cds.pen(418K) 포함 exports 크로스 동기화 완료.
+Next-TODO:
+  (1) **이미지 원본 매칭** — 옵션 A(Node.js로 16 Unsplash URL 다운로드→JPEG 분할 transport) / 옵션 B(Chrome headless PNG 렌더→사용자 수동 drop) / 옵션 C(현 placeholder 유지). 사용자 판단 대기.
+  (2) Section header glyph 정밀화(Compass/TrendingUp/Megaphone/MapIcon lucide path) + §4.6 PRO/✕ overlay.
+  (3) CDS-max `25582:337` 활용 vs HTML-literal `25655:337` 병렬 유지 여부 결정.
+  (4) Rev.20 Phase B Figma 사본 `25548:18524` — 추가 polish 여부.
+Key-Files:
+  - CDS-max 스크린: `t0SK7XaNqw8qIY3PpZw4s7` page `25577:23646`(Test) node `25582:337`(390×1877 5 children: StatusBar/Navbar/Body/TabBar/HomeIndicator)
+  - HTML-literal: `25655:337` (390×2020 Phone + 2000h Screen)
+  - Claude Design 번들: `/tmp/handoff2/lounge-design/` (17MB tar.gz 추출)
+Commits: a5bf921, 92ad55d(git pull) + (이번 세션 기록 commit)
+---
+
+---
 HANDOFF: Claude -> 재현 (다른 로컬 or 다음 세션 — exports 동기화 체계)
 Date: 2026-04-21 23:08:00
 Project: /Users/zenkim_office/Project/CDS
