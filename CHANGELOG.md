@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- CDS → Pencil **Rev.14 Visual Validation + Auto Fix** — Rev.13 추가 34종 Figma↔Pencil 렌더 대조 후 17 visual issues 자동 수정. 공통 원인: fit_content+fill_container 텍스트 세로 wrap, layout 미지정, 빈 image slot, masonry 동일 높이. G() AI 이미지 3, masonry height override 6, width 고정 11, layout 명시 다수. 기존 92종 샘플 8개 정상 확인. **127 reusables 유지, 시각 검증 완료**.
 - CDS → Pencil **Rev.13 P2 Structural 26종 + P3 Illust 8종 추가** — Input Group family 5, Participant family 3, TabsList 3, Challenge Card 3, Container 5, 단독 7, Illust 8. **Pencil reusable 93 → 127** (126 CDS + 1 ancillary). **CDS 102종 전체 매칭 100%**. Illust 8종은 lucide placeholder(PNG export 버그 우회), Keyboard는 iOS native 권장.
 - CDS → Pencil Rev.12 P2 17종 추가 (Textarea, Tooltip, Breadcrumb, Combobox, Date Picker, Radio Group, Checkbox Group, Content Header, Form Message, Profile Card, Invite Profile Card, Purchase Button, TabBar, TabsTrigger Toggle, Switch Toggle, Breadcrumb Item, Combobox Menu) — Pencil reusable 76 → 92, CDS 커버리지 90.2%
 - CDS → Pencil Rev.11 A/B/C 연쇄 Director PASS — Phase 2 3-Layer Diff + P1 15종 추가 + Icon Pipeline (51→76 reusables)

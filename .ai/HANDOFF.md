@@ -1,5 +1,22 @@
 ---
 HANDOFF: Claude -> 재현 (다음 세션 재개용)
+Date: 2026-04-21 (Rev.14)
+Project: ~/Project/CDS
+Agent: Claude
+Summary: CDS → Pencil **Rev.14 Visual Validation + Auto Fix 완료**. Rev.13 추가 34종 Figma↔Pencil 렌더 대조 후 **17 visual issues 자동 수정**. 공통 원인: fit_content+fill_container 충돌(텍스트 세로 wrap), layout 미지정, 빈 image slot, masonry 동일 높이. G() AI 이미지 3건, masonry height override 6건, width 고정 11건, layout 명시 다수. 기존 92종 샘플 8개 점검 모두 정상. **127 reusables 유지, CDS 102종 매칭 100% + 시각 검증 완료**. Step E 문서화(qa-tickets.md).
+Next-TODO:
+  (1) **Illust 업그레이드** (재개 우선) — 8종 lucide placeholder를 Figma REST API PNG export로 교체. 정확한 비주얼 전달용.
+  (2) **Layer 3 자동화** — rendered PNG diff 이미지 비교 에이전트 (Figma get_screenshot ↔ Pencil export_nodes visual subagent 자동 대조).
+  (3) **Drift Monitoring** — discovery.json 스냅샷 diff 감지. CDS Figma 업데이트 시 알림.
+  (4) **Pencil MCP Ralph 호환** — subprocess MCP 허용 방법 탐색.
+Commits: (이번 Rev.14 커밋)
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (127 reusables, visual fix 반영)
+  - Docs: `exports/2026-04-20_cds-migration/qa-tickets.md` (Step E E1-E17 tickets)
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.13)
 Date: 2026-04-21 (Rev.13)
 Project: ~/Project/CDS
 Agent: Claude
