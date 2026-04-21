@@ -41,3 +41,4 @@ exports/
 # Ralph autonomous loop artifacts (local only)
 .ralph/
 .ralphrc
+demo/
