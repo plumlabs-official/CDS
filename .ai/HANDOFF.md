@@ -1,5 +1,26 @@
 ---
 HANDOFF: Claude -> 재현 (다음 세션 재개용)
+Date: 2026-04-21 (Rev.19 — Phase 1-5 완료)
+Project: ~/Project/CDS
+Agent: Claude
+Summary: Team Plan Phase 1-5 완료. Phase 1 inspect 인프라. Phase 2 11-batch 전수 inspection 100%. Phase 3 Triage. **Phase 4 — Critical 3/3 해결**(C1/C2 mapping fix로 downgrade, C3 ACCEPTED) + M1 CT Thumbnail 신규 3종 + 라벨 변경 2 + M2 CT Group 5 재구성 + M3~M6 ACCEPT 명문화. **Phase 5**: screenshot 재검증 ✓ + `drift-monitor.md` 체크 절차/Gate/cadence 문서화. **155→158 reusables**. 주요 패턴 발견: Pencil size scale 라벨 CDS 대비 offset(F6A53/CT Thumbnail/Featured Icon Square 공통).
+Next-TODO:
+  (1) **Layer 3 visual subagent 자동 구동** — 현재 Phase 2는 manual orchestrator. subagent로 자동화.
+  (2) **drift monitor 주간 체크** — 2026-04-28 월요일부터 cadence 시작.
+  (3) **variants-index batch 2 complete** — 120 전체 variants 스냅샷 (batch1은 42 partial).
+  (4) **Tooltip K3-1/K3-2 final resolve** (라벨 convention + Primary default style 사용자 결정).
+  (5) **wRyh9 Featured Icon Square Small 라벨 교정**(optional, F6A53 패턴).
+  (6) **프로덕트 작업 전환**: P0-3 Slot→Instance Swap (~25건), P0-4 Participant Card 분리.
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (158 reusables)
+  - Layer3: `cds-components.json`, `mapping.full.json` (C1/C2/M3/M4/M5/M6 notes 반영), `inspect-protocol.md`, `diffs/batch{1..11}-*.json`, `triage-report.md`, `drift-monitor.md`
+  - Docs: `qa-tickets.md` Step L (L1~L9)
+  - 백업: `cds.pen.bak-rev19-after` (Phase 4 fix 후)
+Commits: CDS 6d204ab (Rev.19 partial), 이번 Rev.19 final record
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.19 partial)
 Date: 2026-04-21 (Rev.19 — Phase 1-4 partial)
 Project: ~/Project/CDS
 Agent: Claude
