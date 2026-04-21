@@ -1,5 +1,16 @@
 ---
-HANDOFF: Claude -> 재현 (다음 세션)
+HANDOFF: Claude -> 재현 (CDS-max 플래닝 중단, 재개용)
+Date: 2026-04-21 22:00:00
+Project: /Users/zen/Project/CDS
+Worktree: main
+Agent: Claude (Opus 4.7 1M)
+Summary: 사용자가 `cold-start-lounge-home-prd.md` v0.3로 Figma 스크린 추가 제작 요청. /team 3역할(Design Director/Product Leader/AI Ops Expert) Simulation 완료 → CDS-max 전략 확정(Profile Card Vertical + Pro Creator Card 전면 교체, §4.3 Spotlight는 커스텀 유지). 사용자가 타겟 노드 지정 `t0SK7XaNqw8qIY3PpZw4s7 / 25577:23646 (Test 페이지)` + 이미지 맥락 매칭 전략 요구. Shell `25582:337` 생성까지 착수(StatusBar/TopBar 검정 pill 세그먼트/Body/TabBar CDS Active=Feed/HomeIndicator). 이후 사용자 `/record`로 중단.
+Next-TODO: (1) 이미지 맥락 매핑 재개 — 페이지 14332:285690 하위 Profile Card/Avatar/Challenge Mission Card Thumbnail 사용처에서 해시 수집(아바타용 원형 20-80pt, 챌린지 썸네일 중형 100-250pt, hero 대형 300+pt 분류). (2) §4.1~§4.8 섹션별 구현 (Hero/MyLounge/Spotlight/Categories Profile Card Vertical/Trending/Popular Pro Creator Card/News/Bait). 총 예상 4-5회 use_figma 호출. (3) QA + CDS 커버리지 리포트 + reviews/ 기록. 참조: `meetings/2026-04-21_lounge-cold-start-cds-max-planning.md` + plumlabs-context `25490/25560/25568` 3 시안.
+Commits: (이번 기록 commit)
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.20 후속)
 Date: 2026-04-21 (Rev.20 후속 — Figma 사본 CDS 교체 + Web Standalone)
 Project: ~/Project/CDS
 Agent: Claude
