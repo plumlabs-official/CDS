@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- CDS → Pencil **Rev.14-2 Size Structural Variants + Visual Polish** — 사용자 피드백 "Participant Card Authed 3 size 누락"에 Coach Variant Mapping Strategy 적용. Size Structural만 별도 reusable, State/Theme는 prop/variable 결정. 신규 6 reusables (Participant Card Authed 4:5/9:16 + Challenge Thumbnail Group XS/S/M/L). Visual polish 4건(arrow-up icon, 6-thumbnail overlap, Mini Card width, Cover Pay Header price). COVERAGE-REPORT에 Variant Mapping Strategy 문서화. **127→133 reusables**.
 - CDS → Pencil **Rev.14 Visual Validation + Auto Fix** — Rev.13 추가 34종 Figma↔Pencil 렌더 대조 후 17 visual issues 자동 수정. 공통 원인: fit_content+fill_container 텍스트 세로 wrap, layout 미지정, 빈 image slot, masonry 동일 높이. G() AI 이미지 3, masonry height override 6, width 고정 11, layout 명시 다수. 기존 92종 샘플 8개 정상 확인. **127 reusables 유지, 시각 검증 완료**.
 - CDS → Pencil **Rev.13 P2 Structural 26종 + P3 Illust 8종 추가** — Input Group family 5, Participant family 3, TabsList 3, Challenge Card 3, Container 5, 단독 7, Illust 8. **Pencil reusable 93 → 127** (126 CDS + 1 ancillary). **CDS 102종 전체 매칭 100%**. Illust 8종은 lucide placeholder(PNG export 버그 우회), Keyboard는 iOS native 권장.
 - CDS → Pencil Rev.12 P2 17종 추가 (Textarea, Tooltip, Breadcrumb, Combobox, Date Picker, Radio Group, Checkbox Group, Content Header, Form Message, Profile Card, Invite Profile Card, Purchase Button, TabBar, TabsTrigger Toggle, Switch Toggle, Breadcrumb Item, Combobox Menu) — Pencil reusable 76 → 92, CDS 커버리지 90.2%

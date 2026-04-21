@@ -1,5 +1,23 @@
 ---
 HANDOFF: Claude -> 재현 (다음 세션 재개용)
+Date: 2026-04-21 (Rev.14-2)
+Project: ~/Project/CDS
+Agent: Claude
+Summary: CDS → Pencil **Rev.14-2 Size Structural Variants + Visual Polish 완료**. 사용자 피드백 "Participant Card Authed 3 size 누락, 전수 조사 필요"에 Coach Variant Mapping Strategy 적용 — Size Structural만 별도 reusable, State/Theme는 prop/variable 바인딩 결정. 신규 6 reusables: Participant Card Authed 4:5/9:16 + Challenge Thumbnail Group XS/S/M/L. Visual polish 4건. COVERAGE-REPORT에 Variant Mapping Strategy 문서화. **127→133 reusables**. Step F 문서화(qa-tickets.md).
+Next-TODO:
+  (1) **렌더 검증** (재개 우선) — Pencil 앱 재시작 후 신규 variants PNG export (현재 새 reusable screenshot blank 버그 있음)
+  (2) **Illust 업그레이드** — 8종 lucide placeholder를 Figma REST API PNG export로 교체
+  (3) **Rev.12 이전 92종 Size Structural 검토** — Button size variants 추가 필요 여부 판단 (Avatar/Featured Icon/Challenge Thumbnail은 이미 완료 확인)
+  (4) **Layer 3 자동화** — rendered PNG diff 에이전트
+  (5) **Drift Monitoring** — discovery.json 스냅샷 diff 알림
+Commits: (이번 Rev.14-2 커밋)
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (133 reusables)
+  - Docs: `COVERAGE-REPORT.md` (Variant Mapping Strategy 섹션), `qa-tickets.md` (Step F F1-F10 tickets)
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.14)
 Date: 2026-04-21 (Rev.14)
 Project: ~/Project/CDS
 Agent: Claude
