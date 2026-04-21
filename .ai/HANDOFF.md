@@ -1,5 +1,28 @@
 ---
-HANDOFF: Claude -> 재현 (다음 세션 재개용)
+HANDOFF: Claude -> 재현 (다음 세션 재개용 — Phase B 이어서)
+Date: 2026-04-21 (Rev.20 — Pencil↔Figma Roundtrip, Phase B 70%)
+Project: ~/Project/CDS
+Agent: Claude (Director Mode)
+Summary: PRD(cold-start-lounge-home-prd.md v0.3) → Pencil Lounge Home Cold 합성 + Figma 이식 테스트. **Phase A 완료**: Pencil `3F9KM` screen (6 섹션 + nav + tabbar, clip + 9 AI 이미지, reusables 20+ 종, Gate G1/G2/G3 PASS). **Phase B 70%**: Figma `25511:337` 테스트 페이지 + `25511:379` 스크린 (CDS instance 10종 + 커스텀 composition). Unsplash 이미지 fetch 샌드박스 제약으로 fallback placeholder. 다음 세션에서 이어서.
+Next-TODO (Phase B 재개):
+  (1) Pencil AI 생성 이미지 후보 리스트 확인: `exports/2026-04-20_cds-migration/images/generated-*.png` 중 Spotlight/§4.4×3/§4.6×3/§4.8×2 = 9장.
+  (2) Figma에 PNG 수동 upload: (a) 로컬에서 파일 선택 후 Figma UI에 drag, 또는 (b) use_figma의 figma.createImage(uint8Array) — 파일 바이트 로드 방법 탐색.
+  (3) 각 Figma placeholder rectangle fill을 업로드한 imageHash로 교체 (§4.3 spotlight, §4.4 3 cards, §4.6 3 cards, §4.8 2 mini).
+  (4) QA Reviewer agent 스폰 (헤드리스 격리) → G4 instance 사용률, G5 Pencil/Figma 시각 대조, G6 이식 절차 재현성.
+  (5) 최종 director record.
+Key-Files:
+  - PRD: `/Users/zenkim_office/Downloads/cold-start-lounge-home-prd.md`
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (Screen `3F9KM`, 158 reusables)
+  - Figma: `t0SK7XaNqw8qIY3PpZw4s7` page `25511:337` screen `25511:379` body `25511:410`
+  - Figma URL: https://www.figma.com/design/t0SK7XaNqw8qIY3PpZw4s7?node-id=25511-379
+  - 리뷰: `reviews/2026-04-21_pencil-figma-roundtrip-test.md` (Phase A 상세 + Phase B 진행 + 재개 지점 + 절차 초안)
+  - Design Director 매핑 (agent 출력), Product Leader 결정 (agent 출력) — 전체 맥락은 리뷰 문서에
+  - 백업: `cds.pen.bak-rev20`
+Commits: (이번 Rev.20 record commit)
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.19 Phase 1-5 완료)
 Date: 2026-04-21 (Rev.19 — Phase 1-5 완료)
 Project: ~/Project/CDS
 Agent: Claude
