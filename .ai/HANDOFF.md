@@ -1,4 +1,22 @@
 ---
+HANDOFF: Claude -> 재현 (Stitch 사본 `25548:18524` 이미지 11건 맥락 교체 완료)
+Date: 2026-04-22 00:51:10
+Project: /Users/zen/Project/CDS
+Agent: Claude
+Summary: 사용자가 Rev.20 후속 1에서 만든 Stitch 사본 "4"(`25548:18524` 375×2019, `14332:285690` "[리뷰 완료] Feed and Lounge" 페이지)의 13 이미지 중 11건을 맥락 맞게 교체. 사용자 정정 "스티치 거 제외" 반영해 Stitch 프레임(`25577:23386`·`25577:24303`·`25577:28356`)의 34 해시를 화이트리스트 제외 후 SECTION 3종(Tab_feed/Consumer Use Case/Creator Case)만 스캔(109 unique non-Stitch). 최종 매핑: §4.3 Spotlight `3f3317f1`(Consumer UC Header Background) / §4.4 Card 2·3 `024e1518`·`0ca588e2`(Consumer UC 167×221) / §4.6 Card 1~4 `51d02539`·`97a9e89b`·`89bd8270`·`ed15a4f5` / §4.8 Challenge 1 `07cd6d68` / §4.8 Challenge 2 `63a728a2`(Tab_feed "Challenge Mission Card Thumbnail" — 이름 자체 매칭) / §4.8 Avatar 1·2 `7439ea93`·`1967330d`(Tab_feed Profile 62×62). 중간 시도의 키보드(9997a553)/도시풍경(7fac65e8)/SUNO(8e497ea1)/AI 테크(789d0cee) 4건 재교정. 노드 ID stale 이슈(swap 후 `I...` ID 재사용 무효) → name+hash 재탐색으로 우회. 유지: §4.4 Card 1(`644b0532`, 기존 non-Stitch) + §4.3 logo(`32f351b8`). Figma 직접 편집, 로컬 파일 변경 없음.
+Next-TODO:
+  (1) 사용자 리뷰 후 §4.4 Card 1(`644b0532`) 적절성 확인 — 필요시 Consumer UC 풀에서 추가 교체
+  (2) Stitch 사본 3종(`25577:23386`/`25577:24303`/`25577:28356`) 변형 중 CDS 교체 추가 필요 여부 사용자 판단
+  (3) 병렬 작업본 `25679:337` "4 — CDS 교체본"(전 세션)에도 동일 이미지 맥락 정리 필요 여부 판단
+  (4) 이전 세션 Next-TODO 계승: CDS-max `25582:337` / HTML-literal `25655:337` 이미지 원본 매칭 방안
+Key-Files:
+  - 사본 스크린: page `14332:285690` node `25548:18524` "4" (375×2019)
+  - 사용된 소스 해시: Tab_feed/Consumer Use Case/Creator Case SECTION on same page
+  - 리뷰(전): `reviews/2026-04-22_stitch-lounge-cds-migration.md`
+Commits: (이번 record — 로컬 파일 변경은 SESSION/HANDOFF만)
+---
+
+---
 HANDOFF: Claude -> 재현 (Stitch 라운지 홈 → CDS 교체 완료, 사용자 리뷰 대기)
 Date: 2026-04-22
 Project: /Users/zen/Project/CDS
