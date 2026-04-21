@@ -1,5 +1,24 @@
 ---
 HANDOFF: Claude -> 재현 (다음 세션 재개용)
+Date: 2026-04-21 (Rev.18)
+Project: ~/Project/CDS
+Agent: Claude
+Summary: CDS → Pencil **Rev.18 Avatar/Avatar Group Structural 재편 완료**. 사용자 요청 "pencil 관련 남은 작업 진행". Rev.17 신규 15종 screenshot 전수 렌더 검증 PASS(blank 0). Avatar Group 기존 KwYkH(Medium) CDS spec 불일치 발견 — 180×40/6children/gap -12 원본 vs 수정 전 fit_content/4children/gap -8. 동시에 F6A53 "Avatar Large"(56×56) 실제는 X Large 라벨 불일치. 수정: F6A53 rename "Avatar X Large" + KwYkH 6 children 재편 + 신규 Avatar 3종(2X Small 20/X Small 24/Large 48) + Avatar Group 4종(2X Small 85×20 gap -7 / X Small 94×24 gap -10 / Small 137×32 gap -11 / Large 218×48 gap -14). 각 6 avatars + 마지막 "+3" indicator. Variant Mapping Strategy 일관: Avatar simple scale → prop override, Avatar Group structural(내부 ref size 교체) → 분리. **148→155 reusables**. Step J 문서화(qa-tickets.md).
+Next-TODO:
+  (1) **Layer 3 자동화** — rendered PNG diff 이미지 비교 에이전트 (Figma get_screenshot ↔ Pencil export_nodes → visual subagent 대조).
+  (2) **Drift Monitoring** — discovery.json 스냅샷 diff 알림.
+  (3) **Illust 업그레이드** — lucide placeholder → Figma REST API PNG export → Pencil image fill 교체.
+  (4) **프로덕트 작업 전환**: P0-3 Slot → Instance Swap (~25건), P0-4 Participant Card 분리.
+  (5) **Claude Design PoC 재테스트**.
+Commits: (이번 Rev.18 커밋)
+Key-Files:
+  - Pencil: `exports/2026-04-20_cds-migration/pen/cds.pen` (155 reusables)
+  - Docs: `qa-tickets.md` Step J, `COVERAGE-REPORT.md` Variant Mapping Strategy
+  - 백업: `cds.pen.bak-rev18`
+---
+
+---
+HANDOFF: Claude -> 재현 (과거 — Rev.17)
 Date: 2026-04-21 (Rev.17)
 Project: ~/Project/CDS
 Agent: Claude
