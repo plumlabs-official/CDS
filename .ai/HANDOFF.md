@@ -1,4 +1,23 @@
 ---
+HANDOFF: Claude -> 재현 (다른 로컬 or 다음 세션 — exports 동기화 체계)
+Date: 2026-04-21 23:08:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: exports 크로스 로컬 동기화 체계 수립. `.gitignore` 수정으로 `exports/` 전체 제외 → 대용량/백업만 제외로 전환. `cds.pen` 활성(409K) + `layer3/` drift 체계 + 루트 문서 6종 = 34 files ~700KB tracking. `.pen` 409K 경량이라 LFS 불필요 판정. 커밋 92ad55d + push 완료. 다른 로컬 `git pull` 시 Rev.19 drift 체계 + 활성 cds.pen 즉시 접근 가능.
+Next-TODO:
+  (1) **다른 로컬에서 `git pull`** — cds.pen + layer3/ + 루트 문서 수신 후 즉시 재개.
+  (2) **`.pen` 동시 편집 금지** — 바이너리라 양 로컬 merge 불가. 한 번에 한 로컬에서만 편집.
+  (3) CDS-max 시안 재개 (`.ai/RESUME-CDS-MAX.md` — Shell `25582:337` 이후 §4.1~§4.8 8섹션 미착수).
+  (4) 2026-04-28 월요일 Rev.19 drift monitor 주간 체크 시작 (`exports/2026-04-20_cds-migration/layer3/drift-monitor.md`).
+  (5) 대기 — P0-3 Slot→Instance Swap (~25건), P0-4 Participant Card 분리.
+Key-Files:
+  - Pencil 활성: `exports/2026-04-20_cds-migration/pen/cds.pen` (158 reusables, tracked)
+  - Drift 체계: `exports/2026-04-20_cds-migration/layer3/` (mapping.full.json, diff batches, drift-monitor.md, triage-report.md)
+  - 재개 가이드: `.ai/RESUME-CDS-MAX.md`
+Commits: 92ad55d + (이번 세션 기록 commit)
+---
+
+---
 HANDOFF: Claude -> 재현 (CDS-max 플래닝 중단, 재개용)
 Date: 2026-04-21 22:00:00
 Project: /Users/zen/Project/CDS
