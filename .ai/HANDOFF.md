@@ -1,4 +1,20 @@
 ---
+HANDOFF: Codex -> 재현 (CDS 컴포넌트 맥락 그룹 배치 하네스 추가)
+Date: 2026-04-28 17:44:37
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 보고 "`Creator Pro Banner`는 `Lounge Card Group`으로 이동했고, 앞으로도 맥락을 공유하는 CDS 컴포넌트 그룹에서 작업" 요청에 따라 재발 방지 하네스 가동. Figma CDS에서 `Creator Pro Banner`(`21385:4415`)가 `Components > Composed > Lounge Cards > Main content` 아래 관련 컴포넌트 sibling으로 배치된 것 확인. 로컬 하네스에는 Context Group Placement 게이트 추가: 컴포넌트 생성 전 group node ID/path/sibling 근거 기록, 완료 전 parent path 일치 검증, current page/root 임시 생성 후 방치 금지.
+Next-TODO:
+  (1) 이후 CDS 컴포넌트 생성/수정 시 Phase 2 proposal에 `componentGroupNodeId`, `componentGroupPath`, `placementReason` 필수 기록.
+  (2) 관련 그룹이 없으면 임시 배치하지 말고 사용자에게 새 그룹 생성 또는 대체 그룹 결정을 요청.
+Key-Files:
+  - Rule: `.claude/rules/qa-rubric.md`
+  - Skill: `.claude/skills/cds-make-component/SKILL.md`
+  - Log: `CHANGELOG.md`
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Claude -> 재현 (CDS Components 페이지 24그룹 quick scan + Radio Group 진단)
 Date: 2026-04-28 17:15:00
 Project: /Users/zenkim_office/Project/CDS
