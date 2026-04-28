@@ -1,0 +1,40 @@
+{
+  "date": "2026-04-28",
+  "context": "CDS Asset 섹션 정리 plan v3 — Wave 0 사전 검증",
+  "tests": {
+    "0.1_reactions_preserved_on_swap": {
+      "method": "임시 SET A (Variant=One, Two), instance + parent wrapper에 reactions seeding, swapComponent(One→Two) 후 재귀 백업/비교",
+      "result": {
+        "before_keys": ["", "/One#0", "__PARENT__"],
+        "after_keys": ["", "__PARENT__"],
+        "missing_after_swap": ["/One#0"],
+        "post_swap_main": "Variant=Two"
+      },
+      "interpretation": {
+        "inst_root_reactions": "preserved",
+        "parent_wrapper_reactions": "preserved (swap에 영향 X)",
+        "instance_descendant_reactions": "자식 노드 이름이 바뀌면 path key 미스매치. 단 swap이 일어났을 때만. variant value rename에선 자식 구조 무변동"
+      }
+    },
+    "0.2_auto_rebind_on_value_rename": {
+      "method": "별도 SET B (Mode=Foo, Bar). instance(Foo) 생성 후 variant 'Foo'를 'Renamed'로 rename, 인스턴스 자동 갱신 검증",
+      "result": {
+        "before": { "mainName": "Mode=Renamed (post-rename 시점 동일 객체)", "props.Mode.value": "Foo" },
+        "after": { "mainName": "Mode=Renamed", "props.Mode.value": "Renamed" },
+        "auto_rebound": true,
+        "main_id_unchanged": true
+      }
+    }
+  },
+  "decision": {
+    "wave_3_strategy": "variant value rename 사용. swap 호출 불필요 — 인스턴스 자동 재매핑이 작동",
+    "manual_restore": false,
+    "rationale": "rename은 master/instance 메타데이터만 변경. 자식 구조/이름 무변동 → reactions 위험 0. swapComponent 미사용",
+    "preflight_addition": "사용처 instance 내부 자식에 reactions 있는지 BEFORE에서 점검. 있으면 별도 보고 + 수동 복원 단계 추가"
+  },
+  "cleanup": {
+    "canary_page_removed": true,
+    "child_count_at_removal": 4,
+    "verified_no_residue": true
+  }
+}

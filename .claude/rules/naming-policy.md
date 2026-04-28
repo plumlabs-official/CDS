@@ -18,7 +18,7 @@
 | 레이어명 | **Title Case 공백** | `Chat Area`, `Feed Section` |
 | 컴포넌트 Display Name | **Title Case 공백** | `Alert Dialog`, `Profile Card` |
 | Variant Property Key | **camelCase** | `size`, `variant`, `showIcon` |
-| Variant Property Value | **lowercase** | `default`, `destructive`, `sm` |
+| Variant Property Value | **Title Case / Pascal Case** | `Default`, `Destructive`, `Small`, `Challenge` |
 | Boolean Property | **Title Case 공백 + Show/Is/Has** | `Show Icon`, `Is Active`, `Show Badge` |
 | Variant 슬래시 | **Title Case** | `Button/Primary`, `Card/Outline` |
 
@@ -32,6 +32,7 @@
 | `Is Active` | `isActive` | 동일 |
 | `Size` | `size` | lowercase 유지 |
 | `Type` | `type` (또는 `variant`) | lowercase 유지 |
+| `Type=Challenge` | `type: "challenge"` | value는 코드 변환 시 lowercase/enum normalize |
 
 ## 3. 네이밍 공식
 

@@ -1,4 +1,165 @@
 ---
+HANDOFF: Codex -> 재현 (Lounge Hero Banner 완료 + asset cleanup 기록)
+Date: 2026-04-28 15:25:35
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 중단된 `Lounge Hero Banner` 컴포넌트화 작업 완료. CDS `21320:6725`(key `55133e898d97dbe3bf370cc5fc3cda6009c2d0c2`)를 원본 `Lounge Header Area` 기준으로 보정하고, 사용자 publish 후 제품 파일 로컬 `Lounge Header Area` 2건(`25830:45346`, `25963:51194`)을 CDS instances `26158:397`, `26158:450`으로 교체. remaining local frame 0, instanceCount 2, exposed props `Title`/`Subtitle`. `reviews/2026-04-28_asset-cleanup.md` + `exports/2026-04-28_asset-cleanup/canary-reactions.json`도 기록 대상에 포함.
+Next-TODO:
+  (1) 필요 시 Figma UI에서 `26158:397`, `26158:450` visual 확인.
+  (2) Asset Section Cleanup Wave 4는 CDS publish + Challify library update 사용자 수동 작업 필요.
+Key-Files:
+  - CDS component: https://www.figma.com/design/H36eNEd6o7ZTv4R7VcyLf2/CDS?node-id=21320-6725
+  - Product instances: `t0SK7XaNqw8qIY3PpZw4s7/26158:397`, `t0SK7XaNqw8qIY3PpZw4s7/26158:450`
+  - Review: `reviews/2026-04-28_asset-cleanup.md`
+Commits: (이번 record commit)
+---
+
+---
+HANDOFF: Codex -> 재현 (Popular Lounge Card 제품 파일 사용처 교체 완료)
+Date: 2026-04-28 14:43:56
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 CDS publish 완료 후 제품 파일에서 `Popular Lounge Card` key `106b611f448401ea6d28cababfb9a84651e923dc` import 성공. Popular Section `25897:15912`의 4개 local wrapper `New Lounge Card` frame(`25897:16286`, `25897:16716`, `25897:16746`, `25897:16770`)을 CDS `Popular Lounge Card` instances(`26138:451`, `26138:502`, `26138:535`, `26138:568`)로 교체. 이름/참여자 수/태그/아바타 image fill 보존. Source 첫 카드 export checksum bytes=9843/sum=1217824, after 첫 카드 checksum 동일. 최종 QA: local wrapper frames=0, local Profile/Tag frames=0, Popular Lounge Card instances=4, nested Profile/Creator Tag 각각 1개 + exposed true.
+Next-TODO:
+  (1) 필요 시 Figma UI에서 `25897:15912` section visual 확인.
+  (2) 이후 신규/수정 컴포넌트는 publish 후 사용처 교체까지 완료 조건으로 유지.
+Key-Files:
+  - CDS component: https://www.figma.com/design/H36eNEd6o7ZTv4R7VcyLf2/CDS?node-id=21314-6707
+  - Product section: https://www.figma.com/design/t0SK7XaNqw8qIY3PpZw4s7/2026-04?node-id=25897-15912
+  - New product instances: `26138:451`, `26138:502`, `26138:535`, `26138:568`
+Commits: (Figma 직접 편집, 로컬 기록 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Popular Lounge Card composed component 생성 / publish blocker)
+Date: 2026-04-28 14:38:35
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: `New Lounge Card` wrapper 구조를 플랜+Claude peer review 후 CDS composed component로 정리. 기존 `Lounge Card`는 531×196 feed/update 카드라 90×146 profile+tag item과 책임이 달라 재사용하지 않음. CDS에 `Popular Lounge Card` 생성(`21314:6707`, key `106b611f448401ea6d28cababfb9a84651e923dc`, 90×146). 내부는 `Profile Card / Type=Popular` instance(`21314:6708`, exposed, key `79faf6...`) + `.Creator Tag` instance(`21314:6726`, exposed, key `642cef...`), vertical gap 10. Parent 신규 text prop 없음, nested instance props로 `Name`, `↳ Attendee Count`, `Label` override 유지. QA export checksum bytes=11182/sum=1426144. 제품 파일 `25897:15912`의 4개 `New Lounge Card` 교체는 `importComponentByKeyAsync`가 새 CDS key를 찾지 못해 publish blocker로 중단.
+Next-TODO:
+  (1) CDS library publish/update 후 제품 파일에서 key `106b611f448401ea6d28cababfb9a84651e923dc` import 가능 여부 재시도. 2026-04-28 14:41 재확인 시 제품 파일 search/import 모두 아직 실패.
+  (2) 교체 대상: `25897:16286`, `25897:16716`, `25897:16746`, `25897:16770`. 보존값: avatar image fills, `Name`, `↳ Attendee Count`, `.Creator Tag` `Label`.
+  (3) 교체 후 QA: remaining `New Lounge Card` frames=0, `Popular Lounge Card` instances=4, nested Profile/Tag instance exposed, overflow 없음.
+Key-Files:
+  - CDS component: https://www.figma.com/design/H36eNEd6o7ZTv4R7VcyLf2/CDS?node-id=21314-6707
+  - Product section: https://www.figma.com/design/t0SK7XaNqw8qIY3PpZw4s7/2026-04?node-id=25897-15912
+  - Peer review: `.ai/peer-review/runs/20260428-143835-claude-plan-direct.md`
+Commits: (Figma 직접 편집, 로컬 기록 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Spotlight 사용처 CDS 인스턴스 교체)
+Date: 2026-04-28 15:30:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 정책에 따라 남은 Spotlight 사용처 교체 완료. 프로덕트 파일 로컬 `Spotlight Creator Card` 컴포넌트 `26099:25417`과 그 인스턴스 `26099:25465`를 최신 CDS `Spotlight Creator Card` key `8fdae3b87dfdb7374145c07f32331a1fd5d85a77` 인스턴스로 교체. `26099:25465`는 `swapComponent`로 연결, `26099:25417` 캔버스 리소스는 새 CDS 인스턴스 `26125:598`로 대체 후 삭제. Hero/avatar image fill과 Title/Description 보존. 최종 확인: `25745:18474`와 `25897:16868`의 카드 모두 mainComponentKey=`8fdae...`, 스크린샷 정상.
+Next-TODO:
+  (1) CDS publish/update 후 제품 파일에서 imported component update 상태 확인.
+  (2) Claude 병행 정리와 충돌 가능성 있으면 `Spotlight Creator Card`, `.Spotlight Metric`, `Profile Card Type=Popular` 우선 확인.
+Key-Files:
+  - Product sections: `t0SK7XaNqw8qIY3PpZw4s7/25745:18474`, `t0SK7XaNqw8qIY3PpZw4s7/25897:16868`
+  - New product instance: `26125:598`
+  - Updated product instance: `26099:25465`
+  - CDS card key: `8fdae3b87dfdb7374145c07f32331a1fd5d85a77`
+Commits: (Figma 직접 편집, 로컬 기록/규칙 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (컴포넌트 생성 완료 조건 보강)
+Date: 2026-04-28 15:15:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 정책 반영. 앞으로 신규 컴포넌트를 만들거나 기존 컴포넌트를 수정/재활용하도록 확장하면, 원본 사용처 리소스를 해당 신규/수정 컴포넌트 인스턴스로 교체해야 작업 완료로 본다. `qa-rubric.md` Completion Gate에 `Use-site Replacement` 추가. publish 전이라 교체할 수 없으면 blocker로 기록하고 사용자에게 publish/update 필요성을 명시한다.
+Next-TODO:
+  (1) 이후 컴포넌트 작업 시 source node → component node → use-site replacement 검증까지 한 세트로 수행.
+Key-Files:
+  - Rule: `.claude/rules/qa-rubric.md`
+Commits: (로컬 기록/규칙 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Popular Section CDS 인스턴스 교체)
+Date: 2026-04-28 15:05:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 프로덕트 파일 Popular Section `25897:15912` 작업 계속 진행. 4개 로컬 `Profile Card` 프레임을 CDS `Profile Card / Type=Popular` 인스턴스로 교체(`26104:418`, `26104:460`, `26104:492`, `26104:524`). 이름/참여자 수/avatar image fill 보존. 태그 로컬 프레임 4개도 제품 파일 내 `.Creator Tag` main component(`26082:19209`, key `642cef0b...`) 인스턴스로 교체(`26110:381`, `26110:400`, `26110:419`, `26110:438`). 최종 QA: localProfileFrames=0, localTagFrames=0, profileInstances=4, tagInstances=4. Screenshot `25897:15912` 확인(transparent contents-only라 배경은 어둡게 보임).
+Next-TODO:
+  (1) 재현 직접: CDS publish 후 제품 파일에서 imported `Profile Card / Type=Popular` 업데이트 상태 확인.
+  (2) `.Creator Tag`는 direct import가 실패했으나 제품 파일 기존 main component로 재사용됨. publish 후 필요 시 library instance로 업데이트 확인.
+Key-Files:
+  - Product section: `t0SK7XaNqw8qIY3PpZw4s7/25897:15912`
+  - Profile instances: `26104:418`, `26104:460`, `26104:492`, `26104:524`
+  - Tag instances: `26110:381`, `26110:400`, `26110:419`, `26110:438`
+Commits: (Figma 직접 편집, 로컬 기록/규칙 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Spotlight Metric nested exposure 적용)
+Date: 2026-04-28 14:45:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: `Challenge Metric`이 nested되어 있지 않다는 사용자 지적 확인. 구조상 `Challenge Metric`은 `.Spotlight Metric / Type=Challenge` instance였지만, 상위 `Spotlight Creator Card`에서 nested instance로 expose되지 않은 상태였음. `Follower Metric`(`21196:6633`)과 `Challenge Metric`(`21257:2831`) 모두 `isExposedInstance=true`로 설정. 상위 stale property는 만들지 않고 nested instance 자체를 노출하는 방식으로 정리. `qa-rubric.md`에 nested instance exposure 검사 추가.
+Next-TODO:
+  (1) 재현 직접: CDS Figma publish 후 프로덕트 파일에서 metric nested props 조작 가능 여부 UI로 확인.
+Key-Files:
+  - Card: `H36eNEd6o7ZTv4R7VcyLf2/21196:6625`
+  - Follower Metric instance: `21196:6633`
+  - Challenge Metric instance: `21257:2831`
+  - Rules: `.claude/rules/qa-rubric.md`
+Commits: (Figma 직접 편집, 로컬 기록/규칙 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Spotlight stale property 제거 + QA 하네스 보강)
+Date: 2026-04-28 14:35:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: `Spotlight Creator Card`(`21196:6625`) 상위 component property에 남아 있던 stale `Challenge Label#21196:6` 삭제. `.Spotlight Metric` 내부 `Challenge Label#21257:3`는 `Type=Challenge` Label에 실제 연결되어 있어 유지. 삭제 후 상위 `componentPropertyDefinitions` 대 `componentPropertyReferences` 대조 결과 stale 0건. 재발 방지로 `qa-rubric.md` R4/Completion Gate에 stale/empty property 검사와 `propertyIntegrity` 산출물 추가. `naming-policy.md`의 Variant Property Value 정책도 실제 CDS 관행에 맞춰 Title Case/Pascal Case로 정정.
+Next-TODO:
+  (1) 재현 직접: CDS Figma publish.
+  (2) 프로덕트 파일 `26082:19211`은 최신 published `Spotlight Creator Card` 인스턴스로 교체/업데이트.
+Key-Files:
+  - Card: `H36eNEd6o7ZTv4R7VcyLf2/21196:6625`
+  - Metric set: `H36eNEd6o7ZTv4R7VcyLf2/21257:2824`
+  - Rules: `.claude/rules/qa-rubric.md`, `.claude/rules/naming-policy.md`
+Commits: (Figma 직접 편집, 로컬 기록/규칙 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Spotlight Metric variant + flexible layout 정리)
+Date: 2026-04-28 14:20:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 수정본 `Spotlight Creator Card`(`21196:6625`) 검토. `.Spotlight Metric` component set `21257:2824`가 `Type=Follower/Challenge` 두 variant로 정리된 방향이 맞다고 확인. 기존 Codex 생성본은 follower metric만 instance이고 challenge metric은 로컬 frame이어서 구조 불일치였음. 추가 정리: metric variants를 auto width로 전환, 내부 icon node를 `Icon`으로 정리, challenge instance를 `Challenge Metric`으로 명명, card `Body`/`Description Row`/`Action Row`를 stretch/fill 구조로 보정, action buttons 양쪽 fill 적용. 임시 인스턴스 320/343/390/430px 폭 QA 결과 Hero/Body/Description/Action/Button 모두 폭에 맞게 변하고 overflow 없음.
+Next-TODO:
+  (1) 재현 직접: CDS Figma publish 후 프로덕트 파일의 기존 Codex 생성본 `26082:19211`을 최신 CDS 컴포넌트 인스턴스로 업데이트.
+  (2) 계승: Popular Section `Profile Card Type=Popular` publish + 프로덕트 교체.
+Key-Files:
+  - CDS card: `H36eNEd6o7ZTv4R7VcyLf2/21196:6625`
+  - Metric set: `H36eNEd6o7ZTv4R7VcyLf2/21257:2824`
+  - Product old generated card: `t0SK7XaNqw8qIY3PpZw4s7/26082:19211`
+Commits: (Figma 직접 편집, 로컬 기록만 변경)
+---
+
+---
+HANDOFF: Codex -> 재현 (Profile Card Popular variant 생성)
+Date: 2026-04-28 13:55:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Popular Section `25897:15912`의 반복 `Profile Card`를 Evidence-First + Component Creation Gate 기준으로 검토 후 새 컴포넌트 생성 대신 기존 CDS `Profile Card`(`20199:6243`) 확장으로 처리. `Type=Popular` variant `21273:2` 추가. 구조: Avatar `Size=X-Large` + Creator Badge, Name, Attendee row(`Icon Scaler` → Lucide users + `↳ Attendee Count`). 기존 `↳ Body` 기본값은 `4 Sept, 2025`로 복구했고 Popular 전용 텍스트 property `↳ Attendee Count#21276:0` 기본값 `73K`를 추가. Source/component screenshot pair와 absolute bounds check 완료, 잘림/가림 없음.
+Next-TODO:
+  (1) 재현 직접: CDS Figma publish 후 프로덕트 파일에서 Popular Section 카드 인스턴스 교체.
+  (2) 필요 시 Tag(`#산책` 등)는 Profile Card 내부가 아니라 Badge/Tag 조합으로 섹션에서 별도 구성.
+  (3) 계승: Button 228v use-site survey, P0 Slot→Instance Swap, Participant Card 분리.
+Key-Files:
+  - Source unit: `t0SK7XaNqw8qIY3PpZw4s7/25897:16678`
+  - Source section: `t0SK7XaNqw8qIY3PpZw4s7/25897:15912`
+  - CDS component set: `H36eNEd6o7ZTv4R7VcyLf2/20199:6243`
+  - New variant: `H36eNEd6o7ZTv4R7VcyLf2/21273:2`
+Commits: (Figma 직접 편집, 로컬 기록만 변경)
+---
+
+---
 HANDOFF: Codex -> 재현 (CDS 컴포넌트 생성 QA 하네스 강화)
 Date: 2026-04-28 13:20:00
 Project: /Users/zenkim_office/Project/CDS
@@ -581,5 +742,38 @@ Agent: Claude via peer-agent-review
 Summary: codex peer review completed. Verdict: PASS. Focus: # Spotlight Creator Card Body fills 수정 리뷰 ## 컨텍스트 CDS Figma 라이브러리(fileKey `H36eNEd6o7ZTv4R7VcyLf2`)의 신규 컴포넌트 `Spotlight Creator Card`(node `21196:6625`, 어제 Codex가 생성, publish 전)에서 사용자가 "프로필 이미지가 Hero 영역에 하단이 잘린다"고 보고. 원본 디자인 노드는 프로덕트 파일 `t0
 Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
 Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-101853-codex-review-37520.md
+Commits: pending
+---
+
+---
+HANDOFF: Codex -> Claude (peer plan)
+Date: 2026-04-28 14:30:52
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex via peer-agent-review
+Summary: claude peer plan completed. Verdict: unknown. Focus: Figma/CDS plan review request. Context: - CDS file: H36eNEd6o7ZTv4R7VcyLf2 - Product file: t0SK7XaNqw8qIY3PpZw4s7 - Product Popular Section node: 25897:15912 - Example use-site frame: 25897:16716 `New Lounge Card`, size 90x146 - Current pro
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-142723-claude-plan-31229.md
+Commits: pending
+---
+
+---
+HANDOFF: Claude -> Codex (peer plan)
+Date: 2026-04-28 14:36:11
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude via peer-agent-review
+Summary: codex peer plan completed. Verdict: FAIL. Focus: 다음 implementation plan을 검토해줘. Plan 파일: /Users/zenkim_office/.claude/plans/codex-plan-imperative-flame.md 배경: - CDS Figma 라이브러리(H36eNEd6o7ZTv4R7VcyLf2) Components 페이지 → Primitives → Asset 섹션의 11개 컴포넌트 정리 작업 - 사용자 핵심 요구: "사용처 인스턴스 연결 끊기지 않게 주
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-143331-codex-plan-47515.md
+Commits: pending
+---
+
+---
+HANDOFF: Claude -> Codex (peer plan)
+Date: 2026-04-28 14:45:12
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude via peer-agent-review
+Summary: codex peer plan completed. Verdict: NEEDS_USER_DECISION. Focus: 이전 검토(2026-04-28 14:33, FAIL)의 6건 지적을 반영한 plan v2를 재검토해줘. Plan 파일: /Users/zenkim_office/.claude/plans/codex-plan-imperative-flame.md 이전 검토 결과: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-143331-codex-plan-47515.md v1 → v2
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-144254-codex-plan-70836.md
 Commits: pending
 ---
