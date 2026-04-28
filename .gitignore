@@ -48,3 +48,6 @@ exports/**/*.bak-*
 .ralph/
 .ralphrc
 demo/
+
+# Peer review run artifacts (local only — audit-trail 보존은 수동 stage)
+.ai/peer-review/runs/
