@@ -1,4 +1,22 @@
 ---
+HANDOFF: Claude -> 재현 (CDS Components 페이지 24그룹 quick scan + Radio Group 진단)
+Date: 2026-04-28 17:15:00
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: OS/Native Wave 1 완료 후 옆 그룹 검토 흐름. Components 페이지 Primitives 섹션 24그룹/62컴포넌트 quick scan 실행 → hot-spot 도출(State variant 위반 13개, Variant 폭발 2개[Button 228v/Avatar 55v], Raster R7 19개, Description 부재 ~54개). 사용자 "Button 그룹 보류" → Index 8 Radio Group부터 진단. Radio Group 3 ComponentSet 분석: 32v(2+24+6) → 정합 시 7v(-78%, Boolean 5건 + Pseudo Focus 1건 States 분리). 패턴: .Radio Group Item의 Disabled/Error/Checked는 6분류 Runtime state → Boolean Property가 정합. .Radio Group Radio Toggle의 State=Focus는 Pseudo → States 페이지. Wave A description 3 ComponentSet 초안 작성 후 사용자 컨펌 대기에서 /record 실행.
+Next-TODO:
+  (1) Radio Group Wave A description 적용 결정 — 초안 톤/내용 컨펌 후 use_figma로 3 ComponentSet description 일괄 적용 (OS/Native Wave 1 동일 패턴). 인스턴스 영향 0.
+  (2) State variant 위반 13개 일괄 처리 — Button audit follow-up + 6분류 ADR 완료 후 trigger.
+  (3) 옆 그룹 순서 다음: Index 9 Textarea, Index 10 Progress, Index 11 Badge, Index 12 Page Indicator, ... — Radio Group 패턴 재사용.
+Key-Files:
+  - Radio Group 노드: `H36eNEd6o7ZTv4R7VcyLf2/20876:{2842,2857,2978}`
+  - 6분류 정책: `.ai/SESSION.md` L138
+  - Wave A 초안: 본 세션 텍스트 (description 미적용)
+  - Primitives section: `H36eNEd6o7ZTv4R7VcyLf2/20152:1165` 24 children
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Claude -> 재현 (CDS OS/Native description 보강 완료, Wave 2 trigger 대기)
 Date: 2026-04-28 16:30:00
 Project: /Users/zenkim_office/Project/CDS
@@ -834,5 +852,27 @@ Agent: Codex via peer-agent-review
 Summary: claude peer plan completed. Verdict: unknown. Focus: Review this implementation plan before execution. Target Figma product section: https://www.figma.com/design/t0SK7XaNqw8qIY3PpZw4s7/2026-04?node-id=24119-16618 Product fileKey: t0SK7XaNqw8qIY3PpZw4s7 CDS fileKey: H36eNEd6o7ZTv4R7VcyLf2 Plan
 Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
 Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-162734-claude-plan-14609.md
+Commits: pending
+---
+
+---
+HANDOFF: Codex -> Claude (peer plan)
+Date: 2026-04-28 16:36:31
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex via peer-agent-review
+Summary: claude peer plan completed. Verdict: unknown. Focus: Verdict only plan review: PASS/FAIL/NEEDS_USER_DECISION. Plan: In Figma product section t0SK7XaNqw8qIY3PpZw4s7/24119:16618, replace one local Select frame with existing CDS Select instance, flatten two auto-named frames that only wrap CDS A
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-163256-claude-plan-27816.md
+Commits: pending
+---
+
+---
+HANDOFF: Codex -> Claude (peer review)
+Date: 2026-04-28 16:54:11
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex via peer-agent-review
+Summary: claude peer review completed. Verdict: **PASS**. Focus: Review completed Figma work. Verdict PASS/FAIL/NEEDS_USER_DECISION. Context: Figma-only implementation in product file t0SK7XaNqw8qIY3PpZw4s7 section 24119:16618 and CDS library H36eNEd6o7ZTv4R7VcyLf2. Local git diff is not the source of tr
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-165335-claude-review-76185.md
 Commits: pending
 ---
