@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-05
+> Last updated: 2026-05-06
 
 ---
 
@@ -166,6 +166,8 @@
 | **Ranked Profile Item 분리** (2026-05-05) | 사용자 확인: `Ranked`는 초대와 무관한 랭킹 리스트 아이템. CDS `Invite Profile Card`의 `Type=Ranked` variant(`21554:2`)를 key `050351101bee816a24bbc48e2b5226f9ad046f45` 보존 상태로 `Components > Composed > Lounge Cards > Main content`의 standalone `Ranked Profile Item`으로 이동. `Invite Profile Card`는 `Vertical/Horizontal`만 유지하고 `↳ Rank` 제거. 신규 컴포넌트 props는 `Rank/Name/Description/Show Description/Show Avatar/Show Action`, hidden invite-only `.Invite Item` 제거, `Avatar`/`Button` expose. Contract check: parent-scoped property matrix PASS, root A/L PASS, instance probe PASS. 제품 파일 `2026-05`에는 같은 key 사용처 6건이 아직 구형 remote `Invite Profile Card / Type=Ranked`로 보이며, CDS publish + product library update 후 override 보존 재검증 필요. |
 | **팔로우 관리 ↔ 친구 찾기 IA 결정** (2026-05-06) | 사용자 요청 `-team` + `-play`로 팔로우 관리/추천 친구 IA 옵션 4개를 Product/Growth/Design/Data 관점으로 검토하고 Claude peer review/plan-review를 실행. 최종 결론: `Option A + D` 채택. `팔로우 관리`에는 우측 상단 `UserPlus`/`사람 추가` → `친구 찾기` 경로를 두고, `친구 찾기`에는 `팔로우 관리` 버튼과 팔로잉 preview를 두지 않는다. `친구 찾기`는 별도 screen으로 생성, 기존 `추천/인기` 탭은 순수 `팔로우 관리`에서 제거, `Recommendation Profile List` composed pattern 생성을 선행 조건으로 기록. 산출: `meetings/2026-05-06_follow-management-recommendation-ia.md`, `.ai/pipeline/runs/20260506-160545_follow-management-recommendation-ia/`. |
 | **친구 찾기 / 팔로우 관리 디자인 PRD** (2026-05-06) | 사용자 요청 `-director -play`로 이전 IA 결정을 디자인 PRD로 확장. `report/2026-05-06_friend-discovery-follow-management-design-prd.md`에 TL;DR, 문제/목표/비범위, 진입점, IA, `친구 찾기`/`팔로우 관리` screen spec, CDS `Recommendation Profile List` 요구사항, metadata/source/follower count 규칙, state/accessibility, metrics, Figma QA checklist, Now/Next/Later를 정리. Claude team analysis review PASS, plan review PASS, completed PRD review PASS(`.ai/peer-review/runs/20260506-163233-claude-review-69476.md`). 산출: `.ai/pipeline/runs/20260506-162343_friend-discovery-design-prd/`, `reviews/2026-05-06_friend-discovery-design-prd-director.md`. |
+| **연락처 친구 더보기 / 팔로우 관리 화면 디자인** (2026-05-06) | 사용자 요청 `-play -director`로 Figma `2026-05` 파일의 현재 `팔로우 추천` 프레임(`CS2ZhrORl4E1szQfTe2UvO/28237:37689`) 우측에 신규 sibling screen 2개 생성. `Contact Friends Screen`(`28252:14022`)은 `연락처 동기화됨`, `팔로우할 수 있는 연락처`, `초대할 연락처`, `링크로 친구 초대` CTA를 포함. `Follow Management Screen - Pure Management`(`28252:14125`)은 `팔로잉/팔로워` 탭, 관계 row, `소식 숨김`/`팔로잉`/overflow, `빠른 정리` 카드로 구성하고 추천/인기 feed는 제외. QA에서 follow-management 하단 2개 avatar 누락을 발견해 initial avatar로 보정 후 metadata/screenshot PASS. 산출: `.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/`, `reviews/2026-05-06_follow-contact-management-screens-director.md`. |
+| **[CLD] 팔로우 추천 화면 UX Team 리뷰 + 사용자 토론 결정** (2026-05-06) | 사용자 요청 `/team`으로 Follow Recommendation Screen(`CS2ZhrORl4E1szQfTe2UvO/28237:37689`) UX 다중 관점 리뷰. Design Director + Product Leader + Growth Expert Simulation 진행 후 사용자와 직접 토론으로 결정 확정. 5행 cap + 더보기 적용 시안 검증, 인스타 main(사람 찾아보기) 벤치마킹 차이 정리, X 동작은 인스타와 동일(즉시 사라짐, 피드백 없음 — 사용자 직접 테스트 확인), 무한 스크롤 라벨 `더 많은 추천` 유지, 초대 메커니즘 = in-app trigger → OS share, 연락처 한 뎁스 진입(권한 없음 시 CTA 대체), placeholder "친구" 라벨 = 연락처 섹션 한정 적용, 우측 상단 person icon = 옵셔널 "팔로우 중인 친구 관리" 진입점. 보류 항목: 섹션 헤더 라벨 단축 검토 + 빈 상태 4종은 후속. 산출: `meetings/2026-05-06_follow-recommendation-screen-review.md`. |
 
 ---
 

@@ -1,4 +1,25 @@
 ---
+HANDOFF: Claude -> User
+Date: 2026-05-06 17:43:16 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: Follow Recommendation Screen(`CS2ZhrORl4E1szQfTe2UvO/28237:37689`)을 `/team` Mode로 다중 관점 UX 리뷰(Design/Product/Growth Simulation). 직후 사용자와 직접 토론으로 디테일 결정 확정 — 5행 cap + 더보기 적용된 시안 검증, 인스타 main 벤치마킹 차이 정리(인스타 X 동작은 즉시 사라짐, 피드백 없음 — 사용자 테스트 확인), 무한 스크롤 라벨 `더 많은 추천` 유지, 초대 = in-app trigger → OS share, 연락처 한 뎁스 진입 + 권한 없음 시 CTA 대체. Codex의 `-play -director` Figma 화면 생성 작업과 같은 안건 후속.
+Next-TODO: 디자인 픽스 시 (1) 섹션 헤더 라벨 단축 검토(`강명재님을 위한 추천` → 짧은 hook 또는 신규/재방문 분기), (2) 빈/오류 상태 4종 시안(추천 0 / 연락처 권한 X / 맞팔로우 0 / 검색 결과 0), (3) placeholder "친구" 단어를 연락처 섹션에만 적용. 컴포넌트 제작 요청은 디자인 픽스 후.
+Commits: (이번 record commit, 혼합 커밋)
+---
+
+---
+HANDOFF: Codex -> User
+Date: 2026-05-06 17:34:39 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Figma `2026-05`의 현재 `팔로우 추천` 프레임 옆에 `연락처 친구 더보기`(`28252:14022`)와 pure `팔로우 관리`(`28252:14125`) 신규 화면을 생성. 연락처 화면은 팔로우 가능 연락처/초대 연락처/링크 초대를 분리했고, 관리 화면은 `팔로잉/팔로워` 탭과 관계 관리 액션 중심으로 구성. Screenshot QA에서 누락 avatar 2건을 initial avatar로 보정 후 PASS.
+Next-TODO: 디자인 확정 시 연락처 row/관리 row/quick action card를 CDS composed pattern으로 승격할지 결정하고, 구현 단계에서는 44px touch target을 보장.
+Review-Result: /Users/zenkim_office/Project/CDS/reviews/2026-05-06_follow-contact-management-screens-director.md
+Commits: (Figma 직접 편집, 로컬 기록 변경)
+---
+
+---
 HANDOFF: Codex -> User
 Date: 2026-05-06 16:38:24 +0900
 Project: /Users/zenkim_office/Project/CDS

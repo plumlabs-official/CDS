@@ -1,0 +1,22 @@
+{
+  "schema": "play.pipeline.v1",
+  "created_at": "2026-05-06T17:26:31+0900",
+  "updated_at": "2026-05-06T17:34:39+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "slug": "follow-contact-management-screens",
+  "request_type": "text",
+  "request_value": "연락처 친구 더보기 스크린과 팔로우 관리 스크린을 Figma에 디자인. -play + -director",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens",
+  "team_analysis_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/01-team-analysis.md",
+  "review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/02-review.md",
+  "plan_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/03-plan.md",
+  "plan_review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/04-plan-review.md",
+  "implementation_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/05-implementation.md",
+  "record_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/06-record.md",
+  "review_verdict": "PASS",
+  "review_result_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/02-review.md",
+  "review_exit_code": null,
+  "plan_review_verdict": "PASS",
+  "plan_review_result_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-172631_follow-contact-management-screens/04-plan-review.md",
+  "plan_review_exit_code": null
+}
