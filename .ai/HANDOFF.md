@@ -1,5 +1,16 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-06 16:16:21 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 팔로우 관리와 친구 찾기 IA를 Team/Play로 결정. Claude peer review/plan-review PASS 후 `Option A + D` 확정: 관리 화면에는 `UserPlus`/`사람 추가` → `친구 찾기` 경로를 두고, 친구 찾기에는 관리 버튼/팔로잉 preview를 노출하지 않음.
+Next-TODO: Figma 적용 시 별도 `친구 찾기` screen 생성, 순수 `팔로우 관리`에서 `추천/인기` 탭 제거, CDS `Recommendation Profile List` composed pattern 선행 생성.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260506-160545_follow-management-recommendation-ia/04-plan-review.md
+Commits: (이번 record commit)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-05 01:29:29 +0900
 Project: /Users/zen/Project/CDS
 Agent: Codex
@@ -911,7 +922,6 @@ Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260428-14
 Commits: pending
 ---
 
----
 HANDOFF: Claude -> Codex (peer plan)
 Date: 2026-04-28 14:45:12
 Project: /Users/zenkim_office/Project/CDS
