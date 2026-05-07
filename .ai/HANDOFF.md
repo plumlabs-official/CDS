@@ -1071,3 +1071,25 @@ Next-TODO: Keep D7 on backlog until a Discover empty-state surface is selected. 
 Review-Result: /Users/zen/Project/CDS/.ai/peer-review/runs/20260501-124544-claude-review-89138.md
 Commits: (이번 커밋)
 ---
+
+---
+HANDOFF: Codex -> Claude (peer review)
+Date: 2026-05-07 22:11:58
+Project: /Users/zen/Project/CDS
+Agent: Codex via peer-agent-review
+Summary: claude peer review completed. Verdict: unknown. Focus: Review the Figma design work completed for the Contact Friends screen. Context: - Product Figma file: CS2ZhrORl4E1szQfTe2UvO / 2026-05 - Target node: 28252:14022 (Contact Friends Screen V2 - Sorted + CDS Reuse) - User request: re-check node
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zen/Project/CDS/.ai/peer-review/runs/20260507-221016-claude-review-64834.md
+Commits: pending
+---
+
+---
+HANDOFF: Codex -> User
+Date: 2026-05-08 00:01:22 +0900
+Project: /Users/zen/Project/CDS
+Agent: Codex
+Summary: Completed Figma-only CDS/product cleanup for follow recommendation and contact friends. Created CDS `Follow Recommendation Item` component (`H36eNEd6o7ZTv4R7VcyLf2/21626:6700`, key `a074a8a48b2dff38272ec94fff3b29ab34df6d92`) and restructured product `Contact Friends Screen V2 - Sorted + CDS Reuse` (`CS2ZhrORl4E1szQfTe2UvO/28252:14022`) to the reference `Top Bar / Navbar / Body` auto-layout hierarchy. Corrected typography usage so custom notice/initial/index text nodes use `text-*` text styles rather than raw font primitive bindings.
+Next-TODO: Publish/update CDS library, then replace product follow recommendation rows with the new component key and verify overrides. Product contact screen now has 85/86 text nodes on `text-*`; the only exception is the iOS status bar `9:41` inside the existing status bar instance.
+Review-Result: /Users/zen/Project/CDS/.ai/peer-review/runs/20260507-221016-claude-review-64834.md
+Commits: (이번 커밋)
+---

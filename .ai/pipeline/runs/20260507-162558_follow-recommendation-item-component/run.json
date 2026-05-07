@@ -1,0 +1,22 @@
+{
+  "schema": "play.pipeline.v1",
+  "created_at": "2026-05-07T16:25:58+0900",
+  "updated_at": "2026-05-07T16:25:58+0900",
+  "repo": "/Users/zen/Project/CDS",
+  "slug": "follow-recommendation-item-component",
+  "request_type": "text",
+  "request_value": "Create a CDS standalone component from Figma product node CS2ZhrORl4E1szQfTe2UvO/28237:38430. User asked to verify through -play and then proceed.",
+  "run_dir": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component",
+  "team_analysis_artifact": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component/01-team-analysis.md",
+  "review_artifact": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component/02-review.md",
+  "plan_artifact": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component/03-plan.md",
+  "plan_review_artifact": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component/04-plan-review.md",
+  "implementation_artifact": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component/05-implementation.md",
+  "record_artifact": "/Users/zen/Project/CDS/.ai/pipeline/runs/20260507-162558_follow-recommendation-item-component/06-record.md",
+  "review_verdict": "controller-pass-peer-timeout",
+  "review_result_file": null,
+  "review_exit_code": -1,
+  "plan_review_verdict": "controller-pass-peer-skipped-after-timeout",
+  "plan_review_result_file": null,
+  "plan_review_exit_code": 0
+}
