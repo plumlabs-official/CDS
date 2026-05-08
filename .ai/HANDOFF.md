@@ -3,7 +3,7 @@ HANDOFF: Codex -> User
 Date: 2026-05-08 14:07:40 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
-Summary: CDS `Lounge Update Item` composed component를 생성하고 제품 파일 Creator Case use-site 교체까지 검증했다. 노드는 `H36eNEd6o7ZTv4R7VcyLf2/21708:253`, component key는 `1dd4808f25b6577b8e6f9e3379295665175bb53c`이다. 기존 `Lounge Card`는 variant 추가 없이 nested exposed instance로 재사용했고, inline `.Reaction Bar`와 `Reply Preview`를 붙여 소식 아이템의 신규 댓글 preview UI를 구성했다. Property/reference/layout/text style/long-text/responsive probes와 completed-work Claude review는 PASS. Product follow-up에서 `2026-05` Creator Case use-site가 remote `Lounge Update Item` 인스턴스 `28428:27223`, `28428:29052`로 교체된 것을 확인했고 원본 `25945:38066` 및 제안 source `28047:38198`은 제거됨.
+Summary: CDS `Lounge Update Item` composed component를 생성하고 제품 파일 Creator Case use-site 교체까지 검증했다. 노드는 `H36eNEd6o7ZTv4R7VcyLf2/21708:253`, component key는 `1dd4808f25b6577b8e6f9e3379295665175bb53c`이다. 기존 `Lounge Card`는 variant 추가 없이 nested exposed instance로 재사용했고, inline `.Reaction Bar`와 `Reply Preview`를 붙여 소식 아이템의 신규 댓글 preview UI를 구성했다. Property/reference/layout/text style/long-text/responsive probes와 completed-work Claude review는 PASS. Product follow-up에서 `2026-05` Creator Case use-site가 remote `Lounge Update Item` 인스턴스 `28428:27223`, `28428:29052`, `28439:29132`로 교체된 것을 확인했고 원본 `25945:38066` 및 제안 source `28047:38198`은 제거됨. CDS/product Creator use-site 모두 Phosphor count 0.
 Next-TODO: 필요 시 별도 범위로 Consumer Use Case의 manual lounge-update-like frame `28040:37949`를 같은 컴포넌트로 롤아웃할지 결정.
 Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260508-140020-claude-review-40632.md
 Commits: (이번 record commit)

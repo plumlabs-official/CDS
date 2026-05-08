@@ -85,8 +85,8 @@ unblock: Publish CDS library, then update library in product file and retry repl
 
 ## Product Replacement Follow-up Verification
 
-Verified at `2026-05-08 14:15:47 KST` after the CDS component became importable
-from the product file.
+Verified at `2026-05-08 14:21:35 KST` after the CDS component became importable
+from the product file and the remaining reply icon was normalized to Lucide.
 
 ```text
 status: pass
@@ -98,9 +98,12 @@ original Lounge Card node 25945:38066: absent
 replacement instances:
 - 28428:27223 under Upadates Card 25945:37950
 - 28428:29052 under Upadates Card 25945:38065
+- 28439:29132 under Upadates Card 28439:29131
 creator manual reply-preview candidates: 0
-instance screenshot: https://www.figma.com/api/mcp/asset/c7705831-a6bf-4da7-a41a-bbdfdef6ff02
-screen screenshot: https://www.figma.com/api/mcp/asset/472b9b1e-b148-4743-b1f6-e06bb8cb3f6b
+CDS Phosphor count: 0
+product Creator Lounge Update Item Phosphor count: 0
+instance screenshot: https://www.figma.com/api/mcp/asset/c4ab3818-1bf7-42a6-a06f-48c9e9d1a13f
+screen screenshot: https://www.figma.com/api/mcp/asset/686c5b95-53dd-4160-b999-765b20afaeb6
 details: .ai/pipeline/runs/20260508-132749_lounge-update-item-component/07-product-replacement-verify.md
 ```
 
