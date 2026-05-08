@@ -1,5 +1,24 @@
 ---
 HANDOFF: Claude -> User (CDS publish + use site replacement 후속)
+Date: 2026-05-08 14:38:00 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: 사용자 피드백 2건 반영. (1) Comment Item Right Slot default를 Type=Default Size=Icon-Small (32×32 icon-only) → **Type=Ghost Size=Small Label="더보기"**로 변경, 원본 Feed Screen 첫 카드 시각과 일치. (2) `addComponentProperty INSTANCE_SWAP` 호환 이슈 해결: 5가지 default value 형식 테스트 결과 `instance.mainComponent.id`만 PASS (docs는 "key"라 표기하지만 실제 동작은 node id). Comment Item에 `Right Slot` INSTANCE_SWAP 추가 (5 props), Feed Card에 6 slot props (Header/Lounge Card/Reaction Bar/Addon Footer/Comment 1/2) INSTANCE_SWAP 추가 (10 props). 모든 nested instance를 새 prop에 mainComponent + visible 재바인딩. 컴포넌트 4종 유지 결정 — 사용자 원칙 "동일 구조만 대체, variant 폭발 X" 적용. CDS `Item` ComponentSet (vertical 2-line + Slot Left)은 Comment Item (horizontal Name+Desc no Slot Left)와 구조 다르므로 extend 시 6→9 variant 폭발 위험.
+Next-TODO:
+  (1) **CDS publish** — 신규 Feed Cards 그룹 + 4 컴포넌트 publish (이전 HANDOFF 동일).
+  (2) **제품 파일 라이브러리 업데이트** — `2026-05`.
+  (3) **Use site replacement** — Feed Screen 6 use site 교체. 이제 INSTANCE_SWAP props로 Figma UI에서 파라미터 swap 가능.
+  (4) **INSTANCE_SWAP id-vs-key publish 검증** — `instance.mainComponent.id`로 default를 설정한 INSTANCE_SWAP property가 publish 후 cross-file 라이브러리 컨텍스트에서 정상 작동하는지 확인. 만약 깨지면 publish 시 자동 key resolve 또는 fallback 필요.
+  (5) **Cross-run 정리** — Lounge Update Item run의 inline Reaction Bar 분기 정리 (이전 HANDOFF 동일).
+Key-Files:
+  - Run dir: `/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-143314_feed-cards-default-button-fix/`
+  - Before screenshot: `exports/2026-05-08_feed-cards-cds/feed-cards-group.png`
+  - After screenshot: `exports/2026-05-08_feed-cards-cds/feed-cards-group-after-fix.png`
+Commits: (이번 record commit)
+---
+
+---
+HANDOFF: Claude -> User (CDS publish + use site replacement 후속)
 Date: 2026-05-08 14:30:00 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Claude
