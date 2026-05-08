@@ -14,15 +14,25 @@ Completed-work peer review:
 PASS — /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260508-140020-claude-review-40632.md
 ```
 
-## `/record` Decision
+## `/record` Result
 
-Not run automatically in this step because the repo already contains unrelated
-untracked work:
+Scoped record was run after user confirmation, without `git add -A`, because
+the repo already contained unrelated untracked work:
 
 ```text
 .ai/pipeline/runs/20260508-131502_feed-screen-new-components/
 ```
 
-The project `/record` command uses `git add -A`, which would sweep that run into
-the commit. Record/commit should be run after the user confirms whether to
-include or isolate the unrelated untracked run.
+Commit:
+
+```text
+e23d0a1 docs: record lounge update item component
+```
+
+Pushed to `origin/main`.
+
+## Product Replacement Follow-up
+
+After the CDS component became available to the product file, product use-site
+verification was rerun. Creator Case replacement is now PASS; details are in
+`07-product-replacement-verify.md`.

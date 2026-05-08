@@ -53,7 +53,7 @@ Created CDS composed component `Lounge Update Item` in the CDS Figma library.
 | responsiveProbe | PASS — 320/343/430 widths: Lounge Card, `.Reaction Bar`, `Reply Preview` fill width |
 | longTextProbe | PASS — long reply text remains single-line truncated; long author is clamped to 48×16 |
 | boundsCheck | PASS — reply rows 20px, children ≤20px |
-| useSiteReplacement | BLOCKED — product import failed because component key is not published/available yet |
+| useSiteReplacement | PASS — follow-up verification found product import available and Creator use-site replaced with remote `Lounge Update Item` instances |
 | exceptions | `R2-naming-item` — see contract exception below |
 
 ### Contract Exceptions
@@ -83,6 +83,27 @@ error: Component with key "1dd4808f25b6577b8e6f9e3379295665175bb53c" not found
 unblock: Publish CDS library, then update library in product file and retry replacement.
 ```
 
+## Product Replacement Follow-up Verification
+
+Verified at `2026-05-08 14:15:47 KST` after the CDS component became importable
+from the product file.
+
+```text
+status: pass
+importComponentByKeyAsync: ok
+remote component: 28430:1505 / Lounge Update Item
+component key: 1dd4808f25b6577b8e6f9e3379295665175bb53c
+proposal source node 28047:38198: absent
+original Lounge Card node 25945:38066: absent
+replacement instances:
+- 28428:27223 under Upadates Card 25945:37950
+- 28428:29052 under Upadates Card 25945:38065
+creator manual reply-preview candidates: 0
+instance screenshot: https://www.figma.com/api/mcp/asset/c7705831-a6bf-4da7-a41a-bbdfdef6ff02
+screen screenshot: https://www.figma.com/api/mcp/asset/472b9b1e-b148-4743-b1f6-e06bb8cb3f6b
+details: .ai/pipeline/runs/20260508-132749_lounge-update-item-component/07-product-replacement-verify.md
+```
+
 ## Intentional Deltas
 
 - `.Reaction Bar` is inline authored in this component, not a standalone CDS component. The feed-screen run remains SSOT owner for a future shared `Reaction Bar`; replace node `21708:299` when that component exists.
@@ -98,4 +119,4 @@ unblock: Publish CDS library, then update library in product file and retry repl
 | G3 Reuse | PASS — nested existing `Lounge Card`, Avatar, Lucide icons |
 | G4 Icon policy | PASS — Phosphor count 0 |
 | G5 Contract sanity | PASS |
-| G6 Product path | BLOCKED by library publish/update only |
+| G6 Product path | PASS — product file import and Creator use-site replacement verified in follow-up |
