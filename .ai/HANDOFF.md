@@ -1,4 +1,43 @@
 ---
+HANDOFF: Codex -> User (Profile Action Button 공통화 + child Show property 정리 완료)
+Date: 2026-05-08 18:21:00 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: CDS Figma 파일 `H36eNEd6o7ZTv4R7VcyLf2`에서 `Follow Button` component set(`21638:4169`)을 공통 composed component `Profile Action Button`으로 승격하고 `Components > Composed > Profile Actions > Main content`로 이동했다. Feed Card header는 raw follow button 대신 `Profile Action Button` 인스턴스를 사용하도록 바꾸고 `↳ Show Author Action` BOOLEAN + `↳ Author Action` INSTANCE_SWAP property로 노출했다. 내 게시물에서는 author action만 숨기고 ellipsis menu는 유지된다. 이어서 `Invite Composed`(`20358:7313`), `Feed Cards`(`21721:6809`), `Lounge Cards`(`20726:2860`) 세 그룹에서 하위 요소 제어용 `Show*` boolean property 36개에 `↳` prefix를 적용했고 paired child property 일부(`Name`, `Like Count`, `Reply Count`, `Right Slot`, `Price`)도 함께 정리했다. `.Backup` 계열과 `Feed Card` 최상위 섹션 토글은 제외. 임시 인스턴스 검증: author action hide/swap PASS, 13개 affected component owner의 `↳ Show* = false` set PASS, 잔여 누락 0건.
+Next-TODO: CDS publish 필요. property 순서 재배치는 Figma Plugin API에 비파괴 reorder가 없어 미적용; Figma UI에서 수동 drag하거나 key 변경 리스크를 감수하는 별도 작업으로만 처리 가능.
+Key-Files:
+  - Session: `.ai/SESSION.md`
+  - Changelog: `CHANGELOG.md`
+Commits: pending `-record`
+---
+
+---
+HANDOFF: Codex -> User (Feed Screen published CDS use-site 원본 속성 복원 완료)
+Date: 2026-05-08 16:49:09 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 CDS publish 후 제품 파일 `2026-05` target `Feed Screen`(`CS2ZhrORl4E1szQfTe2UvO/24112:14935`)을 backup 원본 `28453:33210`과 대조해 6개 published `Feed Card` 인스턴스에 원본 속성을 적용했다. Target cards: `28452:1811`, `28452:2457`, `28452:2749`, `28452:3056`, `28452:3356`, `28452:3659`. Source local frames: `28453:33236`, `28453:33293`, `28453:33344`, `28453:33395`, `28453:33445`, `28453:33497`. 적용 범위: header name/date/right button state, avatar/creator badge images, Feed Lounge Strip title/attendee/challenge thumbnail/avatar group, media 인증이미지(원본에 image fill이 있는 카드 3~6), Reaction count, Addon Footer actor/count/status + 조사 suffix(`이/가`), Comment text. 후속 지적 "인증 이미지는 비어있어" 확인 후 target `Feed Content Section` frame에 원본 image paint를 명시 재주입: 카드 3 `9dfe2118...`, 카드 4 `da2b7158...`, 카드 5 `2584063e...`, 카드 6 `1451448a...`; 카드 1~2는 원본에도 대형 인증 image fill 없음. Postflight key-field compare 6/6 PASS, mismatch 0.
+Next-TODO: 사용자 visual inspection. 필요 시 layout/padding drift는 별도 pass로 처리; 이번 작업은 원본 속성 이전에 한정.
+Key-Files:
+  - Session: `.ai/SESSION.md`
+  - Changelog: `CHANGELOG.md`
+Commits: not committed
+---
+
+---
+HANDOFF: Codex -> User (CDS Feed Cards probe cleanup 완료)
+Date: 2026-05-08 15:56:28 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 지적 "[PROBE] Feed Addon Footer — long Actor Name + Status 이런 애들은 왜 있는거야?"에 대해 `-play`로 유사 케이스를 점검하고 정리했다. CDS 파일 `H36eNEd6o7ZTv4R7VcyLf2`에서 실제 대상은 `Components > Composed > Feed Cards > Main content`(`21721:6812`) direct child `[PROBE]` instance 10개였고, icon page의 `long` 이름 19건은 false positive로 제외. Claude analysis review PASS + plan review PASS 후 guard(expected IDs 10개, INSTANCE type, immediate parent `21721:6812`, reactions 0)로 10개 삭제. Postflight: CDS file 전체 `[PROBE]` 0개, `Reaction Bar`/`Comment Item`/`Feed Addon Footer`/`Feed Card`/`Feed Lounge Strip` property integrity PASS.
+Next-TODO: 필요 시 별도 run에서 `Feed Card` top-level property가 nested `Feed Addon Footer` Actor/Count/Status를 forward하도록 API 개선 검토. 이번 cleanup에서는 component API 변경 없음.
+Key-Files:
+  - Run: `.ai/pipeline/runs/20260508-154755_cds-probe-cleanup/`
+  - Implementation: `.ai/pipeline/runs/20260508-154755_cds-probe-cleanup/05-implementation.md`
+Commits: not committed (`-play`, not `-record`)
+---
+
+---
 HANDOFF: Codex -> User (Feed Card visual parity Option B CDS-side 완료)
 Date: 2026-05-08 15:42:00 KST
 Project: /Users/zenkim_office/Project/CDS
