@@ -1,4 +1,22 @@
 ---
+HANDOFF: Claude -> User (Use site replacement 완료, 시각 검증 + 후속)
+Date: 2026-05-08 14:50:00 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: 사용자 publish 후 Feed Screen 6 use site 교체 완료. 제품 파일 `2026-05`에서 Feed Card componentKey `1a348920b824461793300098c74f832f20f758b7` import 정상(10 props 노출). 6 source feed frames(`24112:14976/15039/15087/15135/15182/15231`) 각각 preserve-source-overrides procedure로 신규 Feed Card 인스턴스(`28452:1811/2457/2749/3056/3356/3659`)로 교체. 모든 source는 신규 PAGE `_Archive Feed Screen 2026-05-08`(`28452:1633`)로 이동. 보존된 overrides: Avatar/Thumbnail image fills, Profile name/date, Lounge title, Reaction Like/Reply count, Addon Footer Actor/Count/Status (suffix strip 휴리스틱), Comment 1·2 name/description, Right Slot variant swap (icon heart vs text "더보기"). 6/6 PASS, errors 0. 사용자 질문 "Reaction bar / Comment item은 type property로 컨트롤하는게 맞지 않나?" — 답변: Reaction Bar Is Liked는 runtime state라 Boolean 정합. Comment Item Right Slot은 Variant `Type` 축 재구성이 정합 (사용자 지적 valid). 옵션 A(현 INSTANCE_SWAP 유지) 결정으로 후속 처리.
+Next-TODO:
+  (1) **시각 검증** — Feed Screen 6 카드 visual diff. 특히 Lounge Card 자연 height 196 vs 원본 96 drift 확인. drift 시 Lounge Card Slot resize 또는 Lounge Card 자체 width contract 보강.
+  (2) **Addon Footer suffix strip 검증** — "232K가" 등 비정형 suffix 시각 어색함 검증. 필요 시 수동 보정.
+  (3) **Comment Item Right Slot Variant 재구성 (사용자 후속)** — Variant `Type=Default(text 더보기)/Icon-Only(heart)/None` 축으로 재구성. 별도 run.
+  (4) **Archive page 정리 결정** — `_Archive Feed Screen 2026-05-08` 6 source frames 보존 vs 삭제.
+  (5) **Cross-run 정리** — Lounge Update Item run의 inline Reaction Bar 분기 (이전 HANDOFF).
+Key-Files:
+  - Run dir: `/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-144125_feed-screen-use-site-replacement/`
+  - After screenshot: `exports/2026-05-08_feed-cards-cds/feed-screen-after-replacement.png`
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Claude -> User (CDS publish + use site replacement 후속)
 Date: 2026-05-08 14:38:00 KST
 Project: /Users/zenkim_office/Project/CDS
