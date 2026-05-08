@@ -27,6 +27,7 @@ The replacement scope is the Creator Case `Creator Lounge Updates Screen`
 | Remaining normal Lounge Card | ACCEPTED — `25945:39579` remains a plain no-reply update card and is not a reply-preview use-site |
 | CDS icon policy | PASS — CDS `Lounge Update Item` Phosphor count `0`; reply icon is `Lucide Icons / message-square-text` |
 | Product icon policy | PASS — Creator `Lounge Update Item` instances Phosphor count `0`; nested reply icons override to remote `Lucide Icons / message-square-text` |
+| User review | PASS — user confirmed "유저 리뷰도 패스" at `2026-05-08 14:39:37 KST` |
 
 ## Screenshots
 

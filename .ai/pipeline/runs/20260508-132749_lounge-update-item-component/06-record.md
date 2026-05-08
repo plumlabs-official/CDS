@@ -14,6 +14,12 @@ Completed-work peer review:
 PASS — /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260508-140020-claude-review-40632.md
 ```
 
+User review:
+
+```text
+PASS — user confirmed "유저 리뷰도 패스" at 2026-05-08 14:39:37 KST
+```
+
 ## `/record` Result
 
 Scoped record was run after user confirmation, without `git add -A`, because
