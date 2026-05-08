@@ -1,4 +1,29 @@
 ---
+HANDOFF: Claude -> Codex (Feed Card visual parity fix — 사용자 결정 대기)
+Date: 2026-05-08 15:05:00 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: Use site replacement 후 사용자가 visual diff 보고: "아바타 이미지, 챌린지 정보 섹션 구성, 패딩값, A/L 오차가 큼". 분석 결과 정정: (1) Avatar 이미지는 정상 적용 (image hash 동일) — 사용자가 본 plus 아이콘은 Profile Card Right Slot의 default content. (2) Profile Card Right Slot은 SLOT 타입이라 source의 ellipsis Button 대신 default plus Button이 노출됨. (3) **가장 큰 문제**: CDS Lounge Card는 Updates/announcement용 anatomy(Avatar + Updates Badge + Subtitle + Date + Info Slot의 Addon Block count)이고 source LOCAL Lounge Card는 Feed Challenge promotion용 anatomy(Challenge Thumbnail + Title + Avatar Group + multi-text attendee). 구조가 근본적으로 다름 — 사용자 원칙 "동일 구조만 대체"에 어긋남. Lounge Card 단순 reuse는 잘못된 선택. (4) Feed Content Section image fill 누락. (5) padding/AL 4px diff는 minor. 옵션 A(현 인스턴스 inner slot 패치) / B(신규 `Feed Lounge Strip` CDS 컴포넌트 신설 + Feed Card Lounge Card Slot default 교체) / C(Feed Card 자체 재빌드, Local frame anatomy)를 사용자에게 제시. Claude 권장 옵션 B.
+Next-TODO (사용자 결정 대기, 그 후 Codex 진행):
+  - 사용자 옵션 A/B/C 선택
+  - 옵션 B 선택 시 Codex가 Phase 1~6 실행:
+    1. Feed Lounge Strip 컴포넌트 신설 (Components > Composed > Feed Cards > Main content)
+    2. Feed Card Lounge Card Slot default를 Feed Lounge Strip으로 교체
+    3. Profile Card Right Slot Button ellipsis swap (6 cards)
+    4. Feed Content Section image fill 적용 (6 cards)
+    5. publish + library update (사용자)
+    6. 6 use site 재적용 + visual diff 검증
+  - 옵션 A/C 선택 시 별도 plan
+Key-Files:
+  - Run dir: `/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/`
+  - **Codex가 읽어야 할 분석/계획**: `01-team-analysis.md` (옵션 비교 + Phase 1~6 spec + source 데이터 참조)
+  - Source archive page: `28452:1633` (Feed Screen 6 source frames 보존)
+  - Before/after screenshots: `exports/2026-05-08_feed-cards-cds/source-card-1.png`, `new-card-1-after-fix.png`
+  - 신규 Feed Card 인스턴스 IDs: 28452:1811, 2457, 2749, 3056, 3356, 3659
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Claude -> User (Use site replacement 완료, 시각 검증 + 후속)
 Date: 2026-05-08 14:50:00 KST
 Project: /Users/zenkim_office/Project/CDS

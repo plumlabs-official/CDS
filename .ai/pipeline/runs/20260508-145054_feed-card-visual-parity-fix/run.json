@@ -1,0 +1,22 @@
+{
+  "schema": "play.pipeline.v1",
+  "created_at": "2026-05-08T14:50:54+0900",
+  "updated_at": "2026-05-08T14:50:54+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "slug": "feed-card-visual-parity-fix",
+  "request_type": "text",
+  "request_value": "아바타 이미지, 챌린지 정보 섹션 구성, 패딩값, A/L 오차 큼. 원본 24112:14976 vs 신규 28452:1811 비교 후 보정",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix",
+  "team_analysis_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/01-team-analysis.md",
+  "review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/02-review.md",
+  "plan_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/03-plan.md",
+  "plan_review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/04-plan-review.md",
+  "implementation_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/05-implementation.md",
+  "record_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-145054_feed-card-visual-parity-fix/06-record.md",
+  "review_verdict": null,
+  "review_result_file": null,
+  "review_exit_code": null,
+  "plan_review_verdict": null,
+  "plan_review_result_file": null,
+  "plan_review_exit_code": null
+}
