@@ -1,4 +1,18 @@
 ---
+HANDOFF: Codex -> User (Feed Card visual parity Option B CDS-side 완료)
+Date: 2026-05-08 15:42:00 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: `/goal -play -director`로 Claude handoff 옵션 B를 실행했다. CDS `Feed Lounge Strip` component를 `Components > Composed > Feed Cards > Main content`에 생성(`H36eNEd6o7ZTv4R7VcyLf2/21743:9854`, key `4ea818eba7746173a2c69f5f8df3f13fda116ca3`)하고, CDS `Feed Card` master `21732:3062`의 `Lounge Card Slot#21737:1` default를 신규 strip으로 교체했다. Feed Card master는 375×790, lounge slot은 375×96으로 보정. Creation/Completion Gate PASS, property matrix 6/6 PASS, token binding PASS, completed-work Claude review PASS.
+Next-TODO: 사용자가 CDS library publish 후 제품 파일 `2026-05`에서 library update를 수락하면 6 use site(`28452:1811`, `2457`, `2749`, `3056`, `3356`, `3659`)에 후속 적용: source thumbnail/avatar image fills 재적용, Header Slot right button plus→ellipsis, Feed Content Section media fill 복구, archive page `28452:1633` 기준 visual diff 검증.
+Key-Files:
+  - Run: `.ai/pipeline/runs/20260508-150832_feed-card-visual-parity-option-b/`
+  - Review: `reviews/2026-05-08_feed-card-visual-parity-option-b.md`
+  - Peer review: `.ai/peer-review/runs/20260508-153502-claude-review-73821.md`
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Claude -> Codex (Feed Card visual parity fix — 사용자 결정 대기)
 Date: 2026-05-08 15:05:00 KST
 Project: /Users/zenkim_office/Project/CDS
