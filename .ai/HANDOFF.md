@@ -1,4 +1,15 @@
 ---
+HANDOFF: Codex -> User
+Date: 2026-05-06 18:03:54 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: 사용자 피드백 3건을 반영해 `-lennyteam -play`로 연락처 친구/팔로우 관리 화면을 기획부터 재진행. 기존 생성 프레임 `28252:14022`, `28252:14125`를 제자리에서 V2로 교체했고, 연락처 초대 리스트는 ㄱ/ㄴ/ㅁ/ㅈ/A 그룹 + 우측 인덱스 rail로 정리. 레이블은 `Challify에 있는 친구`, `아직 가입하지 않은 연락처`, `내가 팔로우 중인 사람` 등으로 교체. CDS/similar instances를 대거 재사용(Contact 146 instances, Management 96 instances). Claude analysis/plan peer review PASS, screenshot QA 후 탭 red-dot/반복 avatar 문제 보정.
+Next-TODO: 디자인 픽스가 확정되면 Contact Row / Follow Management Row / Quick Action Notice를 CDS composed component로 승격할지 판단. 구현 단계에서는 visual 32px pill과 별개로 44px hit target 보장.
+Review-Result: /Users/zenkim_office/Project/CDS/reviews/2026-05-06_follow-contact-management-v2.md
+Commits: (Figma 직접 편집, 로컬 기록 변경)
+---
+
+---
 HANDOFF: Claude -> User
 Date: 2026-05-06 17:43:16 +0900
 Project: /Users/zenkim_office/Project/CDS
