@@ -1,0 +1,22 @@
+{
+  "schema": "play.pipeline.v1",
+  "created_at": "2026-05-08T13:27:49+0900",
+  "updated_at": "2026-05-08T14:02:41+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "slug": "lounge-update-item-component",
+  "request_type": "text",
+  "request_value": "Create a CDS composed component for lounge update items with reaction bar and reply preview, reusing existing Lounge Card instead of adding a Lounge Card variant; replace/test product node 28047:38198 in 2026-05.",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component",
+  "team_analysis_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component/01-team-analysis.md",
+  "review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component/02-review.md",
+  "plan_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component/03-plan.md",
+  "plan_review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component/04-plan-review.md",
+  "implementation_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component/05-implementation.md",
+  "record_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-132749_lounge-update-item-component/06-record.md",
+  "review_verdict": "PASS",
+  "review_result_file": "/Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260508-132944-claude-review-31700.md",
+  "review_exit_code": 0,
+  "plan_review_verdict": "PASS",
+  "plan_review_result_file": "/Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260508-134151-claude-plan-36500.md",
+  "plan_review_exit_code": 0
+}
