@@ -1,4 +1,22 @@
 ---
+HANDOFF: Claude -> User (CDS publish + use site replacement 후속)
+Date: 2026-05-08 14:30:00 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude
+Summary: `/play /director`로 Feed Screen(`CS2ZhrORl4E1szQfTe2UvO/24112:14935`)에서 신규 CDS 컴포넌트 4종 생성. CDS file `H36eNEd6o7ZTv4R7VcyLf2`의 신규 그룹 `Components > Composed > Feed Cards > Main content`(`21721:6812`)에 Reaction Bar(`21723:2908`/key `1065b60af9b20c02d5c47a80e1e4b3475d368e5c`), Comment Item(`21725:2939`/key `f2d39007910743ce240c9f8591ab766d2a9dcec3`), Feed Addon Footer(`21726:2953`/key `3a4eb5a7dac4d1234cc5ee13e13aebcfd2e8d5a5`), Feed Card(`21732:3062`/key `1a348920b824461793300098c74f832f20f758b7`)를 배치. CDS Item/Lounge Card Addon Block/Messaging Reaction은 anatomy 호환 X로 reject 결정 evidence 기록. 모든 컴포넌트의 양/음 instance probe PASS. Reaction Bar는 Heart Outline+Filled overlay 모델(R3 F2)로 `Is Liked` BOOLEAN 구현, Phosphor `chat-centered-dots` → Lucide `message-circle-more` 정합. Feed Addon Footer는 카피 정확 매핑을 위해 5개 별도 TEXT 노드(Actor Name·Suffix1·Attendee Count·Suffix2·Status)로 분리. R8 hit area exception은 사용자 명시 승인. Lounge Card 375 preflight PASS(531×196 → 375×196). 7회 peer review 사이클(분석 4 + plan 3) 거쳐 controller fallback으로 진행.
+Next-TODO:
+  (1) **CDS publish** — 신규 Feed Cards 그룹 + 4 컴포넌트 publish (사용자 Figma 우상단 Publish 버튼).
+  (2) **제품 파일 라이브러리 업데이트** — `2026-05` 파일에서 라이브러리 update prompt 수락.
+  (3) **Use site replacement** — Feed Screen 6 use site (24112:14976, 15039, 15087, 15135, 15182, 15231)을 신규 Feed Card 인스턴스로 교체. preserve-source-overrides procedure는 `.ai/pipeline/runs/20260508-131502_feed-screen-new-components/03-plan.md` §4-6 참조.
+  (4) **INSTANCE_SWAP API 호환 이슈** — `addComponentProperty(name, "INSTANCE_SWAP", key)` 호출이 "Property value is incompatible with component property type" 에러로 미동작. Comment Item Right Slot + Feed Card 6 slot props가 nested instance level swap으로 운용 중. Figma plugin 환경/문서 재조사 필요.
+  (5) **Cross-run 정리** — Lounge Update Item run의 inline Reaction Bar(`Lounge Update Item` 자체에 author됨)와 본 run의 Reaction Bar(`21723:2908`) 분기 정리. 사용자 결정 필요 (deprecate vs swap vs 양쪽 유지).
+Key-Files:
+  - Run dir: `/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260508-131502_feed-screen-new-components/`
+  - Group screenshot: `exports/2026-05-08_feed-cards-cds/feed-cards-group.png`
+Commits: (이번 record commit)
+---
+
+---
 HANDOFF: Codex -> User
 Date: 2026-05-08 14:07:40 KST
 Project: /Users/zenkim_office/Project/CDS

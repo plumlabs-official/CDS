@@ -2,7 +2,17 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-06
+> Last updated: 2026-05-08
+
+---
+
+## 현재 세션 (2026-05-08)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **Feed Cards CDS 컴포넌트 4종 생성 (`/play /director`)** | Feed Screen(`CS2ZhrORl4E1szQfTe2UvO/24112:14935`)에서 Tier 1 컴포넌트 후보 도출 후 신규 그룹 `Components > Composed > Feed Cards > Main content`(`H36eNEd6o7ZTv4R7VcyLf2/21721:6812`)에 4종 생성. Reaction Bar(`21723:2908`/key `1065b60a...`, 375×38, Heart Outline+Filled overlay, Lucide message-circle-more), Comment Item(`21725:2939`/key `f2d39007...`, 343×32), Feed Addon Footer(`21726:2953`/key `3a4eb5a7...`, 343×36, 5 TEXT 노드 분리), Feed Card(`21732:3062`/key `1a348920...`, 375×858 composed). 후보 평가: CDS Item/Lounge Card Addon Block/Messaging Reaction reject. **알려진 한계**: `addComponentProperty INSTANCE_SWAP` API 호환 이슈로 6 slot props 미추가 (BOOLEAN show/hide만), nested instance level swap으로 운용. R8 hit area exception 사용자 명시 승인. Lounge Card 375 preflight PASS. 7회 peer review 사이클(분석 4 + plan 3) 후 controller fallback. **Use site replacement BLOCKED** — CDS publish + 제품 파일 library update 사용자 액션 필요. 산출물: `.ai/pipeline/runs/20260508-131502_feed-screen-new-components/` |
 
 ---
 
