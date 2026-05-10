@@ -1,0 +1,6 @@
+{
+  "status": "needs_user_decision",
+  "summary": "Desktop-control stage could not run: request_access for Figma was rejected because another Claude session is currently holding the computer-use lock. Per dispatch safety, not pretending the copy/paste happened. Release the other Claude session (Stop button) and re-dispatch this stage; also confirm Figma still has the 27 source nodes selected on the product file before re-running.",
+  "updated_at": "2026-05-10T00:00:00+0900",
+  "changed_files": []
+}

@@ -1,0 +1,16 @@
+{
+  "checkedInstances": 29,
+  "riskCount": 1,
+  "risks": [
+    {
+      "candidateId": "28502:5",
+      "candidateName": "Feed Compose Option Row",
+      "instanceId": "28502:43",
+      "instanceName": "Feed Compose Option Row / 사람 태그",
+      "reason": "The instance text differs from the local component default. Replacing it with the generic image-backed CDS component would lose the visible label.",
+      "baseText": "공개대상\n전체공개",
+      "instanceText": "사람 태그\n",
+      "resolution": "Created a state-specific CDS source component and will map this instance to that source."
+    }
+  ]
+}

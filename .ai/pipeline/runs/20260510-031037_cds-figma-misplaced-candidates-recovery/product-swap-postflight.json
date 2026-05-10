@@ -1,0 +1,21 @@
+{
+  "status": "done",
+  "usageFile": "CS2ZhrORl4E1szQfTe2UvO",
+  "usageScreenNode": "14332:285690",
+  "checkedInstances": 29,
+  "allRemoteCdsInstances": true,
+  "allInsideTargetScreen": true,
+  "localOldInstancesInTargetScreen": 0,
+  "stateSpecificMapping": {
+    "instanceId": "28502:43",
+    "instanceName": "Feed Compose Option Row / 사람 태그",
+    "componentName": "Feed Compose Option Row Tag People",
+    "componentKey": "528cad1526637836c8f48d8a2b1bde18de4a0d64"
+  },
+  "cleanup": {
+    "removedLocalCandidateComponents": 27,
+    "removedEmptyCandidateFrame": "28502:4",
+    "remainingCandidateNodesOutsideScope": 8,
+    "remainingCandidateNodesNote": "Remaining / CANDIDATE nodes are referenced on page 15236:199 ([전체 플로우 최신화 예정]) and were not part of this Feed and Lounge recovery scope."
+  }
+}

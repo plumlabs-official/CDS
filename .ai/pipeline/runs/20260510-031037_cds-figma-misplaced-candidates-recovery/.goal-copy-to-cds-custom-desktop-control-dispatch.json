@@ -1,0 +1,15 @@
+{
+  "schema": "play.desktop_actuator.dispatch.v1",
+  "status": "result",
+  "detail": "done: Copied the selected product candidate component originals and pasted them into the CDS file via custom desktop actuator.",
+  "actuator": "custom",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery",
+  "stage": "copy-to-cds-custom",
+  "prompt_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/desktop-copy-to-cds.md",
+  "metadata_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/desktop-copy-to-cds-metadata.json",
+  "dispatch_prompt": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/.goal-copy-to-cds-custom-desktop-control-dispatch.md",
+  "result_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/desktop-copy-to-cds-result.json",
+  "url": null,
+  "updated_at": "2026-05-10T03:33:43+0900"
+}

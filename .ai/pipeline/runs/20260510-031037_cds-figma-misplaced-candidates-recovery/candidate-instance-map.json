@@ -1,0 +1,621 @@
+{
+  "schema": "cds.figma_candidate_instance_map.v1",
+  "fileKey": "CS2ZhrORl4E1szQfTe2UvO",
+  "nodeId": "14332:285690",
+  "candidateCount": 27,
+  "instanceCount": 29,
+  "items": [
+    {
+      "id": "28502:5",
+      "key": "d2fbf50568cf88ce86aa63645a8fb92908eb4dab",
+      "name": "Feed Compose Option Row / CANDIDATE",
+      "cdsName": "Feed Compose Option Row",
+      "type": "COMPONENT",
+      "x": 29098,
+      "y": -9577,
+      "w": 343,
+      "h": 40,
+      "instances": [
+        {
+          "id": "28502:35",
+          "name": "Feed Compose Option Row / 공개대상",
+          "componentId": "28502:5",
+          "x": 27598,
+          "y": -7582,
+          "w": 343,
+          "h": 40
+        },
+        {
+          "id": "28502:43",
+          "name": "Feed Compose Option Row / 사람 태그",
+          "componentId": "28502:5",
+          "x": 27598,
+          "y": -7542,
+          "w": 343,
+          "h": 40
+        }
+      ]
+    },
+    {
+      "id": "28504:49",
+      "key": "c3990a5b66aef79db82168f96061f63c5158cd7b",
+      "name": "Feed Compose Media Preview Card / CANDIDATE",
+      "cdsName": "Feed Compose Media Preview Card",
+      "type": "COMPONENT",
+      "x": 29098,
+      "y": -9517,
+      "w": 350,
+      "h": 480,
+      "instances": [
+        {
+          "id": "28504:50",
+          "name": "Feed Compose Media Preview Card / Instance",
+          "componentId": "28504:49",
+          "x": 27590,
+          "y": -8076,
+          "w": 350,
+          "h": 480
+        }
+      ]
+    },
+    {
+      "id": "28511:195",
+      "key": "f338cec0afdcfb31fa72dd86f2c11e708c84fe01",
+      "name": "Post Action Sheet / Other User / CANDIDATE",
+      "cdsName": "Post Action Sheet / Other User",
+      "type": "COMPONENT",
+      "x": 29098,
+      "y": -9017,
+      "w": 375,
+      "h": 309,
+      "instances": [
+        {
+          "id": "28511:196",
+          "name": "Post Action Sheet / Other User / Instance",
+          "componentId": "28511:195",
+          "x": 24713,
+          "y": -9113,
+          "w": 375,
+          "h": 309
+        }
+      ]
+    },
+    {
+      "id": "28511:331",
+      "key": "2fefabb12840d33823825e8a4457b9a4a94dd0b2",
+      "name": "Post Action Sheet / Owner / CANDIDATE",
+      "cdsName": "Post Action Sheet / Owner",
+      "type": "COMPONENT",
+      "x": 29098,
+      "y": -8688,
+      "w": 375,
+      "h": 433,
+      "instances": [
+        {
+          "id": "28511:332",
+          "name": "Post Action Sheet / Owner / Instance",
+          "componentId": "28511:331",
+          "x": 24713,
+          "y": -8731,
+          "w": 375,
+          "h": 433
+        }
+      ]
+    },
+    {
+      "id": "28512:398",
+      "key": "7d4e73d4a72bc44c8caec60ca2a4eaa29c4f0e14",
+      "name": "Comment Drawer / CANDIDATE",
+      "cdsName": "Comment Drawer",
+      "type": "COMPONENT",
+      "x": 29098,
+      "y": -8235,
+      "w": 375,
+      "h": 525,
+      "instances": [
+        {
+          "id": "28512:399",
+          "name": "Comment Drawer / Instance",
+          "componentId": "28512:398",
+          "x": 24713,
+          "y": -8225,
+          "w": 375,
+          "h": 525
+        }
+      ]
+    },
+    {
+      "id": "28512:512",
+      "key": "ca875759cc20cdf6a19ab51b5c32ca95f762c636",
+      "name": "Confirm Dialog / Stop Writing / CANDIDATE",
+      "cdsName": "Confirm Dialog / Stop Writing",
+      "type": "COMPONENT",
+      "x": 29098,
+      "y": -7690,
+      "w": 280,
+      "h": 222,
+      "instances": [
+        {
+          "id": "28512:513",
+          "name": "Confirm Dialog / Stop Writing / Instance",
+          "componentId": "28512:512",
+          "x": 24760,
+          "y": -6900,
+          "w": 280,
+          "h": 222
+        }
+      ]
+    },
+    {
+      "id": "28536:213",
+      "key": "381a82e2e04a94d1fb52578fb772478ab89814ac",
+      "name": "Template Crop Canvas Expanded / CANDIDATE",
+      "cdsName": "Template Crop Canvas Expanded",
+      "type": "COMPONENT",
+      "x": 1303,
+      "y": 183,
+      "w": 375,
+      "h": 500,
+      "instances": [
+        {
+          "id": "28536:236",
+          "name": "Template Crop Canvas Expanded / Instance",
+          "componentId": "28536:213",
+          "x": 26775,
+          "y": -8121,
+          "w": 375,
+          "h": 500
+        }
+      ]
+    },
+    {
+      "id": "28536:292",
+      "key": "5f461e874e34d122825ec6196f70dd6f390e4558",
+      "name": "Template Edit Tool Rail / CANDIDATE",
+      "cdsName": "Template Edit Tool Rail",
+      "type": "COMPONENT",
+      "x": 1303,
+      "y": 723,
+      "w": 359,
+      "h": 86,
+      "instances": [
+        {
+          "id": "28536:293",
+          "name": "Template Edit Tool Rail / Instance",
+          "componentId": "28536:292",
+          "x": 26791,
+          "y": -7581,
+          "w": 359,
+          "h": 86
+        },
+        {
+          "id": "28538:233",
+          "name": "Template Edit Tool Rail / Instance",
+          "componentId": "28536:292",
+          "x": 26390,
+          "y": -7581,
+          "w": 359,
+          "h": 86
+        }
+      ]
+    },
+    {
+      "id": "28537:213",
+      "key": "1a8e7e60a802160524be75dcc15c501f8d89da14",
+      "name": "Template Crop Canvas Text Editing / CANDIDATE",
+      "cdsName": "Template Crop Canvas Text Editing",
+      "type": "COMPONENT",
+      "x": 1704,
+      "y": 183,
+      "w": 375,
+      "h": 500,
+      "instances": [
+        {
+          "id": "28537:266",
+          "name": "Template Crop Canvas Text Editing / Instance",
+          "componentId": "28537:213",
+          "x": 27176,
+          "y": -8094,
+          "w": 375,
+          "h": 500
+        }
+      ]
+    },
+    {
+      "id": "28537:286",
+      "key": "67dc35c386eba95e9897d4ae4583caeedee90dbc",
+      "name": "Template Editor Top Bar Done / CANDIDATE",
+      "cdsName": "Template Editor Top Bar Done",
+      "type": "COMPONENT",
+      "x": 1704,
+      "y": 723,
+      "w": 375,
+      "h": 60,
+      "instances": [
+        {
+          "id": "28537:287",
+          "name": "Template Editor Top Bar Done / Instance",
+          "componentId": "28537:286",
+          "x": 27176,
+          "y": -8147,
+          "w": 375,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "28537:342",
+      "key": "861bc3f454442172fc3d271febf645a0ce1881b8",
+      "name": "Template Text Editing Overlay / CANDIDATE",
+      "cdsName": "Template Text Editing Overlay",
+      "type": "COMPONENT",
+      "x": 1704,
+      "y": 823,
+      "w": 375,
+      "h": 812,
+      "instances": [
+        {
+          "id": "28537:343",
+          "name": "Template Text Editing Overlay / Instance",
+          "componentId": "28537:342",
+          "x": 27176,
+          "y": -8188,
+          "w": 375,
+          "h": 812
+        }
+      ]
+    },
+    {
+      "id": "28537:395",
+      "key": "75deec499537f28dbab202658bab3b939a2b74bf",
+      "name": "iOS Korean Keyboard Sheet / CANDIDATE",
+      "cdsName": "iOS Korean Keyboard Sheet",
+      "type": "COMPONENT",
+      "x": 1704,
+      "y": 1683,
+      "w": 375,
+      "h": 311,
+      "instances": [
+        {
+          "id": "28537:396",
+          "name": "iOS Korean Keyboard Sheet / Instance",
+          "componentId": "28537:395",
+          "x": 27176,
+          "y": -7687,
+          "w": 375,
+          "h": 311
+        }
+      ]
+    },
+    {
+      "id": "28538:302",
+      "key": "d6e34321da9c06beaa5e461df2e4c4a8b786233b",
+      "name": "Template Preview Carousel / CANDIDATE",
+      "cdsName": "Template Preview Carousel",
+      "type": "COMPONENT",
+      "x": 902,
+      "y": 183,
+      "w": 375,
+      "h": 373,
+      "instances": [
+        {
+          "id": "28538:303",
+          "name": "Template Preview Carousel / Instance",
+          "componentId": "28538:302",
+          "x": 26374,
+          "y": -8044,
+          "w": 375,
+          "h": 373
+        }
+      ]
+    },
+    {
+      "id": "28538:337",
+      "key": "e62194add781e06beba279906e9913bf896ee9c5",
+      "name": "Template Editor Top Bar Close / CANDIDATE",
+      "cdsName": "Template Editor Top Bar Close",
+      "type": "COMPONENT",
+      "x": 902,
+      "y": 603,
+      "w": 375,
+      "h": 60,
+      "instances": [
+        {
+          "id": "28538:338",
+          "name": "Template Editor Top Bar Close / Instance",
+          "componentId": "28538:337",
+          "x": 26374,
+          "y": -8138,
+          "w": 375,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "28538:446",
+      "key": "d69fea89f6c859bbb2361261598e3bb30375896b",
+      "name": "Template Fullscreen Control / CANDIDATE",
+      "cdsName": "Template Fullscreen Control",
+      "type": "COMPONENT",
+      "x": 902,
+      "y": 703,
+      "w": 36,
+      "h": 36,
+      "instances": [
+        {
+          "id": "28538:447",
+          "name": "Template Fullscreen Control / Instance",
+          "componentId": "28538:446",
+          "x": 26390,
+          "y": -7702,
+          "w": 36,
+          "h": 36
+        }
+      ]
+    },
+    {
+      "id": "28539:270",
+      "key": "88b304420b3f6f9d13a4fcfb67c6c34bf18c2028",
+      "name": "Template Page Indicator 5-Step Small / CANDIDATE",
+      "cdsName": "Template Page Indicator 5-Step Small",
+      "type": "COMPONENT",
+      "x": 2124,
+      "y": 183,
+      "w": 69,
+      "h": 8,
+      "instances": [
+        {
+          "id": "28539:391",
+          "name": "Template Page Indicator 5-Step Small / Instance",
+          "componentId": "28539:270",
+          "x": 27335,
+          "y": -7574,
+          "w": 69,
+          "h": 8
+        }
+      ]
+    },
+    {
+      "id": "28539:403",
+      "key": "ac92e471a6ed2aa52ad8d4a656bc995631efa679",
+      "name": "Template Page Indicator 5-Step Large / CANDIDATE",
+      "cdsName": "Template Page Indicator 5-Step Large",
+      "type": "COMPONENT",
+      "x": 2124,
+      "y": 263,
+      "w": 375,
+      "h": 32,
+      "instances": [
+        {
+          "id": "28539:576",
+          "name": "Template Page Indicator 5-Step Large / Instance",
+          "componentId": "28539:403",
+          "x": 26374,
+          "y": -7671,
+          "w": 375,
+          "h": 32
+        }
+      ]
+    },
+    {
+      "id": "28542:331",
+      "key": "2cb77a736d7dbe86ee1dfeb1777df5bf9fc5c6ae",
+      "name": "Completion Preview Carousel / CANDIDATE",
+      "cdsName": "Completion Preview Carousel",
+      "type": "COMPONENT",
+      "x": 2506,
+      "y": 183,
+      "w": 375,
+      "h": 373,
+      "instances": [
+        {
+          "id": "28542:332",
+          "name": "Completion Preview Carousel / Instance",
+          "componentId": "28542:331",
+          "x": 27978,
+          "y": -8035,
+          "w": 375,
+          "h": 373
+        }
+      ]
+    },
+    {
+      "id": "28542:393",
+      "key": "5665d254ed7a23dc5d31045706812dd253a9b136",
+      "name": "Completion Share Rail / CANDIDATE",
+      "cdsName": "Completion Share Rail",
+      "type": "COMPONENT",
+      "x": 2506,
+      "y": 613,
+      "w": 375,
+      "h": 84,
+      "instances": [
+        {
+          "id": "28542:394",
+          "name": "Completion Share Rail / Instance",
+          "componentId": "28542:393",
+          "x": 27978,
+          "y": -7579,
+          "w": 375,
+          "h": 84
+        }
+      ]
+    },
+    {
+      "id": "28542:431",
+      "key": "7f8c425e40e81addbd20d134abe19ae41598b78a",
+      "name": "Completion Title Row / CANDIDATE",
+      "cdsName": "Completion Title Row",
+      "type": "COMPONENT",
+      "x": 2506,
+      "y": 743,
+      "w": 375,
+      "h": 28,
+      "instances": [
+        {
+          "id": "28542:432",
+          "name": "Completion Title Row / Instance",
+          "componentId": "28542:431",
+          "x": 27978,
+          "y": -8118,
+          "w": 375,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "id": "28542:437",
+      "key": "77381484247390c50e34079bc42721a26fba0a8f",
+      "name": "Completion Date Row / CANDIDATE",
+      "cdsName": "Completion Date Row",
+      "type": "COMPONENT",
+      "x": 2506,
+      "y": 803,
+      "w": 375,
+      "h": 28,
+      "instances": [
+        {
+          "id": "28542:438",
+          "name": "Completion Date Row / Instance",
+          "componentId": "28542:437",
+          "x": 27978,
+          "y": -8090,
+          "w": 375,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "id": "28542:446",
+      "key": "df37660abc28ab281817ce0c2983feccb2a6217b",
+      "name": "Completion Page Indicator 5-Step / CANDIDATE",
+      "cdsName": "Completion Page Indicator 5-Step",
+      "type": "COMPONENT",
+      "x": 2506,
+      "y": 863,
+      "w": 375,
+      "h": 32,
+      "instances": [
+        {
+          "id": "28542:447",
+          "name": "Completion Page Indicator 5-Step / Instance",
+          "componentId": "28542:446",
+          "x": 27978,
+          "y": -7662,
+          "w": 375,
+          "h": 32
+        }
+      ]
+    },
+    {
+      "id": "28543:366",
+      "key": "7fd0a1e3af9dc2b308b8253d3255bc8776d7a0f2",
+      "name": "Album Picker Top Bar / CANDIDATE",
+      "cdsName": "Album Picker Top Bar",
+      "type": "COMPONENT",
+      "x": 501,
+      "y": 75,
+      "w": 375,
+      "h": 60,
+      "instances": [
+        {
+          "id": "28543:367",
+          "name": "Album Picker Top Bar / Instance",
+          "componentId": "28543:366",
+          "x": 25973,
+          "y": -8246,
+          "w": 375,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "28543:502",
+      "key": "0f5ed2bf488e7957f8f1b0be4648554a587cf4af",
+      "name": "Album Picker Content / CANDIDATE",
+      "cdsName": "Album Picker Content",
+      "type": "COMPONENT",
+      "x": 501,
+      "y": 165,
+      "w": 375,
+      "h": 817,
+      "instances": [
+        {
+          "id": "28543:503",
+          "name": "Album Picker Content / Instance",
+          "componentId": "28543:502",
+          "x": 25973,
+          "y": -8186,
+          "w": 375,
+          "h": 817
+        }
+      ]
+    },
+    {
+      "id": "28544:214",
+      "key": "72579a6f2063ede18eb6f2547618a56c12f6c428",
+      "name": "Success Streak Illustration / CANDIDATE",
+      "cdsName": "Success Streak Illustration",
+      "type": "COMPONENT",
+      "x": 2907,
+      "y": 183,
+      "w": 374,
+      "h": 151,
+      "instances": [
+        {
+          "id": "28544:215",
+          "name": "Success Streak Illustration / Instance",
+          "componentId": "28544:214",
+          "x": 28380,
+          "y": -7934,
+          "w": 374,
+          "h": 151
+        }
+      ]
+    },
+    {
+      "id": "28545:244",
+      "key": "b6842d153ffbdbc24eac3531211118de024f6926",
+      "name": "iOS Activity Header / CANDIDATE",
+      "cdsName": "iOS Activity Header",
+      "type": "COMPONENT",
+      "x": 595,
+      "y": 3050,
+      "w": 389,
+      "h": 80,
+      "instances": [
+        {
+          "id": "28545:245",
+          "name": "iOS Activity Header / Instance",
+          "componentId": "28545:244",
+          "x": 24712,
+          "y": -6559,
+          "w": 389,
+          "h": 80
+        }
+      ]
+    },
+    {
+      "id": "28545:287",
+      "key": "a95a673177cc7cef2a31ac6f3aa10b6fae6493c4",
+      "name": "iOS Activity Scroll View / CANDIDATE",
+      "cdsName": "iOS Activity Scroll View",
+      "type": "COMPONENT",
+      "x": 595,
+      "y": 3150,
+      "w": 390,
+      "h": 414,
+      "instances": [
+        {
+          "id": "28545:288",
+          "name": "iOS Activity Scroll View / Instance",
+          "componentId": "28545:287",
+          "x": 24712,
+          "y": -6479,
+          "w": 390,
+          "h": 414
+        }
+      ]
+    }
+  ]
+}

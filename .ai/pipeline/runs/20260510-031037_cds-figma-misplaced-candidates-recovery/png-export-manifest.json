@@ -1,0 +1,250 @@
+{
+  "schema": "cds.png_export_manifest.v1",
+  "scale": 2,
+  "count": 27,
+  "rows": [
+    {
+      "id": "28502:5",
+      "name": "Feed Compose Option Row / CANDIDATE",
+      "cdsName": "Feed Compose Option Row",
+      "w": 343,
+      "h": 40,
+      "bytes": 4995,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28502-5.png"
+    },
+    {
+      "id": "28504:49",
+      "name": "Feed Compose Media Preview Card / CANDIDATE",
+      "cdsName": "Feed Compose Media Preview Card",
+      "w": 350,
+      "h": 480,
+      "bytes": 592278,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28504-49.png"
+    },
+    {
+      "id": "28511:195",
+      "name": "Post Action Sheet / Other User / CANDIDATE",
+      "cdsName": "Post Action Sheet / Other User",
+      "w": 375,
+      "h": 309,
+      "bytes": 15733,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28511-195.png"
+    },
+    {
+      "id": "28511:331",
+      "name": "Post Action Sheet / Owner / CANDIDATE",
+      "cdsName": "Post Action Sheet / Owner",
+      "w": 375,
+      "h": 433,
+      "bytes": 22325,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28511-331.png"
+    },
+    {
+      "id": "28512:398",
+      "name": "Comment Drawer / CANDIDATE",
+      "cdsName": "Comment Drawer",
+      "w": 375,
+      "h": 525,
+      "bytes": 88888,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28512-398.png"
+    },
+    {
+      "id": "28512:512",
+      "name": "Confirm Dialog / Stop Writing / CANDIDATE",
+      "cdsName": "Confirm Dialog / Stop Writing",
+      "w": 280,
+      "h": 222,
+      "bytes": 16194,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28512-512.png"
+    },
+    {
+      "id": "28536:213",
+      "name": "Template Crop Canvas Expanded / CANDIDATE",
+      "cdsName": "Template Crop Canvas Expanded",
+      "w": 375,
+      "h": 500,
+      "bytes": 931257,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28536-213.png"
+    },
+    {
+      "id": "28536:292",
+      "name": "Template Edit Tool Rail / CANDIDATE",
+      "cdsName": "Template Edit Tool Rail",
+      "w": 359,
+      "h": 86,
+      "bytes": 19751,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28536-292.png"
+    },
+    {
+      "id": "28537:213",
+      "name": "Template Crop Canvas Text Editing / CANDIDATE",
+      "cdsName": "Template Crop Canvas Text Editing",
+      "w": 375,
+      "h": 500,
+      "bytes": 931257,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28537-213.png"
+    },
+    {
+      "id": "28537:286",
+      "name": "Template Editor Top Bar Done / CANDIDATE",
+      "cdsName": "Template Editor Top Bar Done",
+      "w": 375,
+      "h": 60,
+      "bytes": 1217,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28537-286.png"
+    },
+    {
+      "id": "28537:342",
+      "name": "Template Text Editing Overlay / CANDIDATE",
+      "cdsName": "Template Text Editing Overlay",
+      "w": 375,
+      "h": 812,
+      "bytes": 51692,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28537-342.png"
+    },
+    {
+      "id": "28537:395",
+      "name": "iOS Korean Keyboard Sheet / CANDIDATE",
+      "cdsName": "iOS Korean Keyboard Sheet",
+      "w": 375,
+      "h": 311,
+      "bytes": 42118,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28537-395.png"
+    },
+    {
+      "id": "28538:302",
+      "name": "Template Preview Carousel / CANDIDATE",
+      "cdsName": "Template Preview Carousel",
+      "w": 375,
+      "h": 373,
+      "bytes": 757639,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28538-302.png"
+    },
+    {
+      "id": "28538:337",
+      "name": "Template Editor Top Bar Close / CANDIDATE",
+      "cdsName": "Template Editor Top Bar Close",
+      "w": 375,
+      "h": 60,
+      "bytes": 778,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28538-337.png"
+    },
+    {
+      "id": "28538:446",
+      "name": "Template Fullscreen Control / CANDIDATE",
+      "cdsName": "Template Fullscreen Control",
+      "w": 36,
+      "h": 36,
+      "bytes": 548,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28538-446.png"
+    },
+    {
+      "id": "28539:270",
+      "name": "Template Page Indicator 5-Step Small / CANDIDATE",
+      "cdsName": "Template Page Indicator 5-Step Small",
+      "w": 69,
+      "h": 8,
+      "bytes": 693,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28539-270.png"
+    },
+    {
+      "id": "28539:403",
+      "name": "Template Page Indicator 5-Step Large / CANDIDATE",
+      "cdsName": "Template Page Indicator 5-Step Large",
+      "w": 375,
+      "h": 32,
+      "bytes": 1308,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28539-403.png"
+    },
+    {
+      "id": "28542:331",
+      "name": "Completion Preview Carousel / CANDIDATE",
+      "cdsName": "Completion Preview Carousel",
+      "w": 375,
+      "h": 373,
+      "bytes": 769630,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28542-331.png"
+    },
+    {
+      "id": "28542:393",
+      "name": "Completion Share Rail / CANDIDATE",
+      "cdsName": "Completion Share Rail",
+      "w": 375,
+      "h": 84,
+      "bytes": 24145,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28542-393.png"
+    },
+    {
+      "id": "28542:431",
+      "name": "Completion Title Row / CANDIDATE",
+      "cdsName": "Completion Title Row",
+      "w": 375,
+      "h": 28,
+      "bytes": 7670,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28542-431.png"
+    },
+    {
+      "id": "28542:437",
+      "name": "Completion Date Row / CANDIDATE",
+      "cdsName": "Completion Date Row",
+      "w": 375,
+      "h": 28,
+      "bytes": 3451,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28542-437.png"
+    },
+    {
+      "id": "28542:446",
+      "name": "Completion Page Indicator 5-Step / CANDIDATE",
+      "cdsName": "Completion Page Indicator 5-Step",
+      "w": 375,
+      "h": 32,
+      "bytes": 1213,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28542-446.png"
+    },
+    {
+      "id": "28543:366",
+      "name": "Album Picker Top Bar / CANDIDATE",
+      "cdsName": "Album Picker Top Bar",
+      "w": 375,
+      "h": 60,
+      "bytes": 3226,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28543-366.png"
+    },
+    {
+      "id": "28543:502",
+      "name": "Album Picker Content / CANDIDATE",
+      "cdsName": "Album Picker Content",
+      "w": 375,
+      "h": 817,
+      "bytes": 1987974,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28543-502.png"
+    },
+    {
+      "id": "28544:214",
+      "name": "Success Streak Illustration / CANDIDATE",
+      "cdsName": "Success Streak Illustration",
+      "w": 374,
+      "h": 151,
+      "bytes": 30769,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28544-214.png"
+    },
+    {
+      "id": "28545:244",
+      "name": "iOS Activity Header / CANDIDATE",
+      "cdsName": "iOS Activity Header",
+      "w": 389,
+      "h": 80,
+      "bytes": 8585,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28545-244.png"
+    },
+    {
+      "id": "28545:287",
+      "name": "iOS Activity Scroll View / CANDIDATE",
+      "cdsName": "iOS Activity Scroll View",
+      "w": 390,
+      "h": 414,
+      "bytes": 331377,
+      "file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/png-export/28545-287.png"
+    }
+  ]
+}

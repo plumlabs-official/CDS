@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "sourceInstanceId": "28502:43",
+      "sourceInstanceName": "Feed Compose Option Row / 사람 태그",
+      "name": "Feed Compose Option Row Tag People",
+      "componentId": "21880:7344",
+      "componentKey": "528cad1526637836c8f48d8a2b1bde18de4a0d64",
+      "imageNodeId": "21880:7345",
+      "imageFile": "state-png/28502-43.png",
+      "reason": "Preserves a text override that cannot survive a swap to the generic image-backed source component."
+    }
+  ]
+}

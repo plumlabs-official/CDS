@@ -1,0 +1,15 @@
+{
+  "schema": "play.desktop_actuator.dispatch.v1",
+  "status": "submitted",
+  "detail": "Claude Cowork Dispatch link prepared",
+  "actuator": "claude_cowork_dispatch",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery",
+  "stage": "copy-to-cds",
+  "prompt_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/desktop-copy-to-cds.md",
+  "metadata_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/desktop-copy-to-cds-metadata.json",
+  "dispatch_prompt": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/.goal-copy-to-cds-desktop-control-dispatch.md",
+  "result_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260510-031037_cds-figma-misplaced-candidates-recovery/desktop-copy-to-cds-result.json",
+  "url": "claude://cowork/new?q=Open%20the%20attached%20repo%20folder%20and%20run%20the%20desktop-control%20stage%20described%20in%20%2FUsers%2Fzenkim_office%2FProject%2FCDS%2F.ai%2Fpipeline%2Fruns%2F20260510-031037_cds-figma-misplaced-candidates-recovery%2F.goal-copy-to-cds-desktop-control-dispatch.md.%20Write%20the%20required%20result%20JSON%20to%20%2FUsers%2Fzenkim_office%2FProject%2FCDS%2F.ai%2Fpipeline%2Fruns%2F20260510-031037_cds-figma-misplaced-candidates-recovery%2Fdesktop-copy-to-cds-result.json.&folder=%2FUsers%2Fzenkim_office%2FProject%2FCDS",
+  "updated_at": "2026-05-10T03:30:52+0900"
+}

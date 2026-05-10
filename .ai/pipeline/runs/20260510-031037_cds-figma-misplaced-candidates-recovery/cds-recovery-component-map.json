@@ -1,0 +1,281 @@
+{
+  "schema": "cds.recovery_component_map.v1",
+  "fileKey": "H36eNEd6o7ZTv4R7VcyLf2",
+  "sourceFileKey": "CS2ZhrORl4E1szQfTe2UvO",
+  "groupNodeId": "21850:3069",
+  "mainNodeId": "21850:3071",
+  "count": 27,
+  "missing": [],
+  "items": [
+    {
+      "oldId": "28502:5",
+      "oldName": "Feed Compose Option Row / CANDIDATE",
+      "name": "Feed Compose Option Row",
+      "componentId": "21850:3072",
+      "componentKey": "4bf614af9ae0dc20113c61cdad65ead12c453bb0",
+      "imageNodeId": "21850:3073",
+      "w": 343,
+      "h": 40
+    },
+    {
+      "oldId": "28504:49",
+      "oldName": "Feed Compose Media Preview Card / CANDIDATE",
+      "name": "Feed Compose Media Preview Card",
+      "componentId": "21850:3074",
+      "componentKey": "19e8fcf40ce90fd3920be2220af956b3646592af",
+      "imageNodeId": "21850:3075",
+      "w": 350,
+      "h": 480
+    },
+    {
+      "oldId": "28511:195",
+      "oldName": "Post Action Sheet / Other User / CANDIDATE",
+      "name": "Post Action Sheet Other User",
+      "componentId": "21850:3076",
+      "componentKey": "9533787d12076772fdd58a6a4853c4d43663c0d2",
+      "imageNodeId": "21850:3077",
+      "w": 375,
+      "h": 309
+    },
+    {
+      "oldId": "28511:331",
+      "oldName": "Post Action Sheet / Owner / CANDIDATE",
+      "name": "Post Action Sheet Owner",
+      "componentId": "21850:3078",
+      "componentKey": "97738cf76a1751b289adf4a1e700226123433154",
+      "imageNodeId": "21850:3079",
+      "w": 375,
+      "h": 433
+    },
+    {
+      "oldId": "28512:398",
+      "oldName": "Comment Drawer / CANDIDATE",
+      "name": "Comment Drawer",
+      "componentId": "21850:3080",
+      "componentKey": "24d9c4068fa5416a4d8fd3bf8b849408ad80f406",
+      "imageNodeId": "21850:3081",
+      "w": 375,
+      "h": 525
+    },
+    {
+      "oldId": "28512:512",
+      "oldName": "Confirm Dialog / Stop Writing / CANDIDATE",
+      "name": "Confirm Dialog Stop Writing",
+      "componentId": "21850:3082",
+      "componentKey": "d940cc9a13b2d090d2fd3c51f3621a47a8b7a8a0",
+      "imageNodeId": "21850:3083",
+      "w": 280,
+      "h": 222
+    },
+    {
+      "oldId": "28536:213",
+      "oldName": "Template Crop Canvas Expanded / CANDIDATE",
+      "name": "Template Crop Canvas Expanded",
+      "componentId": "21850:3084",
+      "componentKey": "c360479005d0cd79f27b9af5e05d39189d93c6e0",
+      "imageNodeId": "21850:3085",
+      "w": 375,
+      "h": 500
+    },
+    {
+      "oldId": "28536:292",
+      "oldName": "Template Edit Tool Rail / CANDIDATE",
+      "name": "Template Edit Tool Rail",
+      "componentId": "21850:3086",
+      "componentKey": "1fc9e292cb7d6168896b92fb73f7c3e8414fff19",
+      "imageNodeId": "21850:3087",
+      "w": 359,
+      "h": 86
+    },
+    {
+      "oldId": "28537:213",
+      "oldName": "Template Crop Canvas Text Editing / CANDIDATE",
+      "name": "Template Crop Canvas Text Editing",
+      "componentId": "21850:3088",
+      "componentKey": "707d10e8fdad8adb149b0983fc02b95a57a4a0c0",
+      "imageNodeId": "21850:3089",
+      "w": 375,
+      "h": 500
+    },
+    {
+      "oldId": "28537:286",
+      "oldName": "Template Editor Top Bar Done / CANDIDATE",
+      "name": "Template Editor Top Bar Done",
+      "componentId": "21850:3090",
+      "componentKey": "abfc3a220acc518e49c81049ff4ac70d49875348",
+      "imageNodeId": "21850:3091",
+      "w": 375,
+      "h": 60
+    },
+    {
+      "oldId": "28537:342",
+      "oldName": "Template Text Editing Overlay / CANDIDATE",
+      "name": "Template Text Editing Overlay",
+      "componentId": "21850:3092",
+      "componentKey": "ad6217ad122e48999414f406d2148c3383c994de",
+      "imageNodeId": "21850:3093",
+      "w": 375,
+      "h": 812
+    },
+    {
+      "oldId": "28537:395",
+      "oldName": "iOS Korean Keyboard Sheet / CANDIDATE",
+      "name": "iOS Korean Keyboard Sheet",
+      "componentId": "21850:3094",
+      "componentKey": "3534781ac23e485351910d37138a8b071a372a09",
+      "imageNodeId": "21850:3095",
+      "w": 375,
+      "h": 311
+    },
+    {
+      "oldId": "28538:302",
+      "oldName": "Template Preview Carousel / CANDIDATE",
+      "name": "Template Preview Carousel",
+      "componentId": "21850:3096",
+      "componentKey": "76132c4bae3b608963f4e2c3fd0bee4931ec21ba",
+      "imageNodeId": "21850:3097",
+      "w": 375,
+      "h": 373
+    },
+    {
+      "oldId": "28538:337",
+      "oldName": "Template Editor Top Bar Close / CANDIDATE",
+      "name": "Template Editor Top Bar Close",
+      "componentId": "21850:3098",
+      "componentKey": "3adc7478836ea68662f7a665f40ed3f06a41c29a",
+      "imageNodeId": "21850:3099",
+      "w": 375,
+      "h": 60
+    },
+    {
+      "oldId": "28538:446",
+      "oldName": "Template Fullscreen Control / CANDIDATE",
+      "name": "Template Fullscreen Control",
+      "componentId": "21850:3100",
+      "componentKey": "9c7027eaf13ae8bd0d64ea42d87cd638d3f4df0f",
+      "imageNodeId": "21850:3101",
+      "w": 36,
+      "h": 36
+    },
+    {
+      "oldId": "28539:270",
+      "oldName": "Template Page Indicator 5-Step Small / CANDIDATE",
+      "name": "Template Page Indicator 5-Step Small",
+      "componentId": "21850:3102",
+      "componentKey": "83582114f3b4ab2979b66271eba313a545a05082",
+      "imageNodeId": "21850:3103",
+      "w": 69,
+      "h": 8
+    },
+    {
+      "oldId": "28539:403",
+      "oldName": "Template Page Indicator 5-Step Large / CANDIDATE",
+      "name": "Template Page Indicator 5-Step Large",
+      "componentId": "21850:3104",
+      "componentKey": "8c2a865191a2a51b7e3250d14ef24cde9acea6cd",
+      "imageNodeId": "21850:3105",
+      "w": 375,
+      "h": 32
+    },
+    {
+      "oldId": "28542:331",
+      "oldName": "Completion Preview Carousel / CANDIDATE",
+      "name": "Completion Preview Carousel",
+      "componentId": "21850:3106",
+      "componentKey": "bbbf4e6ab178dc4d891df0d0358e0892bc68f3e7",
+      "imageNodeId": "21850:3107",
+      "w": 375,
+      "h": 373
+    },
+    {
+      "oldId": "28542:393",
+      "oldName": "Completion Share Rail / CANDIDATE",
+      "name": "Completion Share Rail",
+      "componentId": "21850:3108",
+      "componentKey": "e09466745496663b07efefc3b4711511401d8208",
+      "imageNodeId": "21850:3109",
+      "w": 375,
+      "h": 84
+    },
+    {
+      "oldId": "28542:431",
+      "oldName": "Completion Title Row / CANDIDATE",
+      "name": "Completion Title Row",
+      "componentId": "21850:3110",
+      "componentKey": "9514d7232b248566366196a7e1b66e77a82c317b",
+      "imageNodeId": "21850:3111",
+      "w": 375,
+      "h": 28
+    },
+    {
+      "oldId": "28542:437",
+      "oldName": "Completion Date Row / CANDIDATE",
+      "name": "Completion Date Row",
+      "componentId": "21850:3112",
+      "componentKey": "701ee228bc44bb6266e7d93d20ed6f5533a5b33f",
+      "imageNodeId": "21850:3113",
+      "w": 375,
+      "h": 28
+    },
+    {
+      "oldId": "28542:446",
+      "oldName": "Completion Page Indicator 5-Step / CANDIDATE",
+      "name": "Completion Page Indicator 5-Step",
+      "componentId": "21850:3114",
+      "componentKey": "82ccfb0f06b424a8e6fc5ed4c3174cdba9dc2265",
+      "imageNodeId": "21850:3115",
+      "w": 375,
+      "h": 32
+    },
+    {
+      "oldId": "28543:366",
+      "oldName": "Album Picker Top Bar / CANDIDATE",
+      "name": "Album Picker Top Bar",
+      "componentId": "21850:3116",
+      "componentKey": "c1821c4e6fb829016f726fd80e908f1bb42f2861",
+      "imageNodeId": "21850:3117",
+      "w": 375,
+      "h": 60
+    },
+    {
+      "oldId": "28543:502",
+      "oldName": "Album Picker Content / CANDIDATE",
+      "name": "Album Picker Body",
+      "componentId": "21850:3118",
+      "componentKey": "f0fcb0a16f889e817801a5f7770f22c0e8e70b07",
+      "imageNodeId": "21850:3119",
+      "w": 375,
+      "h": 817
+    },
+    {
+      "oldId": "28544:214",
+      "oldName": "Success Streak Illustration / CANDIDATE",
+      "name": "Success Streak Illustration",
+      "componentId": "21850:3120",
+      "componentKey": "353a3dc245d229f64565da8d8925d82e51d9656e",
+      "imageNodeId": "21850:3121",
+      "w": 374,
+      "h": 151
+    },
+    {
+      "oldId": "28545:244",
+      "oldName": "iOS Activity Header / CANDIDATE",
+      "name": "iOS Activity Header",
+      "componentId": "21850:3122",
+      "componentKey": "4147c7688d4af48962fda6f8de38c1ebeb9c01d6",
+      "imageNodeId": "21850:3123",
+      "w": 389,
+      "h": 80
+    },
+    {
+      "oldId": "28545:287",
+      "oldName": "iOS Activity Scroll View / CANDIDATE",
+      "name": "iOS Activity Scroll View",
+      "componentId": "21850:3124",
+      "componentKey": "d9cc9fea35804c7c2faaa01485565e592b70b97b",
+      "imageNodeId": "21850:3125",
+      "w": 390,
+      "h": 414
+    }
+  ]
+}

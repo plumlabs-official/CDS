@@ -1,0 +1,8 @@
+{
+  "schema": "play.desktop_actuator.result.v1",
+  "status": "needs_user_decision",
+  "summary": "desktop actuator timed out waiting for result file",
+  "actuator": "claude_cowork_dispatch",
+  "stage": "publish-cds",
+  "updated_at": "2026-05-10T04:06:25+0900"
+}

@@ -1,0 +1,9 @@
+{
+  "stage_record": {
+    "id": "copy-to-cds",
+    "executor": "desktop_control",
+    "preferred_actuator": "claude_cowork_dispatch",
+    "fallback_actuator": null,
+    "requires_user_approval": false
+  }
+}
