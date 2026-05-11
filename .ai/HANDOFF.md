@@ -1279,3 +1279,17 @@ Summary: Ran `-play` for Feed/Lounge target `CS2ZhrORl4E1szQfTe2UvO/14332:285690
 Next-TODO: Create or extend a CDS update-card component that supports compact heights and owns the bottom action bar, publish CDS, update the product library, then replace use-sites `25972:54734`, `25972:54739`, `25972:54744`, `25972:55344` and rerun CompletionEvidence. Evidence: `.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/figma-probe-results.json`.
 Commits: (이번 커밋)
 ---
+
+---
+HANDOFF: Codex -> Codex
+Date: 2026-05-11 19:45:17 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex auto-handoff
+Summary: Context dropped below 20% (15% remaining). Auto-handoff saved SESSION/HANDOFF state, git snapshot, and clear-required sentinel before session clear.
+Next-TODO: Resume with `cd ~ && read .ai/HANDOFF.md`, then read latest `.ai/HANDOFF.md` and `/Users/zenkim_office/Project/CDS/.ai/auto-handoff/20260511-194517_codex-context-low/resume.md`.
+Resume-Trigger: cd ~ && read .ai/HANDOFF.md
+Auto-Handoff-Snapshot: /Users/zenkim_office/Project/CDS/.ai/auto-handoff/20260511-194517_codex-context-low
+Context-Remaining: 15%
+Clear-Required: /Users/zenkim_office/.codex/auto-handoff/clear-required.json
+Commits: auto-record attempted after this entry; check git log and result.json
+---

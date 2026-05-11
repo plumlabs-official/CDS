@@ -262,3 +262,13 @@
 **모니터링:**
 - Figma MCP 커스텀 폰트 지원 출시 시 → Pretendard 복원 검토
 - Claude Design Research Preview → GA 전환 시 CDS 연동 PoC 검토
+
+### 2026-05-11 19:45:17 +0900 Auto Context Handoff
+
+- Trigger: Codex context below `20%` (`15%` remaining)
+- Project: `/Users/zenkim_office/Project/CDS`
+- Resume trigger: `cd ~ && read .ai/HANDOFF.md`
+- Snapshot: `/Users/zenkim_office/Project/CDS/.ai/auto-handoff/20260511-194517_codex-context-low`
+- Clear sentinel: `/Users/zenkim_office/.codex/auto-handoff/clear-required.json`
+- Record mode: `commit`
+- Next session: run resume trigger, read latest `.ai/HANDOFF.md`, then inspect `resume.md` if needed.

@@ -1,0 +1,5 @@
+b326bd8 chore: record blocked Feed Lounge CDS replacement probe
+18e9cf8 chore: record Feed Card footer slot optimization
+a73f0c9 chore: record CDS Figma recovery run
+2fa28cd refactor: record CDS feed card action cleanup
+4a376ad docs: Feed Card visual parity Option B CDS-side 완료
