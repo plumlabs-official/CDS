@@ -42,6 +42,7 @@ type CompletionEvidence = {
   useSiteReplacement: "pass" | "fail" | "blocked";
   intentionalDeltas: string[];
   layoutContract: LayoutContractSummary;
+  structuralFidelity: StructuralFidelitySummary;
   tokenBindingSummary: TokenBindingSummary;
   responsiveProbe: ProbeSummary;
   longTextProbe: ProbeSummary;
@@ -51,6 +52,38 @@ type CompletionEvidence = {
 ```
 
 Final Handoff means any final response after creating, modifying, or extending a CDS component. Final Handoff requires a full `CompletionEvidence` packet. Quick screen review may return a partial score, but must not mark component work complete without the packet.
+
+## Structural Fidelity
+
+Publishable CDS components must be authored component structure, not a screenshot or raster layer wrapped in a component.
+
+| Rule | PASS 기준 |
+|------|-----------|
+| image-backed-component | component/variant root is not a single raster/image-backed layer or an all-image subtree |
+| authored-structure | component contains meaningful TEXT, INSTANCE, VECTOR, layout, property, or token signal |
+| exception-boundary | `ContractException` can document recovery or quarantine, but cannot turn image-backed structure into PASS |
+
+Compact output:
+
+```ts
+type StructuralFidelitySummary = {
+  status: "pass" | "fail";
+  issues: string[];
+  imageBacked: boolean;
+  checked: number;
+  rasterPaintCount: number;
+  structuralNodeCount: number;
+  tokenOrPropertySignalCount: number;
+  exceptions: ContractException[];
+  truncated?: boolean;
+};
+```
+
+If `structuralFidelity.status === "fail"`, Completion Gate is FAIL regardless of visual parity or exceptions. Image-backed components may remain only as `recovery`, `reference`, or `quarantine/remediationRequired` artifacts.
+
+Feed screen remediation note:
+- Manual completed screen `CS2ZhrORl4E1szQfTe2UvO/28582:15332` is protected and must not be mutated by automated remediation.
+- Remaining/original source screen section `CS2ZhrORl4E1szQfTe2UvO/28587:14830` may be used as source/reference evidence.
 
 ## Layout Contract
 

@@ -1,5 +1,6 @@
 import { collectLayoutContract } from './layout-contract';
 import { collectPropertyReferenceMatrix } from './property-matrix';
+import { collectStructuralFidelity } from './structural-fidelity';
 import { collectTokenBindingSummary } from './token-binding';
 import type { ComponentContractFixture, FixtureResult } from './types';
 
@@ -16,9 +17,11 @@ export function runSyntheticFixture(fixture: ComponentContractFixture): FixtureR
   assertCount(failures, input, expected, 'propertyReferenceMatrix', 'danglingRefs');
   assertCount(failures, input, expected, 'propertyReferenceMatrix', 'fieldMismatches');
   assertCount(failures, input, expected, 'layoutContract', 'issues', 'layoutIssues');
+  assertCount(failures, input, expected, 'structuralFidelity', 'issues', 'structuralIssues');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'missingTextStyle');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'missingFillBinding');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'hardcodedTokenEligibleColors');
+  assertBoolean(failures, input, expected, 'structuralFidelity', 'imageBacked');
 
   if ('pass' in expected) {
     const pass = inferPass(input);
@@ -38,6 +41,7 @@ function materializeInput(fixture: ComponentContractFixture): Record<string, unk
     ...input,
     propertyReferenceMatrix: collectPropertyReferenceMatrix(contractNode),
     layoutContract: collectLayoutContract(contractNode, fixture.exceptions || []),
+    structuralFidelity: collectStructuralFidelity(contractNode, fixture.exceptions || []),
     tokenBindingSummary: collectTokenBindingSummary(contractNode, fixture.exceptions || []),
   };
 }
@@ -73,11 +77,28 @@ function countAt(input: Record<string, unknown>, section: string, field: string)
   return Array.isArray(value) ? value.length : 0;
 }
 
+function assertBoolean(
+  failures: string[],
+  input: Record<string, unknown>,
+  expected: Record<string, unknown>,
+  section: string,
+  field: string,
+): void {
+  if (!(field in expected)) return;
+  const sectionValue = input[section];
+  const actual = Boolean(sectionValue && typeof sectionValue === 'object'
+    && (sectionValue as Record<string, unknown>)[field]);
+  if (actual !== expected[field]) {
+    failures.push(`${field}: expected ${expected[field]}, got ${actual}`);
+  }
+}
+
 function inferPass(input: Record<string, unknown>): boolean {
   return countAt(input, 'propertyReferenceMatrix', 'unreferenced') === 0
     && countAt(input, 'propertyReferenceMatrix', 'danglingRefs') === 0
     && countAt(input, 'propertyReferenceMatrix', 'fieldMismatches') === 0
     && countAt(input, 'layoutContract', 'issues') === 0
+    && countAt(input, 'structuralFidelity', 'issues') === 0
     && countAt(input, 'tokenBindingSummary', 'missingTextStyle') === 0
     && countAt(input, 'tokenBindingSummary', 'missingFillBinding') === 0
     && countAt(input, 'tokenBindingSummary', 'hardcodedTokenEligibleColors') === 0;

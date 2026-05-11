@@ -1248,3 +1248,24 @@ Next-TODO: Publish/update CDS library, then replace product follow recommendatio
 Review-Result: /Users/zen/Project/CDS/.ai/peer-review/runs/20260507-221016-claude-review-64834.md
 Commits: (이번 커밋)
 ---
+
+---
+HANDOFF: Codex -> Claude (peer review)
+Date: 2026-05-11 13:25:23
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex via peer-agent-review
+Summary: claude peer review completed. Verdict: PASS. Focus: # Peer Review Request: CDS Feed Card Expanded Comment Component Review the completed controller-recovery implementation for this `-play` run. Focus on whether the Figma/CDS change satisfies the user request and whether the recorded verifica
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260511-131957-claude-review-33470.md
+Commits: pending
+---
+
+---
+HANDOFF: Codex -> User
+Date: 2026-05-11 14:37:03 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Completed CDS Feed Card footer slot optimization. Removed six legacy footer child-level properties from the parent Feed Card, kept the group-level `Feed Footer Slot`, restored Feed Card width to 375, verified source/instance overflow 0, and confirmed product use-sites `28587:18399` and `28602:19583` expose the new slot surface after publish/update.
+Next-TODO: Publish/update consuming files as needed for future footer group variants; keep footer-internal overrides inside grouped footer components rather than the Feed Card parent.
+Commits: (이번 커밋)
+---

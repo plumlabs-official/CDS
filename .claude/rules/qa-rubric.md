@@ -191,6 +191,8 @@ CDS 컴포넌트 생성/수정은 점수와 별도로 `.claude/rules/component-c
 | Creation Gate | Figma mutation 전 | FAIL이면 생성/수정 중단 |
 | Completion Gate | 최종 handoff 전 | FAIL이면 완료 보고 금지 |
 
+Completion Gate는 `structuralFidelity.status=pass`를 포함해야 한다. 단일 raster/image-backed 레이어로 만든 CDS 컴포넌트는 Critical FAIL이며, `ContractException`은 복구/격리 근거만 남길 수 있고 완료 PASS로 승격할 수 없다.
+
 ---
 
 ## 리포트 템플릿
@@ -238,6 +240,7 @@ CDS 컴포넌트 생성/수정은 점수와 별도로 `.claude/rules/component-c
 | Component screenshot | |
 | Visual diff summary | |
 | Intentional deltas | |
+| Structural fidelity | |
 
 ### 수정 가이드 (--fix)
 | Phase | 작업 | 건수 |

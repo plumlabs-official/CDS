@@ -1,6 +1,7 @@
 import {
   collectLayoutContract,
   collectPropertyReferenceMatrix,
+  collectStructuralFidelity,
   collectTokenBindingSummary,
   validateCompletionEvidence,
   withProbeCleanup,
@@ -31,8 +32,11 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
   const contractNode = sceneNodeToContractNode(node, tokenCatalog);
   const propertyReferenceMatrix = collectPropertyReferenceMatrix(contractNode);
   const layoutContract = collectLayoutContract(contractNode, exceptions);
+  const structuralFidelity = collectStructuralFidelity(contractNode, exceptions);
   const tokenBindingSummary = collectTokenBindingSummary(contractNode, exceptions);
-  const propertyIntegrity = matrixPasses(propertyReferenceMatrix) ? 'pass' : 'fail';
+  const propertyIntegrity = matrixPasses(propertyReferenceMatrix) && structuralFidelity.status === 'pass'
+    ? 'pass'
+    : 'fail';
 
   const evidence: CompletionEvidence = {
     sourceNodeId: input.sourceNodeId || '',
@@ -47,6 +51,7 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
     useSiteReplacement: input.useSiteReplacement || 'blocked',
     intentionalDeltas: input.intentionalDeltas || [],
     layoutContract,
+    structuralFidelity,
     tokenBindingSummary,
     responsiveProbe: skippedProbe('not-run'),
     longTextProbe: skippedProbe('not-run'),

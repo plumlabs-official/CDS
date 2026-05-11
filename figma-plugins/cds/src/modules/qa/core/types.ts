@@ -112,6 +112,18 @@ export interface LayoutContractSummary {
   truncated?: boolean;
 }
 
+export interface StructuralFidelitySummary {
+  status: 'pass' | 'fail';
+  issues: string[];
+  imageBacked: boolean;
+  checked: number;
+  rasterPaintCount: number;
+  structuralNodeCount: number;
+  tokenOrPropertySignalCount: number;
+  exceptions: ContractException[];
+  truncated?: boolean;
+}
+
 export interface ProbeSummary {
   pass: boolean;
   checked?: number;
@@ -132,6 +144,7 @@ export interface CompletionEvidence {
   useSiteReplacement: ContractStatus;
   intentionalDeltas: string[];
   layoutContract: LayoutContractSummary;
+  structuralFidelity: StructuralFidelitySummary;
   tokenBindingSummary: TokenBindingSummary;
   responsiveProbe: ProbeSummary;
   longTextProbe: ProbeSummary;

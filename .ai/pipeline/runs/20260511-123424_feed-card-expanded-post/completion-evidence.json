@@ -1,0 +1,177 @@
+{
+  "sourceNodeId": "CS2ZhrORl4E1szQfTe2UvO/28587:18399",
+  "componentNodeId": "H36eNEd6o7ZTv4R7VcyLf2/21925:48",
+  "componentGroupPath": "CDS / Feed Cards / Main content / Comment Item",
+  "sourceScreenshot": "Figma source reference: https://www.figma.com/design/CS2ZhrORl4E1szQfTe2UvO/2026-05?node-id=28587-18399",
+  "componentScreenshot": "Figma component reference: https://www.figma.com/design/H36eNEd6o7ZTv4R7VcyLf2/CDS?node-id=21925-48",
+  "visualDiffSummary": "Collapsed state preserves the compact comment row with visible 더보기. Expanded state hides 더보기 and exposes the detailed written-post body structure from reference node CS2ZhrORl4E1szQfTe2UvO/28587:16570.",
+  "propertyIntegrity": "pass",
+  "propertyReferenceMatrix": {
+    "definitionCount": 6,
+    "nonVariantDefinitionCount": 5,
+    "referencedNonVariantCount": 5,
+    "matrix": [
+      {
+        "key": "↳ Name#21925:4",
+        "name": "Name",
+        "type": "TEXT",
+        "targets": [
+          {
+            "nodeId": "21925:3",
+            "nodeName": "Name",
+            "nodeType": "TEXT",
+            "field": "characters"
+          },
+          {
+            "nodeId": "21925:29",
+            "nodeName": "Name",
+            "nodeType": "TEXT",
+            "field": "characters"
+          }
+        ],
+        "exposedInstanceEvidence": []
+      },
+      {
+        "key": "↳ Show Name#21925:5",
+        "name": "Show Name",
+        "type": "BOOLEAN",
+        "targets": [
+          {
+            "nodeId": "21925:3",
+            "nodeName": "Name",
+            "nodeType": "TEXT",
+            "field": "visible"
+          },
+          {
+            "nodeId": "21925:29",
+            "nodeName": "Name",
+            "nodeType": "TEXT",
+            "field": "visible"
+          }
+        ],
+        "exposedInstanceEvidence": []
+      },
+      {
+        "key": "Description#21925:6",
+        "name": "Description",
+        "type": "TEXT",
+        "targets": [
+          {
+            "nodeId": "21925:6",
+            "nodeName": "Description",
+            "nodeType": "TEXT",
+            "field": "characters"
+          },
+          {
+            "nodeId": "21925:32",
+            "nodeName": "Description",
+            "nodeType": "TEXT",
+            "field": "characters"
+          }
+        ],
+        "exposedInstanceEvidence": []
+      },
+      {
+        "key": "↳ Right Slot#21925:8",
+        "name": "Right Slot",
+        "type": "INSTANCE_SWAP",
+        "targets": [
+          {
+            "nodeId": "21925:7",
+            "nodeName": "Right Slot",
+            "nodeType": "INSTANCE",
+            "field": "mainComponent"
+          },
+          {
+            "nodeId": "21925:33",
+            "nodeName": "Right Slot",
+            "nodeType": "INSTANCE",
+            "field": "mainComponent"
+          }
+        ],
+        "exposedInstanceEvidence": []
+      },
+      {
+        "key": "More Description#21925:9",
+        "name": "More Description",
+        "type": "TEXT",
+        "targets": [
+          {
+            "nodeId": "21925:27",
+            "nodeName": "More Description",
+            "nodeType": "TEXT",
+            "field": "characters"
+          },
+          {
+            "nodeId": "21925:47",
+            "nodeName": "More Description",
+            "nodeType": "TEXT",
+            "field": "characters"
+          }
+        ],
+        "exposedInstanceEvidence": []
+      },
+      {
+        "key": "State",
+        "name": "State",
+        "type": "VARIANT",
+        "targets": [],
+        "exposedInstanceEvidence": []
+      }
+    ],
+    "unreferenced": [],
+    "danglingRefs": [],
+    "fieldMismatches": []
+  },
+  "instanceOverrideProbe": {
+    "pass": true,
+    "checked": 3,
+    "failures": []
+  },
+  "useSiteReplacement": "blocked",
+  "intentionalDeltas": [
+    "Original Comment Item/Short component 21725:2939 is preserved for backward compatibility.",
+    "Expanded body is added as a second state in the new Comment Item component set rather than altering every legacy instance immediately.",
+    "Downstream product-file instances require normal CDS library publish/update before remote use-site replacement."
+  ],
+  "layoutContract": {
+    "issues": [],
+    "checked": 40,
+    "exceptions": []
+  },
+  "structuralFidelity": {
+    "status": "pass",
+    "issues": [],
+    "imageBacked": false,
+    "checked": 40,
+    "rasterPaintCount": 0,
+    "structuralNodeCount": 40,
+    "tokenOrPropertySignalCount": 48,
+    "exceptions": []
+  },
+  "tokenBindingSummary": {
+    "checked": 10,
+    "missingTextStyle": [],
+    "missingFillBinding": [],
+    "missingStrokeBinding": [],
+    "missingEffectBinding": [],
+    "hardcodedTokenEligibleColors": [],
+    "exceptions": []
+  },
+  "responsiveProbe": {
+    "pass": true,
+    "checked": 3,
+    "failures": []
+  },
+  "longTextProbe": {
+    "pass": true,
+    "checked": 1,
+    "failures": []
+  },
+  "boundsCheck": {
+    "pass": true,
+    "checked": 4,
+    "failures": []
+  },
+  "exceptions": []
+}

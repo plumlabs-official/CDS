@@ -1,0 +1,38 @@
+{
+  "name": "image-backed-component",
+  "mode": "synthetic",
+  "input": {
+    "node": {
+      "id": "root",
+      "name": "Feed Creation Option Row",
+      "type": "COMPONENT",
+      "children": [
+        {
+          "id": "image",
+          "name": "Feed Creation Option Row Image",
+          "type": "RECTANGLE",
+          "fills": [
+            {
+              "type": "IMAGE"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "expected": {
+    "pass": false,
+    "structuralIssues": 1,
+    "imageBacked": true
+  },
+  "exceptions": [
+    {
+      "ruleId": "manual-recovery",
+      "nodeId": "root",
+      "reason": "Recovered from a source screenshot.",
+      "evidence": "single image fill",
+      "sourceReference": "CS2ZhrORl4E1szQfTe2UvO/28587:14830",
+      "revisit": "replace with authored CDS structure before publish"
+    }
+  ]
+}

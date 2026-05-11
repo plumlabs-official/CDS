@@ -1,0 +1,71 @@
+{
+  "schema": "play.pipeline.v1",
+  "created_at": "2026-05-11T12:34:24+0900",
+  "updated_at": "2026-05-11T12:55:34+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "slug": "feed-card-expanded-post",
+  "request_type": "text",
+  "request_value": "Feed Card comment 더보기 확장 상태를 CDS 컴포넌트에 추가/수정. Source screen CS2ZhrORl4E1szQfTe2UvO node 28587:18399의 더보기 클릭 시 expanded reference node 28587:16570처럼 작성한 게시글이 펼쳐져 보여야 함. 더보기 버튼은 hidden, 이름과 게시글 상세 내용 구조 동일. CDS file H36eNEd6o7ZTv4R7VcyLf2의 Feed Cards 컴포넌트를 비트맵 없이 구조/토큰/variant 기반으로 확장 가능하게 수정.",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post",
+  "team_analysis_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/01-team-analysis.md",
+  "review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/02-review.md",
+  "plan_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/03-plan.md",
+  "plan_review_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/04-plan-review.md",
+  "implementation_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/05-implementation.md",
+  "record_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/06-record.md",
+  "review_verdict": "PASS",
+  "review_result_file": "/Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260511-124956-claude-review-18011.md",
+  "review_exit_code": 0,
+  "plan_review_verdict": "NEEDS_USER_DECISION",
+  "plan_review_result_file": "/Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260511-125254-claude-plan-19356.md",
+  "plan_review_exit_code": 0,
+  "implementation_status": "controller_recovery_completed",
+  "implementation_completed_at": "2026-05-11T13:18:24+0900",
+  "verification_all": true,
+  "controller_recovery_reason": "Worker dispatch had empty write_scope and no Figma write capability; controller completed bounded Figma changes and verification directly.",
+  "completion_evidence_artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/completion-evidence.json",
+  "controller_recovery_review_verdict": "PASS",
+  "controller_recovery_review_result_file": "/Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260511-131957-claude-review-33470.md",
+  "followup_clipping_fix": {
+    "completed_at": "2026-05-11T13:47:51+0900",
+    "reported_node": "H36eNEd6o7ZTv4R7VcyLf2/21925:31",
+    "root_cause": "Expanded Item content 21925:30 had fixed 1px height and clipped its Description Slot.",
+    "verification_all": true
+  },
+  "legacy_cleanup_followup": {
+    "completed_at": "2026-05-11T13:54:22+0900",
+    "legacy_node": "H36eNEd6o7ZTv4R7VcyLf2/21725:2939",
+    "legacy_instance_count": 0,
+    "stale_preferred_value_count": 0,
+    "feed_card_slots_use_new_comment_item": true,
+    "note": "Figma API still resolves the legacy component id as an orphaned parent=null object after removal, but Feed Card no longer references it."
+  },
+  "feed_card_footer_slot_optimization": {
+    "completed_at": "2026-05-11T14:37:03+0900",
+    "feed_card_node": "H36eNEd6o7ZTv4R7VcyLf2/21732:3062",
+    "deleted_legacy_properties": [
+      "Show Addon Footer#21732:1",
+      "Show Comment 1#21732:2",
+      "Show Comment 2#21732:3",
+      "Addon Footer Slot#21737:3",
+      "Comment Slot 1#21737:4",
+      "Comment Slot 2#21737:5"
+    ],
+    "kept_parent_properties": [
+      "Show Lounge Card#21732:0",
+      "Header Slot#21737:0",
+      "Lounge Card Slot#21737:1",
+      "Reaction Bar Slot#21737:2",
+      "↳ Show Author Action#21791:0",
+      "↳ Author Action#21791:1",
+      "Feed Footer Slot#21924:0"
+    ],
+    "property_count_before": 13,
+    "property_count_after": 7,
+    "verification_all": true,
+    "product_use_sites_verified": [
+      "CS2ZhrORl4E1szQfTe2UvO/28587:18399",
+      "CS2ZhrORl4E1szQfTe2UvO/28602:19583"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "worker_id": "worker-01",
+  "role": "junior",
+  "persona": "design-director",
+  "execution_profile": "junior",
+  "runtime": "codex",
+  "model": "gpt-5.3-codex",
+  "effort": "medium",
+  "exit_code": 0,
+  "timeout_seconds": 2700,
+  "updated_at": "2026-05-11T13:04:16+0900",
+  "prompt": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/workers/worker-01/runtime-prompt.md",
+  "output": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/workers/worker-01/output.md",
+  "log": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/workers/worker-01/runtime.log"
+}

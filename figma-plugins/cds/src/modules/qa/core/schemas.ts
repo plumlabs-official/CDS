@@ -26,6 +26,7 @@ const COMPLETION_REQUIRED = [
   'useSiteReplacement',
   'intentionalDeltas',
   'layoutContract',
+  'structuralFidelity',
   'tokenBindingSummary',
   'responsiveProbe',
   'longTextProbe',

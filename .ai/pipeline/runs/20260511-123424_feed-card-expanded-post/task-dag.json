@@ -1,0 +1,154 @@
+{
+  "schema": "play.goal_orchestrator.task_dag.v1",
+  "created_at": "2026-05-11T12:34:25+0900",
+  "updated_at": "2026-05-11T13:18:24+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post",
+  "request": "Feed Card comment 더보기 확장 상태를 CDS 컴포넌트에 추가/수정. Source screen CS2ZhrORl4E1szQfTe2UvO node 28587:18399의 더보기 클릭 시 expanded reference node 28587:16570처럼 작성한 게시글이 펼쳐져 보여야 함. 더보기 버튼은 hidden, 이름과 게시글 상세 내용 구조 동일. CDS file H36eNEd6o7ZTv4R7VcyLf2의 Feed Cards 컴포넌트를 비트맵 없이 구조/토큰/variant 기반으로 확장 가능하게 수정.",
+  "current_stage": "record",
+  "status": "completed_with_controller_recovery",
+  "stages": [
+    {
+      "id": "analysis",
+      "label": "Team analysis",
+      "status": "completed",
+      "depends_on": [],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/01-team-analysis.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null,
+      "updated_at": "2026-05-11T12:34:25+0900",
+      "detail": null,
+      "runner_pid": 75377
+    },
+    {
+      "id": "review",
+      "label": "Analysis peer review",
+      "status": "completed",
+      "depends_on": [
+        "analysis"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/02-review.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "plan",
+      "label": "Implementation plan",
+      "status": "completed",
+      "depends_on": [
+        "review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/03-plan.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "plan-review",
+      "label": "Plan peer review",
+      "status": "completed",
+      "depends_on": [
+        "plan"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/04-plan-review.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "allocation",
+      "label": "Persona/model allocation",
+      "status": "completed",
+      "depends_on": [
+        "plan-review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/allocation.json",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "assignment-review",
+      "label": "Assignment peer review",
+      "status": "completed",
+      "depends_on": [
+        "allocation"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/assignment-review-result.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "dispatch",
+      "label": "Worker dispatch",
+      "status": "completed",
+      "depends_on": [
+        "assignment-review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/workers",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "integrate",
+      "label": "Integration and implementation peer gate",
+      "status": "completed_with_controller_recovery",
+      "depends_on": [
+        "dispatch"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/orchestrator/implementation-review-result.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "record",
+      "label": "Record summary",
+      "status": "completed",
+      "depends_on": [
+        "integrate"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post/06-record.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    }
+  ],
+  "orchestrator": {
+    "mode": "daemon",
+    "pid": 75377,
+    "updated_at": "2026-05-11T13:18:24+0900",
+    "recovered_by_controller": true
+  }
+}

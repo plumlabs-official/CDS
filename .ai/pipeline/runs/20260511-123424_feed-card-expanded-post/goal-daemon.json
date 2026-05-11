@@ -1,0 +1,14 @@
+{
+  "schema": "play.goal_orchestrator.daemon.v1",
+  "status": "completed_with_controller_recovery",
+  "pid": 75377,
+  "started_at": "2026-05-11T12:34:25+0900",
+  "updated_at": "2026-05-11T13:18:24+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-123424_feed-card-expanded-post",
+  "command": "",
+  "caffeinate_pid": 75418,
+  "last_stage": "record",
+  "exit_code": 0,
+  "detail": "Daemon stopped after analysis placeholder; controller completed Figma implementation and verification in the same play run."
+}

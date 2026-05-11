@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import {
   collectLayoutContract,
   collectPropertyReferenceMatrix,
+  collectStructuralFidelity,
   collectTokenBindingSummary,
   runSyntheticFixture,
   validateCompletionEvidence,
@@ -127,6 +128,54 @@ describe('layout and token summaries', () => {
     const root: ContractNode = { id: 'title', name: 'Title', type: 'TEXT', tokenEligible: true };
     const summary = collectTokenBindingSummary(root);
     expect(summary.missingTextStyle).toEqual(['title']);
+  });
+});
+
+describe('structural fidelity', () => {
+  it('fails image-backed components even when an exception is present', () => {
+    const root: ContractNode = {
+      id: 'root',
+      name: 'Feed Creation Row',
+      type: 'COMPONENT',
+      children: [
+        {
+          id: 'image',
+          name: 'Feed Creation Row Image',
+          type: 'RECTANGLE',
+          fills: [{ type: 'IMAGE' }],
+        },
+      ],
+    };
+
+    const summary = collectStructuralFidelity(root, [{
+      ruleId: 'manual-recovery',
+      nodeId: 'root',
+      reason: 'Recovered from source screenshot',
+      evidence: 'single image fill',
+      sourceReference: 'CS2ZhrORl4E1szQfTe2UvO/28587:14830',
+      revisit: 'replace with authored CDS structure before publish',
+    }]);
+
+    expect(summary.status).toBe('fail');
+    expect(summary.imageBacked).toBe(true);
+    expect(summary.issues[0]).toContain('structural-fidelity.image-backed-component');
+  });
+
+  it('passes authored components with text and instance structure', () => {
+    const root: ContractNode = {
+      id: 'root',
+      name: 'Feed Creation Row',
+      type: 'COMPONENT',
+      layoutMode: 'HORIZONTAL',
+      children: [
+        { id: 'icon', name: 'Icon', type: 'INSTANCE' },
+        { id: 'label', name: 'Label', type: 'TEXT' },
+      ],
+    };
+
+    const summary = collectStructuralFidelity(root);
+    expect(summary.status).toBe('pass');
+    expect(summary.imageBacked).toBe(false);
   });
 });
 
