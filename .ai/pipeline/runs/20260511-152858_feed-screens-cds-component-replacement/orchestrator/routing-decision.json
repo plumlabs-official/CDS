@@ -1,0 +1,26 @@
+{
+  "decision_reason": "오케스트레이터가 Lenny Team owner를 세웠지만, worker 간 선후관계가 있거나 병렬 이득이 작아 직렬 실행으로 판단했습니다.",
+  "execution_mode": "serial",
+  "mode": "team_dispatch",
+  "needs_assignment_review": true,
+  "parallel_reason": null,
+  "parallelization": {
+    "considered": true,
+    "decision": "serial",
+    "execution_groups": [
+      {
+        "id": "serial-implementation",
+        "mode": "serial",
+        "reason": "worker가 1명이라 병렬 실행 이득이 작습니다."
+      }
+    ],
+    "reason": "오케스트레이터가 Lenny Team owner를 세웠지만, worker 간 선후관계가 있거나 병렬 이득이 작아 직렬 실행으로 판단했습니다.",
+    "worker_count": 1
+  },
+  "primary_owner": "design-director",
+  "reason": "오케스트레이터가 Lenny Team owner를 세웠지만, worker 간 선후관계가 있거나 병렬 이득이 작아 직렬 실행으로 판단했습니다.",
+  "resolved_tier": "tier1",
+  "serial_reason": "선행 결과를 확인해야 하거나 worker가 1명이라 병렬 실행 이득이 작습니다.",
+  "solo_reason": null,
+  "tier": "tier1"
+}

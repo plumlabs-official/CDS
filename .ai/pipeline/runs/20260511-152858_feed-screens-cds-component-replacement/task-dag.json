@@ -1,0 +1,156 @@
+{
+  "schema": "play.goal_orchestrator.task_dag.v1",
+  "created_at": "2026-05-11T15:28:58+0900",
+  "updated_at": "2026-05-11T15:31:53+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement",
+  "request": "https://www.figma.com/design/CS2ZhrORl4E1szQfTe2UvO/2026-05?node-id=14332-285690&t=YmMFApYdJEsv56Dm-1 각 스크린을 분석해서 CDS 콤포넌트 작업 및 사용처 인스턴스 교체작업까지 진행. 분석-플래닝-구현까지 수행한다. 수동 완성본은 건드리지 않고 원본/대상 스크린을 백업한 뒤 CDS 컴포넌트 구조를 authored Figma components/instances로 만들거나 기존 컴포넌트가 커버하도록 수정하고, 사용처는 CDS instance로 교체한다. 비트맵/스크린샷 기반 컴포넌트 금지. CompletionEvidence와 use-site replacement evidence를 남긴다.",
+  "current_stage": "review",
+  "status": "failed",
+  "stages": [
+    {
+      "id": "analysis",
+      "label": "Team analysis",
+      "status": "done",
+      "depends_on": [],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/01-team-analysis.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null,
+      "updated_at": "2026-05-11T15:30:07+0900",
+      "detail": null,
+      "runner_pid": null
+    },
+    {
+      "id": "review",
+      "label": "Analysis peer review",
+      "status": "failed",
+      "depends_on": [
+        "analysis"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/02-review.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null,
+      "updated_at": "2026-05-11T15:31:53+0900",
+      "detail": "exit=1",
+      "runner_pid": null
+    },
+    {
+      "id": "plan",
+      "label": "Implementation plan",
+      "status": "pending",
+      "depends_on": [
+        "review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/03-plan.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "plan-review",
+      "label": "Plan peer review",
+      "status": "pending",
+      "depends_on": [
+        "plan"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/04-plan-review.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "allocation",
+      "label": "Persona/model allocation",
+      "status": "pending",
+      "depends_on": [
+        "plan-review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/orchestrator/allocation.json",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "assignment-review",
+      "label": "Assignment peer review",
+      "status": "pending",
+      "depends_on": [
+        "allocation"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/orchestrator/assignment-review-result.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "dispatch",
+      "label": "Worker dispatch",
+      "status": "pending",
+      "depends_on": [
+        "assignment-review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/orchestrator/workers",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "integrate",
+      "label": "Integration and implementation peer gate",
+      "status": "pending",
+      "depends_on": [
+        "dispatch"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/orchestrator/implementation-review-result.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "record",
+      "label": "Record summary",
+      "status": "pending",
+      "depends_on": [
+        "integrate"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/06-record.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    }
+  ],
+  "orchestrator": {
+    "mode": "daemon",
+    "pid": 24643,
+    "updated_at": "2026-05-11T15:28:58+0900"
+  }
+}

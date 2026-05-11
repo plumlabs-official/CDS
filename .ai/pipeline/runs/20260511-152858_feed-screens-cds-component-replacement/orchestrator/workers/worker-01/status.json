@@ -1,0 +1,12 @@
+{
+  "worker_id": "worker-01",
+  "role": "junior",
+  "persona": "design-director",
+  "execution_profile": "junior",
+  "difficulty": "low",
+  "risk": "low",
+  "status": "done",
+  "updated_at": "2026-05-11T15:57:10+0900",
+  "output_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/orchestrator/workers/worker-01/output.md",
+  "changed_files_file": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/orchestrator/workers/worker-01/changed-files.txt"
+}

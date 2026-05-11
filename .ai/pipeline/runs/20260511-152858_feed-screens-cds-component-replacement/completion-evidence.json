@@ -1,0 +1,157 @@
+{
+  "schema": "cds.completion_evidence.v1",
+  "runId": "20260511-152858_feed-screens-cds-component-replacement",
+  "status": "blocked",
+  "blockerType": "component_coverage_gap",
+  "sourceNodeId": [
+    "25972:54733",
+    "25972:54734",
+    "25972:54739",
+    "25972:54744",
+    "25972:55344"
+  ],
+  "componentNodeId": "21708:253",
+  "componentKey": "1dd4808f25b6577b8e6f9e3379295665175bb53c",
+  "cdsFileKey": "H36eNEd6o7ZTv4R7VcyLf2",
+  "componentGroupPath": "CDS > Components > Composed > Lounge Cards > Main content",
+  "sourceScreenshot": {
+    "status": "not_captured",
+    "reason": "No active replacement was performed; Figma MCP screenshot tool is unavailable in this session."
+  },
+  "componentScreenshot": {
+    "status": "not_captured",
+    "reason": "No active replacement was performed; Figma MCP screenshot tool is unavailable in this session."
+  },
+  "visualDiffSummary": {
+    "status": "fail",
+    "summary": "Probe showed the published Lounge Update Item cannot match the four source card heights or action-bar ownership safely.",
+    "details": [
+      "Candidate component default size is 343x286.",
+      "Source card sizes are 343x316, 343x220, 343x190, and 343x148.",
+      "The candidate component has no bottom action bar equivalent to the source 좋아요/댓글 쓰기 row.",
+      "Resizing to source heights produced out-of-bounds children."
+    ]
+  },
+  "propertyIntegrity": {
+    "status": "blocked",
+    "reason": "Root properties were available, but same-turn replacement was blocked before setting active use-site overrides."
+  },
+  "propertyReferenceMatrix": {
+    "status": "blocked",
+    "rootProperties": [
+      "Like Count#21708:0",
+      "Reply Count#21708:1",
+      "Reply Author 1#21708:2",
+      "Reply Text 1#21708:3",
+      "Reply Author 2#21708:4",
+      "Reply Text 2#21708:5",
+      "↳ Show Reply Preview#21708:6",
+      "↳ Show Reaction Bar#21708:7"
+    ],
+    "nestedOverrides": [
+      "Lounge Card title",
+      "Lounge Card description",
+      "Lounge Card date",
+      "badge/addon properties"
+    ],
+    "reason": "Active use-site replacement did not proceed because bounds checks failed."
+  },
+  "instanceOverrideProbe": {
+    "status": "partial_pass",
+    "result": "Imported published Lounge Update Item and verified root property keys plus nested Lounge Card property surface.",
+    "componentImportedInProductFile": true,
+    "temporaryProbeInstancesRemoved": true
+  },
+  "layoutContract": {
+    "status": "fail",
+    "parentNodeId": "25972:54733",
+    "layoutMode": "VERTICAL",
+    "itemSpacing": 24,
+    "widthDerivation": "All source cards inspected at 343px width.",
+    "heightFit": "fail",
+    "actionRowOwnership": "fail",
+    "reason": "Published component does not own bottom action row and cannot fit compact source heights without child overflow."
+  },
+  "structuralFidelity": {
+    "status": "pass",
+    "reason": "Candidate replacement component is a published authored CDS component, not image-backed.",
+    "imageBacked": false
+  },
+  "tokenBindingSummary": {
+    "status": "not_applicable",
+    "reason": "No new CDS component or active use-site replacement was committed."
+  },
+  "responsiveProbe": {
+    "status": "blocked",
+    "reason": "Bounds failed at default mobile source heights before responsive probing."
+  },
+  "longTextProbe": {
+    "status": "blocked",
+    "reason": "Compact height/bounds failed before safe long-text probing."
+  },
+  "boundsCheck": {
+    "status": "fail",
+    "results": [
+      {
+        "sourceId": "25972:54734",
+        "targetHeight": 316,
+        "boundsPass": false,
+        "issues": [
+          "Info Slot width extends beyond root",
+          "Timestamp escapes root width"
+        ]
+      },
+      {
+        "sourceId": "25972:54739",
+        "targetHeight": 220,
+        "boundsPass": false,
+        "issues": [
+          "Item Footer remains outside root",
+          "Reply Preview Slot starts below root"
+        ]
+      },
+      {
+        "sourceId": "25972:54744",
+        "targetHeight": 190,
+        "boundsPass": false,
+        "issues": [
+          "Nested Lounge Card height exceeds root",
+          "Item Footer remains outside root"
+        ]
+      },
+      {
+        "sourceId": "25972:55344",
+        "targetHeight": 148,
+        "boundsPass": false,
+        "issues": [
+          "Nested Lounge Card height exceeds root",
+          "Challenge Sub List and Item Footer escape root"
+        ]
+      }
+    ]
+  },
+  "protectedNodeChecks": {
+    "doNotMutate": "28582:15332",
+    "referenceOnly": "28587:14830",
+    "status": "pass",
+    "reason": "No permanent product mutation was performed."
+  },
+  "mutations": {
+    "permanentProductMutation": false,
+    "temporaryProbeInstancesRemoved": true,
+    "backupCreated": false,
+    "backupReason": "Backup gate is required before permanent mutation; implementation stopped before mutation after probe failure."
+  },
+  "exceptions": [
+    {
+      "ruleId": "use-site-replacement",
+      "nodeId": "25972:54733",
+      "reason": "Replacement blocked because the published component does not cover compact update-card heights and bottom action bar ownership."
+    }
+  ],
+  "recommendedNext": [
+    "Create or extend a CDS update-card component that supports compact heights and owns the bottom action bar.",
+    "Publish CDS and update the product library.",
+    "Then replace the four use-sites and rerun CompletionEvidence."
+  ]
+}

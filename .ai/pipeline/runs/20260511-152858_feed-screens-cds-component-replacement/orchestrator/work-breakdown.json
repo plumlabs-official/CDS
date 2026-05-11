@@ -1,0 +1,37 @@
+{
+  "execution_groups": [
+    {
+      "id": "serial-implementation",
+      "mode": "serial",
+      "reason": "worker가 1명이라 병렬 실행 이득이 작습니다."
+    }
+  ],
+  "workers": [
+    {
+      "depends_on": [],
+      "effort": "medium",
+      "execution_group": "serial-implementation",
+      "functional_role": "Design Director Worker",
+      "id": "worker-01",
+      "model": "gpt-5.3-codex",
+      "open_skill_source_ids": [
+        "bergside-awesome-design-skills",
+        "leonxlnx-taste-skill",
+        "anthropics-frontend-design",
+        "typeui-docs"
+      ],
+      "persona": "design-director",
+      "responsibility": "Implement the bounded change inside the assigned write scope.",
+      "role": "junior",
+      "runtime": "codex",
+      "seniority": "junior",
+      "write_scope": [
+        "05-implementation.md",
+        "06-record.md",
+        "completion-evidence.json",
+        "component-mapping.md",
+        "target-screen-inventory.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "cds.figma_probe_results.v1",
+  "runId": "20260511-152858_feed-screens-cds-component-replacement",
+  "checkedAt": "2026-05-11T15:59:00+09:00",
+  "productFileKey": "CS2ZhrORl4E1szQfTe2UvO",
+  "cdsFileKey": "H36eNEd6o7ZTv4R7VcyLf2",
+  "targetSection": {
+    "id": "22206:21655",
+    "name": "Consumer Use Case"
+  },
+  "candidateComponent": {
+    "name": "Lounge Update Item",
+    "nodeId": "21708:253",
+    "importedProductComponentId": "28493:62910",
+    "key": "1dd4808f25b6577b8e6f9e3379295665175bb53c",
+    "defaultSize": {
+      "width": 343,
+      "height": 286
+    },
+    "rootPropertyKeys": [
+      "Reply Preview Slot#21739:0",
+      "↳ Show Reply Preview#21708:6",
+      "Reply Text 2#21708:5",
+      "Reply Author 2#21708:4",
+      "Reply Text 1#21708:3",
+      "↳ Show Reaction Bar#21708:7",
+      "Reply Author 1#21708:2",
+      "Reply Count#21708:1",
+      "Like Count#21708:0"
+    ],
+    "hasActionBar": false
+  },
+  "listProbe": {
+    "nodeId": "25972:54733",
+    "name": "Updates Card List",
+    "layoutMode": "VERTICAL",
+    "itemSpacing": 24,
+    "paddingLeft": 16,
+    "paddingRight": 16,
+    "paddingTop": 0,
+    "paddingBottom": 0
+  },
+  "sourceCards": [
+    {
+      "id": "25972:54734",
+      "name": "Upadates Card",
+      "size": {
+        "width": 343,
+        "height": 316
+      },
+      "bottomActionArea": true,
+      "sourceLoungeType": "FRAME",
+      "resizeProbe": {
+        "targetHeight": 316,
+        "boundsPass": false,
+        "blockingIssues": [
+          "Info Slot width extends to 370px",
+          "Timestamp x=458 escapes root width"
+        ]
+      }
+    },
+    {
+      "id": "25972:54739",
+      "name": "Upadates Card",
+      "size": {
+        "width": 343,
+        "height": 220
+      },
+      "bottomActionArea": true,
+      "sourceLoungeType": "INSTANCE",
+      "resizeProbe": {
+        "targetHeight": 220,
+        "boundsPass": false,
+        "blockingIssues": [
+          "Item Footer remains at y=200 with height 86",
+          "Reply Preview Slot starts at y=240 outside root"
+        ]
+      }
+    },
+    {
+      "id": "25972:54744",
+      "name": "Upadates Card",
+      "size": {
+        "width": 343,
+        "height": 190
+      },
+      "bottomActionArea": true,
+      "sourceLoungeType": "INSTANCE",
+      "resizeProbe": {
+        "targetHeight": 190,
+        "boundsPass": false,
+        "blockingIssues": [
+          "Nested Lounge Card height 200 exceeds root height",
+          "Item Footer remains outside root"
+        ]
+      }
+    },
+    {
+      "id": "25972:55344",
+      "name": "Upadates Card",
+      "size": {
+        "width": 343,
+        "height": 148
+      },
+      "bottomActionArea": true,
+      "sourceLoungeType": "INSTANCE",
+      "resizeProbe": {
+        "targetHeight": 148,
+        "boundsPass": false,
+        "blockingIssues": [
+          "Nested Lounge Card height 200 exceeds root height",
+          "Challenge Sub List and Item Footer escape root"
+        ]
+      }
+    }
+  ],
+  "compactToggleProbe": {
+    "propertiesSet": {
+      "↳ Show Reply Preview#21708:6": false,
+      "↳ Show Reaction Bar#21708:7": false
+    },
+    "result": "failed",
+    "reason": "Published component still reports out-of-bounds children for compact source heights after toggles."
+  },
+  "decision": {
+    "status": "blocked",
+    "reason": "Published Lounge Update Item cannot safely replace the four product update cards without clipping or changing layout height. Same-turn product replacement would degrade visual structure.",
+    "recommendedNext": "Extend or create a CDS update-card component that owns compact heights and bottom action bar, publish CDS, then update the product library before replacing use-sites."
+  },
+  "mutations": {
+    "permanentProductMutation": false,
+    "temporaryProbeInstancesRemoved": true,
+    "backupCreated": false,
+    "backupReason": "No active product mutation was performed after the probe failed."
+  }
+}

@@ -16,6 +16,7 @@
 | **Figma Feed 화면 보호/소스 기준 기록** | 수동 완성본 `CS2ZhrORl4E1szQfTe2UvO/28582:15332`은 자동 remediation 금지. 나머지 feed 원본/backup source는 `CS2ZhrORl4E1szQfTe2UvO/28587:14830` 사용. |
 | **Agent Center `-play` CDS/Figma 라우팅 보강** | Figma/CDS 컴포넌트 작업은 `play/automation` 키워드가 있어도 primary `design-director`, co-owner `ai-ops-expert`로 배정. worker prompt에 `CDS Figma Component Gate` 삽입. `test-team-model-orchestrator-routing.sh` PASS. |
 | **Feed Card footer slot 최적화** | CDS `Feed Card`의 footer 내부 child-level 레거시 property 6개를 제거하고 `Feed Footer Slot` group slot만 남김. property surface `13 → 7`, product use-site `28587:18399`, `28602:19583` 모두 publish/update 후 slot surface 정상 반영 확인. |
+| **Feed/Lounge 전체 스크린 CDS 교체 `-play` probe — BLOCKED** | Target `CS2ZhrORl4E1szQfTe2UvO/14332:285690` → `Consumer Use Case`(`22206:21655`) direct 26개/nested mobile 75개 inventory. 전체 인스턴스 audit: local/missing main 0. 첫 교체 후보 `Creator Lounge Updates Screen`의 `Upadates Card` 4개(`25972:54734`, `54739`, `54744`, `55344`)를 published `Lounge Update Item`으로 probe했으나 default `343×286` vs source `343×316/220/190/148`, action bar 부재, bounds overflow로 active replacement 중단. 영구 Figma mutation 없음, 임시 probe 제거. 산출물: `.ai/pipeline/runs/20260511-152858_feed-screens-cds-component-replacement/`; 다음 단계는 compact height + bottom action bar를 소유하는 CDS update-card 컴포넌트 생성/확장 후 publish/update. |
 
 ---
 
