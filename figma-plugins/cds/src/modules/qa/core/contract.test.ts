@@ -6,12 +6,14 @@ import {
   collectPropertyReferenceMatrix,
   collectStructuralFidelity,
   collectTokenBindingSummary,
+  runNamingGate,
   runSyntheticFixture,
   validateCompletionEvidence,
   withProbeCleanup,
   type ComponentContractFixture,
   type ContractNode,
 } from './index';
+import { NAMING_RULES, evaluateNamingTarget, suggestNamingFix } from '../../renamer/rules';
 
 describe('property reference matrix', () => {
   it('passes when every non-variant property is connected to the expected field', () => {
@@ -129,6 +131,92 @@ describe('layout and token summaries', () => {
     const summary = collectTokenBindingSummary(root);
     expect(summary.missingTextStyle).toEqual(['title']);
   });
+
+  it('requires text styles to use CDS typography token naming', () => {
+    const invalid: ContractNode = {
+      id: 'body',
+      name: 'Body',
+      type: 'TEXT',
+      textStyleId: 'S:body',
+      textStyleName: 'Body/Regular',
+      tokenEligible: true,
+    };
+    expect(collectTokenBindingSummary(invalid).invalidTextStyle).toEqual(['body']);
+
+    const valid: ContractNode = {
+      id: 'body',
+      name: 'Body',
+      type: 'TEXT',
+      textStyleId: 'S:text-xs',
+      textStyleName: 'text-xs/leading-normal',
+      tokenEligible: true,
+    };
+    expect(collectTokenBindingSummary(valid).invalidTextStyle).toHaveLength(0);
+  });
+
+  it('requires token-eligible solid paints to be bound, not merely color-matched', () => {
+    const root: ContractNode = {
+      id: 'surface',
+      name: 'Surface',
+      type: 'FRAME',
+      fills: [{
+        type: 'SOLID',
+        tokenEligible: true,
+        color: { r: 1, g: 1, b: 1, a: 1 },
+        matchedTokenName: 'colors/white',
+        matchedTokenCollectionName: 'Mode',
+      }],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.missingFillBinding).toEqual(['surface']);
+    expect(summary.hardcodedTokenEligibleColors).toEqual(['surface']);
+  });
+
+  it('rejects non-CDS color bindings', () => {
+    const root: ContractNode = {
+      id: 'surface',
+      name: 'Surface',
+      type: 'FRAME',
+      fills: [{
+        type: 'SOLID',
+        tokenEligible: true,
+        boundVariables: { color: { type: 'VARIABLE_ALIAS', id: 'other' } },
+        boundTokenName: 'white',
+        boundTokenCollectionName: 'Primitives',
+        isCdsModeBound: false,
+      }],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.missingFillBinding).toHaveLength(0);
+    expect(summary.nonCdsColorBinding).toEqual(['surface']);
+  });
+
+  it('passes CDS Mode-bound colors and CDS typography token styles', () => {
+    const root: ContractNode = {
+      id: 'body',
+      name: 'Body',
+      type: 'TEXT',
+      textStyleId: 'S:text-xs',
+      textStyleName: 'text-xs/leading-normal',
+      tokenEligible: true,
+      fills: [{
+        type: 'SOLID',
+        tokenEligible: true,
+        boundVariables: { color: { type: 'VARIABLE_ALIAS', id: 'mode' } },
+        boundTokenName: 'colors/white',
+        boundTokenCollectionName: 'Mode',
+        isCdsModeBound: true,
+      }],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.missingTextStyle).toHaveLength(0);
+    expect(summary.invalidTextStyle).toHaveLength(0);
+    expect(summary.missingFillBinding).toHaveLength(0);
+    expect(summary.nonCdsColorBinding).toHaveLength(0);
+  });
 });
 
 describe('structural fidelity', () => {
@@ -213,5 +301,107 @@ describe('fixtures, schemas, and cleanup', () => {
       throw new Error('boom');
     })).rejects.toThrow('boom');
     expect(probe.removed).toBe(true);
+  });
+});
+
+describe('naming policy gate', () => {
+  it('maps naming-policy v2.0 sections 3-8 into executable rules', () => {
+    const sections = new Set(NAMING_RULES.map((rule) => rule.policySection));
+    expect([...sections].sort()).toEqual(['3', '4', '5', '6', '7', '8']);
+    expect(NAMING_RULES.every((rule) => rule.id.startsWith('naming.'))).toBe(true);
+  });
+
+  it('blocks layer slashes while allowing variant slash hierarchy', () => {
+    const layerGate = runNamingGate({
+      targets: [{ id: 'layer', name: 'Header/Nav', kind: 'layer', type: 'FRAME' }],
+    });
+    expect(layerGate.status).toBe('fail');
+    expect(layerGate.violations.map((violation) => violation.ruleId)).toContain('naming.section6.layer-slash');
+
+    const variantGate = runNamingGate({
+      targets: [{ id: 'variant', name: 'Button/Primary', kind: 'variantPath', isVariantPath: true }],
+    });
+    expect(variantGate.status).toBe('pass');
+  });
+
+  it('requires explicit M3 anatomy evidence before allowing Container suffix', () => {
+    const arbitraryContainer = runNamingGate({
+      root: { id: 'frame', name: 'Dialog Container', type: 'FRAME' },
+    });
+    expect(arbitraryContainer.status).toBe('fail');
+    expect(arbitraryContainer.violations.map((violation) => violation.ruleId)).toContain('naming.section5.banned-suffix');
+
+    const m3Container = runNamingGate({
+      root: { id: 'm3', name: 'Container', type: 'FRAME', isM3Anatomy: true },
+    });
+    expect(m3Container.status).toBe('pass');
+  });
+
+  it('blocks icon-like vectors that are not Lucide instances', () => {
+    const gate = runNamingGate({
+      root: { id: 'icon-vector', name: 'Chevron Right', type: 'VECTOR' },
+    });
+    expect(gate.status).toBe('fail');
+    expect(gate.violations.map((violation) => violation.ruleId)).toContain('naming.section7.lucide-icon');
+  });
+
+  it('separates owner from approver for temporary naming exceptions', () => {
+    const invalid = runNamingGate({
+      now: '2026-05-12T00:00:00Z',
+      targets: [{ id: 'layer', name: 'Header/Nav', kind: 'layer', type: 'FRAME' }],
+      exceptions: [{
+        ruleId: 'naming.section6.layer-slash',
+        nodeId: 'layer',
+        reason: 'Migration hold',
+        evidence: 'Tracked in harness run',
+        approver: 'design-lead',
+        revisit: 'Rename before publish',
+      }],
+    });
+    expect(invalid.status).toBe('fail');
+    expect(invalid.violations[0].message).toContain('owner is required');
+
+    const valid = runNamingGate({
+      now: '2026-05-12T00:00:00Z',
+      targets: [{ id: 'layer', name: 'Header/Nav', kind: 'layer', type: 'FRAME' }],
+      exceptions: [{
+        ruleId: 'naming.section6.layer-slash',
+        nodeId: 'layer',
+        reason: 'Migration hold',
+        evidence: 'Tracked in harness run',
+        owner: 'component-owner',
+        approver: 'design-lead',
+        review_at: '2026-05-19',
+        expires_at: '2026-05-26',
+        revisit: 'Rename before publish',
+      }],
+    });
+    expect(valid.status).toBe('pass');
+    expect(valid.metrics.activeExceptionCount).toBe(1);
+  });
+
+  it('requires evidence and revisit on temporary naming exceptions at runtime', () => {
+    const invalid = runNamingGate({
+      now: '2026-05-12T00:00:00Z',
+      targets: [{ id: 'layer', name: 'Header/Nav', kind: 'layer', type: 'FRAME' }],
+      exceptions: [{
+        ruleId: 'naming.section6.layer-slash',
+        nodeId: 'layer',
+        reason: 'Migration hold',
+        owner: 'component-owner',
+        approver: 'design-lead',
+        review_at: '2026-05-19',
+        expires_at: '2026-05-26',
+      } as any],
+    });
+    expect(invalid.status).toBe('fail');
+    expect(invalid.violations[0].message).toContain('evidence is required');
+    expect(invalid.violations[0].message).toContain('revisit is required');
+  });
+
+  it('exposes autofix suggestions for policy violations', () => {
+    expect(suggestNamingFix({ id: 'a', name: 'Main Content', kind: 'layer', type: 'FRAME' })).toBe('Body');
+    expect(evaluateNamingTarget({ id: 'b', name: 'Container CTA', kind: 'layer', type: 'FRAME' })
+      .map((violation) => violation.ruleId)).toContain('naming.section5.cta');
   });
 });

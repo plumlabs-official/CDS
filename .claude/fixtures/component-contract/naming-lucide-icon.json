@@ -1,0 +1,14 @@
+{
+  "name": "naming-lucide-icon",
+  "mode": "synthetic",
+  "input": {
+    "namingTargets": [
+      { "id": "icon", "name": "ChevronRightIcon", "kind": "icon", "type": "INSTANCE" }
+    ]
+  },
+  "expected": {
+    "pass": false,
+    "namingGateStatus": "fail",
+    "namingBlockingViolations": 2
+  }
+}

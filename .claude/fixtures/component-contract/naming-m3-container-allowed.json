@@ -1,0 +1,20 @@
+{
+  "name": "naming-m3-container-allowed",
+  "mode": "synthetic",
+  "input": {
+    "namingTargets": [
+      {
+        "id": "m3-container",
+        "name": "Container",
+        "kind": "componentPart",
+        "type": "FRAME",
+        "isM3Anatomy": true
+      }
+    ]
+  },
+  "expected": {
+    "pass": true,
+    "namingGateStatus": "pass",
+    "namingBlockingViolations": 0
+  }
+}

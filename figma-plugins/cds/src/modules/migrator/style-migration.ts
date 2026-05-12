@@ -4,7 +4,14 @@
  * Source: migrate-to-cds/code.js processNode() (lines 589-846)
  */
 
-import { findCdsVariable, findNearestColor, serializeEffects, findCdsEffectStyle, findNearestCdsEffect, findNearestTextStyle } from '../../shared/matching';
+import {
+  findCdsVariable,
+  findNearestColor,
+  serializeEffects,
+  findCdsEffectStyle,
+  findNearestCdsEffect,
+  findNearestTextStyle,
+} from '../../shared/matching';
 import type { ColorMatchResult } from '../../shared/matching';
 import type { TextMigrationContext } from './text-migration';
 import { migrateTextStyle } from './text-migration';
@@ -46,6 +53,12 @@ export interface MigrationContext {
   nearestStats: NearestStats;
 }
 
+interface PaintVariableMatch {
+  variable: Variable;
+  key: string;
+  distance?: number;
+}
+
 /**
  * Process a single node: replace fills/strokes/effects/text styles with CDS equivalents.
  */
@@ -60,11 +73,9 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
     try {
       const currentEffectStyle = await figma.getStyleByIdAsync((node as any).effectStyleId);
       if (currentEffectStyle && currentEffectStyle.name.indexOf('focus/') !== 0) {
-        // 이미 CDS 로컬 Effect Style이면 스킵
         if ((currentEffectStyle as EffectStyle).remote) {
           let cdsEffectStyle = findCdsEffectStyle(currentEffectStyle.name, ctx.effectByName, ctx.effectByShortName);
 
-          // 이름 매칭 실패 → 속성 정확 매칭 → 근사 매칭 fallback
           if (!cdsEffectStyle || cdsEffectStyle.id === (node as any).effectStyleId) {
             const nodeEffectKey = serializeEffects((currentEffectStyle as EffectStyle).effects);
             if (nodeEffectKey && ctx.effectStyleByProps[nodeEffectKey]) {
@@ -76,7 +87,6 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
             if (nearest) {
               cdsEffectStyle = nearest;
               ctx.nearestStats.effectCount++;
-              // approximate distance tracking (re-compute for stats)
             }
           }
 
@@ -92,7 +102,7 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
     }
   }
 
-  // 2. Fill 변수 교체
+  // 2. Fill 변수 교체: 기존 바인딩뿐 아니라 하드코딩 SOLID 색도 Mode 토큰으로 바인딩한다.
   if ('fills' in node) {
     const fillNode = node as MinimalFillsMixin & SceneNode;
     const fills = fillNode.fills;
@@ -100,79 +110,59 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
       const fillsArr = fills as readonly Paint[];
       const newFills: Paint[] = [];
       let fillChanged = false;
+
       for (let fi = 0; fi < fillsArr.length; fi++) {
         let fill = JSON.parse(JSON.stringify(fillsArr[fi])) as Paint;
-        const bv = (node as any).boundVariables;
-        if (bv && bv.fills && bv.fills[fi]) {
-          const fillBinding = bv.fills[fi];
-          try {
-            const currentFillVar = await figma.variables.getVariableByIdAsync(fillBinding.id);
-            if (currentFillVar) {
-              // 이미 CDS(Mode Collection) 변수면 스킵
-              if (currentFillVar.variableCollectionId === ctx.modeCollection.id) {
-                newFills.push(fill);
-                continue;
-              }
-              if (currentFillVar.name.indexOf('custom/') === 0) {
-                newFills.push(fill);
-                continue;
-              }
-              const cdsFillVar = findCdsVariable(currentFillVar.name, ctx.variableByFullName, ctx.variableByShortName);
-              if (cdsFillVar && cdsFillVar.id !== currentFillVar.id) {
-                fill = figma.variables.setBoundVariableForPaint(fill as SolidPaint, 'color', cdsFillVar);
-                fillChanged = true;
-                ctx.stats.fills++;
-                console.log('Fill: ' + currentFillVar.name + ' -> CDS ' + cdsFillVar.name);
-              }
+        if (fill.type === 'SOLID') {
+          const currentFillVar = await getCurrentPaintVariable((node as any).boundVariables, 'fills', fi, fill);
+          const match = resolveModePaintMatch(fill as SolidPaint, currentFillVar, ctx);
+          if (match && (!currentFillVar || match.variable.id !== currentFillVar.id)) {
+            try {
+              fill = figma.variables.setBoundVariableForPaint(fill as SolidPaint, 'color', match.variable);
+              fillChanged = true;
+              ctx.stats.fills++;
+              recordNearestColor(ctx, match);
+              console.log('Fill: ' + (currentFillVar ? currentFillVar.name : match.key) + ' -> CDS ' + match.variable.name);
+            } catch (err) {
+              console.log('Fill bind error: ' + (err as Error).message);
             }
-          } catch (err) {
-            console.log('Fill bind error: ' + (err as Error).message);
           }
         }
         newFills.push(fill);
       }
+
       if (fillChanged) fillNode.fills = newFills;
     }
   }
 
-  // 3. Stroke 변수 교체
+  // 3. Stroke 변수 교체: fill과 동일하게 Mode 컬렉션 기준으로 정규화한다.
   if ('strokes' in node) {
     const strokeNode = node as MinimalStrokesMixin & SceneNode;
     const strokes = strokeNode.strokes;
     if (strokes && strokes !== (figma.mixed as any) && strokes.length > 0) {
       const newStrokes: Paint[] = [];
       let strokeChanged = false;
+
       for (let si = 0; si < strokes.length; si++) {
         let stroke = JSON.parse(JSON.stringify(strokes[si])) as Paint;
-        const bv = (node as any).boundVariables;
-        if (bv && bv.strokes && bv.strokes[si]) {
-          const strokeBinding = bv.strokes[si];
-          try {
-            const currentStrokeVar = await figma.variables.getVariableByIdAsync(strokeBinding.id);
-            if (currentStrokeVar) {
-              // 이미 CDS(Mode Collection) 변수면 스킵
-              if (currentStrokeVar.variableCollectionId === ctx.modeCollection.id) {
-                newStrokes.push(stroke);
-                continue;
-              }
-              if (currentStrokeVar.name.indexOf('custom/') === 0) {
-                newStrokes.push(stroke);
-                continue;
-              }
-              const cdsStrokeVar = findCdsVariable(currentStrokeVar.name, ctx.variableByFullName, ctx.variableByShortName);
-              if (cdsStrokeVar && cdsStrokeVar.id !== currentStrokeVar.id) {
-                stroke = figma.variables.setBoundVariableForPaint(stroke as SolidPaint, 'color', cdsStrokeVar);
-                strokeChanged = true;
-                ctx.stats.strokes++;
-                console.log('Stroke: ' + currentStrokeVar.name + ' -> CDS ' + cdsStrokeVar.name);
-              }
+        if (stroke.type === 'SOLID') {
+          const currentStrokeVar = await getCurrentPaintVariable((node as any).boundVariables, 'strokes', si, stroke);
+          const match = resolveModePaintMatch(stroke as SolidPaint, currentStrokeVar, ctx);
+          if (match && (!currentStrokeVar || match.variable.id !== currentStrokeVar.id)) {
+            try {
+              stroke = figma.variables.setBoundVariableForPaint(stroke as SolidPaint, 'color', match.variable);
+              strokeChanged = true;
+              ctx.stats.strokes++;
+              recordNearestColor(ctx, match);
+              console.log('Stroke: ' + (currentStrokeVar ? currentStrokeVar.name : match.key) + ' -> CDS ' + match.variable.name);
+            } catch (err) {
+              console.log('Stroke bind error: ' + (err as Error).message);
             }
-          } catch (err) {
-            console.log('Stroke bind error: ' + (err as Error).message);
           }
         }
         newStrokes.push(stroke);
       }
+
       if (strokeChanged) strokeNode.strokes = newStrokes;
     }
   }
@@ -181,7 +171,6 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
   if (node.type === 'TEXT') {
     const textNode = node as TextNode;
 
-    // 4/4.5: Text style swap + inference
     const textChanges = await migrateTextStyle(
       textNode,
       ctx.textCtx,
@@ -194,61 +183,35 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
       },
     );
     if (textChanges > 0) {
-      // Determine if it was a direct swap or inferred
-      // (migrateTextStyle logs the specifics; we just aggregate here)
-      // The first change from migrateTextStyle could be textStyles or inferredStyles
-      // We rely on the caller's log messages for granularity; for stats, we track both
+      ctx.stats.textStyles += textChanges;
     }
-    // Track text style changes in stats — note: migrateTextStyle handles both swap and inference
-    // We need to track them separately, but migrateTextStyle returns combined count.
-    // For accurate stats, we check the node state before/after.
-    // Simplification: count as textStyles for swap, inferredStyles for inference
-    // (migrateTextStyle already logs which type it is)
 
-    // 4.6: 텍스트 Fill 컬러 → CDS 변수 바인딩 (바인딩 안 된 하드코딩 색상만)
+    // 4.6: 텍스트 Fill 컬러 → CDS Mode 변수 바인딩
     if ('fills' in textNode && textNode.fills && textNode.fills !== figma.mixed) {
       const textFills = textNode.fills as readonly Paint[];
       const newTextFills: Paint[] = [];
       let textFillChanged = false;
+
       for (let tfi = 0; tfi < textFills.length; tfi++) {
         let textFill = JSON.parse(JSON.stringify(textFills[tfi])) as Paint;
-        const bv = (textNode as any).boundVariables;
-        const alreadyBound = bv && bv.fills && bv.fills[tfi];
-        if (!alreadyBound && textFill.type === 'SOLID') {
-          const tr = Math.round((textFill as SolidPaint).color.r * 255);
-          const tg = Math.round((textFill as SolidPaint).color.g * 255);
-          const tb = Math.round((textFill as SolidPaint).color.b * 255);
-          const ta = Math.round(((textFill as SolidPaint).opacity !== undefined ? (textFill as SolidPaint).opacity! : 1) * 100);
-          const textColorKey = tr + '_' + tg + '_' + tb + '_' + ta;
-          const matchedVar = ctx.colorToVariable[textColorKey];
-          if (matchedVar) {
+        if (textFill.type === 'SOLID') {
+          const currentTextVar = await getCurrentPaintVariable((textNode as any).boundVariables, 'fills', tfi, textFill);
+          const match = resolveModePaintMatch(textFill as SolidPaint, currentTextVar, ctx);
+          if (match && (!currentTextVar || match.variable.id !== currentTextVar.id)) {
             try {
-              textFill = figma.variables.setBoundVariableForPaint(textFill, 'color', matchedVar);
+              textFill = figma.variables.setBoundVariableForPaint(textFill as SolidPaint, 'color', match.variable);
               textFillChanged = true;
               ctx.stats.colorTokens++;
-              console.log('Text color: ' + textColorKey + ' → ' + matchedVar.name + ' on ' + textNode.name);
+              recordNearestColor(ctx, match);
+              console.log('Text color: ' + (currentTextVar ? currentTextVar.name : match.key) + ' -> CDS ' + match.variable.name + ' on ' + textNode.name);
             } catch (err) {
               console.log('Text color bind error: ' + (err as Error).message);
-            }
-          } else {
-            // 근사 매칭 fallback
-            const nearest = findNearestColor(tr, tg, tb, ta, ctx.colorToVariable, ctx.nearestColorCache);
-            if (nearest) {
-              try {
-                textFill = figma.variables.setBoundVariableForPaint(textFill, 'color', nearest.variable);
-                textFillChanged = true;
-                ctx.stats.colorTokens++;
-                ctx.nearestStats.colorCount++;
-                ctx.nearestStats.colorTotalDist += nearest.distance;
-                console.log('Text color: ' + textColorKey + ' ~> ' + nearest.variable.name + ' (dist: ' + nearest.distance + ') on ' + textNode.name);
-              } catch (err) {
-                console.log('Text color bind error: ' + (err as Error).message);
-              }
             }
           }
         }
         newTextFills.push(textFill);
       }
+
       if (textFillChanged) textNode.fills = newTextFills;
     }
 
@@ -257,7 +220,6 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
       ? (textNode.fontName as FontName).family : '';
     if (ctx.textCtx.fontSans && (!textNode.textStyleId || textNode.textStyleId === '') && fontFamily.indexOf('SF Pro') !== 0) {
       try {
-        // 현재 폰트 로드 (수정 전 필수)
         if (textNode.fontName && textNode.fontName !== figma.mixed) {
           await figma.loadFontAsync(textNode.fontName as FontName);
           try {
@@ -266,9 +228,7 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
             // font style not available
           }
         }
-        // fontFamily 바인딩
         await textNode.setBoundVariable('fontFamily', ctx.textCtx.fontSans!);
-        // fontWeight 바인딩 (현재 weight에 매칭되는 CDS 토큰)
         if (textNode.fontWeight && textNode.fontWeight !== figma.mixed && ctx.textCtx.fontWeightMap[textNode.fontWeight as number]) {
           await textNode.setBoundVariable('fontWeight', ctx.textCtx.fontWeightMap[textNode.fontWeight as number]);
           console.log('Font weight bound: ' + textNode.fontWeight + ' on ' + textNode.name);
@@ -285,4 +245,75 @@ export async function processNode(node: SceneNode, ctx: MigrationContext): Promi
       await processNode((node as ChildrenMixin).children[ci], ctx);
     }
   }
+}
+
+async function getCurrentPaintVariable(
+  boundVariables: Record<string, unknown> | undefined,
+  field: 'fills' | 'strokes',
+  index: number,
+  paint: Paint,
+): Promise<Variable | null> {
+  const variableId = readPaintBindingId(boundVariables, field, index, paint);
+  if (!variableId) return null;
+  try {
+    return await figma.variables.getVariableByIdAsync(variableId);
+  } catch (err) {
+    return null;
+  }
+}
+
+function readPaintBindingId(
+  boundVariables: Record<string, unknown> | undefined,
+  field: 'fills' | 'strokes',
+  index: number,
+  paint: Paint,
+): string | null {
+  const paintColor = (paint as any).boundVariables?.color as { id?: unknown } | undefined;
+  if (typeof paintColor?.id === 'string') return paintColor.id;
+
+  const fieldBindings = boundVariables?.[field] as Array<{ id?: unknown }> | undefined;
+  const fieldBinding = Array.isArray(fieldBindings) ? fieldBindings[index] : undefined;
+  return typeof fieldBinding?.id === 'string' ? fieldBinding.id : null;
+}
+
+function resolveModePaintMatch(
+  paint: SolidPaint,
+  currentVariable: Variable | null,
+  ctx: MigrationContext,
+): PaintVariableMatch | null {
+  const key = paintColorKey(paint);
+
+  if (currentVariable) {
+    if (currentVariable.variableCollectionId === ctx.modeCollection.id) return null;
+    if (currentVariable.name.indexOf('custom/') === 0) return null;
+    const byName = findCdsVariable(currentVariable.name, ctx.variableByFullName, ctx.variableByShortName);
+    if (byName) return { variable: byName, key };
+  }
+
+  const exact = ctx.colorToVariable[key];
+  if (exact) return { variable: exact, key };
+
+  const rgb = paintToRgbaBytes(paint);
+  const nearest = findNearestColor(rgb.r, rgb.g, rgb.b, rgb.a, ctx.colorToVariable, ctx.nearestColorCache);
+  return nearest ? { variable: nearest.variable, key, distance: nearest.distance } : null;
+}
+
+function paintColorKey(paint: SolidPaint): string {
+  const rgb = paintToRgbaBytes(paint);
+  return rgb.r + '_' + rgb.g + '_' + rgb.b + '_' + rgb.a;
+}
+
+function paintToRgbaBytes(paint: SolidPaint): { r: number; g: number; b: number; a: number } {
+  return {
+    r: Math.round(paint.color.r * 255),
+    g: Math.round(paint.color.g * 255),
+    b: Math.round(paint.color.b * 255),
+    a: Math.round((paint.opacity !== undefined ? paint.opacity : 1) * 100),
+  };
+}
+
+function recordNearestColor(ctx: MigrationContext, match: PaintVariableMatch): void {
+  if (match.distance === undefined) return;
+  ctx.nearestStats.colorCount++;
+  ctx.nearestStats.colorTotalDist += match.distance;
 }

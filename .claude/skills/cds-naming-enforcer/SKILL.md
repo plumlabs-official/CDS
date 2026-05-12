@@ -14,6 +14,7 @@ Figma 레이어명을 CDS naming-policy v2.0 기준으로 점검하고 수정합
 
 - 규칙 원본: `.claude/rules/naming-policy.md` v2.0
 - 데이터 원본: `figma-plugins/cds/src/modules/renamer/rules.ts`
+- QA 게이트: `figma-plugins/cds/src/modules/qa/core/naming-gate.ts`
 - 상세 파이프라인: `references/rename-pipeline.md`
 
 ## 오탐 방지 원칙
@@ -107,5 +108,6 @@ return { success: true, nodeId: node.id, oldName: "Old", newName: "New" };
 ## 예외
 
 - M3 "Container": CDS 컴포넌트 anatomy 내부 최외곽 파트는 허용
+- 단, M3 예외는 evidence에서 `isM3Anatomy=true`일 때만 허용. 이름이 `Container`라는 이유만으로 통과시키지 않음
 - `.` `_` 접두어: 퍼블리시 제외 (Figma 공식)
 - CDS 인스턴스 내부: 검사 제외

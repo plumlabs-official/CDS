@@ -1,3 +1,4 @@
+import { isCdsTypographyTokenStyleName } from '../../../shared/typography-utils';
 import type { ContractException, ContractNode, ContractPaint, TokenBindingSummary } from './types';
 
 const MAX_IDS = 50;
@@ -13,6 +14,8 @@ export function collectTokenBindingSummary(
     missingStrokeBinding: [],
     missingEffectBinding: [],
     hardcodedTokenEligibleColors: [],
+    invalidTextStyle: [],
+    nonCdsColorBinding: [],
     exceptions,
   };
 
@@ -22,13 +25,11 @@ export function collectTokenBindingSummary(
     if (node.type === 'TEXT') {
       summary.checked++;
       if (!hasStyle(node.textStyleId)) pushCapped(summary.missingTextStyle, node.id);
-      if (node.tokenEligible && !hasBoundVariables(node.boundVariables)) {
-        pushCapped(summary.hardcodedTokenEligibleColors, node.id);
-      }
+      else if (!isCdsTypographyTokenStyleName(node.textStyleName)) pushCapped(summary.invalidTextStyle, node.id);
     }
 
-    collectPaintIssues(node, 'fills', summary.missingFillBinding, summary.hardcodedTokenEligibleColors);
-    collectPaintIssues(node, 'strokes', summary.missingStrokeBinding, summary.hardcodedTokenEligibleColors);
+    collectPaintIssues(node, 'fills', summary.missingFillBinding, summary.hardcodedTokenEligibleColors, summary.nonCdsColorBinding);
+    collectPaintIssues(node, 'strokes', summary.missingStrokeBinding, summary.hardcodedTokenEligibleColors, summary.nonCdsColorBinding);
 
     if (Array.isArray(node.effects) && node.effects.some((effect) => effect.tokenEligible)) {
       summary.checked++;
@@ -44,6 +45,8 @@ export function collectTokenBindingSummary(
     summary.missingStrokeBinding,
     summary.missingEffectBinding,
     summary.hardcodedTokenEligibleColors,
+    summary.invalidTextStyle,
+    summary.nonCdsColorBinding,
   ].some((ids) => ids.length >= MAX_IDS);
 
   return summary;
@@ -54,6 +57,7 @@ function collectPaintIssues(
   field: 'fills' | 'strokes',
   missingBinding: string[],
   hardcodedColors: string[],
+  nonCdsBinding: string[],
 ): void {
   const paints = node[field];
   if (!Array.isArray(paints)) return;
@@ -61,10 +65,15 @@ function collectPaintIssues(
   if (tokenEligiblePaints.length === 0) return;
 
   const hasBinding = tokenEligiblePaints.some((paint) => hasBoundVariables(paint.boundVariables))
-    || hasBoundVariables(node.boundVariables);
+    || hasFieldBinding(node.boundVariables, field);
+  const hasCdsModeBinding = tokenEligiblePaints.some((paint) => paint.isCdsModeBound === true);
   if (!hasBinding) {
     pushCapped(missingBinding, node.id);
     pushCapped(hardcodedColors, node.id);
+    return;
+  }
+  if (!hasCdsModeBinding) {
+    pushCapped(nonCdsBinding, node.id);
   }
 }
 
@@ -78,6 +87,12 @@ function hasStyle(styleId: string | symbol | null | undefined): boolean {
 
 function hasBoundVariables(boundVariables: Record<string, unknown> | undefined): boolean {
   return Boolean(boundVariables && Object.keys(boundVariables).length > 0);
+}
+
+function hasFieldBinding(boundVariables: Record<string, unknown> | undefined, field: 'fills' | 'strokes'): boolean {
+  if (!boundVariables) return false;
+  const key = field === 'fills' ? 'fills' : 'strokes';
+  return key in boundVariables;
 }
 
 function isExcepted(exceptions: ContractException[], nodeId: string, prefix: string): boolean {

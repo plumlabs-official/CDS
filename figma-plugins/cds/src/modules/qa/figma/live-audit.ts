@@ -3,10 +3,12 @@ import {
   collectPropertyReferenceMatrix,
   collectStructuralFidelity,
   collectTokenBindingSummary,
+  runNamingGate,
   validateCompletionEvidence,
   withProbeCleanup,
   type CompletionEvidence,
   type ContractException,
+  type ContractNode,
   type ProbeSummary,
 } from '../core';
 import { buildTokenCatalog, sceneNodeToContractNode } from './scene-node';
@@ -21,6 +23,7 @@ export interface CompletionGateInput {
   useSiteReplacement?: 'pass' | 'fail' | 'blocked';
   intentionalDeltas?: string[];
   exceptions?: ContractException[];
+  namingHardGate?: boolean;
 }
 
 export async function runCompletionGate(input: CompletionGateInput): Promise<CompletionEvidence> {
@@ -30,11 +33,18 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
   const exceptions = input.exceptions || [];
   const tokenCatalog = await buildTokenCatalog();
   const contractNode = sceneNodeToContractNode(node, tokenCatalog);
+  await hydrateTextStyleNames(contractNode);
   const propertyReferenceMatrix = collectPropertyReferenceMatrix(contractNode);
   const layoutContract = collectLayoutContract(contractNode, exceptions);
   const structuralFidelity = collectStructuralFidelity(contractNode, exceptions);
   const tokenBindingSummary = collectTokenBindingSummary(contractNode, exceptions);
+  const namingGate = runNamingGate({
+    root: contractNode,
+    exceptions,
+    hardGate: input.namingHardGate !== false,
+  });
   const propertyIntegrity = matrixPasses(propertyReferenceMatrix) && structuralFidelity.status === 'pass'
+    && namingGate.status === 'pass'
     ? 'pass'
     : 'fail';
 
@@ -53,6 +63,7 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
     layoutContract,
     structuralFidelity,
     tokenBindingSummary,
+    namingGate,
     responsiveProbe: skippedProbe('not-run'),
     longTextProbe: skippedProbe('not-run'),
     boundsCheck: skippedProbe('not-run'),
@@ -61,6 +72,9 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
 
   const schemaErrors = validateCompletionEvidence(evidence);
   if (schemaErrors.length > 0) throw new Error(schemaErrors.join('; '));
+  if (namingGate.hardGate && namingGate.status === 'fail') {
+    throw new Error(formatNamingGateFailure(namingGate));
+  }
   return evidence;
 }
 
@@ -97,6 +111,23 @@ function isSceneNode(node: BaseNode): node is SceneNode {
   return 'visible' in node;
 }
 
+async function hydrateTextStyleNames(node: ContractNode): Promise<void> {
+  if (node.type === 'TEXT' && typeof node.textStyleId === 'string' && !node.textStyleName) {
+    try {
+      const style = await figma.getStyleByIdAsync(node.textStyleId);
+      if (style && style.type === 'TEXT') {
+        node.textStyleName = style.name;
+      }
+    } catch {
+      // Keep null; token binding gate will fail unresolved non-token styles.
+    }
+  }
+
+  for (const child of node.children || []) {
+    await hydrateTextStyleNames(child);
+  }
+}
+
 function matrixPasses(matrix: CompletionEvidence['propertyReferenceMatrix']): boolean {
   return matrix.unreferenced.length === 0
     && matrix.danglingRefs.length === 0
@@ -105,4 +136,12 @@ function matrixPasses(matrix: CompletionEvidence['propertyReferenceMatrix']): bo
 
 function skippedProbe(reason: string): ProbeSummary {
   return { pass: false, checked: 0, failures: [reason] };
+}
+
+function formatNamingGateFailure(gate: CompletionEvidence['namingGate']): string {
+  const first = gate.violations.find((violation) => violation.status === 'fail');
+  const suffix = first
+    ? ` first=${first.ruleId} ${first.targetId} "${first.currentName}"`
+    : '';
+  return `naming gate failed: ${gate.metrics.blockingViolationCount} blocking violation(s).${suffix}`;
 }

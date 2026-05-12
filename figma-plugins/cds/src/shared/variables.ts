@@ -10,12 +10,18 @@ let cdsVarCache: Record<string, Variable> = {};
 let modeCollectionCache: VariableCollection | null = null;
 let varsPromise: Promise<VariableCollection | null> | null = null;
 
+function isModeCollectionName(name: string): boolean {
+  const normalized = name.trim().toLowerCase();
+  return normalized === 'mode' || normalized === 'cds/mode';
+}
+
 /** Internal loader */
 async function doLoadCdsVars(): Promise<VariableCollection | null> {
   const collections = await figma.variables.getLocalVariableCollectionsAsync();
-  modeCollectionCache = collections.find(c => c.name === 'Mode') ?? null;
+  modeCollectionCache = collections.find(c => isModeCollectionName(c.name)) ?? null;
   if (!modeCollectionCache) return null;
 
+  cdsVarCache = {};
   const allVars = await figma.variables.getLocalVariablesAsync();
   for (const v of allVars) {
     if (v.variableCollectionId === modeCollectionCache.id && v.resolvedType === 'COLOR') {

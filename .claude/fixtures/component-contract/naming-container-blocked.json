@@ -1,0 +1,17 @@
+{
+  "name": "naming-container-blocked",
+  "mode": "synthetic",
+  "input": {
+    "node": {
+      "id": "dialog-container",
+      "name": "Dialog Container",
+      "type": "FRAME",
+      "children": []
+    }
+  },
+  "expected": {
+    "pass": false,
+    "namingGateStatus": "fail",
+    "namingBlockingViolations": 1
+  }
+}

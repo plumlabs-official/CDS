@@ -1,5 +1,5 @@
 /**
- * CDS Renamer — naming-policy v1.1 기반 자동 리네이밍
+ * CDS Renamer — naming-policy v2.0 기반 자동 리네이밍
  *
  * Mode 1: analyzeProductDesign — 프로덕트 디자인 화면 리네이밍
  * Mode 2: analyzeCDSLibrary — CDS 라이브러리 컴포넌트 리네이밍 + 프로퍼티 점검
@@ -16,6 +16,7 @@ import {
   KOREAN_LABEL_MAP,
   LEGACY_NAME_MAP,
   SHADCN_COMPONENTS,
+  suggestNamingFix,
 } from './rules';
 
 import { isCDSInstance, walkTree, getTargetNodes } from '../../shared/tree-utils';
@@ -289,7 +290,16 @@ function computeProductName(node: SceneNode): string | null {
     name = name.replace(SPECIAL_CHARS_IN_NAMES, '').trim();
   }
 
-  // Step 7: 시맨틱 역할 접미사 — 금지어 제거 후 1단어가 된 경우만
+  // Step 7: v2.0 rule schema 기반 자동수정 가능 항목 재적용
+  var ruleFix = suggestNamingFix({
+    id: node.id,
+    name: name,
+    type: node.type,
+    kind: node.type === 'TEXT' ? 'text' : 'layer',
+  });
+  if (ruleFix) name = ruleFix;
+
+  // Step 8: 시맨틱 역할 접미사 — 금지어 제거 후 1단어가 된 경우만
   if (bannedRemoved
     && node.type === 'FRAME'
     && name.split(/\s+/).length === 1
@@ -368,6 +378,9 @@ function replaceBannedSuffix(node: SceneNode, name: string): string | null {
       if (k !== idx) parts.push(words[k]);
     }
     var context = parts.join(' ').trim() || inferContext(node) || 'Main';
+    if (BANNED_SUFFIXES[b].toLowerCase() === 'content' && context.toLowerCase() === 'main') {
+      return 'Body';
+    }
 
     // 역할 추가 판정
     if (endsWithRole(context)) return context;

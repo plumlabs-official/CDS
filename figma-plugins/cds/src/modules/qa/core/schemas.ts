@@ -28,6 +28,7 @@ const COMPLETION_REQUIRED = [
   'layoutContract',
   'structuralFidelity',
   'tokenBindingSummary',
+  'namingGate',
   'responsiveProbe',
   'longTextProbe',
   'boundsCheck',

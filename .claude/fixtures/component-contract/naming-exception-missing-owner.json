@@ -1,0 +1,30 @@
+{
+  "name": "naming-exception-missing-owner",
+  "mode": "synthetic",
+  "input": {
+    "now": "2026-05-12T00:00:00Z",
+    "namingTargets": [
+      { "id": "legacy", "name": "Header/Nav", "kind": "layer", "type": "FRAME" }
+    ]
+  },
+  "expected": {
+    "pass": false,
+    "namingGateStatus": "fail",
+    "namingBlockingViolations": 1,
+    "namingActiveExceptions": 0
+  },
+  "exceptions": [
+    {
+      "ruleId": "naming.section6.layer-slash",
+      "nodeId": "legacy",
+      "nodeName": "Header/Nav",
+      "reason": "Legacy imported page awaiting scheduled rename.",
+      "evidence": "Tracked by naming harness fixture.",
+      "approver": "design-system-lead",
+      "review_at": "2026-05-19",
+      "expires_at": "2026-05-26",
+      "sourceReference": ".claude/rules/naming-policy.md#section-6",
+      "revisit": "Remove slash before publish."
+    }
+  ]
+}

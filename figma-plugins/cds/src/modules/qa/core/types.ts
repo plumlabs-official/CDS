@@ -6,8 +6,15 @@ export interface ContractException {
   nodeName?: string;
   reason: string;
   evidence: string;
+  /** Remediation owner. For naming gates this is mandatory and distinct from approver. */
+  owner?: string;
+  /** Person who approved the temporary exception. Distinct from owner. */
   approver?: string;
   sourceReference?: string;
+  /** ISO date (YYYY-MM-DD) for the next review. Required by naming gates. */
+  review_at?: string;
+  /** ISO date (YYYY-MM-DD) when the exception stops being valid. Required by naming gates. */
+  expires_at?: string;
   revisit: string;
 }
 
@@ -16,12 +23,20 @@ export interface ContractPaint {
   boundVariables?: Record<string, unknown>;
   tokenEligible?: boolean;
   color?: unknown;
+  boundTokenName?: string | null;
+  boundTokenCollectionName?: string | null;
+  isCdsModeBound?: boolean;
+  matchedTokenName?: string | null;
+  matchedTokenCollectionName?: string | null;
 }
 
 export interface ContractNode {
   id: string;
   name: string;
   type: string;
+  isM3Anatomy?: boolean;
+  isVariantPath?: boolean;
+  hardcodedData?: boolean;
   visible?: boolean;
   layoutMode?: string;
   layoutSizingHorizontal?: string;
@@ -34,6 +49,7 @@ export interface ContractNode {
   textAutoResize?: string;
   textTruncation?: string;
   textStyleId?: string | symbol | null;
+  textStyleName?: string | null;
   gridStyleId?: string | symbol | null;
   effectStyleId?: string | symbol | null;
   boundVariables?: Record<string, unknown>;
@@ -101,6 +117,8 @@ export interface TokenBindingSummary {
   missingStrokeBinding: string[];
   missingEffectBinding: string[];
   hardcodedTokenEligibleColors: string[];
+  invalidTextStyle: string[];
+  nonCdsColorBinding: string[];
   exceptions: ContractException[];
   truncated?: boolean;
 }
@@ -131,6 +149,40 @@ export interface ProbeSummary {
   truncated?: boolean;
 }
 
+export interface NamingGateViolation {
+  ruleId: string;
+  policySection: string;
+  target: string;
+  targetId: string;
+  targetName: string;
+  targetKind: string;
+  currentName: string;
+  suggestedName?: string;
+  autofixable: boolean;
+  exceptionRef?: string;
+  status: 'fail' | 'warning' | 'excepted';
+  message: string;
+  sourceReference: string;
+}
+
+export interface NamingGateMetrics {
+  checked: number;
+  violationCount: number;
+  blockingViolationCount: number;
+  autofixableCount: number;
+  activeExceptionCount: number;
+  expiringExceptionCount: number;
+}
+
+export interface NamingGateSummary {
+  status: ContractStatus;
+  hardGate: boolean;
+  policyVersion: string;
+  metrics: NamingGateMetrics;
+  violations: NamingGateViolation[];
+  exceptions: ContractException[];
+}
+
 export interface CompletionEvidence {
   sourceNodeId: string;
   componentNodeId: string;
@@ -146,6 +198,7 @@ export interface CompletionEvidence {
   layoutContract: LayoutContractSummary;
   structuralFidelity: StructuralFidelitySummary;
   tokenBindingSummary: TokenBindingSummary;
+  namingGate: NamingGateSummary;
   responsiveProbe: ProbeSummary;
   longTextProbe: ProbeSummary;
   boundsCheck: ProbeSummary;

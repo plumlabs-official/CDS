@@ -44,6 +44,7 @@ type CompletionEvidence = {
   layoutContract: LayoutContractSummary;
   structuralFidelity: StructuralFidelitySummary;
   tokenBindingSummary: TokenBindingSummary;
+  namingGate: NamingGateSummary;
   responsiveProbe: ProbeSummary;
   longTextProbe: ProbeSummary;
   boundsCheck: ProbeSummary;
@@ -80,6 +81,26 @@ type StructuralFidelitySummary = {
 ```
 
 If `structuralFidelity.status === "fail"`, Completion Gate is FAIL regardless of visual parity or exceptions. Image-backed components may remain only as `recovery`, `reference`, or `quarantine/remediationRequired` artifacts.
+
+## Naming Gate
+
+CDS component Creation/Completion workflows must enforce `.claude/rules/naming-policy.md` v2.0 before final handoff.
+
+| Rule | PASS 기준 |
+|------|-----------|
+| executable-policy-map | `figma-plugins/cds/src/modules/renamer/rules.ts` maps naming-policy sections 3-8 into `NamingRule` entries |
+| completion-subgate | `runCompletionGate()` includes `namingGate` and throws before handoff when `namingGate.status === "fail"` |
+| layer-slash-hard-fail | slash is allowed only for variant paths, never ordinary layer names |
+| lucide-icon-hard-fail | icon-like nodes must be Lucide component instances using official Lucide Title Case names |
+| m3-container-evidence | M3 `Container` is allowed only when explicit `isM3Anatomy=true` evidence is present; do not infer the exception from the name alone |
+
+Typed handoff function:
+
+```ts
+import { runNamingGate } from "figma-plugins/cds/src/modules/qa/core";
+```
+
+Pipeline stage handoff: after `05-implementation` and before `06-record`, the controller must run the naming gate or include a `CompletionEvidence.namingGate` packet produced by `runCompletionGate()`. A failing hard gate blocks record/final report.
 
 Feed screen remediation note:
 - Manual completed screen `CS2ZhrORl4E1szQfTe2UvO/28582:15332` is protected and must not be mutated by automated remediation.
@@ -123,10 +144,10 @@ Audit token-eligible authored nodes only. CDS nested instance internals are excl
 
 | Surface | PASS 기준 |
 |---------|-----------|
-| text style | TEXT nodes have `textStyleId` or an exception |
-| text variables | token-eligible TEXT nodes have relevant `boundVariables` |
+| text style | TEXT nodes use CDS typography token styles such as `text-sm/leading-normal/normal`; arbitrary local/remote styles fail |
+| color variables | token-eligible fills/strokes are bound to variables in the CDS `Mode` collection; primitive/other collection bindings fail |
 | fills/strokes/effects | token-eligible paints/effects are variable/style bound |
-| hardcoded colors | `hardcodedTokenEligibleColors === 0` |
+| hardcoded colors | colors that merely match a token value still fail until bound to CDS `Mode` |
 
 Token eligibility is derived per audit run from live Figma metadata: local variable collections, text/paint/effect styles, and source/reference `boundVariables`. Do not rely on a stale JSON token snapshot.
 
@@ -136,10 +157,12 @@ Compact output:
 type TokenBindingSummary = {
   checked: number;
   missingTextStyle: string[];
+  invalidTextStyle: string[];
   missingFillBinding: string[];
   missingStrokeBinding: string[];
   missingEffectBinding: string[];
   hardcodedTokenEligibleColors: string[];
+  nonCdsColorBinding: string[];
   exceptions: ContractException[];
   truncated?: boolean;
 };
@@ -179,13 +202,18 @@ type ContractException = {
   nodeName?: string;
   reason: string;
   evidence: string;
+  owner?: string;
   approver?: string;
   sourceReference?: string;
+  review_at?: string;
+  expires_at?: string;
   revisit: string;
 };
 ```
 
 Exceptions without `evidence` and either `approver` or `sourceReference` are FAIL. Exceptions must have a revisit condition.
+
+Naming exceptions are stricter: `owner`, `approver`, `review_at`, `expires_at`, `evidence`, and `revisit` are required. `owner` is the remediation owner; `approver` is the person approving temporary risk acceptance. `review_at` and `expires_at` use `YYYY-MM-DD`.
 
 ## Output Budget
 

@@ -1,0 +1,15 @@
+{
+  "name": "naming-variant-slash-allowed",
+  "mode": "synthetic",
+  "input": {
+    "namingTargets": [
+      { "id": "variant", "name": "Button/Primary", "kind": "variantPath", "isVariantPath": true }
+    ]
+  },
+  "expected": {
+    "pass": true,
+    "namingGateStatus": "pass",
+    "namingViolations": 0,
+    "namingBlockingViolations": 0
+  }
+}

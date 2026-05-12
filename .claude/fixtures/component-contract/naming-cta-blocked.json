@@ -1,0 +1,14 @@
+{
+  "name": "naming-cta-blocked",
+  "mode": "synthetic",
+  "input": {
+    "namingTargets": [
+      { "id": "cta", "name": "CTA Area", "kind": "layer", "type": "FRAME" }
+    ]
+  },
+  "expected": {
+    "pass": false,
+    "namingGateStatus": "fail",
+    "namingBlockingViolations": 1
+  }
+}

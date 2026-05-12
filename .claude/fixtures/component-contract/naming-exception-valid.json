@@ -1,0 +1,32 @@
+{
+  "name": "naming-exception-valid",
+  "mode": "synthetic",
+  "input": {
+    "now": "2026-05-12T00:00:00Z",
+    "namingTargets": [
+      { "id": "legacy", "name": "Header/Nav", "kind": "layer", "type": "FRAME" }
+    ]
+  },
+  "expected": {
+    "pass": true,
+    "namingGateStatus": "pass",
+    "namingViolations": 1,
+    "namingBlockingViolations": 0,
+    "namingActiveExceptions": 1
+  },
+  "exceptions": [
+    {
+      "ruleId": "naming.section6.layer-slash",
+      "nodeId": "legacy",
+      "nodeName": "Header/Nav",
+      "reason": "Legacy imported page awaiting scheduled rename.",
+      "evidence": "Tracked by naming harness fixture.",
+      "owner": "cds-maintainer",
+      "approver": "design-system-lead",
+      "review_at": "2026-05-19",
+      "expires_at": "2026-05-26",
+      "sourceReference": ".claude/rules/naming-policy.md#section-6",
+      "revisit": "Remove slash before publish."
+    }
+  ]
+}

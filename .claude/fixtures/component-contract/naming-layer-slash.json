@@ -1,0 +1,15 @@
+{
+  "name": "naming-layer-slash",
+  "mode": "synthetic",
+  "input": {
+    "namingTargets": [
+      { "id": "layer", "name": "Header/Nav", "kind": "layer", "type": "FRAME" }
+    ]
+  },
+  "expected": {
+    "pass": false,
+    "namingGateStatus": "fail",
+    "namingViolations": 1,
+    "namingBlockingViolations": 1
+  }
+}

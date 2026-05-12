@@ -2,6 +2,7 @@ import { collectLayoutContract } from './layout-contract';
 import { collectPropertyReferenceMatrix } from './property-matrix';
 import { collectStructuralFidelity } from './structural-fidelity';
 import { collectTokenBindingSummary } from './token-binding';
+import { runNamingGate } from './naming-gate';
 import type { ComponentContractFixture, FixtureResult } from './types';
 
 export function runSyntheticFixture(fixture: ComponentContractFixture): FixtureResult {
@@ -20,8 +21,15 @@ export function runSyntheticFixture(fixture: ComponentContractFixture): FixtureR
   assertCount(failures, input, expected, 'structuralFidelity', 'issues', 'structuralIssues');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'missingTextStyle');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'missingFillBinding');
+  assertCount(failures, input, expected, 'tokenBindingSummary', 'missingStrokeBinding');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'hardcodedTokenEligibleColors');
+  assertCount(failures, input, expected, 'tokenBindingSummary', 'invalidTextStyle');
+  assertCount(failures, input, expected, 'tokenBindingSummary', 'nonCdsColorBinding');
+  assertCount(failures, input, expected, 'namingGate', 'violations', 'namingViolations');
+  assertNumber(failures, input, expected, 'namingGate', ['metrics', 'blockingViolationCount'], 'namingBlockingViolations');
+  assertNumber(failures, input, expected, 'namingGate', ['metrics', 'activeExceptionCount'], 'namingActiveExceptions');
   assertBoolean(failures, input, expected, 'structuralFidelity', 'imageBacked');
+  assertStatus(failures, input, expected, 'namingGate', 'namingGateStatus');
 
   if ('pass' in expected) {
     const pass = inferPass(input);
@@ -34,6 +42,18 @@ export function runSyntheticFixture(fixture: ComponentContractFixture): FixtureR
 function materializeInput(fixture: ComponentContractFixture): Record<string, unknown> {
   const input = fixture.input || {};
   const node = input.node;
+
+  if (Array.isArray(input.namingTargets)) {
+    return {
+      ...input,
+      namingGate: runNamingGate({
+        targets: input.namingTargets as any,
+        exceptions: fixture.exceptions || [],
+        now: input.now as string | undefined,
+      }),
+    };
+  }
+
   if (!node || typeof node !== 'object') return input;
 
   const contractNode = node as any;
@@ -43,6 +63,7 @@ function materializeInput(fixture: ComponentContractFixture): Record<string, unk
     layoutContract: collectLayoutContract(contractNode, fixture.exceptions || []),
     structuralFidelity: collectStructuralFidelity(contractNode, fixture.exceptions || []),
     tokenBindingSummary: collectTokenBindingSummary(contractNode, fixture.exceptions || []),
+    namingGate: runNamingGate({ root: contractNode, exceptions: fixture.exceptions || [], now: input.now as string | undefined }),
   };
 }
 
@@ -93,6 +114,45 @@ function assertBoolean(
   }
 }
 
+function assertStatus(
+  failures: string[],
+  input: Record<string, unknown>,
+  expected: Record<string, unknown>,
+  section: string,
+  expectedKey: string,
+): void {
+  if (!(expectedKey in expected)) return;
+  const sectionValue = input[section];
+  const actual = sectionValue && typeof sectionValue === 'object'
+    ? (sectionValue as Record<string, unknown>).status
+    : undefined;
+  if (actual !== expected[expectedKey]) {
+    failures.push(`${expectedKey}: expected ${expected[expectedKey]}, got ${actual}`);
+  }
+}
+
+function assertNumber(
+  failures: string[],
+  input: Record<string, unknown>,
+  expected: Record<string, unknown>,
+  section: string,
+  path: string[],
+  expectedKey: string,
+): void {
+  if (!(expectedKey in expected)) return;
+  let current: unknown = input[section];
+  for (const part of path) {
+    if (!current || typeof current !== 'object') {
+      current = undefined;
+      break;
+    }
+    current = (current as Record<string, unknown>)[part];
+  }
+  if (current !== expected[expectedKey]) {
+    failures.push(`${expectedKey}: expected ${expected[expectedKey]}, got ${current}`);
+  }
+}
+
 function inferPass(input: Record<string, unknown>): boolean {
   return countAt(input, 'propertyReferenceMatrix', 'unreferenced') === 0
     && countAt(input, 'propertyReferenceMatrix', 'danglingRefs') === 0
@@ -101,5 +161,15 @@ function inferPass(input: Record<string, unknown>): boolean {
     && countAt(input, 'structuralFidelity', 'issues') === 0
     && countAt(input, 'tokenBindingSummary', 'missingTextStyle') === 0
     && countAt(input, 'tokenBindingSummary', 'missingFillBinding') === 0
-    && countAt(input, 'tokenBindingSummary', 'hardcodedTokenEligibleColors') === 0;
+    && countAt(input, 'tokenBindingSummary', 'missingStrokeBinding') === 0
+    && countAt(input, 'tokenBindingSummary', 'hardcodedTokenEligibleColors') === 0
+    && countAt(input, 'tokenBindingSummary', 'invalidTextStyle') === 0
+    && countAt(input, 'tokenBindingSummary', 'nonCdsColorBinding') === 0
+    && namingGatePasses(input);
+}
+
+function namingGatePasses(input: Record<string, unknown>): boolean {
+  const namingGate = input.namingGate;
+  if (!namingGate || typeof namingGate !== 'object') return true;
+  return (namingGate as Record<string, unknown>).status === 'pass';
 }

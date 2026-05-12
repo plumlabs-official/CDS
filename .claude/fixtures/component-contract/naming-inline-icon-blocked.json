@@ -1,0 +1,17 @@
+{
+  "name": "naming-inline-icon-blocked",
+  "mode": "synthetic",
+  "input": {
+    "node": {
+      "id": "inline-chevron",
+      "name": "Chevron Right",
+      "type": "VECTOR",
+      "children": []
+    }
+  },
+  "expected": {
+    "pass": false,
+    "namingGateStatus": "fail",
+    "namingBlockingViolations": 1
+  }
+}

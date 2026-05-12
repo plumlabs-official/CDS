@@ -6,6 +6,10 @@
  */
 
 import { STYLE_TO_WEIGHT, WEIGHT_NAME_MAP } from '../../shared/matching';
+import {
+  isCdsTypographyTokenStyleName,
+  normalizeTypographyStyleName,
+} from '../../shared/typography-utils';
 
 /** Context object holding all text migration lookup maps and variables */
 export interface TextMigrationContext {
@@ -26,20 +30,22 @@ export interface TextMigrationContext {
  */
 export async function buildTextContext(): Promise<TextMigrationContext> {
   const textStyles = await figma.getLocalTextStylesAsync();
+  const tokenTextStyles = textStyles.filter((style) => isCdsTypographyTokenStyleName(style.name));
   const variables = await figma.variables.getLocalVariablesAsync();
 
   const styleToWeight = STYLE_TO_WEIGHT;
 
   // Text style name map
   const textStyleByName: Record<string, TextStyle> = {};
-  for (let t = 0; t < textStyles.length; t++) {
-    textStyleByName[textStyles[t].name] = textStyles[t];
+  for (let t = 0; t < tokenTextStyles.length; t++) {
+    textStyleByName[tokenTextStyles[t].name] = tokenTextStyles[t];
+    textStyleByName[normalizeTypographyStyleName(tokenTextStyles[t].name)] = tokenTextStyles[t];
   }
 
   // 속성 기반 역방향 Lookup Map: (fontSize_lineHeight_fontWeight) → TextStyle
   const textStyleByProps: Record<string, TextStyle> = {};
-  for (let tp = 0; tp < textStyles.length; tp++) {
-    const tStyle = textStyles[tp];
+  for (let tp = 0; tp < tokenTextStyles.length; tp++) {
+    const tStyle = tokenTextStyles[tp];
     const tsFontSize = tStyle.fontSize;
     let tsLineHeight: number | null = null;
     if (tStyle.lineHeight && tStyle.lineHeight.unit === 'PIXELS') {
@@ -124,21 +130,30 @@ export async function migrateTextStyle(
   findNearestTextStyleFn: (fontSize: number, lineHeight: number | null, fontWeight: number) => TextStyle | null,
 ): Promise<number> {
   let changes = 0;
+  let needsTokenInference = false;
 
   // 4. Text Style 교체 (named style → local CDS style)
   if (node.textStyleId && typeof node.textStyleId === 'string') {
     try {
       const currentTextStyle = await figma.getStyleByIdAsync(node.textStyleId);
-      if (currentTextStyle && (currentTextStyle as TextStyle).remote) {
-        const cdsTextStyle = ctx.textStyleByName[currentTextStyle.name];
+      if (currentTextStyle && isCdsTypographyTokenStyleName(currentTextStyle.name) && !(currentTextStyle as TextStyle).remote) {
+        return changes;
+      }
+      if (currentTextStyle) {
+        const cdsTextStyle =
+          ctx.textStyleByName[currentTextStyle.name] ||
+          ctx.textStyleByName[normalizeTypographyStyleName(currentTextStyle.name)];
         if (cdsTextStyle && cdsTextStyle.id !== node.textStyleId) {
           await node.setTextStyleIdAsync(cdsTextStyle.id);
           changes++;
           console.log('Text Style: ' + currentTextStyle.name + ' -> CDS');
+          return changes;
         }
+        needsTokenInference = true;
       }
     } catch (err) {
       console.log('Text Style error: ' + (err as Error).message);
+      needsTokenInference = true;
     }
   }
 
@@ -146,7 +161,7 @@ export async function migrateTextStyle(
   const fontFamily = (node.fontName && node.fontName !== figma.mixed) ? (node.fontName as FontName).family : '';
   if (fontFamily.indexOf('SF Pro') === 0) {
     console.log('Skipped SF Pro: ' + node.name + ' (' + fontFamily + ')');
-  } else if (!node.textStyleId || node.textStyleId === '') {
+  } else if (!node.textStyleId || node.textStyleId === '' || needsTokenInference) {
     const canInfer = node.fontSize !== figma.mixed
       && node.lineHeight !== figma.mixed;
 

@@ -2,6 +2,12 @@
 
 > 2026-03-17 | 클린 재작성
 
+## 0. 실행 계약
+
+- SSOT는 이 문서이며, 실행 룰은 `figma-plugins/cds/src/modules/renamer/rules.ts`가 Section 3-8을 `NamingRule`로 매핑한다.
+- CDS 컴포넌트 Completion Gate는 `runNamingGate()` 결과를 포함해야 하며, hard gate 실패 시 완료/record로 진행하지 않는다.
+- 예외는 `.claude/rules/component-contract.md`의 `ContractException`을 사용한다. 네이밍 예외는 `owner`, `approver`, `review_at`, `expires_at`을 모두 요구한다.
+
 ## 1. 스코프
 
 | 대상 | 적용 |
@@ -146,7 +152,7 @@ X  아이콘 세트 혼용 (Lucide 외)
 
 | 예외 | 조건 |
 |------|------|
-| M3 "Container" | CDS 컴포넌트 anatomy 내부 최외곽 파트 |
+| M3 "Container" | CDS 컴포넌트 anatomy 내부 최외곽 파트이며, audit evidence에서 `isM3Anatomy=true`로 명시된 경우 |
 | `.` `_` 접두어 | 퍼블리시 제외 (Figma 공식) |
 
 ## 9. Before → After
