@@ -1,0 +1,13 @@
+{
+  "auto_confirm": true,
+  "desktop_auto_confirm": true,
+  "approval_policy": "user_preapproved",
+  "preferred_actuator": "codex_computer_use",
+  "preapproved_desktop_actions": [
+    "Open Figma Desktop",
+    "Open CDS library file H36eNEd6o7ZTv4R7VcyLf2",
+    "Publish or update the CDS library for Feed Detail Action Rail",
+    "Publish or update the CDS library for Feed Detail Comment Composer",
+    "Confirm Figma library publish/update dialogs for these two components only"
+  ]
+}

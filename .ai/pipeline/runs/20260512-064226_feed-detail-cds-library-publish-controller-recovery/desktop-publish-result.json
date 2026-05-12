@@ -1,0 +1,21 @@
+{
+  "schema": "play.desktop_actuator.result.v1",
+  "status": "done",
+  "summary": "Figma Desktop publish flow completed for Feed Detail Action Rail and Feed Detail Comment Composer in CDS library H36eNEd6o7ZTv4R7VcyLf2. Publish UI initially showed CDS 4 changes; the actuator attempted to select only Feed Detail components. During Figma publish verification the modal briefly showed Changes (3 of 4), then completed. Post-publish verification showed CDS 1 change remaining, identified as Drawer Modified, while Feed Detail Action Rail and Feed Detail Comment Composer were no longer pending.",
+  "updated_at": "2026-05-12T06:56:20+0900",
+  "published_components": [
+    "Feed Detail Action Rail",
+    "Feed Detail Comment Composer"
+  ],
+  "ui_evidence": {
+    "before": "Review unpublished changes -> CDS 4 changes: Accordion, Drawer, Feed Detail Action Rail, Feed Detail Comment Composer",
+    "selection_attempt": "Changes (2 of 4) showed Feed Detail Action Rail and Feed Detail Comment Composer selected; subsequent Figma verification briefly showed Changes (3 of 4), so possible Accordion inclusion is noted for follow-up audit.",
+    "after": "Post-publish review showed CDS 1 change remaining; remaining unpublished change was Drawer Modified. Feed Detail Action Rail and Feed Detail Comment Composer were no longer pending."
+  },
+  "changed_files": [
+    ".ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/desktop-publish-stage.md",
+    ".ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/desktop-publish-metadata.json",
+    ".ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/desktop-publish-result.json"
+  ],
+  "controller_note": "Result JSON was written by the controller because the Codex Computer Use child completed the UI work but compacted before writing the result file."
+}

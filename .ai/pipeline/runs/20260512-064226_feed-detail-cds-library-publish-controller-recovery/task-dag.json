@@ -1,0 +1,160 @@
+{
+  "schema": "play.goal_orchestrator.task_dag.v1",
+  "created_at": "2026-05-12T06:42:26+0900",
+  "updated_at": "2026-05-12T06:45:26+0900",
+  "repo": "/Users/zenkim_office/Project/CDS",
+  "run_dir": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery",
+  "request": "Continue the CDS Feed Detail library publish -play from run /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-060949_feed-detail-cds-library-publish-recovery-text. Scope: CDS library file H36eNEd6o7ZTv4R7VcyLf2, product feed detail section CS2ZhrORl4E1szQfTe2UvO node 28587:15601. Finish publish/update of real authored CDS Feed Detail Action Rail and Comment Composer components, then replace copied feed detail screens 28643:11, 28643:104, 28643:179 with published CDS library instances. Preserve original source screens 28587:15677, 28587:15602, 28587:15770, protected 28582:15332, and Lounge. No bitmap-only components; use tokens, typography, properties, evidence, and peer gate.",
+  "desktop_auto_confirm": false,
+  "desktop_approval_policy": null,
+  "desktop_auto_confirm_reason": null,
+  "preapproved_desktop_actions": [],
+  "current_stage": "review",
+  "status": "failed",
+  "stages": [
+    {
+      "id": "analysis",
+      "label": "Team analysis",
+      "status": "done",
+      "depends_on": [],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/01-team-analysis.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null,
+      "updated_at": "2026-05-12T06:43:33+0900",
+      "detail": null,
+      "runner_pid": null
+    },
+    {
+      "id": "review",
+      "label": "Analysis peer review",
+      "status": "failed",
+      "depends_on": [
+        "analysis"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/02-review.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null,
+      "updated_at": "2026-05-12T06:45:26+0900",
+      "detail": "exit=1",
+      "runner_pid": null
+    },
+    {
+      "id": "plan",
+      "label": "Implementation plan",
+      "status": "pending",
+      "depends_on": [
+        "review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/03-plan.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "plan-review",
+      "label": "Plan peer review",
+      "status": "pending",
+      "depends_on": [
+        "plan"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/04-plan-review.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "allocation",
+      "label": "Persona/model allocation",
+      "status": "pending",
+      "depends_on": [
+        "plan-review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/orchestrator/allocation.json",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "assignment-review",
+      "label": "Assignment peer review",
+      "status": "pending",
+      "depends_on": [
+        "allocation"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/orchestrator/assignment-review-result.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "dispatch",
+      "label": "Worker dispatch",
+      "status": "pending",
+      "depends_on": [
+        "assignment-review"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/orchestrator/workers",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "integrate",
+      "label": "Integration and implementation peer gate",
+      "status": "pending",
+      "depends_on": [
+        "dispatch"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/orchestrator/implementation-review-result.md",
+      "fresh_context": true,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    },
+    {
+      "id": "record",
+      "label": "Record summary",
+      "status": "pending",
+      "depends_on": [
+        "integrate"
+      ],
+      "artifact": "/Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/06-record.md",
+      "fresh_context": false,
+      "executor": "headless",
+      "preferred_actuator": null,
+      "fallback_actuator": null,
+      "requires_user_approval": false,
+      "approval_reason": null
+    }
+  ],
+  "orchestrator": {
+    "mode": "daemon",
+    "pid": 28907,
+    "updated_at": "2026-05-12T06:42:27+0900"
+  }
+}

@@ -2,7 +2,17 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-11
+> Last updated: 2026-05-12
+
+---
+
+## 현재 세션 (2026-05-12)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **Feed Detail CDS library publish recovery + product replacement** | CDS library `H36eNEd6o7ZTv4R7VcyLf2`의 `Feed Detail Action Rail`(`21997:581`, key `1c5a825311b9c5f6ab74129581c4a4285f70935c`)과 `Feed Detail Comment Composer`(`21997:582`, key `8aee4e2edacd16ea4cdd7a578161d394c0932121`)를 Figma Desktop publish flow로 product import 가능 상태까지 반영. Product file `CS2ZhrORl4E1szQfTe2UvO`의 copied Feed Detail screens `28643:11`, `28643:104`, `28643:179` 안의 6개 local instance를 published remote CDS instance로 swap. 위치/크기, `Like Count=32`, `Comment Count=2`, `Share Count=2`, composer placeholder 유지. Product import-by-key PASS, target remote reference PASS, token/typography/property audit PASS, Codex peer gate PASS(`.ai/peer-review/runs/20260512-070306-codex-review-34593.md`). Residual risk: publish UI가 `2 of 4`에서 `3 of 4`로 drift해 `Accordion`이 함께 publish됐을 가능성이 있고, `Drawer Modified`는 publish 대기 상태로 남음. 산출물: `.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/`. |
 
 ---
 

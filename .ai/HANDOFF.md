@@ -1293,3 +1293,26 @@ Context-Remaining: 15%
 Clear-Required: /Users/zenkim_office/.codex/auto-handoff/clear-required.json
 Commits: auto-record attempted after this entry; check git log and result.json
 ---
+
+---
+HANDOFF: Claude -> Codex (peer review)
+Date: 2026-05-12 07:09:23
+Project: /Users/zenkim_office/Project/CDS
+Agent: Claude via peer-agent-review
+Summary: codex peer review completed. Verdict: PASS. Focus: Implementation peer review for CDS Feed Detail library publish recovery. Review artifacts: .ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery/05-implementation.md, evidence/publish-proof.md, evidence/produ
+Next-TODO: Review result file and address FAIL/NEEDS_USER_DECISION items before completion.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260512-070306-codex-review-34593.md
+Commits: pending
+---
+
+---
+HANDOFF: Codex -> User
+Date: 2026-05-12 09:09:20 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Completed Feed Detail CDS library publish recovery. Published/import-enabled `Feed Detail Action Rail` and `Feed Detail Comment Composer`, then replaced copied Feed Detail screens `28643:11`, `28643:104`, `28643:179` with published remote CDS instances while preserving geometry and count/placeholder overrides. Final Codex peer gate PASS.
+Next-TODO: `Drawer Modified` remains unpublished in the CDS library. Also audit whether `Accordion` was included in the publish flow due to Figma modal selection drift from `2 of 4` to `3 of 4`.
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260512-070306-codex-review-34593.md
+Play-Run: /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery
+Commits: (이번 커밋)
+---
