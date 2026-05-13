@@ -208,12 +208,27 @@ export interface CompletionEvidence {
 export interface CreationDecision {
   sourceUnitNodeId: string;
   candidateComponents: string[];
+  /**
+   * Existing CDS components/variants/properties evaluated before creation.
+   * Kept additive so reuseExisting/extendExisting callers can migrate gradually.
+   */
+  existingCandidates?: string[];
   componentGroupNodeId: string;
   componentGroupPath: string;
   placementReason: string;
   decision: 'reuseExisting' | 'extendExisting' | 'createNew';
   decisionReason: string;
   rejectedOptions: string[];
+  exactFit?: boolean;
+  extendFit?: boolean;
+  reuseRejectionEvidence?: string[];
+  createNewJustification?: string;
+  expectedReuseCount?: number;
+  /**
+   * True means the unit is acceptable as a screen/product-local composition.
+   * It does not approve public CDS creation when expected reuse is below the gate.
+   */
+  productLocalAllowed?: boolean;
   variantExplosionRisk: 'low' | 'medium' | 'high';
   exceptions: ContractException[];
 }

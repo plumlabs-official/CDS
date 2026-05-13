@@ -2,7 +2,18 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-12
+> Last updated: 2026-05-13
+
+---
+
+## 현재 세션 (2026-05-13)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **CDS Creation Reuse Gate 보강** | Streak 화면 CDS 교체 과정에서 기존 `iOS HomeIndicator`, `Navbar`, `Calendar Block`/day primitive 재사용 가능성을 놓치고 public component를 과생성한 이슈를 회고했다. `CreationDecision`에 `existingCandidates`, `exactFit`, `extendFit`, `reuseRejectionEvidence`, `createNewJustification`, `expectedReuseCount`, `productLocalAllowed`를 추가하고, `createNew`일 때 기존 CDS exact/extend fit과 3회 미만 재사용 public creation을 hard fail하는 검증을 구현했다. `.claude/rules/component-contract.md`에 Creation Reuse Gate 규칙과 회귀 probe를 문서화하고, contract test 6개를 추가했다. 검증: `npm --prefix figma-plugins/cds run test:contract` PASS(28 tests), `git diff --check` PASS. |
+| **Streak Calendar CDS primitive 정리(Figma)** | CDS file `H36eNEd6o7ZTv4R7VcyLf2`에서 기존 `.Streak Calendar Day`(`22136:7752`)와 `Streak Calendar`(`22136:7753`)를 재사용해 연속 인증 캘린더를 정리했다. absolute range fill/marker 방식을 제거하고 `Streak Start/Middle/End/Single` corner-radius variant로 연결하도록 변경했다. Today는 `color/orange/500` dashed chip + alpha fill, future enabled는 muted dashed stroke로 유지했다. `Streak Calendar` 블록의 날짜 chip은 `46.714 x 46.714` 정사각으로 보정하고 dashed stroke는 `1px`로 낮췄다. Figma 최종 검증: range/absolute 잔여 0, week row zero gap, Day 5/6 radius 연결, Day 7/8 정원 + stroke 1. |
 
 ---
 

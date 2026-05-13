@@ -1,4 +1,15 @@
 ---
+HANDOFF: Codex -> User
+Date: 2026-05-13 20:04:08 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Added a CDS Creation Reuse Gate after the Streak screen over-creation issue. `CreationDecision` now records existing candidates, exact/extend fit, reuse rejection evidence, create-new justification, expected reuse count, and product-local routing; `createNew` is blocked when existing CDS coverage fits or public reuse is too low. Also cleaned the CDS Figma `Streak Calendar` primitives: removed the absolute range fill/marker approach, switched streak connection to per-day Start/Middle/End/Single radius variants, kept Today on `color/orange/500` alpha+dashed chip, and fixed block date chips to square cells with thinner 1px dashed stroke.
+Next-TODO: Publish/update CDS library if the Figma Streak Calendar changes need to propagate to product files. agent-center has separate dirty harness files and was not touched by this CDS record.
+Verification: `npm --prefix figma-plugins/cds run test:contract` PASS (28 tests); `git diff --check` PASS; Figma structural verification showed no range-fill/absolute leftovers, week rows zero gap, and square Day 7/8 chips with stroke 1.
+Commits: (이번 커밋)
+---
+
+---
 HANDOFF: Codex -> User (Profile Action Button 공통화 + child Show property 정리 완료)
 Date: 2026-05-08 18:21:00 KST
 Project: /Users/zenkim_office/Project/CDS

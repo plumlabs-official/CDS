@@ -8,6 +8,7 @@ import {
   collectTokenBindingSummary,
   runNamingGate,
   runSyntheticFixture,
+  validateCreationDecision,
   validateCompletionEvidence,
   withProbeCleanup,
   type ComponentContractFixture,
@@ -264,6 +265,137 @@ describe('structural fidelity', () => {
     const summary = collectStructuralFidelity(root);
     expect(summary.status).toBe('pass');
     expect(summary.imageBacked).toBe(false);
+  });
+});
+
+describe('creation reuse gate', () => {
+  const baseDecision = {
+    sourceUnitNodeId: 'streak-home-indicator-source',
+    candidateComponents: ['iOS HomeIndicator'],
+    existingCandidates: ['iOS HomeIndicator'],
+    componentGroupNodeId: 'group:mobile-system',
+    componentGroupPath: 'CDS / Mobile / System',
+    placementReason: 'Screen contains a bottom home indicator region',
+    decision: 'createNew',
+    decisionReason: 'Source shape looked visually unique',
+    rejectedOptions: [],
+    exactFit: false,
+    extendFit: false,
+    reuseRejectionEvidence: ['Compared geometry, visibility, and token usage against candidates'],
+    createNewJustification: 'Reusable mobile system primitive with repeated product demand',
+    expectedReuseCount: 3,
+    productLocalAllowed: false,
+    variantExplosionRisk: 'low',
+    exceptions: [],
+  } as const;
+
+  it('requires createNew reuse evidence fields', () => {
+    const failures = validateCreationDecision({
+      sourceUnitNodeId: 'streak-top-bar-source',
+      candidateComponents: ['Navbar / Type=L'],
+      componentGroupNodeId: 'group:navigation',
+      componentGroupPath: 'CDS / Navigation',
+      placementReason: 'Top bar region',
+      decision: 'createNew',
+      decisionReason: 'Create Streak Top Bar',
+      rejectedOptions: [],
+      variantExplosionRisk: 'low',
+      exceptions: [],
+    });
+
+    expect(failures.join('\n')).toContain('creationDecision.existingCandidates is required for createNew');
+    expect(failures.join('\n')).toContain('creationDecision.exactFit is required for createNew');
+    expect(failures.join('\n')).toContain('creationDecision.reuseRejectionEvidence is required for createNew');
+    expect(failures.join('\n')).toContain('creationDecision.expectedReuseCount must be a non-negative integer');
+  });
+
+  it('blocks createNew when an existing CDS component is an exact fit', () => {
+    const failures = validateCreationDecision({
+      ...baseDecision,
+      exactFit: true,
+      decisionReason: 'Create Streak Home Indicator',
+      createNewJustification: 'Keep source screen naming',
+      expectedReuseCount: 3,
+    });
+
+    expect(failures.join('\n')).toContain('createNew blocked');
+    expect(failures.join('\n')).toContain('iOS HomeIndicator');
+  });
+
+  it('blocks createNew when an existing CDS component can be extended', () => {
+    const failures = validateCreationDecision({
+      ...baseDecision,
+      sourceUnitNodeId: 'streak-calendar-source',
+      candidateComponents: ['Calendar Block', 'Calendar Day Button'],
+      existingCandidates: ['Calendar Block', 'Calendar Day Button'],
+      componentGroupNodeId: 'group:calendar',
+      componentGroupPath: 'CDS / Calendar',
+      placementReason: 'Calendar-like streak grid',
+      decisionReason: 'Create Streak Calendar',
+      exactFit: false,
+      extendFit: true,
+      reuseRejectionEvidence: ['Calendar needs a streak state'],
+      createNewJustification: 'Create separate streak calendar family',
+      expectedReuseCount: 3,
+    });
+
+    expect(failures.join('\n')).toContain('createNew blocked');
+    expect(failures.join('\n')).toContain('Calendar Block');
+  });
+
+  it('blocks low-reuse public CDS creation and routes product-local compositions away from CDS', () => {
+    const failures = validateCreationDecision({
+      ...baseDecision,
+      sourceUnitNodeId: 'streak-summary-hero',
+      candidateComponents: [],
+      existingCandidates: [],
+      exactFit: false,
+      extendFit: false,
+      reuseRejectionEvidence: ['No reusable component family found after search'],
+      createNewJustification: 'One-off streak summary composition',
+      expectedReuseCount: 1,
+      productLocalAllowed: true,
+    });
+
+    expect(failures.join('\n')).toContain('expectedReuseCount must be at least 3');
+    expect(failures.join('\n')).toContain('product-local composition');
+  });
+
+  it('allows extendExisting without the createNew-only reuse fields', () => {
+    const failures = validateCreationDecision({
+      sourceUnitNodeId: 'streak-calendar-source',
+      candidateComponents: ['Calendar Block', 'Calendar Day Button'],
+      componentGroupNodeId: 'group:calendar',
+      componentGroupPath: 'CDS / Calendar',
+      placementReason: 'Calendar family owns date grid behavior',
+      decision: 'extendExisting',
+      decisionReason: 'Add a Streak state variant to Calendar Day Button first',
+      rejectedOptions: ['createNew Streak Calendar'],
+      variantExplosionRisk: 'medium',
+      exceptions: [],
+    });
+
+    expect(failures).toEqual([]);
+  });
+
+  it('allows createNew only when reuse rejection, reuse count, or explicit exception evidence is present', () => {
+    const failures = validateCreationDecision({
+      ...baseDecision,
+      exactFit: true,
+      extendFit: false,
+      reuseRejectionEvidence: [],
+      expectedReuseCount: 1,
+      exceptions: [{
+        ruleId: 'creation.reuse-exception',
+        nodeId: 'streak-specialized-primitive',
+        reason: 'Existing HomeIndicator cannot support required animated safe-area state',
+        evidence: 'Prototype evidence shows a required state not present in iOS HomeIndicator',
+        approver: 'design-system-owner',
+        revisit: 'Remove exception after HomeIndicator receives the animated safe-area state',
+      }],
+    });
+
+    expect(failures).toEqual([]);
   });
 });
 
