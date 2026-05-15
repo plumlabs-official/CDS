@@ -2,7 +2,18 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-13
+> Last updated: 2026-05-15
+
+---
+
+## 현재 세션 (2026-05-15)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **Certification Item 토큰/Stack 아이콘 QA 게이트 보강** | CDS `Certification Item` component set(`H36eNEd6o7ZTv4R7VcyLf2/22260:7976`)에서 hardcoded visible SOLID paint와 stack icon 두-filled-rect 구조가 통과하던 문제를 수정했다. `TokenBindingSummary.status`, invalid token exception validation, field-level binding CDS Mode 검증, visible solid paint token-eligibility, stack icon fidelity check를 추가했다. Regression fixture 2개(`certification-item-stack-token`, `generic-component-token`)와 관련 contract tests를 추가했고 `test:contract` 38 tests, `typecheck`, `build` PASS. Figma 컴포넌트는 root muted, pill foreground, text/icon primary-foreground 토큰으로 재바인딩했고 stack icon은 stroke-only back layer + filled front layer로 수정했다. Play run: `.ai/pipeline/runs/20260514-175444_certification-item-token-stack-quality-fix`. |
+| **최종 리포트 Publish Decision Disclosure 문서 반영** | 사용자 피드백에 따라 CDS final handoff/QA report 계약에 `PublishDecisionDisclosure`를 추가했다. `publish_attempted`, `why_not_published`, `blocker_and_evidence`, `next_condition_to_publish`를 CDS/Figma 컴포넌트/라이브러리 작업 최종 리포트에 요구하도록 `.claude/rules/component-contract.md`, `.claude/rules/qa-rubric.md`를 보강했다. Runtime enforcement는 agent-center 별도 커밋에서 처리. Play run: `.ai/pipeline/runs/20260515-114914_final-report-publish-reason`. |
 
 ---
 

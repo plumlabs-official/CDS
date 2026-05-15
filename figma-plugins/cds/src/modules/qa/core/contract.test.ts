@@ -14,6 +14,7 @@ import {
   type ComponentContractFixture,
   type ContractNode,
 } from './index';
+import { collectStackIconFidelity } from '../figma/live-audit';
 import { NAMING_RULES, evaluateNamingTarget, suggestNamingFix } from '../../renamer/rules';
 
 describe('property reference matrix', () => {
@@ -217,6 +218,128 @@ describe('layout and token summaries', () => {
     expect(summary.invalidTextStyle).toHaveLength(0);
     expect(summary.missingFillBinding).toHaveLength(0);
     expect(summary.nonCdsColorBinding).toHaveLength(0);
+    expect(summary.status).toBe('pass');
+  });
+
+  it('does not allow invalid token exceptions to convert missing bindings to pass', () => {
+    const root: ContractNode = {
+      id: 'surface',
+      name: 'Surface',
+      type: 'FRAME',
+      fills: [{
+        type: 'SOLID',
+        tokenEligible: true,
+        color: { r: 1, g: 1, b: 1, a: 1 },
+      }],
+    };
+
+    const summary = collectTokenBindingSummary(root, [{
+      ruleId: 'token.missing-fill-binding',
+      nodeId: 'surface',
+      reason: 'Temporary exception without required evidence',
+      evidence: '',
+      revisit: '',
+    }]);
+
+    expect(summary.status).toBe('fail');
+    expect(summary.missingFillBinding).toEqual(['surface']);
+    expect(summary.invalidExceptions.join('\n')).toContain('approver is required');
+    expect(summary.invalidExceptions.join('\n')).toContain('sourceReference is required');
+    expect(summary.invalidExceptions.join('\n')).toContain('revisit is required');
+  });
+
+  it('treats arbitrary visible solid paints as token-eligible hardcoded colors', () => {
+    const root: ContractNode = {
+      id: 'tile',
+      name: 'Certification Item',
+      type: 'COMPONENT',
+      fills: [{
+        type: 'SOLID',
+        visible: true,
+        color: { r: 0.82, g: 0.84, b: 0.86, a: 1 },
+      }],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.status).toBe('fail');
+    expect(summary.missingFillBinding).toEqual(['tile']);
+    expect(summary.hardcodedTokenEligibleColors).toEqual(['tile']);
+  });
+
+  it('fails partially bound multi-paint surfaces', () => {
+    const root: ContractNode = {
+      id: 'stack-icon',
+      name: 'Stack Icon',
+      type: 'VECTOR',
+      fills: [
+        {
+          type: 'SOLID',
+          visible: true,
+          boundVariables: { color: { type: 'VARIABLE_ALIAS', id: 'mode-foreground' } },
+          isCdsModeBound: true,
+          color: { r: 1, g: 1, b: 1, a: 1 },
+        },
+        {
+          type: 'SOLID',
+          visible: true,
+          color: { r: 1, g: 1, b: 1, a: 1 },
+        },
+      ],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.status).toBe('fail');
+    expect(summary.missingFillBinding).toEqual(['stack-icon']);
+  });
+
+  it('ignores hidden or transparent solid paints', () => {
+    const root: ContractNode = {
+      id: 'play-root',
+      name: 'Remix Icons / play-fill 1',
+      type: 'FRAME',
+      fills: [
+        { type: 'SOLID', visible: false, color: { r: 1, g: 1, b: 1, a: 1 } },
+        { type: 'SOLID', opacity: 0, color: { r: 1, g: 1, b: 1, a: 1 } },
+      ],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.status).toBe('pass');
+    expect(summary.missingFillBinding).toHaveLength(0);
+  });
+
+  it('passes field-level color bindings only when proven CDS Mode-bound', () => {
+    const root: ContractNode = {
+      id: 'field-fill',
+      name: 'Field Fill',
+      type: 'FRAME',
+      boundVariables: { fills: [{ type: 'VARIABLE_ALIAS', id: 'mode-foreground' }] },
+      variableBindings: {
+        fills: [{ variableId: 'mode-foreground', boundTokenName: 'foreground', boundTokenCollectionName: 'Mode', isCdsModeBound: true }],
+      },
+      fills: [{ type: 'SOLID', visible: true, color: { r: 1, g: 1, b: 1, a: 1 } }],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.status).toBe('pass');
+  });
+
+  it('fails field-level color bindings unless CDS Mode binding is proven', () => {
+    const root: ContractNode = {
+      id: 'field-fill',
+      name: 'Field Fill',
+      type: 'FRAME',
+      boundVariables: { fills: [{ type: 'VARIABLE_ALIAS', id: 'other-white' }] },
+      variableBindings: {
+        fills: [{ variableId: 'other-white', boundTokenName: 'White', boundTokenCollectionName: 'Legacy Colors', isCdsModeBound: false }],
+      },
+      fills: [{ type: 'SOLID', visible: true, color: { r: 1, g: 1, b: 1, a: 1 } }],
+    };
+
+    const summary = collectTokenBindingSummary(root);
+    expect(summary.status).toBe('fail');
+    expect(summary.missingFillBinding).toHaveLength(0);
+    expect(summary.nonCdsColorBinding).toEqual(['field-fill']);
   });
 });
 
@@ -265,6 +388,50 @@ describe('structural fidelity', () => {
     const summary = collectStructuralFidelity(root);
     expect(summary.status).toBe('pass');
     expect(summary.imageBacked).toBe(false);
+  });
+
+  it('fails stack icons built from two filled rectangles without vector or stroke structure', () => {
+    const root: ContractNode = {
+      id: 'root',
+      name: 'Certification Item',
+      type: 'COMPONENT',
+      layoutMode: 'VERTICAL',
+      children: [{
+        id: 'stack-icon',
+        name: 'tabler:squares-filled',
+        type: 'FRAME',
+        children: [
+          { id: 'stack-back', name: 'Back Square', type: 'RECTANGLE', fills: [{ type: 'SOLID', visible: true, color: { r: 1, g: 1, b: 1 } }] },
+          { id: 'stack-front', name: 'Front Square', type: 'RECTANGLE', fills: [{ type: 'SOLID', visible: true, color: { r: 1, g: 1, b: 1 } }] },
+        ],
+      }],
+    };
+
+    const summary = collectStackIconFidelity(root);
+    expect(summary.pass).toBe(false);
+    expect(summary.failures?.join('\n')).toContain('structural-fidelity.stack-icon-filled-primitives');
+  });
+
+  it('fails stack icons built from two filled vectors without stroke or approved icon instance structure', () => {
+    const root: ContractNode = {
+      id: 'root',
+      name: 'Certification Item',
+      type: 'COMPONENT',
+      layoutMode: 'VERTICAL',
+      children: [{
+        id: 'stack-icon',
+        name: 'Stack Icon',
+        type: 'FRAME',
+        children: [
+          { id: 'stack-back', name: 'Vector', type: 'VECTOR', fills: [{ type: 'SOLID', visible: true, color: { r: 1, g: 1, b: 1 } }] },
+          { id: 'stack-front', name: 'Vector', type: 'VECTOR', fills: [{ type: 'SOLID', visible: true, color: { r: 1, g: 1, b: 1 } }] },
+        ],
+      }],
+    };
+
+    const summary = collectStackIconFidelity(root);
+    expect(summary.pass).toBe(false);
+    expect(summary.failures?.join('\n')).toContain('structural-fidelity.stack-icon-filled-primitives');
   });
 });
 
@@ -378,7 +545,7 @@ describe('creation reuse gate', () => {
     expect(failures).toEqual([]);
   });
 
-  it('allows createNew only when reuse rejection, reuse count, or explicit exception evidence is present', () => {
+  it('blocks createNew prerequisites even when reuse exception evidence is present', () => {
     const failures = validateCreationDecision({
       ...baseDecision,
       exactFit: true,
@@ -395,7 +562,9 @@ describe('creation reuse gate', () => {
       }],
     });
 
-    expect(failures).toEqual([]);
+    expect(failures.join('\n')).toContain('reuseRejectionEvidence must list why existing candidates cannot cover the use case');
+    expect(failures.join('\n')).toContain('createNew blocked: existing CDS coverage');
+    expect(failures.join('\n')).toContain('expectedReuseCount must be at least 3');
   });
 });
 
@@ -425,6 +594,64 @@ describe('fixtures, schemas, and cleanup', () => {
 
   it('validates required completion evidence fields', () => {
     expect(validateCompletionEvidence({ componentNodeId: '1:2' })).toContain('completionEvidence.sourceNodeId is required');
+  });
+
+  it('blocks completion evidence that marks token failures as property pass', () => {
+    const failures = validateCompletionEvidence({
+      sourceNodeId: 'source',
+      componentNodeId: 'component',
+      componentGroupPath: 'Components / Composed',
+      sourceScreenshot: 'source.png',
+      componentScreenshot: 'component.png',
+      visualDiffSummary: 'matches',
+      propertyIntegrity: 'pass',
+      propertyReferenceMatrix: { definitionCount: 0, nonVariantDefinitionCount: 0, referencedNonVariantCount: 0, matrix: [], unreferenced: [], danglingRefs: [], fieldMismatches: [] },
+      instanceOverrideProbe: { pass: true },
+      useSiteReplacement: 'blocked',
+      intentionalDeltas: [],
+      layoutContract: { issues: [], checked: 1, exceptions: [] },
+      structuralFidelity: { status: 'pass', issues: [], imageBacked: false, checked: 1, rasterPaintCount: 0, structuralNodeCount: 1, tokenOrPropertySignalCount: 1, exceptions: [] },
+      tokenBindingSummary: {
+        status: 'fail',
+        checked: 1,
+        missingTextStyle: [],
+        missingFillBinding: ['component'],
+        missingStrokeBinding: [],
+        missingEffectBinding: [],
+        hardcodedTokenEligibleColors: ['component'],
+        invalidTextStyle: [],
+        nonCdsColorBinding: [],
+        invalidExceptions: [],
+        exceptions: [],
+      },
+      namingGate: {
+        status: 'pass',
+        hardGate: true,
+        policyVersion: '2.0',
+        metrics: { checked: 1, violationCount: 0, blockingViolationCount: 0, autofixableCount: 0, activeExceptionCount: 0, expiringExceptionCount: 0 },
+        violations: [],
+        exceptions: [],
+      },
+      responsiveProbe: { pass: true },
+      longTextProbe: { pass: true },
+      boundsCheck: { pass: true },
+      exceptions: [],
+    });
+
+    expect(failures.join('\n')).toContain('propertyIntegrity cannot be pass when tokenBindingSummary.status is fail');
+  });
+
+  it('runs synthetic fixture manifests from qa core fixtures', () => {
+    const fixtureDir = join(process.cwd(), 'src', 'modules', 'qa', 'core', '__fixtures__');
+    const fixtures = readdirSync(fixtureDir)
+      .filter((name) => name.endsWith('.json'))
+      .map((name) => JSON.parse(readFileSync(join(fixtureDir, name), 'utf8')) as ComponentContractFixture)
+      .filter((fixture) => fixture.mode === 'synthetic');
+
+    expect(fixtures.length).toBeGreaterThan(0);
+    for (const fixture of fixtures) {
+      expect(runSyntheticFixture(fixture), fixture.name).toMatchObject({ pass: true });
+    }
   });
 
   it('removes probes even when the probe body throws', async () => {

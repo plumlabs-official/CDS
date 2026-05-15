@@ -1,5 +1,19 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-15 12:53:21 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Fixed the CDS `Certification Item` token/stack-icon regression and hardened the local QA contract so visible hardcoded solids, invalid token exceptions, unproven field-level bindings, and two-filled-rect/vector stack icons fail. Also documented the new `PublishDecisionDisclosure` final-report contract in CDS rules after the publish-reason reporting gap.
+Next-TODO: If `Certification Item` needs to propagate to product files, run a publish-specific flow after verifying the Figma publish modal contains only intended changes or the user approves unrelated pending changes. The agent-center runtime enforcement for `Publish Decision` record output is committed separately in the agent-center repo.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Active-Play-Run: /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260515-114914_final-report-publish-reason
+Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260515-122731-claude-review-39308.md
+Verification: `npm --prefix figma-plugins/cds run test:contract` PASS (38 tests); `npm --prefix figma-plugins/cds run typecheck` PASS; `npm --prefix figma-plugins/cds run build` PASS; Figma readback showed 8 visible paints, 0 unbound visible solids, stack icon stroke/fill separation; play DAG 9/9 done.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-13 20:04:08 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex

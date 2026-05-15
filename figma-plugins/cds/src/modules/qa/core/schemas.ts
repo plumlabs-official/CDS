@@ -1,4 +1,4 @@
-import type { CompletionEvidence, CreationDecision } from './types';
+import type { CompletionEvidence, ContractException, CreationDecision } from './types';
 
 const CREATION_REQUIRED = [
   'sourceUnitNodeId',
@@ -60,7 +60,28 @@ export function validateCreationDecision(value: unknown): string[] {
 }
 
 export function validateCompletionEvidence(value: unknown): string[] {
-  return validateRequiredObject(value, COMPLETION_REQUIRED, 'completionEvidence');
+  const failures = validateRequiredObject(value, COMPLETION_REQUIRED, 'completionEvidence');
+  if (failures.length > 0 || !value || typeof value !== 'object' || Array.isArray(value)) {
+    return failures;
+  }
+
+  failures.push(...validateCompletionEvidenceShape(value as Record<string, unknown>));
+  return failures;
+}
+
+export function validateContractException(exception: ContractException, now: Date | string = new Date()): string[] {
+  const errors: string[] = [];
+  if (!exception.reason) errors.push('reason is required');
+  if (!exception.evidence) errors.push('evidence is required');
+  if (!exception.approver) errors.push('approver is required');
+  if (!exception.sourceReference) errors.push('sourceReference is required');
+  if (!exception.revisit) errors.push('revisit is required');
+  if (exception.review_at && !isIsoDate(exception.review_at)) errors.push('review_at must be YYYY-MM-DD');
+  if (exception.expires_at && !isIsoDate(exception.expires_at)) errors.push('expires_at must be YYYY-MM-DD');
+  if (exception.expires_at && isIsoDate(exception.expires_at) && parseIsoDate(exception.expires_at) < startOfDay(normalizeNow(now))) {
+    errors.push('expires_at is expired');
+  }
+  return errors;
 }
 
 export function isCompletionEvidence(value: unknown): value is CompletionEvidence {
@@ -98,9 +119,76 @@ function validateCreationDecisionShape(decision: Record<string, unknown>): strin
   return failures;
 }
 
+function validateCompletionEvidenceShape(evidence: Record<string, unknown>): string[] {
+  const failures: string[] = [];
+  if (!['pass', 'fail', 'blocked'].includes(String(evidence.propertyIntegrity))) {
+    failures.push('completionEvidence.propertyIntegrity must be pass, fail, or blocked');
+  }
+
+  const tokenBindingSummary = objectAt(evidence, 'tokenBindingSummary');
+  if (tokenBindingSummary) {
+    const status = tokenBindingSummary.status;
+    const inferredPass = tokenBindingArraysPass(tokenBindingSummary);
+    if (status !== 'pass' && status !== 'fail') {
+      failures.push('completionEvidence.tokenBindingSummary.status must be pass or fail');
+    }
+    if (status === 'pass' && !inferredPass) {
+      failures.push('completionEvidence.tokenBindingSummary.status cannot be pass while token binding issue arrays are non-empty');
+    }
+    if (status === 'fail' && evidence.propertyIntegrity === 'pass') {
+      failures.push('completionEvidence.propertyIntegrity cannot be pass when tokenBindingSummary.status is fail');
+    }
+  }
+
+  const structuralFidelity = objectAt(evidence, 'structuralFidelity');
+  if (structuralFidelity?.status === 'fail' && evidence.propertyIntegrity === 'pass') {
+    failures.push('completionEvidence.propertyIntegrity cannot be pass when structuralFidelity.status is fail');
+  }
+
+  const namingGate = objectAt(evidence, 'namingGate');
+  if (namingGate?.status === 'fail' && evidence.propertyIntegrity === 'pass') {
+    failures.push('completionEvidence.propertyIntegrity cannot be pass when namingGate.status is fail');
+  }
+
+  return failures;
+}
+
+function objectAt(parent: Record<string, unknown>, key: string): Record<string, unknown> | null {
+  const value = parent[key];
+  return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;
+}
+
+function tokenBindingArraysPass(summary: Record<string, unknown>): boolean {
+  return [
+    'missingTextStyle',
+    'missingFillBinding',
+    'missingStrokeBinding',
+    'missingEffectBinding',
+    'hardcodedTokenEligibleColors',
+    'invalidTextStyle',
+    'nonCdsColorBinding',
+    'invalidExceptions',
+  ].every((key) => arrayOfStrings(summary[key]).length === 0);
+}
+
+function normalizeNow(now: Date | string): Date {
+  return now instanceof Date ? now : new Date(now);
+}
+
+function isIsoDate(value: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value);
+}
+
+function parseIsoDate(value: string): Date {
+  return new Date(`${value}T00:00:00Z`);
+}
+
+function startOfDay(value: Date): Date {
+  return new Date(Date.UTC(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate()));
+}
+
 function validateCreateNewReuseGate(decision: Record<string, unknown>): string[] {
   const failures: string[] = [];
-  const hasException = hasApprovedReuseException(decision.exceptions);
   const existingCandidates = arrayOfStrings(decision.existingCandidates);
   const candidateComponents = arrayOfStrings(decision.candidateComponents);
   const candidates = [...existingCandidates, ...candidateComponents];
@@ -117,7 +205,7 @@ function validateCreateNewReuseGate(decision: Record<string, unknown>): string[]
   }
   if (!Array.isArray(decision.reuseRejectionEvidence)) {
     failures.push('creationDecision.reuseRejectionEvidence is required for createNew');
-  } else if (reuseRejectionEvidence.length === 0 && !hasException) {
+  } else if (reuseRejectionEvidence.length === 0) {
     failures.push('creationDecision.reuseRejectionEvidence must list why existing candidates cannot cover the use case');
   }
   if (typeof decision.createNewJustification !== 'string' || decision.createNewJustification.trim().length === 0) {
@@ -130,32 +218,17 @@ function validateCreateNewReuseGate(decision: Record<string, unknown>): string[]
     failures.push('creationDecision.productLocalAllowed is required for createNew');
   }
 
-  if ((exactFit === true || extendFit === true) && !hasException) {
+  if (exactFit === true || extendFit === true) {
     const candidateText = candidates.length > 0 ? ` Candidates: ${candidates.join(', ')}` : '';
     failures.push(`creationDecision.createNew blocked: existing CDS coverage is exactFit=${exactFit} extendFit=${extendFit}.${candidateText}`);
   }
-  if (typeof expectedReuseCount === 'number' && expectedReuseCount < 3 && !hasException) {
+  if (typeof expectedReuseCount === 'number' && expectedReuseCount < 3) {
     const localText = productLocalAllowed === true
       ? ' productLocalAllowed=true means keep this as a product-local composition instead of public CDS.'
       : '';
     failures.push(`creationDecision.createNew blocked: expectedReuseCount must be at least 3 for public CDS creation.${localText}`);
   }
   return failures;
-}
-
-function hasApprovedReuseException(value: unknown): boolean {
-  if (!Array.isArray(value)) return false;
-  return value.some((exception) => {
-    if (!exception || typeof exception !== 'object') return false;
-    const obj = exception as Record<string, unknown>;
-    const ruleId = typeof obj.ruleId === 'string' ? obj.ruleId : '';
-    const hasEvidence = typeof obj.evidence === 'string' && obj.evidence.trim().length > 0;
-    const hasRevisit = typeof obj.revisit === 'string' && obj.revisit.trim().length > 0;
-    const hasApprovalSource =
-      (typeof obj.approver === 'string' && obj.approver.trim().length > 0)
-      || (typeof obj.sourceReference === 'string' && obj.sourceReference.trim().length > 0);
-    return ruleId.includes('reuse') && hasEvidence && hasRevisit && hasApprovalSource;
-  });
 }
 
 function arrayOfStrings(value: unknown): string[] {

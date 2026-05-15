@@ -1,4 +1,4 @@
-import type { ContractNode, ContractPaint } from '../core';
+import type { ContractNode, ContractPaint, ContractVariableBinding } from '../core';
 import { findLightModeId, rgbToHex, resolveColorValue } from '../../../shared/color-utils';
 
 interface TokenMeta {
@@ -108,6 +108,7 @@ export function sceneNodeToContractNode(node: SceneNode, tokenCatalog: TokenCata
     gridStyleId: readStyleId(safeRead(() => anyNode.gridStyleId)),
     effectStyleId: readStyleId(safeRead(() => anyNode.effectStyleId)),
     boundVariables: safeRead(() => anyNode.boundVariables),
+    variableBindings: readNodeVariableBindings(safeRead(() => anyNode.boundVariables), tokenCatalog),
     fills: readPaints(safeRead(() => anyNode.fills), tokenCatalog),
     strokes: readPaints(safeRead(() => anyNode.strokes), tokenCatalog),
     effects: readEffects(safeRead(() => anyNode.effects)),
@@ -123,6 +124,33 @@ export function sceneNodeToContractNode(node: SceneNode, tokenCatalog: TokenCata
   }
 
   return contract;
+}
+
+function readNodeVariableBindings(
+  boundVariables: Record<string, unknown> | undefined,
+  tokenCatalog: TokenCatalog,
+): ContractNode['variableBindings'] | undefined {
+  if (!boundVariables) return undefined;
+  const result: ContractNode['variableBindings'] = {};
+  for (const field of ['fills', 'strokes'] as const) {
+    const bindings = readVariableBindingList(boundVariables[field], tokenCatalog);
+    if (bindings.length > 0) result[field] = bindings;
+  }
+  return Object.keys(result).length > 0 ? result : undefined;
+}
+
+function readVariableBindingList(value: unknown, tokenCatalog: TokenCatalog): ContractVariableBinding[] {
+  const aliases = Array.isArray(value) ? value : value ? [value] : [];
+  return aliases.map((alias) => {
+    const variableId = readVariableAliasId(alias);
+    const meta = variableId ? tokenCatalog.variableMetaById[variableId] : undefined;
+    return {
+      variableId: variableId ?? undefined,
+      boundTokenName: meta?.name ?? null,
+      boundTokenCollectionName: meta?.collectionName ?? null,
+      isCdsModeBound: meta?.source === 'cds-mode',
+    };
+  });
 }
 
 function safeRead<T>(read: () => T): T | undefined {
@@ -144,6 +172,8 @@ function readPaints(value: unknown, tokenCatalog: TokenCatalog): ContractPaint[]
     const contract: ContractPaint = {
       type: anyPaint.type,
       boundVariables: anyPaint.boundVariables,
+      visible: anyPaint.visible !== false,
+      opacity: typeof anyPaint.opacity === 'number' ? anyPaint.opacity : undefined,
       color: anyPaint.color,
     };
 
@@ -151,7 +181,7 @@ function readPaints(value: unknown, tokenCatalog: TokenCatalog): ContractPaint[]
       const boundColorId = readBoundColorId(anyPaint.boundVariables);
       const boundMeta = boundColorId ? tokenCatalog.variableMetaById[boundColorId] : undefined;
       const matchedMeta = tokenCatalog.colorMetaByHex[rgbToHex(anyPaint.color.r, anyPaint.color.g, anyPaint.color.b)];
-      contract.tokenEligible = hasPaintBinding(anyPaint) || Boolean(matchedMeta);
+      contract.tokenEligible = anyPaint.visible !== false && anyPaint.opacity !== 0;
       contract.boundTokenName = boundMeta?.name ?? null;
       contract.boundTokenCollectionName = boundMeta?.collectionName ?? null;
       contract.isCdsModeBound = boundMeta?.source === 'cds-mode';
@@ -183,6 +213,14 @@ function hasPaintBinding(paint: any): boolean {
 function readBoundColorId(boundVariables: Record<string, unknown> | undefined): string | null {
   const color = boundVariables?.color as { id?: unknown } | undefined;
   return typeof color?.id === 'string' ? color.id : null;
+}
+
+function readVariableAliasId(value: unknown): string | null {
+  if (!value || typeof value !== 'object') return null;
+  const obj = value as Record<string, unknown>;
+  if (typeof obj.id === 'string') return obj.id;
+  if (obj.type === 'VARIABLE_ALIAS' && typeof obj.id === 'string') return obj.id;
+  return null;
 }
 
 function isRgb(value: unknown): value is RGB {

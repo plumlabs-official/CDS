@@ -48,7 +48,7 @@ coverage was checked first.
 | exact-fit-first | if an existing component is an exact fit, use `reuseExisting`; `createNew` fails |
 | extend-fit-first | if a variant/property/slot extension covers the need, use `extendExisting`; `createNew` fails |
 | create-new-evidence | `createNew` requires `exactFit=false`, `extendFit=false`, non-empty `reuseRejectionEvidence`, and non-empty `createNewJustification` |
-| reuse-threshold | public `createNew` requires `expectedReuseCount >= 3` unless an approved reuse exception exists |
+| reuse-threshold | public `createNew` requires `expectedReuseCount >= 3`; exceptions may document risk/remediation but do not approve public creation |
 | product-local-route | `productLocalAllowed=true` means keep the node as a screen/product-local composition; it does not approve public CDS creation |
 
 Known regression probes for this gate:
@@ -79,10 +79,33 @@ type CompletionEvidence = {
   longTextProbe: ProbeSummary;
   boundsCheck: ProbeSummary;
   exceptions: ContractException[];
+  publishDecisionDisclosure?: PublishDecisionDisclosure;
 };
 ```
 
 Final Handoff means any final response after creating, modifying, or extending a CDS component. Final Handoff requires a full `CompletionEvidence` packet. Quick screen review may return a partial score, but must not mark component work complete without the packet.
+
+### Publish Decision Disclosure
+
+Any Final Handoff or `-play`/record final report for CDS/Figma component or
+library work must include publish decision context. This is required even when
+the correct decision is to skip publishing.
+
+```ts
+type PublishDecisionDisclosure = {
+  publish_attempted: "yes" | "no" | "N/A";
+  why_not_published: string;
+  blocker_and_evidence: string[];
+  next_condition_to_publish: string;
+};
+```
+
+Rules:
+- If `publish_attempted` is `"no"` or a publish attempt failed, `why_not_published` must be non-empty.
+- `blocker_and_evidence` must contain at least one verifiable artifact, such as a file path, run log, node id, gate result, or explicit user/request boundary.
+- `next_condition_to_publish` must state the concrete condition that would make publish appropriate, not a vague follow-up.
+- Pure code or harness-only work may use `publish_attempted: "N/A"`, but must still include `why_not_published` and evidence explaining why publishing is out of scope.
+- Do not publish a Figma library from reporting/record cleanup unless the active request explicitly asks for publish or the run has preapproved publish/update action metadata.
 
 ## Structural Fidelity
 
@@ -176,6 +199,7 @@ Audit token-eligible authored nodes only. CDS nested instance internals are excl
 |---------|-----------|
 | text style | TEXT nodes use CDS typography token styles such as `text-sm/leading-normal/normal`; arbitrary local/remote styles fail |
 | color variables | token-eligible fills/strokes are bound to variables in the CDS `Mode` collection; primitive/other collection bindings fail |
+| field-level color variables | node-level `boundVariables.fills/strokes` count as bound only when live metadata proves every field binding resolves to the CDS `Mode` collection |
 | fills/strokes/effects | token-eligible paints/effects are variable/style bound |
 | hardcoded colors | colors that merely match a token value still fail until bound to CDS `Mode` |
 
@@ -185,6 +209,7 @@ Compact output:
 
 ```ts
 type TokenBindingSummary = {
+  status: "pass" | "fail";
   checked: number;
   missingTextStyle: string[];
   invalidTextStyle: string[];
@@ -197,6 +222,20 @@ type TokenBindingSummary = {
   truncated?: boolean;
 };
 ```
+
+Completion Gate must treat `tokenBindingSummary.status === "fail"` as a hard
+failure. The summary is not advisory evidence: any unexcepted hardcoded visible
+solid fill/stroke, missing CDS typography token style, missing effect binding,
+or non-CDS color variable binding blocks `propertyIntegrity=pass`.
+
+Visible solid fills/strokes are token-eligible by default. Hidden paints
+(`visible=false`) and fully transparent paints (`opacity=0`) are ignored so
+suppressed icon root fills do not regress audits.
+
+Icon-like custom structures are audited as authored structure. A stack icon
+implemented as two filled rectangles without any vector or stroke signal fails
+`structuralFidelity` even when its fills are token-bound; it must use an
+approved icon instance or a faithful vector/stroke structure.
 
 ## Probes
 
@@ -241,7 +280,7 @@ type ContractException = {
 };
 ```
 
-Exceptions without `evidence` and either `approver` or `sourceReference` are FAIL. Exceptions must have a revisit condition.
+Exceptions without `evidence`, `approver`, `sourceReference`, and `revisit` are FAIL. Token, layout, structural, and completion gates must validate these fields at runtime before an exception can suppress a finding.
 
 Naming exceptions are stricter: `owner`, `approver`, `review_at`, `expires_at`, `evidence`, and `revisit` are required. `owner` is the remediation owner; `approver` is the person approving temporary risk acceptance. `review_at` and `expires_at` use `YYYY-MM-DD`.
 

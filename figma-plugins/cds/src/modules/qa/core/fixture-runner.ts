@@ -25,6 +25,7 @@ export function runSyntheticFixture(fixture: ComponentContractFixture): FixtureR
   assertCount(failures, input, expected, 'tokenBindingSummary', 'hardcodedTokenEligibleColors');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'invalidTextStyle');
   assertCount(failures, input, expected, 'tokenBindingSummary', 'nonCdsColorBinding');
+  assertStatus(failures, input, expected, 'tokenBindingSummary', 'tokenBindingStatus');
   assertCount(failures, input, expected, 'namingGate', 'violations', 'namingViolations');
   assertNumber(failures, input, expected, 'namingGate', ['metrics', 'blockingViolationCount'], 'namingBlockingViolations');
   assertNumber(failures, input, expected, 'namingGate', ['metrics', 'activeExceptionCount'], 'namingActiveExceptions');

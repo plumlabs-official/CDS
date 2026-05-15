@@ -1,0 +1,60 @@
+{
+  "name": "generic-component-token",
+  "mode": "synthetic",
+  "input": {
+    "node": {
+      "id": "generic-root",
+      "name": "Generic Component",
+      "type": "COMPONENT",
+      "layoutMode": "VERTICAL",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          }
+        }
+      ],
+      "children": [
+        {
+          "id": "generic-title",
+          "name": "Title",
+          "type": "TEXT",
+          "textStyleId": "S:text-xs",
+          "textStyleName": "text-xs/leading-normal",
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "mode-foreground"
+                }
+              },
+              "isCdsModeBound": true,
+              "boundTokenName": "foreground",
+              "boundTokenCollectionName": "Mode",
+              "color": {
+                "r": 0.1019607843,
+                "g": 0.1019607843,
+                "b": 0.1019607843,
+                "a": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "expected": {
+    "pass": false,
+    "missingFillBinding": 1,
+    "hardcodedTokenEligibleColors": 1,
+    "tokenBindingStatus": "fail"
+  }
+}

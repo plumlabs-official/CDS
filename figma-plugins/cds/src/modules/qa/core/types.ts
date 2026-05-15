@@ -22,12 +22,21 @@ export interface ContractPaint {
   type?: string;
   boundVariables?: Record<string, unknown>;
   tokenEligible?: boolean;
+  visible?: boolean;
+  opacity?: number;
   color?: unknown;
   boundTokenName?: string | null;
   boundTokenCollectionName?: string | null;
   isCdsModeBound?: boolean;
   matchedTokenName?: string | null;
   matchedTokenCollectionName?: string | null;
+}
+
+export interface ContractVariableBinding {
+  variableId?: string;
+  boundTokenName?: string | null;
+  boundTokenCollectionName?: string | null;
+  isCdsModeBound?: boolean;
 }
 
 export interface ContractNode {
@@ -53,6 +62,7 @@ export interface ContractNode {
   gridStyleId?: string | symbol | null;
   effectStyleId?: string | symbol | null;
   boundVariables?: Record<string, unknown>;
+  variableBindings?: Partial<Record<'fills' | 'strokes', ContractVariableBinding[]>>;
   fills?: ContractPaint[] | symbol;
   strokes?: ContractPaint[] | symbol;
   effects?: Array<{ boundVariables?: Record<string, unknown>; tokenEligible?: boolean }> | symbol;
@@ -111,6 +121,7 @@ export interface PropertyReferenceMatrixSummary {
 }
 
 export interface TokenBindingSummary {
+  status: 'pass' | 'fail';
   checked: number;
   missingTextStyle: string[];
   missingFillBinding: string[];
@@ -119,6 +130,7 @@ export interface TokenBindingSummary {
   hardcodedTokenEligibleColors: string[];
   invalidTextStyle: string[];
   nonCdsColorBinding: string[];
+  invalidExceptions: string[];
   exceptions: ContractException[];
   truncated?: boolean;
 }

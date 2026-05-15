@@ -37,6 +37,11 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
   const propertyReferenceMatrix = collectPropertyReferenceMatrix(contractNode);
   const layoutContract = collectLayoutContract(contractNode, exceptions);
   const structuralFidelity = collectStructuralFidelity(contractNode, exceptions);
+  const stackIconFidelity = collectStackIconFidelity(contractNode);
+  if (!stackIconFidelity.pass) {
+    structuralFidelity.issues.push(...(stackIconFidelity.failures || []));
+    structuralFidelity.status = 'fail';
+  }
   const tokenBindingSummary = collectTokenBindingSummary(contractNode, exceptions);
   const namingGate = runNamingGate({
     root: contractNode,
@@ -44,6 +49,7 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
     hardGate: input.namingHardGate !== false,
   });
   const propertyIntegrity = matrixPasses(propertyReferenceMatrix) && structuralFidelity.status === 'pass'
+    && tokenBindingSummary.status === 'pass'
     && namingGate.status === 'pass'
     ? 'pass'
     : 'fail';
@@ -78,6 +84,22 @@ export async function runCompletionGate(input: CompletionGateInput): Promise<Com
   return evidence;
 }
 
+export function collectStackIconFidelity(root: ContractNode): ProbeSummary {
+  const failures: string[] = [];
+  let checked = 0;
+  for (const iconRoot of collectVisibleNodes(root).filter(isStackIconRoot)) {
+    checked++;
+    const subtree = collectVisibleNodes(iconRoot);
+    const filledPrimitiveParts = subtree.filter(isVisibleFilledPrimitiveWithoutStroke).length;
+    const strokeSignals = subtree.filter(hasVisibleStroke).length;
+    const authoredIconInstanceSignals = subtree.filter((node) => node.type === 'INSTANCE').length;
+    if (filledPrimitiveParts >= 2 && strokeSignals === 0 && authoredIconInstanceSignals === 0) {
+      failures.push(`structural-fidelity.stack-icon-filled-primitives: ${iconRoot.id} uses ${filledPrimitiveParts} filled rectangle/vector primitives without stroke or approved icon instance structure`);
+    }
+  }
+  return { pass: failures.length === 0, checked, failures };
+}
+
 export async function assertNoContractProbeLeftovers(runId: string): Promise<number> {
   const leftovers = figma.root.findAll((node) => node.getPluginData('contract-probe') === runId);
   return leftovers.length;
@@ -109,6 +131,37 @@ export async function runCleanupProbe(componentNodeId: string): Promise<ProbeSum
 
 function isSceneNode(node: BaseNode): node is SceneNode {
   return 'visible' in node;
+}
+
+function collectVisibleNodes(root: ContractNode): ContractNode[] {
+  const result: ContractNode[] = [];
+  const visit = (node: ContractNode): void => {
+    if (node.visible === false) return;
+    result.push(node);
+    for (const child of node.children || []) visit(child);
+  };
+  visit(root);
+  return result;
+}
+
+function isStackIconRoot(node: ContractNode): boolean {
+  return /\b(stack icon|squares[-\s]*filled|tabler:squares-filled)\b/i.test(node.name);
+}
+
+function isVisibleFilledPrimitiveWithoutStroke(node: ContractNode): boolean {
+  return (node.type === 'RECTANGLE' || node.type === 'VECTOR')
+    && hasVisibleSolidFill(node)
+    && !hasVisibleStroke(node);
+}
+
+function hasVisibleSolidFill(node: ContractNode): boolean {
+  return Array.isArray(node.fills)
+    && node.fills.some((paint) => paint.type === 'SOLID' && paint.visible !== false && paint.opacity !== 0);
+}
+
+function hasVisibleStroke(node: ContractNode): boolean {
+  return Array.isArray(node.strokes)
+    && node.strokes.some((paint) => paint.visible !== false && paint.opacity !== 0);
 }
 
 async function hydrateTextStyleNames(node: ContractNode): Promise<void> {
