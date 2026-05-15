@@ -1,5 +1,18 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-16 03:19:39 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Recorded that the Homegym Tier 4/5/6 badge redesign outputs from the previous GPT Image 2 `-play` run were deleted by the user and must not be treated as accepted state.
+Next-TODO: Restart the 4/5/6 direction from a fresh visual analysis of Tier 1/2/3, confirm the simplified casual 3D direction before image generation, avoid complex crystal/facet detail, and keep Tier 6 the most premium within the same circular badge format.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Active-Play-Run: /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260516-015804_homegym-tier-456-redesign
+Verification: CDS git was clean before this record; no Figma/image output from that run is considered accepted after user deletion.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-15 16:36:57 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
