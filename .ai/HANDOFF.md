@@ -1,5 +1,18 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-15 16:36:57 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Polished the badge visual hierarchy in product file `2026-05`: `Recent Collection List` node `CS2ZhrORl4E1szQfTe2UvO/28968:31879` now uses calmer ordinary-reward frames for 3 recent badges, while `Achievement Collection` node `CS2ZhrORl4E1szQfTe2UvO/28979:32770` uses more ornate category-final reward frames for 10 achievement badges, grounded by the category reward structure reference `14332:426850`.
+Next-TODO: Next agenda is reducing icon visual complexity and decoration density in the achievement final reward badges while preserving the current style and tier hierarchy. Keep recent collected badges comparatively plain.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Active-Play-Run: /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260515-140933_achievement-badge-tier-polish
+Verification: Figma readback confirmed 13 target Avatar image fills updated; recent red notification badges and the existing achievement lock overlay were preserved; screenshots saved at `exports/2026-05-15_badge-tier-polish/recent-final.png`, `exports/2026-05-15_badge-tier-polish/achievement-final-screen.png`, and `exports/2026-05-15_badge-tier-polish/category-structure-reference.png`.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-15 13:12:33 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex

@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-15 13:12
+> Last updated: 2026-05-15 16:36
 
 ---
 
@@ -12,6 +12,7 @@
 
 | 작업 | 비고 |
 |------|------|
+| **Badge visual hierarchy tier polish(Figma)** | Product file `2026-05`에서 `Recent Collection List`(`CS2ZhrORl4E1szQfTe2UvO/28968:31879`) 3종 배지는 일반 수집/낮은 난이도 tier로 낮추고, `Achievement Collection`(`CS2ZhrORl4E1szQfTe2UvO/28979:32770`) 10종 배지는 카테고리 최종 보상 tier로 올렸다. Reference 구조 `14332:426850`를 확인해 최근 수집 -> 카테고리 세부/진행 -> 최종 업적 보상 위계를 적용했다. Figma readback 13개 image hash PASS, recent red dot/achievement lock overlay 보존 PASS. 산출물: `exports/2026-05-15_badge-tier-polish/recent-final.png`, `exports/2026-05-15_badge-tier-polish/achievement-final-screen.png`. 후속 아젠다: 최종 보상 배지의 아이콘 시각적 복잡도와 장식 밀도 완화. |
 | **Achievement Collection 업적 배지 Avatar 이미지 교체(Figma)** | Product file `2026-05`의 `Achievement Collection` node(`CS2ZhrORl4E1szQfTe2UvO/28979:32770`) 안 10개 `Achievement Collection Item`의 `Avatar` frame image fill을 카테고리 텍스트에 맞는 캐주얼 3D 배지 이미지로 교체했다. 적용 카테고리: `비기너`, `실패는 성공의 어머니`, `건강한 신체`, `건강한 마음`, `건강한 취미`, `건강한 식사`, `규칙적인 삶`, `건강한 관계`, `건강한 통장`, `건강한 습관`. 이미지 생성 원본과 잘라낸 투명 PNG는 로컬 `exports/2026-05-15_achievement-badges/`에 보관되어 있으나 export PNG는 `.gitignore` 정책상 커밋 제외. 검증: Figma readback에서 10개 Avatar fill hash 업데이트 PASS, screenshot visual QA PASS. |
 | **Certification Item 토큰/Stack 아이콘 QA 게이트 보강** | CDS `Certification Item` component set(`H36eNEd6o7ZTv4R7VcyLf2/22260:7976`)에서 hardcoded visible SOLID paint와 stack icon 두-filled-rect 구조가 통과하던 문제를 수정했다. `TokenBindingSummary.status`, invalid token exception validation, field-level binding CDS Mode 검증, visible solid paint token-eligibility, stack icon fidelity check를 추가했다. Regression fixture 2개(`certification-item-stack-token`, `generic-component-token`)와 관련 contract tests를 추가했고 `test:contract` 38 tests, `typecheck`, `build` PASS. Figma 컴포넌트는 root muted, pill foreground, text/icon primary-foreground 토큰으로 재바인딩했고 stack icon은 stroke-only back layer + filled front layer로 수정했다. Play run: `.ai/pipeline/runs/20260514-175444_certification-item-token-stack-quality-fix`. |
 | **최종 리포트 Publish Decision Disclosure 문서 반영** | 사용자 피드백에 따라 CDS final handoff/QA report 계약에 `PublishDecisionDisclosure`를 추가했다. `publish_attempted`, `why_not_published`, `blocker_and_evidence`, `next_condition_to_publish`를 CDS/Figma 컴포넌트/라이브러리 작업 최종 리포트에 요구하도록 `.claude/rules/component-contract.md`, `.claude/rules/qa-rubric.md`를 보강했다. Runtime enforcement는 agent-center 별도 커밋에서 처리. Play run: `.ai/pipeline/runs/20260515-114914_final-report-publish-reason`. |
@@ -241,6 +242,9 @@
 ---
 
 ## 다음 TODO
+
+**디자인 후속 (다음 아젠다):**
+1. `Achievement Collection`(`CS2ZhrORl4E1szQfTe2UvO/28979:32770`) 최종 보상 배지는 tier 위계와 화려함은 유지하되, 아이콘 내부 요소 수/장식 밀도/프레임 레이어를 줄여 시각적 복잡도를 완화한다. `Recent Collection List`(`28968:31879`)의 일반 배지 톤은 현재보다 더 화려하게 올리지 않는다.
 
 **P0 (프로덕트 디자인):** ✅ 완료 (2026-04-20)
 1. ~~방장이 아직 일정을 정하지 않은 상태로 초대받는 경우 플로우 삭제~~ ✅
