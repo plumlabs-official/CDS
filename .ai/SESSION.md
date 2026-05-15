@@ -310,3 +310,17 @@
 - Clear sentinel: `/Users/zenkim_office/.codex/auto-handoff/clear-required.json`
 - Record mode: `commit`
 - Next session: run resume trigger, read latest `.ai/HANDOFF.md`, then inspect `resume.md` if needed.
+
+### 2026-05-15 18:44:23 +0900 Badge Avatar Style Figma Record
+
+- Trigger: user requested `-record` after iterative Figma badge avatar styling work in `CS2ZhrORl4E1szQfTe2UvO`.
+- Completed:
+  - Recent Collection List `29134:51595`: updated all three recent/general badge Avatars (`29134:51597`, `29134:51610`, `29134:51623`) to simple cute casual 3D circular frames while preserving the central home-gym/book/meditation concepts and red notification badges.
+  - Weekly limited badge `29134:51649`: attempted simplification toward a stage above general circular badges; final applied hash was `a4f0176f7ac9dfc7e5bd9f4424f85877e7d8a4ea`, but user feedback indicated this direction was not the right path to continue.
+  - Monthly limited badge `29134:51673`: stopped PNG color-removal editing after user pointed out residual outer purple; regenerated the badge as a new raster asset with no outer purple halo/petal, preserved monthly reward hierarchy via gold frame/gems and Sagittarius centaur concept, then applied hash `95fa0e60c15cb5c2effb11f4daab3ee3da0dfdfb`.
+- Verification:
+  - Figma readback PASS for final monthly generated image: `29134:51673` image hash `95fa0e60c15cb5c2effb11f4daab3ee3da0dfdfb`, `scaleMode: FIT`.
+  - Local visual artifacts saved under `exports/2026-05-15_badge-simple-cute-round/` and `exports/2026-05-15_badge-simple-cute-round/generated/`.
+- Next:
+  - For future badge refinements, prefer prompt-based new generation over post-processing flattened PNGs when removing structural ornament layers.
+  - Revisit the weekly badge separately; current user feedback suggests the desired direction is not solved yet.

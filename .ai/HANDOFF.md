@@ -1365,3 +1365,14 @@ Review-Result: /Users/zenkim_office/Project/CDS/.ai/peer-review/runs/20260512-07
 Play-Run: /Users/zenkim_office/Project/CDS/.ai/pipeline/runs/20260512-064226_feed-detail-cds-library-publish-controller-recovery
 Commits: (이번 커밋)
 ---
+
+---
+HANDOFF: Codex -> User
+Date: 2026-05-15 18:44:23 +0900
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Recorded Figma-only badge avatar styling work in `CS2ZhrORl4E1szQfTe2UvO`. Recent/general badges in `29134:51595` were changed to simple cute casual 3D circular frames. Monthly badge `29134:51673` was regenerated as a new raster asset rather than edited from the flattened PNG, removing the outer purple halo/petal while preserving the gold Sagittarius reward concept.
+Next-TODO: Revisit the weekly badge `29134:51649` from a fresh generation direction; the current simplified silver-circle attempt did not satisfy the desired style. Continue using generation from explicit requirements when ornament layers need to be removed cleanly.
+Verification: Figma readback PASS for `29134:51673` with image hash `95fa0e60c15cb5c2effb11f4daab3ee3da0dfdfb` and `scaleMode: FIT`. Local screenshots/assets are under `exports/2026-05-15_badge-simple-cute-round/`.
+Commits: (이번 커밋)
+---
