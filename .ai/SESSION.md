@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-15
+> Last updated: 2026-05-15 13:12
 
 ---
 
@@ -12,6 +12,7 @@
 
 | 작업 | 비고 |
 |------|------|
+| **Achievement Collection 업적 배지 Avatar 이미지 교체(Figma)** | Product file `2026-05`의 `Achievement Collection` node(`CS2ZhrORl4E1szQfTe2UvO/28979:32770`) 안 10개 `Achievement Collection Item`의 `Avatar` frame image fill을 카테고리 텍스트에 맞는 캐주얼 3D 배지 이미지로 교체했다. 적용 카테고리: `비기너`, `실패는 성공의 어머니`, `건강한 신체`, `건강한 마음`, `건강한 취미`, `건강한 식사`, `규칙적인 삶`, `건강한 관계`, `건강한 통장`, `건강한 습관`. 이미지 생성 원본과 잘라낸 투명 PNG는 로컬 `exports/2026-05-15_achievement-badges/`에 보관되어 있으나 export PNG는 `.gitignore` 정책상 커밋 제외. 검증: Figma readback에서 10개 Avatar fill hash 업데이트 PASS, screenshot visual QA PASS. |
 | **Certification Item 토큰/Stack 아이콘 QA 게이트 보강** | CDS `Certification Item` component set(`H36eNEd6o7ZTv4R7VcyLf2/22260:7976`)에서 hardcoded visible SOLID paint와 stack icon 두-filled-rect 구조가 통과하던 문제를 수정했다. `TokenBindingSummary.status`, invalid token exception validation, field-level binding CDS Mode 검증, visible solid paint token-eligibility, stack icon fidelity check를 추가했다. Regression fixture 2개(`certification-item-stack-token`, `generic-component-token`)와 관련 contract tests를 추가했고 `test:contract` 38 tests, `typecheck`, `build` PASS. Figma 컴포넌트는 root muted, pill foreground, text/icon primary-foreground 토큰으로 재바인딩했고 stack icon은 stroke-only back layer + filled front layer로 수정했다. Play run: `.ai/pipeline/runs/20260514-175444_certification-item-token-stack-quality-fix`. |
 | **최종 리포트 Publish Decision Disclosure 문서 반영** | 사용자 피드백에 따라 CDS final handoff/QA report 계약에 `PublishDecisionDisclosure`를 추가했다. `publish_attempted`, `why_not_published`, `blocker_and_evidence`, `next_condition_to_publish`를 CDS/Figma 컴포넌트/라이브러리 작업 최종 리포트에 요구하도록 `.claude/rules/component-contract.md`, `.claude/rules/qa-rubric.md`를 보강했다. Runtime enforcement는 agent-center 별도 커밋에서 처리. Play run: `.ai/pipeline/runs/20260515-114914_final-report-publish-reason`. |
 

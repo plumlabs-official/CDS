@@ -1,5 +1,16 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-15 13:12:33 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Replaced the 10 Avatar image fills in product file `2026-05` Achievement Collection node `CS2ZhrORl4E1szQfTe2UvO/28979:32770` with category-specific casual 3D achievement badge images. Categories covered: beginner, resilience, healthy body, healthy mind, healthy hobby, healthy meal, regular life, healthy relationship, healthy bank account, and healthy habit.
+Next-TODO: None for the Figma badge replacement. The generated source/cut PNGs remain local under `exports/2026-05-15_achievement-badges/` and are excluded from git by export ignore policy.
+Verification: Figma readback confirmed 10 Avatar frame fill hashes updated; screenshot visual QA confirmed the new badges render in the target collection. No code/package verification was needed for this Figma-only edit.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-15 12:53:21 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
