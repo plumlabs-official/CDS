@@ -1,5 +1,17 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-16 14:18:51 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Stored the six-step general achievement badge frame reference at `assets/references/achievement-badges/general-achievement-badge-frames.png` and documented it at `docs/design/general-achievement-badge-frame-reference.md`, but marked it HOLD because user review found slight horizontal distortion in the 1-3단계 circular frames.
+Next-TODO: Before using this as the canonical 일반 업적 배지 frame set, create or approve a corrected reference where 1-3단계 preserve true circular geometry while 4-6단계 keep the existing jewel-frame hierarchy.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Verification: `git diff --check`; stored PNG hash `cc44fb24d32d926e94ab0db04a984892865e2687c65924617adfa7167a0b2dee`; document status says `HOLD - do not use as the canonical frame set yet`.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-16 13:10:46 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
