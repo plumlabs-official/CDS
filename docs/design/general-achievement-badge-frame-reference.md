@@ -1,36 +1,60 @@
 # General Achievement Badge Frame Reference
 
-> 일반 업적 배지 생성 시 참조 후보로 저장한 6단계 프레임 세트.
+> 일반 업적 배지 프레임/아트웍 제작 전략과 현재 레퍼런스 상태.
 
 ## Status
 
-**HOLD - do not use as the canonical frame set yet.**
+**REDESIGN REQUIRED - no canonical normal achievement frame pack is active.**
 
-User review found that the 1-3단계 simple circular frames are slightly distorted horizontally. This reference must not be used for future 일반 업적 배지 generation until a corrected version preserves true circular geometry for all six frames.
+The previous frame directions are intentionally not canonical:
 
-## Stored Asset
+- `assets/references/achievement-badges/general-achievement-badge-frames.png`: superseded because the 1-3단계 simple circular frames were horizontally distorted.
+- The jewel/faceted/laurel direction discussed on 2026-05-16 is paused because it reads too much like an RPG medal for the intended product tone.
+- `assets/Badge/Normal-1.png` through `Normal-6.png` are not present in the current asset folder and must not be referenced as available production assets.
 
-- Image: `assets/references/achievement-badges/general-achievement-badge-frames.png`
-- SHA-256: `cc44fb24d32d926e94ab0db04a984892865e2687c65924617adfa7167a0b2dee`
-- Dimensions: `1448 x 1086`
-- Source: extracted six-tier frame reference from the 2026-05 category badge work.
+Next canonical work should start from a new non-RPG frame system before mask packs, composition automation, or batch badge generation.
 
-## Usage
+## Current Assets
 
-- Do not use this frame set for future **일반 업적 배지** image generation until the 1-3단계 distortion is corrected.
-- Preserve the six-step frame hierarchy:
-  - 1단계: mint simple circular frame
-  - 2단계: lavender simple circular frame
-  - 3단계: gold simple circular frame
-  - 4단계: pink faceted jewel frame
-  - 5단계: blue faceted jewel frame
-  - 6단계: silver/opal faceted jewel frame
-- In the corrected version, generate the subject/icon inside the empty center while keeping the frame geometry, material, lighting, and layout consistent.
-- Assign one of the six frames according to the achievement tier or randomly when the request explicitly asks for random placement.
-- Do not replace this reference with a newly generated frame unless the user explicitly approves a new default.
+`assets/Badge/` currently stores reference material, not a final normal frame system.
+
+### Artwork Output
+
+- `assets/Badge/Artwork/sagittarius-inner-artwork-source.png`
+- `assets/Badge/Artwork/sagittarius-inner-artwork.png`
+
+### Badge + Artwork Composition Samples
+
+- `assets/Badge/Sample/book.png`
+- `assets/Badge/Sample/homegym.png`
+- `assets/Badge/Sample/meditation.png`
+
+### Casual 3D Artwork Style Samples
+
+- `assets/Badge/Sample/character sample.png`
+- `assets/Badge/Sample/icon sample.jpg`
+- `assets/Badge/Sample/icon sample2.png`
+- `assets/Badge/Sample/icon sample3.png`
+
+### Human Or People-Related References
+
+- `assets/Badge/Sample/human.jpg`
+- `assets/Badge/Sample/people.png`
+- `assets/Badge/Sample/d5d22ace-a841-4977-901a-cc4c8225de03.png`
+
+### Archive
+
+- `assets/Badge/Archive/ChatGPT Image 2026년 5월 16일 오전 11_32_44.png`
+
+## Direction For The Next Frame System
+
+- Avoid RPG medal cues: large gemstones, faceted crystal rings, laurel wreaths, crown-like ornaments, and high-fantasy shine.
+- Move toward a soft app badge / casual 3D token language: simpler silhouette, lower rim height, friendlier materials, and product-native icon composition.
+- Keep the frame/mask structure stable once the new direction is approved, even if visual styling changes later.
+- Build each tier as a technical pack: locked frame, inner mask, foreground occlusion mask, overflow mask, palette, and one best integrated composition reference.
 
 ## Image Generation Routing
 
-- Default for quick visual drafts and one-off badge generation: Codex built-in `image_gen`.
+- Default for quick visual drafts and one-off badge exploration: Codex built-in `image_gen`.
 - Use API `gpt-image-2` only when the work requires model evidence, repeatable/batch generation, manifest/hash/request-id logging, delivery review, or client-facing audit records.
-- For transparent PNG output, run a post-processing and alpha verification step after generation.
+- For transparent PNG output, run post-processing and alpha verification after generation.
