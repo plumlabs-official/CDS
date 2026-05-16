@@ -1,0 +1,31 @@
+{
+  "schema": "cds.openai_gpt_image2_connection_check.v1",
+  "checked_at": "2026-05-16T11:42:00+0900",
+  "key_handling": {
+    "source": "macOS clipboard",
+    "persisted": false,
+    "printed": false,
+    "fingerprint_sha256_12": "e73ddc6afb60"
+  },
+  "api": {
+    "base_url": "https://api.openai.com/v1",
+    "models_endpoint": "PASS",
+    "model_retrieve_endpoint": "PASS"
+  },
+  "available_image_models": [
+    "chatgpt-image-latest",
+    "gpt-image-1",
+    "gpt-image-1-mini",
+    "gpt-image-1.5",
+    "gpt-image-2",
+    "gpt-image-2-2026-04-21"
+  ],
+  "connected_model": {
+    "id": "gpt-image-2",
+    "owned_by": "system",
+    "retrievable": true
+  },
+  "local_helper": "scripts/openai-gpt-image2.py",
+  "billable_generation_performed": false,
+  "note": "Only non-generation model/list checks were run to avoid image-generation cost."
+}

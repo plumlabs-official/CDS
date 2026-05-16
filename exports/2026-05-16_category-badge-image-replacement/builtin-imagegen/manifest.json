@@ -1,0 +1,154 @@
+{
+  "schema": "cds.category_badge_imagegen_manifest.v1",
+  "created_at": "2026-05-16T07:18:00+0900",
+  "generator": {
+    "tool": "Codex built-in image_gen",
+    "user_approval": "User explicitly approved using built-in image_gen after the initial gpt-5.5 image gen2 metadata gate blocked the play run.",
+    "source_image": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/source-sprite.png"
+  },
+  "figma": {
+    "file_key": "CS2ZhrORl4E1szQfTe2UvO",
+    "target_node": "29134:51934",
+    "after_screenshot": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/figma-after.png",
+    "fill_scale_mode": "FIT"
+  },
+  "excluded": {
+    "title": "홈짐 매니아",
+    "avatar_node": "29284:3041",
+    "preserved_image_hash": "ab8883e51c276550e0470ed6b1251ae43ae7a075"
+  },
+  "assets": [
+    {
+      "nodeId": "29134:50776",
+      "title": "3대 몇키로",
+      "stage": "stage2",
+      "subject": "dumbbell and barbell strength training",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/01-three-lift.png",
+      "imageHash": "1913399c95c8a1e878f539aa9b32cde1b01da95a",
+      "sourceCell": {
+        "row": 0,
+        "col": 0
+      }
+    },
+    {
+      "nodeId": "29134:50789",
+      "title": "인터벌 마니아",
+      "stage": "stage5",
+      "subject": "interval timer and lightning cardio burst",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/02-interval.png",
+      "imageHash": "5918d2a036fcbb1c6ead2bc10ccb4b42d547fcfc",
+      "sourceCell": {
+        "row": 0,
+        "col": 1
+      }
+    },
+    {
+      "nodeId": "29134:52172",
+      "title": "달려라 하니",
+      "stage": "stage1",
+      "subject": "running shoes and track",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/03-running.png",
+      "imageHash": "cc8e9c110bd718296ca4aafbb71d52834a43dd41",
+      "sourceCell": {
+        "row": 0,
+        "col": 2
+      }
+    },
+    {
+      "nodeId": "29134:52185",
+      "title": "걸어서 지구 한 바퀴",
+      "stage": "stage6",
+      "subject": "walking shoes and globe route",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/04-walking-globe.png",
+      "imageHash": "adf99d824078db4e2363e7b2efb2e2ac9190dd10",
+      "sourceCell": {
+        "row": 0,
+        "col": 3
+      }
+    },
+    {
+      "nodeId": "29134:52198",
+      "title": "페달을 밟자",
+      "stage": "stage3",
+      "subject": "bicycle pedal and crank",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/05-pedal.png",
+      "imageHash": "1f8c09beebc227088b5661befac44af5e811e69e",
+      "sourceCell": {
+        "row": 1,
+        "col": 0
+      }
+    },
+    {
+      "nodeId": "29134:52218",
+      "title": "이 동네 물개",
+      "stage": "stage4",
+      "subject": "swim goggles and water waves",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/06-swimmer.png",
+      "imageHash": "3bdf08d835991b3827be150e27e3920376dedf14",
+      "sourceCell": {
+        "row": 1,
+        "col": 1
+      }
+    },
+    {
+      "nodeId": "29134:52231",
+      "title": "등산 마니아",
+      "stage": "stage2",
+      "subject": "hiking boot and mountain peak",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/07-hiking.png",
+      "imageHash": "80161de18c139b5646c24ad75c40bd2feabdc5ec",
+      "sourceCell": {
+        "row": 1,
+        "col": 2
+      }
+    },
+    {
+      "nodeId": "29134:52244",
+      "title": "댄스 머신",
+      "stage": "stage5",
+      "subject": "dance shoes and music rhythm",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/08-dance.png",
+      "imageHash": "8a42d1ac2aa3c94b9b71fa3db4d07a4dbdbb3e19",
+      "sourceCell": {
+        "row": 1,
+        "col": 3
+      }
+    },
+    {
+      "nodeId": "29134:52264",
+      "title": "우아한 무용수",
+      "stage": "stage1",
+      "subject": "ballet slippers and ribbon",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/09-ballet.png",
+      "imageHash": "985853666b080f9c99c916dd7d4e6b66a7b6b068",
+      "sourceCell": {
+        "row": 2,
+        "col": 0
+      }
+    },
+    {
+      "nodeId": "29134:52277",
+      "title": "나마스떼",
+      "stage": "stage6",
+      "subject": "yoga pose and mat",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/10-yoga.png",
+      "imageHash": "6a6ba6f02b2b57dfd6722c19ca0014ce1e722fae",
+      "sourceCell": {
+        "row": 2,
+        "col": 1
+      }
+    },
+    {
+      "nodeId": "29134:52290",
+      "title": "필라테스 마스터",
+      "stage": "stage3",
+      "subject": "pilates ring and exercise bar",
+      "file": "exports/2026-05-16_category-badge-image-replacement/builtin-imagegen/badges/11-pilates.png",
+      "imageHash": "5c6fc4a06dca50c05f298e5e1c1a48b451521c9f",
+      "sourceCell": {
+        "row": 2,
+        "col": 2
+      }
+    }
+  ]
+}

@@ -1,5 +1,17 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-16 13:10:46 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Completed the category badge replacement in product file `2026-05` target `CS2ZhrORl4E1szQfTe2UvO/29134:51934`, preserving `홈짐 매니아` and replacing 11 other category badges; added a local `gpt-image-2` API helper and saved the API-vs-built-in image generation research report.
+Next-TODO: For future badge/image work, use built-in `image_gen` by default and API `gpt-image-2` only when model evidence, batch/repeatable generation, manifest/hash/request-id logging, delivery, or client-review evidence is required. Keep the extracted six-frame badge reference as the generation SSOT.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Verification: Figma readback 12/12 PASS; `홈짐 매니아` hash preserved; `/v1/models/gpt-image-2` connection check PASS; research report saved.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-16 03:19:39 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex

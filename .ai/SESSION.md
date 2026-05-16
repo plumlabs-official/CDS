@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-16 03:19
+> Last updated: 2026-05-16 13:10
 
 ---
 
@@ -12,6 +12,7 @@
 
 | 작업 | 비고 |
 |------|------|
+| **Category badge image replacement + GPT Image 2 API helper/research** | Product file `2026-05` target `CS2ZhrORl4E1szQfTe2UvO/29134:51934`에서 `홈짐 매니아`를 제외한 11개 category badge image fill을 교체했다. 사용자가 내장 `image_gen` 사용을 승인한 뒤 첨부 6단계 프레임 세트를 기준으로 category title별 이미지를 생성/적용했고, Figma readback 12/12 PASS 및 `홈짐 매니아` hash preserved를 확인했다. 이후 OpenAI project key는 파일에 저장하지 않고 `gpt-image-2` model visibility/retrieve connection check만 저장했으며, helper `scripts/openai-gpt-image2.py`와 research report `report/2026-05-16_codex-imagegen-vs-gpt-image2-api.md`를 추가했다. 권장 운영은 기본 시안/단발 이미지는 내장 `image_gen`, 모델 증빙/대량/manifest/hash/request-id/납품 검수 필요 시 API `gpt-image-2` 사용이다. |
 | **Homegym tier 4/5/6 badge redesign 폐기 기록** | `-play`로 1/2/3단계의 단순 원형 캐주얼 3D 문법을 분석하고 GPT Image 2로 4/5/6단계 단순화 후보를 생성/적용했으나, 사용자가 해당 산출물을 모두 삭제했다. 따라서 이번 Figma/image output은 accepted state가 아니며 다음 작업의 기준으로 삼지 않는다. 다음 재시도는 1/2/3 비주얼 문법을 다시 짧게 분석하고 후보 방향을 먼저 확인받은 뒤 진행한다. 복잡한 crystal/facet/결정 표현은 피하고, 6단계만 같은 포맷 내에서 가장 고급스럽게 유지한다. 이전 run: `.ai/pipeline/runs/20260516-015804_homegym-tier-456-redesign`. |
 
 ---

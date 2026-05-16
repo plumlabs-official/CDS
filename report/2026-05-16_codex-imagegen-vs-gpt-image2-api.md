@@ -1,0 +1,162 @@
+# 리서치 리포트: Codex 내장 image_gen vs GPT Image 2 API 연동
+
+> 생성일: 2026-05-16 | 신뢰도: 88% | 소스: 6개 | 라운드: 1/3
+
+## Executive Summary
+
+앞으로 **모든** 디자인/이미지 제작 요청을 API 키 기반 `gpt-image-2`로 강제할 필요는 없다. 현재 Codex/GPT-5.5 계열의 이미지 생성 경로는 공식 문서상 GPT Image 모델을 사용하며, 로컬 산출물 메타데이터에서도 `gpt-image` `version: 2.0` 단서가 확인된다.
+
+다만 내장 `image_gen`은 모델 ID, request ID, 비용, 파라미터를 감사 가능하게 남기지 않는다. 따라서 “반드시 `gpt-image-2` 사용”처럼 모델 증빙이 필요한 납품형/반복형/클라이언트 검수형 디자인 이미지 작업은 API helper를 쓰는 것이 맞다.
+
+## 1. 핵심 결론
+
+### 결론 1: 일반 작업은 Codex 내장 image_gen 유지가 더 낫다
+
+내장 `image_gen`은 현재 세션에서 바로 쓸 수 있고, Figma 작업처럼 빠르게 시안을 만들고 적용하는 흐름에 맞다. 별도 키 관리, 비용 추적, API 오류 처리, 파일 파이프라인을 매번 신경 쓰지 않아도 된다.
+
+공식 문서 기준으로 GPT-5.5의 Responses API `image_generation` tool은 GPT Image 모델을 사용하며, 해당 모델군에는 `gpt-image-2`가 포함된다. 로컬 Codex 내장 산출물의 C2PA/XMP 문자열에서도 `OpenAI Media Service API`, `softwareAgent: gpt-image`, `version: 2.0`이 확인됐다.
+
+하지만 이 근거는 “GPT Image 2 계열로 보인다”까지다. 내장 도구가 매번 정확히 API 모델 ID `gpt-image-2`를 사용한다고 감사 가능하게 증명하지는 못한다.
+
+### 결론 2: 모델 증빙이 필요한 작업은 API helper를 써야 한다
+
+OpenAI 공식 문서는 Image API의 `/v1/images/generations`에서 `model: "gpt-image-2"`를 직접 지정하는 예시를 제공한다. 우리 로컬 검증에서도 사용자 키로 `/v1/models`와 `/v1/models/gpt-image-2` 조회가 성공했고, `gpt-image-2-2026-04-21` snapshot도 보였다.
+
+따라서 다음 조건 중 하나라도 있으면 API 키 연동 경로를 사용한다.
+
+- 요청에 “반드시 GPT Image 2”, “image gen2”, “모델 증빙”, “재현 가능한 생성”이 포함됨
+- Figma에 여러 이미지/배지를 일괄 적용해야 하고 manifest가 필요함
+- request ID, 모델 ID, 입력 프롬프트, 산출물 경로를 남겨야 함
+- 클라이언트 검수나 내부 감사에서 “어떤 모델로 만들었는지”가 중요함
+- 동일 스타일 세트를 여러 번 재생성하거나 비교해야 함
+
+### 결론 3: 투명 배경이 필요한 경우는 API 사용 여부와 별개로 주의가 필요하다
+
+공식 문서에 따르면 `gpt-image-2`는 현재 transparent background를 지원하지 않는다. 따라서 배지/아이콘처럼 투명 PNG가 필요한 작업에서는 세 가지 중 하나를 선택해야 한다.
+
+- `gpt-image-2`로 생성하고 후처리로 배경 제거/알파 처리
+- 투명 배경 지원이 필요한 경우 다른 GPT Image 모델 사용 가능성을 별도 확인
+- 처음부터 Figma/벡터/수작업 asset pipeline으로 처리
+
+이번 배지 작업처럼 circular badge crop과 투명 외곽이 필요한 경우에는 `gpt-image-2`를 써도 후처리 단계가 필요하다.
+
+## 2. 권장 운영 정책
+
+### 기본값
+
+**Codex 내장 `image_gen`을 기본값으로 유지한다.**
+
+적합한 작업:
+- 빠른 시안
+- 일회성 디자인 이미지
+- 정확한 모델 증빙이 중요하지 않은 작업
+- 사용자가 “내장 image_gen 써줘”라고 명시한 작업
+- Figma에 빠르게 붙여보고 판단하는 탐색형 작업
+
+### API 강제 조건
+
+다음 키워드/조건이 있으면 `scripts/openai-gpt-image2.py` 경로를 사용한다.
+
+- `gpt-image-2`, `image gen2`, `GPT Image 2`, `모델 증빙`
+- batch 생성, manifest, hash, request ID 기록 필요
+- “최종 납품”, “검수”, “같은 모델로 재생성”
+- 이전 작업처럼 play/review gate에서 모델 metadata가 acceptance criterion인 경우
+
+### 보안 규칙
+
+- API 키는 `.env`나 repo 파일에 쓰지 않는다.
+- 기본은 `OPENAI_API_KEY` 환경변수, 임시 로컬 작업은 `--key-source clipboard`만 허용한다.
+- 리포트에는 key fingerprint만 남긴다.
+- 로그에는 전체 키를 출력하지 않는다.
+
+## 3. 현재 로컬 상태
+
+### 연결됨
+
+추가된 helper:
+
+- `scripts/openai-gpt-image2.py`
+
+연결 검증:
+
+- `/v1/models`: PASS
+- `/v1/models/gpt-image-2`: PASS
+- 사용 가능한 이미지 모델:
+  - `chatgpt-image-latest`
+  - `gpt-image-1`
+  - `gpt-image-1-mini`
+  - `gpt-image-1.5`
+  - `gpt-image-2`
+  - `gpt-image-2-2026-04-21`
+
+### 내장 image_gen 산출물 메타데이터
+
+확인 파일:
+
+- `~/.codex/generated_images/019e2d66-b41f-7932-9cea-f9de95b96b86/ig_0b569445c846eb56016a07d088718881919852039e59f33674.png`
+
+확인된 문자열:
+
+- `OpenAI Media Service API`
+- `softwareAgent`
+- `gpt-image`
+- `version c2.0`
+
+확인되지 않은 문자열:
+
+- `gpt-image-2`
+
+해석: 내장 image_gen은 GPT Image 2 계열일 가능성이 높지만, exact model ID 증빙으로는 부족하다.
+
+## 4. 의사결정 매트릭스
+
+| 요청 유형 | 권장 경로 | 이유 |
+|---|---|---|
+| 빠른 시안, moodboard, 한두 장 생성 | 내장 `image_gen` | 속도/편의성이 가장 좋음 |
+| Figma에 바로 붙일 단발 이미지 | 내장 `image_gen` 우선 | 후처리와 업로드가 더 중요 |
+| “반드시 GPT Image 2” 명시 | API `gpt-image-2` | 모델 ID를 직접 지정 가능 |
+| 배지/아이콘 대량 생성 + manifest | API `gpt-image-2` | 산출물/프롬프트/모델 기록 가능 |
+| 투명 PNG 필수 | 조건부 | `gpt-image-2`는 투명 배경 미지원, 후처리 필요 |
+| 재현성/감사/검수 중요 | API `gpt-image-2` 또는 snapshot | dated snapshot 사용 가능 |
+
+## 5. 모순점/불확실성
+
+공식 OpenAI API 문서는 `gpt-5.5`의 `image_generation` tool이 GPT Image 모델을 사용한다고 설명한다. 그러나 Codex UI/CLI의 내장 `image_gen` 도구가 같은 API 표면을 그대로 노출하는지는 문서상 별도로 확인되지 않았다.
+
+로컬 산출물 메타데이터는 `gpt-image` `2.0` 단서를 제공하지만, `gpt-image-2`라는 API 모델 ID는 포함하지 않는다.
+
+따라서 “내장 image_gen이 자동으로 GPT Image 2 계열을 쓴다”는 판단은 가능하지만, “항상 API 모델 `gpt-image-2`로 생성됐다고 증빙 가능하다”는 판단은 불가능하다.
+
+## 6. 최종 권장사항
+
+앞으로의 기본 정책은 다음이 가장 실용적이다.
+
+1. **기본은 내장 `image_gen`**
+   - 빠르고, Codex 작업 흐름에 자연스럽고, 일반 디자인 제작에는 충분하다.
+
+2. **모델 증빙/반복 생산/검수형 작업은 API `gpt-image-2`**
+   - 이미 로컬 helper가 있고 키 접근성도 확인됐다.
+
+3. **요청 문구에 따라 자동 라우팅**
+   - “그냥 만들어줘” → 내장
+   - “gpt-image-2로”, “gen2로”, “기록 남겨”, “대량 생성” → API
+
+4. **투명 배경은 별도 gate**
+   - `gpt-image-2` 직접 출력만으로 투명 PNG를 기대하지 말고, 후처리 또는 모델 선택을 분리한다.
+
+## Sources
+
+| # | URL / Evidence | 유형 | 신뢰도 | 검증 |
+|---|---|---|---|---|
+| 1 | https://developers.openai.com/api/docs/guides/image-generation | 공식 문서 | A | WebFetch |
+| 2 | https://developers.openai.com/api/docs/guides/tools-image-generation | 공식 문서 | A | WebFetch |
+| 3 | https://developers.openai.com/api/docs/models/gpt-image-2 | 공식 문서 | A | WebFetch |
+| 4 | https://developers.openai.com/api/docs/models/gpt-image-1.5 | 공식 문서 | A | WebFetch |
+| 5 | https://developers.openai.com/codex/use-cases | 공식 문서 | A | WebFetch |
+| 6 | Local C2PA/XMP strings from Codex-generated PNG | 로컬 증거 | B | 직접 확인 |
+
+---
+
+*Generated by -research — Deep Research Protocol*
+*Confidence: 88% | Sources: 6 | Rounds: 1/3*
+
