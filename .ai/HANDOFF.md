@@ -1,5 +1,17 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-17 14:56:11 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Recorded the final CDS badge asset cleanup. Temporary/sample badge PNG folders and the old badge README/reference PNG were removed; curated reference images now live under `assets/Badge/Reference/`, and PSD source files were added for Standard, Weekly, Monthly, Seoson, and final badge work.
+Next-TODO: Use the cleaned `assets/Badge/Reference/` images or PSD sources for the Canva AI/Magic Layers POC when testing the semi-automated image layer separation workflow.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Verification: `git status --short -b`; asset size check showed `assets/Badge` at about 48MB, largest PSD about 23MB; `.DS_Store` files were left untracked/ignored and not committed.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-17 13:33:57 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
