@@ -1,5 +1,17 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-17 13:33:57 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Recorded the Canva AI/Magic Layers image-editing POC as a CDS TODO after connecting Canva MCP in Codex and confirming the currently exposed tools are design/read/upload oriented rather than direct layer-separation tools.
+Next-TODO: Run a small CDS POC with one flat badge/design image: upload/create a Canva design, try Magic Layers or equivalent Canva AI UI editing, verify whether text/objects/background become selectable layers, then export and decide whether Canva can be part of the semi-automated image-editing workflow.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Verification: `codex mcp list` shows `canva` enabled with OAuth; a fresh `codex exec` session exposed `mcp__canva__` tools (`get_design`, `get_design_content`, `resolve_shortlink`, `generate_design`, `create_design_from_candidate`, `upload_asset_from_url`, `get_brand_template_dataset`) and did not expose Magic Layers/layer-separation-specific tools.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-17 11:16:03 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
