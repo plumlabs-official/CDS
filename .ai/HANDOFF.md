@@ -1,5 +1,17 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-17 11:16:03 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Restored the CDS badge sample assets after confirming the Archive copies of `book.png`, `homegym.png`, and `meditation.png` matched the deleted Sample originals by git object hash.
+Next-TODO: 없음. Badge sample assets are back under `assets/Badge/Sample/`, and the duplicate Archive copies were removed.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Verification: Hash comparison matched all 3 files; `git status --short -b` showed a clean CDS worktree before this record update, with `main` still ahead of `origin/main` by 1.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-16 14:18:51 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex

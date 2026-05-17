@@ -2,7 +2,7 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-17 00:59
+> Last updated: 2026-05-17 11:16
 
 ---
 
@@ -12,6 +12,7 @@
 
 | 작업 | 비고 |
 |------|------|
+| **Badge sample asset 복구** | 전체 프로젝트 git 상태 확인 중 CDS에서 `assets/Badge/Sample/book.png`, `homegym.png`, `meditation.png` 삭제와 `assets/Badge/Archive/` 동명 파일 추가가 발견됐다. Archive 파일 3개가 HEAD의 Sample 원본과 동일 해시임을 확인한 뒤 Sample 파일을 `git restore`로 복구하고 Archive 중복 파일을 제거했다. 최종 상태는 working tree clean이며, CDS `main`은 기존처럼 `origin/main`보다 1커밋 ahead 상태다. |
 | **Badge frame/artwork production strategy 기록** | 업적 배지 프레임과 내부 아트웍 합성 전략을 재검토했다. 단발 통합 생성은 프레임 디테일 drift가 생기고, 분리 아트웍 합성은 프레임과 따로 노는 문제가 있음을 정리했다. `report/2026-05-16_badge-frame-artwork-integration-strategy.md`에 frame-locked sandwich workflow를 기록하고, `assets/Badge/` 아래 샘플/레퍼런스/사수자리 내부 아트웍을 CDS 폴더 기준으로 저장했다. 현재 보석/월계/faceted 계열은 RPG 메달처럼 읽힌다는 사용자 판단에 따라 canonical frame으로 승격하지 않고, 새 non-RPG soft app badge/casual 3D token 방향의 프레임 시스템을 다시 설계하는 것으로 전환했다. 후속: Normal 1-6 새 프레임 브리프, tier reference sheet, mask/occlusion/overflow pack을 먼저 확정한다. |
 
 ---
