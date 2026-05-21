@@ -2,7 +2,17 @@
 
 > 세션 단기 기억 (compact 후 이어갈 내용)
 >
-> Last updated: 2026-05-17 14:56
+> Last updated: 2026-05-21 18:28
+
+---
+
+## 현재 세션 (2026-05-21)
+
+### 완료된 작업
+
+| 작업 | 비고 |
+|------|------|
+| **Badge final PSD 원본 갱신 기록** | 사용자가 CDS의 `assets/Badge/final.psd` 변경이 의도된 것이라고 확인했다. 해당 PSD를 최신 final badge source로 기록했다. 파일 검증: PSD 포맷, `986×1024`, 약 29MB, SHA-256 `2c1caee7bced464c9022ffa179e148c843c5da2c16a90c9d1f05335d0ff71ad5`. `agent-center`의 pending 커밋은 별도 세션 진행 중이므로 이번 CDS record 범위에서 제외했다. |
 
 ---
 

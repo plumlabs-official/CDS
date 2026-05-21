@@ -1,5 +1,17 @@
 ---
 HANDOFF: Codex -> User
+Date: 2026-05-21 18:28:29 KST
+Project: /Users/zenkim_office/Project/CDS
+Agent: Codex
+Summary: Recorded the intentional update to `assets/Badge/final.psd` as the latest CDS badge final PSD source. The file remains PSD format, measures 986x1024, is about 29MB, and has SHA-256 `2c1caee7bced464c9022ffa179e148c843c5da2c16a90c9d1f05335d0ff71ad5`.
+Next-TODO: Use `assets/Badge/final.psd` as the current final badge source for the next badge production/export pass. `agent-center` was left untouched because its pending record is being handled in a separate session.
+Resume-Trigger: cd ~/Project/CDS && read .ai/HANDOFF.md
+Verification: `git status --short -b`; `git diff --stat`; `ls -lh assets/Badge/final.psd`; `sips -g pixelWidth -g pixelHeight -g format assets/Badge/final.psd`; `shasum -a 256 assets/Badge/final.psd`.
+Commits: (이번 커밋)
+---
+
+---
+HANDOFF: Codex -> User
 Date: 2026-05-17 14:56:11 KST
 Project: /Users/zenkim_office/Project/CDS
 Agent: Codex
